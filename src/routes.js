@@ -6,6 +6,14 @@ const routes = [{
       resolve(require('./views/Home.vue'))
     })
   }
+}, {
+  path: '*',
+  name: '404',
+  component: (resolve) => {
+    require.ensure(['./views/NotFound.vue'], () => {
+      resolve(require('./views/NotFound.vue'))
+    })
+  }
 }]
 
 export default routes
