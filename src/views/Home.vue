@@ -1,15 +1,19 @@
 <template>
-  <div>
-    <hello></hello>
-  </div>
+	<div>
+		<header-top></header-top>
+		<index-content></main-content>
+		<footer-nav></footer-nav>
+	</div>
 </template>
 
 <script>
-  import Hello from '../components/Hello'
+import HeaderTop from '../components/HeaderTop'
+import FooterNav from '../components/Footer'
+import IndexContent from '../components/Index'
 
-  export default {
-    components: {
-      Hello
-    }
+export default {
+  components: {
+    HeaderTop, FooterNav, IndexContent
   }
+}
 </script>
