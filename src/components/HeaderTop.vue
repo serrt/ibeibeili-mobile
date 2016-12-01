@@ -16,7 +16,6 @@
 
 <script>
 export default {
-  name: 'header-top',
   data () {
     return {
       msg: 'Welcome to Your Vue.js App'

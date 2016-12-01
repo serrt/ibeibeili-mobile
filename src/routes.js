@@ -7,6 +7,30 @@ const routes = [{
     })
   }
 }, {
+  path: '/home',
+  name: 'index',
+  component: (resolve) => {
+    require.ensure(['./views/Home.vue'], () => {
+      resolve(require('./views/Home.vue'))
+    })
+  }
+}, {
+  path: '/projects',
+  name: 'projects',
+  component: (resolve) => {
+    require.ensure(['./views/ProjectList.vue'], () => {
+      resolve(require('./views/ProjectList.vue'))
+    })
+  }
+}, {
+  path: '/user',
+  name: 'user',
+  component: (resolve) => {
+    require.ensure(['./views/Home.vue'], () => {
+      resolve(require('./views/Home.vue'))
+    })
+  }
+}, {
   path: '*',
   name: '404',
   component: (resolve) => {

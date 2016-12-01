@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div class="page-box center">
+		<div class="page-box center" v-bind:style="{height:img_height}">
 			
 			<!-- banner -->
-	    <swiper :options="swiperOption">
+	    <swiper :options="swiperOption" class="full-with banner">
 			  <!-- 幻灯内容 -->
-			  <swiper-slide><img src="/static/img/1.jpg" width="100%"></swiper-slide>
-			  <swiper-slide><img src="/static/img/2.jpg" width="100%"></swiper-slide>
-			  <swiper-slide><img src="/static/img/3.jpg" width="100%"></swiper-slide>
+			  <swiper-slide><img src="/static/img/1.jpg"></swiper-slide>
+			  <swiper-slide><img src="/static/img/2.jpg"></swiper-slide>
+			  <swiper-slide><img src="/static/img/3.jpg"></swiper-slide>
 			  <!-- ... -->
 			  <!-- 以下配置均为可选（使用具名slot来确定并应用一些操作控件元素） -->
 			  <div class="swiper-pagination" slot="pagination"></div>
@@ -81,7 +81,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
   data () {
     return {
-      swiperHeight: null,
+      img_height: (window.innerHeight - 90) + 'px',
       swiperOption: {
         autoplay: 500,
         setWrapperSize: false,
@@ -109,7 +109,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.swiper-container{
-	height: 30%;
-}
 </style>
