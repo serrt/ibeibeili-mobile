@@ -1,9 +1,9 @@
 <template>
-	<div>
+  <div>
     <header-top></header-top>
-		<index-content></index-content>
-		<footer-nav></footer-nav>
-	</div>
+    <index-content></index-content>
+    <footer-nav></footer-nav>
+  </div>
 </template>
 
 <script>

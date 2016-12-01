@@ -79,6 +79,7 @@
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 
 export default {
+  components: { swiper, swiperSlide },
   data () {
     return {
       img_height: (window.innerHeight - 90) + 'px',
@@ -89,20 +90,13 @@ export default {
         paginationClickable: false,
         mousewheelControl: false,
         observeParents: false,
-        loop: true
+        loop: true,
+        height: 170
       },
       swiperSlides: [1, 2, 3]
     }
   },
   mounted () {
-    let _this = this
-    setInterval(function () {
-      let swiperSlides = _this.swiperSlides
-      if (swiperSlides.length < 10) swiperSlides.push(swiperSlides.length + 1)
-    }, 3000)
-  },
-  components: {
-    swiper, swiperSlide
   }
 }
 </script>
