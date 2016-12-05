@@ -2,7 +2,7 @@
 	<div class="header bg-white">
 		<ul>
 			<li><a href="javascript:void(0)" class="back"></a></li>
-			<li class="f-gray">首页</li>
+			<li class="f-gray">{{title}}</li>
 			<li><a href="javascript:void(0)">注册</a></li>
 			<!-- 消息提示铃
 			<li>
@@ -16,10 +16,9 @@
 
 <script>
 export default {
+  props: [ 'title' ],
   data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
+    return {}
   }
 }
 </script>

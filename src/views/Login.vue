@@ -1,20 +1,19 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <index-content></index-content>
-    <footer-nav></footer-nav>
+    <login></login>
   </div>
 </template>
 
 <script>
-import IndexContent from '../components/Index'
 import HeaderTop from '../components/HeaderTop'
+import Login from '../components/Login'
 import FooterNav from '../components/FooterNav'
 
 export default {
-  components: { IndexContent, HeaderTop, FooterNav },
+  components: { HeaderTop, FooterNav, Login },
   data: function () {
-    return { title: '首页' }
+    return { title: '登录' }
   }
 }
 </script>

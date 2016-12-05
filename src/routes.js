@@ -31,6 +31,14 @@ const routes = [{
     })
   }
 }, {
+  path: '/login',
+  name: 'login',
+  component: (resolve) => {
+    require.ensure(['./views/Login.vue'], () => {
+      resolve(require('./views/Login.vue'))
+    })
+  }
+}, {
   path: '*',
   name: '404',
   component: (resolve) => {

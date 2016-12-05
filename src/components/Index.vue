@@ -8,7 +8,6 @@
 			  <swiper-slide><img src="/static/img/1.jpg"></swiper-slide>
 			  <swiper-slide><img src="/static/img/2.jpg"></swiper-slide>
 			  <swiper-slide><img src="/static/img/3.jpg"></swiper-slide>
-			  <!-- ... -->
 			  <!-- 以下配置均为可选（使用具名slot来确定并应用一些操作控件元素） -->
 			  <div class="swiper-pagination" slot="pagination"></div>
 			</swiper>
@@ -19,7 +18,6 @@
 					<h1>新手体验任务</h1>
 				</div>
 				
-
 				<div class="freshmen-content">
 					<ul>
 						<li>
@@ -90,8 +88,7 @@ export default {
         paginationClickable: false,
         mousewheelControl: false,
         observeParents: false,
-        loop: true,
-        height: 170
+        loop: true
       },
       swiperSlides: [1, 2, 3]
     }
