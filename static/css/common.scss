@@ -1,0 +1,2213 @@
+@import 'style';
+ 
+
+/* --------------公共样式---------------- */
+
+/* 主体内容 */
+/* 头部标题 */
+
+.header {
+
+	width:100%;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #eee;
+	position:fixed;
+	top:0;
+	color:$header-black;
+	background-color:$white;
+	z-index:20;
+
+	ul{
+		width:100%;
+		height:100%;
+		padding:0 18px;
+		li{
+			display:block;
+			float:left;
+			height:100%;
+		}
+		li:nth-child(1){
+			width:25%;
+			text-align:left;
+		}
+		li:nth-child(2){
+			width:50%;
+			font-size:20px;
+			text-align:center;
+		}
+		li:nth-child(3){
+			width:25%;
+			text-align:right;
+		}
+	}
+	.icon{
+		display:block;
+		width:18px;
+		height:18px;
+		background-image:url(../img/common/icons.png);
+		background-size:54px 36px;
+		margin-top:11px;
+		float:right;
+	}
+	.back{
+		float:left;
+		background-position:0 0;
+	}
+
+	.bell{
+		background-position:-36px 0;
+		position:relative;
+		
+
+
+		.news-num{
+			width:12px;
+			height:12px;
+			border-radius:50%;
+			background-color:$red;
+			position:absolute;
+			top:-4px;
+			right:-4px;
+			color:$white;
+			line-height: 10px;
+			font-size:10px;
+		}
+	}
+
+	.set-up{
+		background-position:0 -18px;
+		position:relative;
+	}
+}
+
+
+.flash{
+	animation:flash 1s 5;
+}
+
+@keyframes flash{
+	50%{
+		opacity:0;
+	}
+	100%{
+		opacity:1;
+	}
+}
+
+
+/* footNav底部导航 */
+.foot-nav{
+	width:100%;
+	height:50px;
+	border-top:1px solid $gray;
+	bottom:0;
+	background-color:#fff;
+
+	.nav-items{
+		display: block;
+		width:33.33%;
+		height:100%;
+		padding:2px;
+		float: left;
+		color:$gray;
+		padding:4.5px 0 ;
+		i{
+			display: block;
+			width:21.5px;
+			height:21px;
+			background-image:url(../img/common/footNavIcon.png);
+			background-size:64.5px 42px;
+			margin:0 auto;
+			margin-bottom:3px;
+		}
+		span{
+			display: block;
+			line-height: 20px;
+			text-align: center;
+			font-size:14px;
+		}
+	}
+	.nav-items:nth-of-type(1){
+		i{
+			background-position:0 0;
+		}
+	}
+	.nav-items:nth-of-type(2){
+		i{
+			background-position:-21.5px 0 ;
+		}
+	}
+	.nav-items:nth-of-type(3){
+		i{
+			background-position:-43px 0 ;
+		}
+	}
+
+	.nav-items:nth-of-type(1).active{
+		i{
+			background-position:0 -21px;
+		}
+		color:$red;
+	}
+	.nav-items:nth-of-type(2).active{
+		i{
+			background-position:43px -21px ;
+		}
+		color:$red;
+	}
+	.nav-items:nth-of-type(3).active{
+		i{
+			background-position:21.5px -21px ;
+		}
+		color:$red;
+	}
+	
+}
+
+/* 倍倍利logo */
+.logo{
+	display:inline-block;
+	width:68px;
+	height:74px;
+	background-image:url(../img/common/BBL-logo.png);
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+}
+/* pageBox */
+.page-box{
+	max-width:640px;
+	min-width:320px;
+	margin-top:40px;
+	overflow:hidden;
+	position:relative;
+
+	.banner{
+		height:32%;
+		img{
+			width:100%;
+			height:100%;
+		}
+	}
+
+	.freshmen-mission{
+		height:36%;
+		font-size:12px;
+		color:$fontGray;
+		.title{
+			height:25%;
+			width:100%;			
+			border-bottom:1px dashed $gray;
+			position:relative;
+		}
+		h1{
+			font-size:18px;
+			height:18px;
+			width:200px;
+			position:absolute;
+			top:50%;
+			margin-top:-9px;
+			text-align:center;
+			left:50%;
+			margin-left:-100px;
+			color:$fontBlack;
+		}
+		
+		.freshmen-content{
+			height:75%;
+			width:100%;
+			padding:2%;
+			ul{
+				height:100%;
+			}
+			li{
+				text-align: center;
+				display: block;
+			}
+			li:nth-child(1){
+				color:$red;
+				p:nth-of-type(1){
+					color:$red;
+					span{
+						font-size:32px;
+						font-weight:bolder;
+						margin-right:2px;
+					}
+				}
+				p:nth-of-type(2){
+					color:$fontGray;
+				}
+
+				height:50%;
+			}
+			li:nth-child(2){
+				p{
+					line-height: 14px;
+				}
+				span{
+					color:$orange;
+				}
+				height:20%;
+				i{
+					display: inline-block;
+					width:13px;
+					height:16px;
+					background-image:url(../img/common/quan.png);
+					background-size:100% 100%;
+					margin-bottom: -4px;
+					margin-right:2px;
+				}
+			}
+			li:nth-child(3){
+				span{
+					color:$orange;
+				}
+				height:30%;
+			}
+			a{
+				display: block;
+				height:100%;
+				height:40px;
+				line-height: 40px;
+				border-radius:5px;
+				background-color:$yellow;
+				color:$white;
+				font-weight: bold;
+				font-size:18px;
+				margin:0 15px;
+				letter-spacing: 10px;
+			}
+		}
+	} 
+
+	.user-btns{
+		height:32%;
+		border-top:1px solid $lightGray;
+		margin-top:-1px;
+		position:relative;
+		hr{
+			border:1px solid $lightGray2;
+		}
+		a{
+			display: block;
+			float: left;
+			width:50%;
+			height:50%;
+			text-align:center;
+			// transform:scale(0.8);
+			.icon {
+				height:50%;
+				width:100%;
+				position:relative;
+				span{
+					display: block;
+					width:32.5px;
+					height:23px;
+					background-image:url(../img/common/indexItems.png);
+					background-size:130px 23px;
+					background-repeat: no-repeat;
+
+					position:absolute;
+					left:50%;
+					top:50%;
+					margin-top:-11px;
+					margin-left:-16px;
+				}
+			}
+			
+			h5{
+				font-size:16px;
+				color:$fontBlack;
+				line-height:24px;
+			}
+			p{
+				font-size:10px;
+				color:$fontGray;
+			}
+		}
+		a:nth-of-type(2){
+			.icon span{
+				background-position:-32.5px 0;
+			}
+		}
+		a:nth-of-type(3){
+			.icon span{
+				background-position:-65px 0;
+			}
+		}
+		a:nth-of-type(4){
+			.icon span{
+				background-position:-97.5px 0;
+			}
+		}
+
+		.slide{
+			width:1px;
+			height:42%;
+			background-color:$lightGray2;
+			position:absolute;
+			left:50%;
+		}
+		.slide:nth-of-type(1){
+			top:4%;
+		}
+		.slide:nth-of-type(2){
+			bottom:4%;
+		}
+	}
+}
+
+
+@media (max-height:580px){
+	.freshmen-mission{
+		.freshmen-content{
+			padding-top:0!important;
+			li:nth-child(1){
+				padding-top:0%!important;
+			}
+		}
+	}
+}
+@media (max-height:481px){
+	.freshmen-mission{
+		font-size:8px!important;
+		.freshmen-content{
+			li:nth-child(1){
+				p:nth-of-type(1){
+					span{
+						font-size:28px!important;
+					}
+				}
+			}
+			a{
+				height:30px!important;
+				line-height: 30px!important;
+				margin:0 20px!important;
+			}
+		}
+	}
+}
+
+@media (max-width:350px){
+	.user-btns{
+		a{
+			transform: scale(0.8);
+			.icon{
+				height:40%!important;
+			}
+		}
+	}
+}
+
+/* --------------------投资列表------------------ */
+.invest{
+	background-color:#f8f8f8;
+	position:relative;
+	margin-top:0px;
+
+	/* ---------筛选按钮--------- */
+	.invest-filter{
+		width:100%;
+		max-width: 640px;
+		height:40px;
+		line-height:40px;
+		position:fixed;
+		top:40px;
+
+		a{
+			display: block;
+			width:50%;
+			height:100%;
+			float: left;
+			text-align: center;
+			font-size:16px;
+			color:#2c2c2c;
+			span{
+				display: inline-block;
+				width:10px;
+				height:7.5px;
+				background-image:url(../img/common/updownArrow.png);
+				background-size:10px 15px;
+				background-position:0 -7.5px;
+				background-repeat:no-repeat;
+				margin-left:2px;
+				transition:transform 0.5s;
+			}
+		}
+		a.active{
+			span{
+				
+				transform:rotate(180deg);
+			}
+		}
+	}
+	/* ---------筛选按钮--------- */
+
+
+
+	/* ---------筛选列表--------- */
+	.filter-list{
+		max-width: 640px;
+		position:fixed;
+		height:100%;
+		width:100%;
+		text-align: center;
+		background-color:rgba(0,0,0,0.5);
+		ul{
+			li{
+				width:100%;
+				height:40px;
+				font-size:15px;
+				color:#2c2c2c;
+				background-color:#fff;
+			}
+			li.selected{
+				color:$red;
+				position:relative;
+				span{
+					position:absolute;
+					right:20px;
+					// float:right;
+					// margin-right: 20px;
+				}
+			}
+		}
+	}
+	/* ---------筛选列表--------- */
+
+
+
+
+
+	/* ---------投资列表--------- */
+	.invest-list{
+		margin-top:80px;
+		background-color: #f8f8f8;
+		li{
+			display: block;
+			margin-top:10px;
+			height:100px;
+			width:100%;
+			color:$fontGray;
+
+			
+			.project-intro{
+
+				width:100%;
+				height:64px;
+				// background-color:$red;
+				border-bottom:1px solid #f5f5f5;
+
+				font-size:13px;
+
+				div{
+					float: left;
+					height:100%;
+					width: 33.33%;
+					text-align: center;
+					padding:5px;
+					p:nth-of-type(1){
+						line-height: 30px;
+						height:30px;
+						// background-color:#000;
+					}
+					p:nth-of-type(2){
+						line-height: 24px;
+						height:24px;
+						// background-color:#000;
+					}
+				}
+				div.expact{
+					text-align: left;
+					padding-left:20px;
+					p:nth-of-type(1){
+						text-indent:11px;
+						color:$red;
+						font-size:15px;
+						span{
+							font-size:18px;
+						}
+					}
+				}
+				div.duration{
+					p:nth-of-type(1){
+						font-size:14px;
+					}
+				}
+				div.usable{
+					p:nth-of-type(1){
+						font-size:14px;
+					}
+				}
+			}
+			.invest-type{
+				height:36px;
+				line-height: 36px;
+				font-size:12px;
+				margin-left: 20px;
+			}
+		}
+	}
+	/* ---------投资列表--------- */
+}
+/* --------------------投资列表------------------ */
+
+/* ------------------用户中心------------------------ */
+.u-center {
+	
+	background-color:#f9f9f9;
+
+	/* 用户余额 收益等等 */
+	.user-account{
+		width:100%;
+		height:160px;
+		ul{
+			width:100%;
+			height:100%;
+			li{
+				width:100%;
+				height:40px;
+				line-height: 40px;
+				font-size:12px;
+				color:$white;
+				text-align: center;
+
+				div{
+					width:50%;
+					height:100%;
+					float:left;
+				}
+				div:nth-of-type(1){
+					width:50%;
+					height:100%;
+					float:left;
+					margin-left:-1px;
+				}
+				.slide{
+					width:0px;
+					height:24px;
+					border-right:1px solid #f52f33;
+					margin-top:8px;
+				}
+				h2{
+					font-size:30px;
+				}
+			}
+
+			li:nth-child(4){
+				border-top:1px solid #f52f33;
+			}
+
+
+		}
+	}
+
+	/* 用户充值体现等等 */
+	.recharge-withdraw{
+		margin-top:4px;
+		border-top:1px solid #efefef;
+		border-bottom:1px solid #efefef;
+		width:100%;
+		height:60px;
+		font-size:12px;
+		color:$fontGray;
+		padding:5px;
+		a{	
+			float:left;
+			display: block;
+			width:25%;
+			height:100%;
+			// background-color:$red;
+			text-align: center;
+			span{
+				display: block;
+				margin:5px auto;
+
+				width:25px;
+				height:20px;
+				background-image:url(../img/common/userAccuntIcon.png);
+				background-size:100px 20px;
+				background-repeat:no-repeat;
+
+			}
+			p{
+				line-height: 20px;
+			}
+		}
+		a:nth-child(1){
+			span{
+				background-position:0 0;
+			}
+		}
+		a:nth-child(2){
+			span{
+				background-position:-25px 0;
+			}
+		}
+		a:nth-child(3){
+			span{
+				background-position:-50px 0;
+			}
+		}
+		a:nth-child(4){
+			span{
+				background-position:-75px 0;
+			}
+		}
+	}
+
+	/* 用户项目 交易明细等等 */
+	.options{
+		ul{
+			width:100%;
+			height:auto;
+			li{
+				border-top:1px solid #efefef;
+				border-bottom:1px solid #efefef;
+				width:100%;
+				height:45px;
+				margin-top:4px;
+				line-height: 45px;
+				color:$fontBlack;
+				font-size:15px;
+				.icon{
+					width:18px;
+					height:18px;
+					display: block;
+					float:left;
+					margin:13px;
+					background-image:url(../img/common/userItems.png);
+					background-size:72px 18px;
+					background-repeat: no-repeat;
+				}
+				a{
+					display: block;
+					float: right;
+					width:45px;
+					height:45px;
+					span{
+						width:18px;
+						height:18px;
+						display: block;
+						margin:13px;
+						background-image:url(../img/common/icons.png);
+						background-size:54px 36px;
+						background-repeat: no-repeat;
+						background-position:-18px 0;
+					}
+				}
+			}
+
+			li:hover{
+				background-color:#efefef;
+			}
+
+			li:nth-child(1){
+				.icon{
+					background-position:0 0;
+				}
+			}
+			li:nth-child(2){
+				.icon{
+					background-position:-18px 0;
+				}
+			}
+			li:nth-child(3){
+				.icon{
+					background-position:-36px 0;
+				}
+			}
+			li:nth-child(4){
+				.icon{
+					background-position:-54px 0;
+				}
+			}
+		}
+	}
+}
+
+/* ------------------用户中心------------------------ */
+
+
+
+/* ------------------公告消息------------------------ */
+.notice{
+	background-color:#f8f8f8;
+
+	li{
+		height:70px;
+		width:100%;
+		border-bottom:1px solid #eeeeee;
+		position:relative;
+		padding:15px 30px 15px 18px;
+		background-color: #fff;
+		p{
+			line-height: 20px;
+		}
+		p:nth-of-type(1){
+			font-size:15px;
+			color:$fontBlack;
+
+			 overflow:hidden;
+		     white-space:nowrap;
+		     text-overflow:ellipsis;
+		}
+		p:nth-of-type(2){
+			font-size:12px;
+			color:#b7b6b6;
+		}
+
+		.nextBtn{
+			width:30px;
+			height:70px;
+			float: right;
+			// background-color:$red;
+			position:absolute;
+			right:5px;
+			top:0;
+			.icon{
+				display:block;
+				width:18px;
+				height:18px;
+				margin:26px auto;
+				background-image:url(../img/common/icons.png);
+				background-size:54px 36px;
+				float:right;
+			}
+
+			.next{
+				background-position:-18px 0;
+			}
+		}
+		.isNew{
+			width:6px;
+			height:6px;
+			border-radius:50%;
+			background-color:$red;
+
+			position:absolute;
+			top:22px;
+			left:7px;
+		}
+
+	}
+
+	.noMore{
+		color:#cfcfcf;
+		font-size:10px;
+		width:100%;
+		background-color:#f8f8f8;
+		text-align: center;
+		line-height: 30px;
+	}
+}
+
+/* ------------------公告消息------------------------ */
+
+
+
+/* ------------------消息infos------------------------ */
+.infos{
+	.notice{
+		width:100%;
+		height:75px;
+
+	}
+
+	.noMore{
+		color:#cfcfcf;
+		font-size:10px;
+		width:100%;
+		background-color:#f8f8f8;
+		text-align: center;
+		line-height: 30px;
+	}
+}
+/* ------------------消息infos------------------------ */
+
+
+
+
+
+/* ------------------投资invest-money------------------------ */
+.invest-money{
+	width:100%;
+	height:auto;
+	ul{
+		
+
+		li{
+			width:100%;
+			border-bottom:1px solid #eee;
+			padding-left:15px;
+			padding-right:15px;
+			div{
+				width:50%;
+				float:left;
+			}
+
+			div:nth-of-type(1){
+				text-align: left;
+			}
+			div:nth-of-type(2){
+				text-align: right;
+			}
+			span{
+				color:$red;
+			}
+		}
+		li:nth-child(1){
+			line-height: 32px;
+			height:32px;
+			div{
+				font-size:11px;
+				color:#818181;
+			}
+
+			div:nth-of-type(1){
+				text-align: left;
+			}
+			div:nth-of-type(2){
+				text-align: right;
+				span{
+					color:$red;
+					display: inline-block;
+					border:1px solid $red;
+					line-height: 16px;
+					font-size:14px;
+					border-radius:3px;
+					margin-left:10px;
+				}
+			}
+		}
+
+		li:nth-child(2){
+			height:55px;
+			line-height: 55px;
+			div:nth-of-type(1){
+				font-size:15px;
+				color:#2c2c2c;
+			}
+			div:nth-of-type(2){
+				font-size:11px;
+				color:#bdbdbd;
+
+				input{
+					text-align: right;
+					width:100%;
+					border:none;
+					outline: none;
+				}
+			}
+		}
+
+		li:nth-child(3){
+			height :30px;
+			text-align: right;
+			color:#818181;
+			line-height: 30px;
+			font-size:11px;
+		}
+
+		li:nth-child(4),li:nth-child(5){
+			height: 40px;
+			line-height: 40px;
+			div:nth-of-type(1){
+				color:#2c2c2c;
+				font-size:15px;
+			}
+			div:nth-of-type(2){
+				font-size:15px;
+				color:#b8b8b8;
+			}
+			div:nth-of-type(3){
+				font-size:15px;
+				color:#b8b8b8;
+				text-align: right;
+			}
+		}
+
+		li:nth-child(6){
+			height: 40px;
+			line-height: 40px;
+		}
+		
+
+	}
+
+	.go-invest{
+		margin-top:100px;
+		// a{
+		// 	display: block;
+		// 	width: 100%;
+		// 	height:100%;
+		// 	border-radius:5px;
+		// 	background-color:$red;
+		// 	color:$white;
+		// 	text-align: center;
+		// }
+	}
+}
+/* ------------------投资invest-money------------------------ */
+
+
+
+
+/* ------------------投资详情页invest-item-detail------------------------ */
+.invest-item-detail{
+	width:100%;
+	height:auto;
+
+	.nums{
+		width:100%;
+		height:auto;
+		position:relative;
+		border-bottom:2px solid #fafafa;
+		img{
+			width:100%;
+		}
+
+		.num{
+			position:absolute;
+			color:$white;
+			p:nth-of-type(2){
+				font-size:12px;
+				text-align: center;
+			}
+			p:nth-of-type(1){
+				text-align: center;
+			}
+		}
+
+		.expect{
+			top:15%;
+			left:19%;
+			b{
+				font-size:50px;
+			}
+		}
+
+		.start,.duration{
+			p:nth-of-type(1){
+				font-size:18px;
+			}
+		}
+		.start{
+			top:40%;
+			left:60%;
+		}
+
+		.duration{
+			top:43%;
+			left:77%;
+		}
+
+		.get{
+			font-size:10px;
+			left:8%;
+			bottom:11%;
+			text-align: center;
+			b{
+				font-size:18px;
+			}
+		}
+
+		.money{
+			color:#333;
+			bottom:7%;
+			left:30%;
+			p:nth-child(1){
+				font-weight: bold;
+				font-size: 15px;
+				span{
+					font-size:18px;
+				}
+				line-height: 20px;
+			}
+			p:nth-child(2){
+				font-size:11px;
+				color:#848484;
+				line-height: 20px;
+			}
+		}
+
+		@media (max-width:370px){
+			.get{
+				left:7%;
+				bottom:11.5%;
+				text-align: center;
+				b{
+					font-size:16px;
+				}
+			}
+		}
+	}
+
+
+	.itemInfo{
+		font-size:13px;
+		width:100%;
+		height:53px;
+		line-height: 53px;
+		padding-right:33px;
+		padding-left:6%;
+		border-bottom:1px solid #f0efef;
+		span:nth-child(1){
+			color:#848484;
+			float: left;
+		}
+		span:nth-child(2){
+			color:#000;
+			float: right;
+		}
+	}
+
+	.insure{
+		height:24px;
+		line-height: 24px;
+		font-size:10px;
+		text-align: center;
+		span{
+			padding-right:5px;
+		}
+		i{
+			display: inline-block;
+			width:14px;
+			height:14px;
+			background-image: url(../img/common/icondanbao.gif);
+			background-size:56px 28px;
+			vertical-align: middle;
+			margin-top: -3px;
+			margin-right:2px;
+		}
+
+		.guarantee{
+			background-position:0 0;
+		}
+
+		.backup{
+			background-position:-14px 0;
+		}
+
+		.expire1{
+			background-position:-28px 0;
+		}
+	}
+
+	
+}
+
+.item-detail-getmore{
+	width:100%;
+	height:auto;
+	text-align: center;
+	color:#ddd;
+	position:fixed;
+	bottom:60px;
+	span{
+		display: inline-block;
+		width:14px;
+		height:11px;
+		background-image:url(../img/common/double-up-arrow.png);
+		background-size:14px 11px ;
+	}
+}
+
+.invest-detail-footer{
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:100%;
+
+	width:100%;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	
+	color:$white;
+	
+	p.state{
+	
+	}
+	.calc{
+		width:45px;
+		height:50px;
+		position:absolute;
+		left:0;
+		bottom:0;
+		background-color:#d30000;
+		span{
+			display: block;
+			width:18px;
+			height:24px;
+			margin:13px auto;
+			background-image:url(../img/common/calc.png);
+			background-size:18px 24px;
+		}
+	}
+	
+}
+
+.repayment{
+	background-color:#b9b9b9;
+}
+.investing{
+	background-color:$red;
+}
+/* ------------------投资详情页invest-item-detail------------------------ */
+
+
+
+/* ------------------关于倍倍利------------------------ */
+.aboutBBL-info{
+	background-color:#f8f8f8;
+
+	.nav-list{
+		width:100%;
+		height:50px;
+		line-height:50px;
+		background-color:#f8f8f8;
+		overflow-x:hidden;
+		margin-bottom: 2px;
+		position:fixed;
+		top:40px;
+		left:0px;
+		z-index: 100;
+		ul{
+			width:420px;
+			height:55px;
+			padding:0 10px;
+		}
+		li{
+			display: block;
+			float: left;
+			// margin:0 10px;
+			text-align: center;
+			height:50px;
+			line-height: 50px;
+			width:80px;
+
+		}
+
+		.active{
+			color:$red;
+			border-bottom:2px solid $red;
+		}
+
+	}
+
+	.aboutBBL{
+		margin-top:82px;
+	}
+
+	.items{
+
+		margin:10px 18px 0;
+		border:1px solid #eaeaea;
+		
+
+		margin-bottom:18px;
+		.intro-pic{
+			width:100%;
+		}
+		.items-title{
+			height:36px;
+			line-height: 36px;
+			width:100%;
+			padding:0 14px;
+			h3{
+				font-size:15px;
+				color:#313131;
+				float: left;
+			}
+			.btn{
+				display: block;
+				float: right;
+				background-image:url(../img/common/open-close.png);
+				width:20px;
+				height:20px;
+				margin-top:8px;
+				background-size:40px 20px;
+			}
+
+			.open{
+				background-position:0 0;
+			}
+
+			.close{
+				background-position:-20px 0;
+			}
+		}
+
+		.items-content{
+			width:100%;
+			padding:0 14px;
+			padding-bottom:14px;
+
+		}
+
+
+		p{
+			text-indent: 2em;
+			font-size:13px;
+			line-height: 24px;
+			color:#5a5a5a;
+		}
+
+
+		
+	}
+
+
+
+	.bigEvents{
+		.items-content{
+			li{
+				width:100%;
+				height:40px;
+				line-height: 40px;
+				font-size:12px;
+				color:#bfbfbf;
+				span{
+					display: block;
+					float: left;
+					height:100%;
+				}
+
+				span:nth-child(1){
+					width:10%;
+
+				}
+
+				span:nth-child(2){
+					width:10%;
+					position:relative;
+					.circle{
+						width:8px;
+						height:8px;
+						border-radius: 50%;
+						background-color:#bfbfbf;
+						margin:0 auto;
+						margin-top:16px;
+					}
+					.slide{
+						width:1px;
+						height:100%;
+						position:absolute;
+						background-color:#bfbfbf;
+						top:0;
+						left:50%;
+						margin-left:-0.5px;
+					}
+
+				}
+
+				span:nth-child(3){
+					width:80%;
+				}
+			}
+
+			.full-year{
+				.icon{
+					.circle{
+						background-color:#ffc000;
+					}
+					.slide{
+						z-index: -1;
+					}
+				}
+				.event{
+					color:#ffc000;
+				}
+			}
+
+			.begin{
+				.icon{
+					.slide{
+						height:50%;
+					}
+				}
+			}
+
+			.latest{
+				.icon{
+					.slide{
+						height:50%;
+						top:50%;
+					}
+				}
+			}
+		}
+	}
+
+	.latest-activities{
+		img{
+			width:100%;
+		}
+		.items-content ul li{
+			font-size:13px;
+			color:#313131;
+			// padding:10px 0;
+			padding-left:15px;
+			position:relative;
+			height:40px;
+			// line-height: 40px;
+			overflow:hidden;
+		    white-space:nowrap;
+		    text-overflow:ellipsis;
+		}
+		.items-content ul li span{
+			display: inline-block;
+			float: left;
+			width:14px;
+			height:14px;
+			border-radius:50%;
+			content:"";
+			position:absolute;
+			left:0px;
+			background:-webkit-radial-gradient(#e51f1f, #e51f1f 4px, #ee5e5e 4px,#ee5e5e 7px); 
+			background:-moz-radial-gradient(#e51f1f, #e51f1f 4px, #ee5e5e 4px,#ee5e5e 7px); 
+			background:-ms-radial-gradient(#e51f1f, #e51f1f 4px, #ee5e5e 4px,#ee5e5e 7px); 
+			background:-o-radial-gradient(#e51f1f, #e51f1f 4px, #ee5e5e 4px,#ee5e5e 7px); 
+			background:radial-gradient(#e51f1f, #e51f1f 4px, #ee5e5e 4px,#ee5e5e 7px); 
+		}
+		.items-content ul li span::before{
+			width:1px;
+			height:40px;
+			background-color:#f0f0f0;
+			content:"";
+			position:absolute;
+			left:6.5px;
+			z-index:-1;
+		}
+		.items-content ul li:last-child span::before{
+			width:1px;
+			height:14px;
+			background-color:#f0f0f0;
+			content:"";
+			position:absolute;
+			left:6.5px;
+			z-index:-1;
+		}
+
+		
+		
+	}
+
+
+	.BBL-safe{
+		i{
+			display: inline-block;
+			width:120px;
+			height:90px;
+			background-image:url(../img/common/aboutBBL.png);
+			background-repeat: no-repeat;
+			background-size:240px 180px;
+		}
+		ul li{
+			padding:0 10px 0 18px;
+			p{
+				text-indent: 0em;
+			}
+			span{
+				color:$red;
+			}
+		}
+
+
+		.security{
+			li:first-child{
+				text-align:center;
+				i{
+					background-position:0 0;
+				}
+			}
+		}
+
+		.risk-management{
+			li:first-child{
+				text-align:center;
+				i{
+					background-position:-120px 0;
+				}
+			}
+		}
+
+		.private{
+			li:first-child{
+				text-align:center;
+				i{
+					background-position:0 -90px;
+				}
+			}
+		}
+
+		.law{
+			li:first-child{
+				text-align:center;
+				i{
+					background-position:-120px -90px;
+				}
+			}
+		}
+	}
+
+	.BBL-contact{
+		i{
+			display: inline-block;
+			width:35px;
+			height:25px;
+			background-image:url(../img/common/get-in-touch.png);
+			background-size:35px 100px;
+			background-repeat: no-repeat;
+			margin-right:5px;
+
+			/* 垂直居中 */
+			-webkit-transform: translateY(25%);
+			-moz-transform: translateY(25%);
+			-ms-transform: translateY(25%);
+			-o-transform: translateY(25%);
+			transform: translateY(25%);
+		}
+		h3{
+			font-size:18px;
+			color:#313131;
+			line-height: 40px;
+			height:40px;
+		}
+		span{
+			color:$red;
+		}
+		li:first-child{
+			border-bottom:1px solid #eaeaea;
+		}
+		li{
+			padding-left:18px;
+			line-height: 40px;
+			margin-bottom:5px;
+		}
+		p{
+			text-indent: 0;
+
+		}
+
+		.service{
+			i{
+				background-position:0 0;
+			}
+		}
+		.media-cooperation{
+			i{
+				background-position:0 -25px;
+			}
+		}
+		.cooperation{
+			i{
+				background-position:0 -50px;
+			}
+		}
+		.address{
+			i{
+				background-position:0 -75px;
+			}
+		}
+	}
+}
+/* ------------------关于倍倍利------------------------ */
+
+
+
+
+/* ------------------登录注册用户输入框------------------------ */
+.user-inputs{
+	display: inline-block;
+	width:100%;
+	height:auto;
+	padding:0 20px;
+	li{
+		display: block;
+		width:100%;
+		height:60px;
+		/* 输入框 */
+		div.input-box{
+			
+			height:30px;
+			border-bottom:1px solid #dcdcdc;
+			label{
+				width:30px;
+				height:30px;
+				display: block;
+				line-height: 30px;
+				text-align: center;
+				float:left;
+				.iconfont{
+					font-size:20px;
+					color:#e52222;
+				}
+			}
+			
+			input{
+				border:none;
+				outline: none;
+				width:85%;
+				height:29px;
+			}
+
+		
+		}
+		/* 信息提示 */
+		.tip-box{
+			width:100%;
+			height:24px;
+			line-height: 24px;
+			font-size:12px;
+			color:#f00;
+			text-align:left;
+			margin-left: 12%;
+
+		}
+	}
+}
+/* ------------------登录注册用户输入框------------------------ */
+
+
+
+/* ------------------登录------------------------ */
+.login-box{
+	font-size:12px;
+	text-align:center;
+
+	.BBL-logo{
+		line-height: 180px;
+		i{
+			-webkit-transform: translate(0,25%);
+			-moz-transform: translate(0,25%);
+			-ms-transform: translate(0,25%);
+			-o-transform: translate(0,25%);
+			transform: translate(0,25%);
+		}
+	}
+
+	.login-input{
+		
+		.other-option{
+			.go-reg{
+				float: left;
+				color:#f7cd09;
+			}
+			.forget-password{
+				float: right;
+			}
+		}
+
+		
+	}
+
+	.login{
+
+		
+		margin:0 20px;
+		
+		color:#fff;
+		
+		font-size:18px;
+	}
+}
+/* ------------------登录------------------------ */
+
+
+
+
+
+
+/* ------------------注册------------------------ */
+.reg-box{
+	font-size:12px;
+	text-align:center;
+	padding-top:10%;
+
+	.reg-input{
+		.identifying-code{
+			input{
+				width:50%;
+				float: left;
+				padding-left:10px;
+			}
+			a.get-code{
+
+				float:right;
+				color:#6d6d6d;
+				line-height: 30px;
+				display: block;
+				text-align: left;
+
+			}
+
+			a.get{
+				color:#e52020;
+			}
+		}
+
+		li.verify-code .tip-box{
+			margin-left:3.5%;
+		}
+	}
+
+	a.next-step{
+		color:#fff;
+		margin-top:10%;
+		margin-bottom:5%;
+	}
+
+	p.login{
+		font-size:12px;
+		text-align: center;
+		color:#727272;
+		a{
+			color:#f08300;
+		}
+	}
+
+
+
+
+	.setpassword{
+		.password2{
+			.iconfont{
+				font-size:24px;
+
+			}
+		}
+		.referee{
+			.iconfont{
+				font-size:16px;
+				line-height: 30px;
+			}
+		}
+
+		.finish-reg{
+			color:#fff;
+			margin:0 20px;
+			margin-top:20px;
+		}
+	}
+}
+
+
+
+
+/* ------------------注册------------------------ */
+
+.operation-success{
+	display:inline-block;
+	width:60px;
+	height:60px;
+	background-image:url(../img/common/operation-success.png);
+	background-size:100% 100%;
+	background-repeat:no-repeat;
+}
+
+/* ------------------注册成功------------------------ */
+.reg-box-ok{
+	text-align:center;
+	padding-top:10%;
+	.success{
+		// margin-bottom: 10%;
+	}
+	h5{
+		font-size:15px;
+		font-weight: 100;
+		line-height: 30px;
+	}
+	p{
+		font-size:12px;
+		line-height: 20px;
+		margin-bottom:10%;
+	}
+
+	a{
+		color:$white;
+	}
+}
+
+/* ------------------注册成功------------------------ */
+
+
+
+
+
+
+
+/* ------------------福利------------------------ */
+.riches{
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0px;
+	margin-top:0;
+	padding-top:40px;
+	left:50%;
+	-webkit-transform:translateX(-50%);
+	-ms-transform:translateX(-50%);
+	-moz-transform:translateX(-50%);
+	-o-transform:translateX(-50%);
+	transform:translateX(-50%);
+	.rich-nav{
+		background-color:$white;
+		width:100%;
+		height: 35px;
+		font-size:15px;
+		line-height: 35px;
+		position:fixed;
+		// top:40px;
+		z-index: 50;
+		// border-bottom:1px solid $light-gray;
+		
+		ul{
+			background-color:transparent;
+			width:100%;
+			height:100%;
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+
+			li{
+				display: block;
+				-webkit-flex:1;
+				flex:1;
+				text-align: center;
+				margin:0 5px;
+			}
+
+			li.active{
+				color:$red;
+				border-bottom:1px solid $red;
+				margin-top:-1px;
+			}
+		}
+
+		hr{
+			border:none;
+			height:1px;
+			box-shadow:0px 1px 2px rgba(0,0,0,0.2);
+		}
+	}
+	
+
+
+	
+
+
+	.cont{
+		position:absolute;
+		background-color:$bg-light-gray;
+		width:100%;
+		height:100%;
+		
+		padding-top:36px;
+		z-index: 30;
+		ul{
+			padding:20px;
+			padding-bottom:40px;
+			width:100%;
+			height: 100%;
+			overflow-y: scroll;
+			li{
+				display: block;
+				width:100%;
+				height: auto;
+				position:relative;
+
+				margin-bottom: 10px;
+				img{
+					width:100%;
+					
+					font-size:0;
+
+					box-shadow:0 3px 5px #ededed;
+					position:relative;
+				}
+			}
+		}
+	}
+
+	.riches-cont{
+		width:100%;
+		height:100%;
+		
+		ul{
+			li{
+				
+				color:$gray-font-color;
+				div{
+					font-size:12px;
+					position:absolute;
+					// z-index:40;
+				}
+				.nums{
+					top:20%;
+					left:17%;
+					font-weight: 500;
+					span{
+						font-size:24px;
+					}
+				}
+
+				.title{
+					top:26%;
+					right:5%;
+				}
+
+				.duration{
+					bottom:10%;
+					right:5%;
+				}
+
+
+				.state{
+					z-index: 30;
+
+					width:51px;
+					height:40px;
+					
+					top:35%;
+					left:40%;
+					background-image:url("../img/common/fuli-state.png");
+					background-size:153px 40px;
+					background-repeat:no-repeat;
+				}
+
+				.repay{
+					background-position:0 0;
+				}
+				.used{
+					background-position:-102px 0;
+				}
+				.outofdate{
+					background-position:-51px 0;
+				}
+			}
+
+			li.valid div{
+				color:$fontBlack;
+			}
+		}
+	}
+	
+	.jiaxi-voucher{
+		font-size:12px;
+		li{
+			color:$gray-font-color;
+			div{
+				position:absolute;
+			}
+			.rates{
+				top:18%;
+				left:7%;
+				font-size:15px;
+				span{
+					font-size:24px;
+				}
+			}
+			
+
+			.title{
+				bottom:12%;
+				left:7%;
+			}
+			.detail{
+				top:27%;
+				right:7%;
+				text-align: center;
+			}
+	 
+			.duration{
+				bottom:12%;
+				right:7%;
+			}
+
+			.state{
+				z-index: 30;
+
+				width:51px;
+				height:40px;
+				
+				top:40%;
+				right:7%;
+				background-image:url("../img/common/fuli-state.png");
+				background-size:153px 40px;
+				background-repeat:no-repeat;
+			}
+
+			.used{
+				background-position:-102px 0;
+			}
+			.outofdate{
+				background-position:-51px 0;
+			}
+		}
+
+		li.valid{
+			color:$fontBlack;
+			.rates{
+				color:$red;
+			}
+
+			.detail{
+				top:20%;
+			}
+		}
+	}
+
+	.red-bag{
+		font-size:12px;
+		li.invalid{
+			color:#999898;
+		}
+		li{
+			div{
+				position:absolute;
+			}
+			.money{
+				top:15%;
+				left:15%;
+				font-size:30px;
+				
+			}
+			
+
+			.title{
+				bottom:12%;
+				left:15%;
+			}
+			.detail{
+				top:22%;
+				right:7%;
+				text-align: center;
+			}
+
+			@media (min-width:322px){
+				.detail{
+					top:15%;
+					line-height: 20px;
+				}
+
+				.money{
+					left:20%;
+				}
+				
+
+				.title{
+					left:20%;
+				}
+			}
+	 
+			.duration{
+				bottom:12%;
+				right:7%;
+			}
+
+			.state{
+				z-index: 30;
+
+				width:51px;
+				height:40px;
+				
+				top:40%;
+				right:7%;
+				background-image:url("../img/common/fuli-state.png");
+				background-size:153px 40px;
+				background-repeat:no-repeat;
+			}
+
+			.used{
+				background-position:-102px 0;
+			}
+			.outofdate{
+				background-position:-51px 0;
+			}
+			
+		}
+
+		li.valid{
+			.money{
+				color:$red;
+			}
+		}
+	}
+}
+/* ------------------福利------------------------ */
+
+
+/* ------------------充值 提现------------------------ */
+.recharge-tixian{
+
+	.recharge-tixian-box{
+		width:100%;
+		border-top:1px solid #dedede;
+		border-bottom:1px solid #dedede;
+		padding:10px 18px;
+		margin-bottom:30px;
+		font-size:15px;
+		color:$gray-font-color;
+		background-color:$white;
+
+		.money{
+			width:100%;
+			height:40px;
+			line-height: 40px;
+
+			input{
+				border:none;
+				outline: none;
+				margin-left: 5px;
+				height:20px;
+				line-height: 20px;
+			}
+
+			.get-all{
+				display: block;
+				font-size:12px;
+				padding:5px;
+				float: right;
+				margin-top:9px;
+				border:none;
+				color:$white;
+				border-radius:5px;
+				background-color:$yellow;
+			}
+		}
+
+		.icon-renminbi{
+			font-size: 14px;
+
+		    display: inline-block;
+		    vertical-align: top;
+		    margin-top: 1px;
+		}
+
+		p{
+			width:100%;
+			line-height: 30px;
+			margin-bottom: 1px;
+			span{
+				float: right;
+			}
+		}
+
+
+		// .bank,.recharge-limit{
+		// 	width:100%;
+		// 	line-height: 30px;
+		// 	span{
+		// 		float: right;
+		// 	}
+		// }
+
+
+
+	}
+
+	a.recharge-explain{
+		display: block;
+		color:$gray-font-color;
+		font-size:15px;
+		line-height: 20px;
+		border-bottom:1px solid $gray-font-color;
+		margin-left:18px;
+		width:auto;
+		margin-bottom:30px;
+		width:60px;
+		text-align: center;
+	}
+
+
+	.valid-money{
+		color:$gray-font-color;
+		font-size:15px;
+		height:40px;
+		line-height: 40px;
+		padding-left:18px;
+		i{
+			margin:0 3px;
+		}
+	}
+
+}
+/* ------------------充值 提现------------------------ */
+
+
+
+/* ------------------充值 提现 说明------------------------ */
+.recharge-tixian-explain{
+	font-size:13px;
+	padding:0 18px 18px;
+	color:$gray-font-color;
+	.content{
+		width:100%;
+		padding:10px;
+		border:1px solid #e8e8e8;
+		.explain{
+			li{
+				line-height: 18px;
+			}
+			width:100%;
+			padding:5px;
+			.limit-table{
+				color:$red;
+			}
+			margin-bottom:10px;
+		}
+
+		.tips{
+			h5{
+				color:$header-black;
+				font-weight:500;
+				line-height: 30px;
+			}
+			ul{
+				padding-left:20px;
+				li{
+					list-style-type:decimal;
+					line-height: 18px;
+				}
+			}
+		}
+	}
+}
+/* ------------------充值 提现 说明------------------------ */
+
+
+
+
+
+.btn-full{
+	display:block;
+	height:45px;
+	line-height:45px;
+	color:$white;
+	margin:0 20px;
+	border-radius:5px;
+	background-color:$red;
+	text-align:center;
+
+	font-size:18px;
+	a{
+		color:#fff;
+	}
+}
+
+.icon-renminbi{
+	color:$red;
+}
+
+.icon-CBC{
+	color:#103c98;
+}
+
+
+
+
+
+
+

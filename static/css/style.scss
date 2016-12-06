@@ -1,0 +1,306 @@
+/* 主色调 */
+$orange : #ff8964;
+$gray : #d2d2d2;
+$white : #fff;
+$testBlue : #58a;
+$lightGray : #efefef;
+$lightGray2 : #f7f7f7;
+
+$fontGray : #6d6d6d;
+$fontBlack : #2d2d2d;
+
+
+
+
+
+/* 20161124定义颜色 */
+$red:#e72418;
+$yellow : #fcc800;
+
+$header-black:#333;
+$content-gray:#666;
+
+$bg-light-gray:#f8f8f8;
+
+
+
+$light-gray:#eaeaea;
+$gray-font-color:#717171;
+
+
+
+
+
+@charset "utf-8";
+ 
+
+/* --------------公共样式---------------- */
+/* 去除内外补丁 */
+html *{
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+	font-family:"SimHei";
+}
+
+body{
+	background-color:$bg-light-gray;
+}
+
+li{
+	list-style:none;
+}
+/* 水平居中 */
+.center{
+	margin-left:auto;
+	margin-right:auto;
+}
+
+/* a标签样式：去除下划线 */
+a,a:visited,a:link{
+	text-decoration:none;
+	color:$fontBlack;
+}
+
+/* 隐藏 */
+.hide{
+	display:none;
+}
+
+input:focus { 
+	outline: none; 
+}
+input,button,select,textarea{
+	outline:none;
+	/*-webkit-appearance:none;*/
+	/*强制去除表单自带的样式*/ 
+}
+textarea{
+	resize:none;
+	/*-webkit-appearance:none;*/
+	/*强制去除textarea自带的样式*/
+}
+
+/* 最大宽度 */
+.maxwrap{
+	max-width:640px;
+}
+
+
+/* 定位 */
+.fixed{
+	position:fixed;
+}
+
+.relat{
+	position:relative;
+}
+
+.absolute{
+	position:absolute;
+}
+
+
+.scroll{
+	overflow-y:scroll;
+}
+
+
+/* 多于文字省略号代替 */
+.ellipsis{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+/* 文字居中 */
+.text-center{
+	text-align:center;
+}
+
+/* 底部灰色边线 */
+.bottom-gray{
+	border-bottom:1px solid $lightGray;
+}
+
+.full-with{
+	width:100%;
+}
+
+.bgWhite{
+	background-color:$white;
+}
+.bg-red{
+	background-color:$red;
+}
+.bg-white{
+	background-color:$white;
+}
+.f-white{
+	color:$white;
+}
+
+.f-gray{
+	color:$fontGray;
+}
+
+
+.no-border{
+	border:none!important;
+}
+
+.mb50{
+	margin-bottom:50px;
+}
+
+
+.z100{
+	z-index:100;
+}
+
+
+.fl{
+	float:left;
+}
+.fr{
+	float:right;
+}
+
+
+/* 内容居中 最大宽度为640px */
+.container{
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+}
+/* 内容居中 最大宽度为640px */
+
+
+
+/* ------------------自适应弹窗弹窗------------------------ */
+.popup-window{
+	position:fixed;
+	width:100%;
+	max-width:640px;
+	height:100%;
+	z-index:100;
+	background-color:rgba(0,0,0,0.5);
+	top:0;
+	left:50%;
+	-webkit-transform: translate(-50%,0);
+	-moz-transform: translate(-50%,0);
+	-ms-transform: translate(-50%,0);
+	-o-transform: translate(-50%,0);
+	transform: translate(-50%,0);
+
+	z-index:101;
+
+	.popup-content{
+		position:absolute;
+		left:50%;
+		top:50%;
+		-webkit-transform: translate(-50%,-50%);
+		-moz-transform: translate(-50%,-50%);
+		-ms-transform: translate(-50%,-50%);
+		-o-transform: translate(-50%,-50%);
+		transform: translate(-50%,-50%);
+		background-color:$white;
+		border-radius:5px;
+		width:72%;
+		height:auto;
+		text-align: center;
+		overflow: hidden;
+
+		/* 弹窗内容 最高高度限制，iphone4限制在300px，默认为400px*/
+		.details{
+			width:90%;
+			height:auto;
+			padding:20px 10px;
+			max-height:400px;
+			overflow-y:scroll;
+			margin:0 auto;
+			.detials-content{
+				// background-color:#000;
+				width:100%;
+				height:auto;
+				box-sizing:content-box;
+				.cont-list{
+					font-size:14px;
+					display: block;
+					margin:0 auto;
+					width:80%;
+					text-align: left;
+					li span{
+						color:$red;
+						line-height: 20px;
+					}
+				}
+			}
+		}
+
+		.success{
+			width:50px;
+			height:50px;
+			border-radius:50%;
+			border:1px solid #e62021;
+			margin: 0 auto 10px;
+
+			.hook{
+				width:16px;
+				height:30px;
+				border-bottom:2px solid #e62021;
+				border-right:2px solid #e62021;
+				margin:5px auto 0;
+				-webkit-transform: rotate(50deg);
+				-moz-transform: rotate(50deg);
+				-ms-transform: rotate(50deg);
+				-o-transform: rotate(50deg);
+				transform: rotate(50deg);
+			}
+
+
+			animation:hook-animate 3s;
+		}
+
+		@keyframes hook-animate{
+			0%{
+				opacity: 0;
+			}
+			100%{
+				opacity: 1;
+			}
+		}
+		
+		@media (max-height:480px){
+			.details{
+				max-height:300px;
+			}
+		}
+		/* 弹窗内容 */
+
+		.btns{
+			display: -webkit-flex;
+			width:100%;
+			height:45px;
+			border-top:1px solid #e6e6e6;
+			button{
+				font-size:16px;
+				color:$red;
+				height:100%;
+				-webkit-flex:1;
+				border:none;
+				outline: none;
+				background-color:$white;
+			}
+			button:nth-child(1){
+				border-right:1px solid #e6e6e6;
+			}
+		}
+	}
+}
+/* ------------------自适应弹窗弹窗------------------------ */
+
+
+/* ------------------图标------------------------ */
+
+/* ------------------图标------------------------ */

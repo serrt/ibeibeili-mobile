@@ -43,10 +43,8 @@
 </template>
 
 <style lang="scss">
-  @import "../assets/scss/_variables";
   @import "../assets/scss/common";
-  @import "../assets/scss/iconfont";
-  @import "../assets/scss/login";
+  @import "../assets/scss/all/LoginBox";
 </style>
 
 <script>

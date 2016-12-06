@@ -5,12 +5,6 @@ const routes = [{
     require(['./views/Home.vue'], (resolve))
   }
 }, {
-  path: '/reg-success',
-  name: 'reg-success',
-  component (resolve) {
-    require(['./views/Reg-success.vue'], (resolve))
-  }
-}, {
   path: '/reg-step1',
   name: 'reg-step1',
   component (resolve) {

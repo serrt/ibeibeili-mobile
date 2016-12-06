@@ -1,0 +1,56 @@
+@import '_variables';
+// @import '_component';
+@import 'iconfont';
+
+
+@charset "utf-8";
+ 
+
+
+ html *{
+	padding:0;
+	margin:0;
+	box-sizing:border-box;
+	font-family:"SimHei";
+}
+
+
+body{
+	background-color:$bg-light-gray;
+}
+
+a{
+	text-decoration:none;
+	color:$black;
+}
+
+
+ul,ol{
+	list-style:none;
+}
+
+/* 设置宽 */
+.full-container{
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+}
+
+/* 设置宽，两边间隙18px */
+.container{
+	padding:0 18px;
+	width:100%;
+	max-width:640px;
+	margin:0 auto;
+}
+
+/* 通用按钮 */
+.btn{
+	display:block;
+	border-radius:5px;
+	background-color:$red;
+	color:$white;
+	height: 45px;
+	line-height: 45px;
+	font-size:18px;
+}

@@ -1,0 +1,181 @@
+.reg-box{
+	padding:40px 0;
+	font-size:12px;
+	text-align:center;
+
+
+	.reg-input{
+		margin-top:60px;
+		.identifying-code{
+			input{
+				width:50%;
+				float: left;
+				padding-left:10px;
+			}
+			a.get-code{
+
+				float:right;
+				color:#6d6d6d;
+				line-height: 30px;
+				display: block;
+				text-align: left;
+
+			}
+
+			a.get{
+				color:#e52020;
+			}
+		}
+
+		li.verify-code .tip-box{
+			margin-left:3.5%;
+		}
+	}
+
+	a.next-step{
+		color:#fff;
+		margin-top:10%;
+		margin-bottom:5%;
+	}
+
+	p.login{
+		font-size:12px;
+		text-align: center;
+		color:#727272;
+		a{
+			color:#f08300;
+		}
+	}
+
+
+
+
+	.setpassword{
+		.password2{
+			.iconfont{
+				font-size:24px;
+
+			}
+		}
+		.referee{
+			.iconfont{
+				font-size:16px;
+				line-height: 30px;
+			}
+		}
+
+		.finish-reg{
+			color:#fff;
+			margin-top:20px;
+		}
+	}
+}
+
+.user-inputs{
+	display: inline-block;
+	width:100%;
+	height:auto;
+	li{
+		display: block;
+		width:100%;
+		height:50px;
+		/* 输入框 */
+		div.input-box{
+			
+			height:30px;
+			border-bottom:1px solid $user-input-borderbottom-color;
+			label{
+				width:30px;
+				height:30px;
+				display: block;
+				line-height: 30px;
+				text-align: center;
+				float:left;
+				.iconfont{
+					font-size:$f20;
+					color:$red;
+				}
+			}
+			
+			input{
+				border:none;
+				outline: none;
+				width:85%;
+				height:29px;
+			}
+
+		
+		}
+		/* 信息提示 */
+		.tip-box{
+			width:100%;
+			height:24px;
+			line-height: 24px;
+			font-size:$f12;
+			color:$red;
+			text-align:left;
+			margin-left: 12%;
+
+		}
+	}
+}
+
+
+.protocol{
+	text-align:left;
+	color:$protocal-color;
+	line-height:20px;
+	height:40px;
+	span{
+		color:$red;
+	}
+	padding-left:10px;
+
+	.tick{
+		display: inline-block;
+		width:15px;
+		height:15px;
+		background-color: #000;
+		position:relative;
+		background-image:url(#{$imgPath}/tick.png);
+		background-size:30px 15px;
+		background-position: -15px 0;
+		vertical-align: top;
+		margin-top: 3px;
+		margin-right:3px;
+		.i-agree{
+			position:absolute;
+			width:100%;
+			height:100%;
+			left:0;
+			top:0;
+			opacity: 0;
+		}
+	}
+}
+
+
+.reg-success{
+	margin-top:80px;
+	text-align:center;
+	line-height: 25px;
+	.success{
+		width:54px;
+		height:54px;
+		margin:0 auto 20px;
+		background-image:url(#{$imgPath}/ok.png);
+		background-size:54px 54px;
+		background-repeat: no-repeat;
+	}
+	h5{
+		font-size:$f14;
+		color:$h5-color;
+		font-weight: 500;
+		
+	}
+	p{
+		font-size:$f12;
+		color:$h5-color;
+		margin-bottom:20px;
+	}
+}
