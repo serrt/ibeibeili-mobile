@@ -1,0 +1,173 @@
+#home{
+	background-color:$home-bgcolor;
+	// background-color:#000;
+	position:absolute;
+	left:0;
+	right:0;
+	bottom:0;
+	top:0;
+	height:100%;
+	.banner{
+		width:100%;
+		height:27%;
+		img{
+			width:100%;
+			height:100%;
+			font-size:0px;
+		}
+	}
+
+	.trade-volume{
+		height:10%;
+		background-color:$white;
+		border-bottom:1px solid $home-border-color;
+		margin-bottom:5px;
+		ul{
+			padding:5px 0;
+			height:100%;
+			li{
+				height: 50%;
+				width:100%;
+				// padding:2px 0;
+
+				align-items:center;
+				display:-webkit-flex;
+				div{
+					width:100%;
+				}
+			}
+			li.go-detail{
+				font-size:$f11;
+				color:$red;
+
+				span{
+					min-width:40px;
+					height:100%;
+					text-align: right;
+					color:$home-goDetail-color;
+					i{
+						display: inline-block;
+						vertical-align: top;
+						margin-top: 1px;
+					}
+				}
+			}
+			li.total-num{
+				color:#666;
+				font-size:$f12;
+				span{
+					padding:2px;
+					font-size:$f18;
+					border:1px solid $home-totalNum-color;
+					border-radius:3px;
+				}
+			}
+		}
+	}
+
+	.recommend-invest{
+		height:18%;
+		background-color:$white;
+		border-bottom:1px solid $home-border-color;
+		border-top:1px solid $home-border-color;
+		margin-bottom:5px;
+		padding-top:5px;
+		padding-bottom:5px;
+		margin-bottom:5px;
+		.invest-title{
+			height:30%;
+			font-size:$f12;
+			color:$home-investTitle-color;
+			border-bottom:1px solid $home-border-color;
+			padding-bottom:5px;
+
+
+			align-items:center;
+			span{
+				font-size:$f10;
+			}
+		}
+		.invest-detail{
+			height: 70%;
+			.invest-show{
+				height: 100%;
+				
+				p.item-title{
+					font-size:$f12;
+					color:#6d6d6d;
+				}
+				.expect{
+					height:100%;
+					flex:1;
+					text-align: center;
+					div{
+						float: left;
+						.rate{
+							height: 50%;
+							// line-height: 24px;
+							color:$red;
+							font-size:$f15;
+							span{
+								font-size:$f18;
+							}
+						}
+					}
+				}
+
+				.duration{
+					height:100%;
+					flex:2;
+					text-align: center;
+					.days{
+						font-size:14px;
+						height: 24px;
+						line-height: 24px;
+						color:#6d6d6d;
+					}
+				}
+
+				.buy{
+					height:100%;
+					flex:2;
+					align-content:center;
+					padding-top:5px;
+					.btn{
+						height:30px;
+						line-height: 30px;
+						background-color:$yellow;
+						font-size:$f18;
+					}
+				}
+			}
+		}
+		
+	}
+
+	.function-nav{
+		ul{
+			width:100%;
+			height:auto;
+			li{
+				padding:10px;
+				display: block;
+				width:50%;
+				text-align: center;
+				float: left;
+				h5{
+					font-size:$f14;
+					font-weight:100;
+					color:#444444;
+					line-height: $f20;
+				}
+				p{
+					font-size:$f10;
+					color:#ababab;
+					line-height: $f14;
+				}
+				.iconfont{
+					font-size:30px;
+				}
+			}
+		}
+	}
+}

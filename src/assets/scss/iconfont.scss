@@ -16,13 +16,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-shezhi:before { content: "\e61f"; }
+
 .icon-01fanhui:before { content: "\e64a"; }
 
 .icon-shouji:before { content: "\e66b"; }
 
+.icon-caifu:before { content: "\e668"; }
+
+.icon-caifuActive:before { content: "\e669"; }
+
 .icon-renminbi:before { content: "\e6c9"; }
 
+.icon-svg17:before { content: "\e838"; }
+
 .icon-faxian:before { content: "\e63b"; }
+
+.icon-homeActive:before { content: "\e603"; }
 
 .icon-shouyeshouye:before { content: "\e60a"; }
 
@@ -30,11 +41,19 @@
 
 .icon-yonghu:before { content: "\e604"; }
 
-.icon-faxianb:before { content: "\e689"; }
+.icon-unie61f:before { content: "\e6ae"; }
+
+.icon-home:before { content: "\e611"; }
+
+.icon-discoveryActive:before { content: "\e617"; }
 
 .icon-suo:before { content: "\e640"; }
 
 .icon-icon:before { content: "\e60d"; }
+
+.icon-shenfen:before { content: "\e6b3"; }
+
+.icon-shoushimima:before { content: "\e644"; }
 
 .icon-9:before { content: "\e608"; }
 
@@ -42,5 +61,12 @@
 
 .icon-353245214507:before { content: "\e628"; }
 
-.icon-CBC:before { content: "\e602"; }
+.icon-zhifu1:before { content: "\e614"; }
 
+.icon-zhifu:before { content: "\e618"; }
+
+.icon-discovery:before { content: "\e600"; }
+
+.icon-touzi:before { content: "\e649"; }
+
+.icon-touziActive:before { content: "\e64b"; }

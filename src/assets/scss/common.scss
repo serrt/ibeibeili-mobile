@@ -29,6 +29,14 @@ ul,ol{
 	list-style:none;
 }
 
+.fr{
+	float:right;
+}
+
+.fl{
+	float:left;
+}
+
 /* 设置宽 */
 .full-container{
 	width:100%;
@@ -54,4 +62,16 @@ ul,ol{
 	line-height: 45px;
 	font-size:18px;
 	text-align:center;
+}
+
+
+.hide{
+	display:none;
+}
+
+/* flex布局 */
+.flex{
+	display:-webkit-flex;
+	display:-ms-flexbox;
+	display:flex;
 }

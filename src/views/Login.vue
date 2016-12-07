@@ -39,7 +39,7 @@
     <a href="javascript:void(0);" class="btn btn-full login">登&nbsp;&nbsp;录</a>
   </div>
 
-  </div>
+</div>
 </template>
 
 <style lang="scss">
