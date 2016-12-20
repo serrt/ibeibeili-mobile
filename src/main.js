@@ -1,14 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import VueResource from 'vue-resource'
 import routes from './routes'
 import appEnv from '../env'
+import TouchRipple from 'vue-touch-ripple'
+import axios from 'axios'
+import Loadmore from 'vue-loadmore'
 
 Vue.use(VueRouter)
-Vue.use(VueResource)
-
+Vue.use(TouchRipple)
+Vue.component('loadmore', Loadmore)
 // Api 请求根地址
-Vue.http.options.root = appEnv.apiUrl
+Vue.prototype.$http = axios
+
+axios.interceptors.request.use(function (config) {
+  return config
+}, function (error) {
+  return Promise.reject(error)
+})
+axios.interceptors.response.use(function (response) {
+  return response
+}, function (error) {
+  return Promise.reject(error)
+})
+Vue.prototype.env = appEnv
 
 const router = new VueRouter({
   mode: 'history',
