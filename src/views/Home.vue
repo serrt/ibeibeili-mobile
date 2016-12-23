@@ -2,10 +2,16 @@
   <div>
     <div class="full-container" id="home">
       <div class="home-content">
-        <!-- banner -->
-        <swiper direction="horizontal" class="full-with banner" @slide-change-start="onSlideChangeStart" @slide-change-end="onSlideChangeEnd">
-          <img v-for="item in img_list" v-bind:src="item.url">
-        </swiper>
+        <div class="banner full-container swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" v-for="item in img_list">
+              <img class="swiper-lazy" v-bind:src="item.url"/>
+              <!-- <div class="swiper-lazy-preloader"></div> -->
+            </div>
+          </div>
+          <!-- If we need pagination -->
+          <div class="swiper-pagination"></div>
+        </div>
       
         <!-- trade-volume -->
         <div class="container trade-volume">
@@ -18,16 +24,16 @@
             </div>
           </div>
           <div class="total-num flex-middle">
-            <div class="full-container">
+            <div class="full-container" v-bind:money="this.fult_money">
               <span>1</span>亿
-              <span>3</span>
-              <span>0</span>
-              <span>8</span>
-              <span>9</span>万
-              <span>6</span>
-              <span>6</span>
               <span>2</span>
-              <span>0</span>元
+              <span>3</span>
+              <span>4</span>
+              <span>5</span>万
+              <span>6</span>
+              <span>7</span>
+              <span>8</span>
+              <span>9</span>元
             </div>
           </div>
         </div>
@@ -60,7 +66,7 @@
 
         <!-- 四大功能 -->
         <div class='four-features full-container'>
-          <div class="feature h50 mission">
+          <div class="feature h50 mission" v-touch-ripple>
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-renwu"></i><br>
@@ -69,7 +75,7 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 invite">
+          <div class="feature h50 invite" v-touch-ripple>
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-yaoqing"></i><br>
@@ -78,7 +84,7 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 about">
+          <div class="feature h50 about" v-touch-ripple>
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <span class="BBL-logo flex-middle">
@@ -89,7 +95,7 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 help">
+          <div class="feature h50 help" v-touch-ripple>
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-bangzhu"></i><br>
@@ -112,58 +118,58 @@
 
 <script>
 import FooterNav from '../components/Footer'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper'
-import Swiper from 'vue-swiper'
+import Swiper from 'swiper'
 
 export default {
-  components: {FooterNav, Swiper},
-  name: 'home',
+  components: {FooterNav},
   data: function () {
     return {
-      swiperOption: {
-        autoplay: 2000,
-        pagination: '.swiper-pagination',
-        paginationClickable: true, // 允许图标点击
-        mousewheelControl: true, // 允许鼠标滑轮
-        autoplayDisableOnInteraction: false, // 用户操作swiper之后，是否禁止autoplay
-        lazyLoading: true, // 懒加载
-        loop: true // 是否循环滚动
-      },
-      // banner图
-      img_list: [{url: '/static/images/banner.png'}, {url: '/static/images/banner.png'}, {url: '/static/images/banner.png'}]
+      swiper: null, // 滑动插件
+      // 图片列表
+      img_list: [{url: '/static/images/banner.png'}, {url: '/static/images/bank.png'}, {url: '/static/images/message-pic.png'}],
+      trade_money: 102587896.00, // 累计交易额
+      money_html: '<span>1</span>已'
+    }
+  },
+  mounted () {
+    let sw = new Swiper('.swiper-container', {
+      loop: true,
+      speed: 2000,
+      preloadImages: true,
+      autoplay: true,
+      pagination: '.swiper-pagination',
+      paginationClickable: true,
+      autoplayDisableOnInteraction: false
+    })
+    this.swiper = sw
+  },
+  computed: {
+    fult_money: function () {
+      let number1 = Math.floor(this.trade_money / 100000000)
+      let number2 = Math.floor((this.trade_money - 100000000 * number1) / 10000)
+      let number3 = Math.floor(this.trade_money - 100000000 * number1 - 10000 * number2)
+      // 少于4位用0代替
+      let stringNumber2 = number2.toString()
+      for (let i = 0; i < 5; i++) {
+        if (stringNumber2[i] === undefined) {
+          stringNumber2 = 0 + stringNumber2
+        }
+      }
+      let stringNumber3 = number3.toString()
+      for (let i = 0; i < 5; i++) {
+        if (stringNumber3[i] === undefined) {
+          stringNumber3 = 0 + stringNumber3
+        }
+      }
+      let string = {number1: number1.toString(), number2: stringNumber2, number3: stringNumber3}
+      return string
     }
   },
   methods: {
-    onSlideChangeStart (currentPage) {
-      console.log('onSlideChangeStart', currentPage)
-    },
-    onSlideChangeEnd (currentPage) {
-      console.log('onSlideChangeEnd', currentPage)
-    }
   }
 }
 </script>
 <style scoped>
-  .swiper {
-    height: 35%;
-    min-height: 158px;
-  }
-
-  .swiper-wrap > img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    font-size: 48px;
-    color: #fff;
-  }
-
-  .swiper-nested-inner {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 0;
-  }
-
   #home {
     position: absolute;
     top: 0;
@@ -172,11 +178,6 @@ export default {
     bottom: 0;
     background-color: #f8f8f8;
     margin-bottom: 50px;
-    /* 轮播图 */
-    /* 累计交易额 */
-    /* 推荐项目 */
-    /* 四大功能 */
-    /* 平台公告 */
   }
 
   #home .home-content {
@@ -184,13 +185,13 @@ export default {
     height: 100%;
     overflow-y: scroll;
   }
-
-  #home .banner {
-    width: 100%;
+  
+  .banner{
+    height: 30%;
   }
-
   #home .banner img {
     width: 100%;
+    height: 100%;
   }
 
   #home .trade-volume {

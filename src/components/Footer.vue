@@ -1,32 +1,29 @@
 <template>
   <div class="full-container">
     <div class="footer full-container flex">
-      <div class="item home active">
-        <a href="">
-          <span class="item-icon"><i class="iconfont icon-homeActive"></i></span>
+      <div class="item home">
+        <router-link :to="{name: 'home'}">
+          <span class="item-icon"><i class="iconfont icon-home"></i></span>
           <span class="item-text">首页</span>
-        </a>
+        </router-link>
       </div>
-      <div class="item invest ">
-        <a href="invest.html">
+      <div class="item invest">
+        <router-link :to="{name: 'projects'}">
           <span class="item-icon"><i class="iconfont icon-touzi"></i></span>
-          <!-- <p class="item-icon"><i class="iconfont icon-touziActive"></i></p> -->
           <span class="item-text">投资</span>
-        </a>
+        </router-link>
       </div>
       <div class="item discovery">
-        <a href="">
+        <router-link :to="{name: 'find'}">
           <span class="item-icon"><i class="iconfont icon-discovery"></i></span>
-          <!-- <p class="item-icon"><i class="iconfont icon-discoveryActive"></i></p> -->
           <span class="item-text">发现</span>
-        </a>
+        </router-link>
       </div>
       <div class="item account">
-        <a href="">
+        <router-link :to="{name: 'user'}">
           <span class="item-icon"><i class="iconfont icon-caifu"></i></span>
-          <!-- <p class="item-icon"><i class="iconfont icon-caifuActive"></i></p> -->
           <span class="item-text">我的账户</span>
-        </a>
+        </router-link>
       </div>
     </div>
   </div>
@@ -83,8 +80,20 @@ export default {
     display: block;
   }
 
-  .footer div.active a {
+  .footer a.router-link-active {
     color: #e72418;
+  }
+  .footer a.router-link-active .icon-home:before {
+    content: "\e603";
+  }
+  .footer a.router-link-active .icon-touzi:before {
+    content: "\e64b";
+  }
+  .footer a.router-link-active .icon-discovery:before {
+    content: "\e617";
+  }
+  .footer a.router-link-active .icon-caifu:before {
+    content: "\e669";
   }
 
   .footer div.account span {

@@ -5,6 +5,10 @@ import appEnv from '../env'
 import TouchRipple from 'vue-touch-ripple'
 import axios from 'axios'
 import Loadmore from 'vue-loadmore'
+import filters from './filters'
+
+// 实例化Vue的filter
+Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
 Vue.use(VueRouter)
 Vue.use(TouchRipple)
