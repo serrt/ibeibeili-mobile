@@ -1,0 +1,35 @@
+.page-loadmore-wrapper {
+ overflow: scroll;
+}
+.mint-loadmore {
+  overflow: hidden;
+}
+.mint-loadmore-bottom {
+  margin-bottom: -50px;
+}
+.mint-loadmore-bottom, .mint-loadmore-top {
+  text-align: center;
+  line-height: 50px;
+}
+.mint-loadmore-bottom span {
+  display: inline-block;
+  -webkit-transition: .2s linear;
+  transition: .2s linear;
+  vertical-align: middle;
+}
+.btn.prepare{
+  background-color: #fcc800;
+}
+.btn.rush{
+  background-color: #e72418;
+}
+.btn.full{
+  background-color: #00BF00;
+}
+.btn.payment{
+  background-color: #fff;
+  color: #6b6b6b;
+}
+.btn.finish{
+  background-color: #979797;
+}
