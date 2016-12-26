@@ -8,7 +8,7 @@
     </div>
 
     <div class="container welfare">
-      <div class="welfare-item red-bag page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+      <div class="welfare-item page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
         <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus === 'drop'">释放刷新</span>
@@ -16,7 +16,7 @@
             <span v-show="topStatus === 'loading'">正在加载。。。</span>
           </div>
           <!-- 红包 -->
-          <ul v-show="selected==='gift'">
+          <ul class="red-bag" v-show="selected==='gift'">
             <li v-bind:class="{'valid': item.status===0}" v-for="item in giftList">
               <span class="left-pic">
                 <img src="../../static/images/welfare.png">
@@ -37,16 +37,18 @@
             </li>
           </ul>
           <!-- 加息券 -->
-          <ul v-show="selected==='rate'">
+          <ul class="rate-voucher" v-show="selected==='rate'">
             <li v-bind:class="{'valid': item.status===1}" v-for="item in rateList">
-              <span class="left-pic">
-                <img src="../../static/images/welfare.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.rate}}%</span>
+              <div class="use">
+                <span class="use-money">{{item.rate}}<span>%</span></span>
+                <!-- <div class="use-purpose fr flex-middle">
+                  <div>
+                    <p>单笔满200元可用</p>
+                    <p>仅限6月标使用</p>
+                  </div>
+                </div> -->
               </div>
-              <div class="voucher-from"><span class="valid-date fr">有效期至{{item.effect_time}}</span></div>
+              <div class="voucher-from">签到奖励<span class="valid-date fr">有效期至{{item.effect_time}}</span></div>
               <!-- 过期 -->
               <div class="state overdue" v-show="item.status===3"></div>
               <!-- 已使用 -->
@@ -54,14 +56,19 @@
             </li>
           </ul>
           <!-- 财富值 -->
-          <ul v-show="selected==='virtual'">
+          <ul class="wealth-value" v-show="selected==='virtual'">
             <li v-bind:class="{'valid': item.status===0}" v-for="item in virtualList">
               <span class="left-pic">
-                <img src="../../static/images/welfare.png">
+                <img src="../../static/images/welfare2.png">
                 <i class="iconfont icon-renminbi"></i>
               </span>
               <div class="use fr">
                 <span class="use-money">{{item.money}}</span>
+                <div class="use-purpose fr flex-middle">
+                  <div>
+                    <p>仅限新手体验任务</p>
+                  </div>
+                </div>
               </div>
               <div class="voucher-from"><span class="valid-date fr">有效期至{{item.effect_time}}</span></div>
               <!-- 过期 -->
@@ -113,7 +120,13 @@ export default {
     toggleTab (item) {
       if (item.key !== this.selected) {
         this.selected = item.key
-        this.refresh(1)
+        if (this.selected === 'gift' && this.giftList.length === 0) {
+          this.refresh(1)
+        } else if (this.selected === 'rate' && this.rateList.length === 0) {
+          this.refresh(1)
+        } else if (this.selected === 'virtual' && this.virtualList.length === 0) {
+          this.refresh(1)
+        }
       }
     },
     handleBottomChange: function (status) {
@@ -135,12 +148,12 @@ export default {
         ]
       } else if (this.selected === 'rate') {
         dataList = [
-          {id: 1, rate: 1.00, effect_time: '2016-12-25 00:00:00', status: 1},
-          {id: 2, rate: 2.00, effect_time: '2016-12-25 00:00:00', status: 1},
-          {id: 3, rate: 3.50, effect_time: '2016-12-25 00:00:00', status: 2},
-          {id: 4, rate: 4.80, effect_time: '2016-12-25 00:00:00', status: 3},
-          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3},
-          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3}
+          {id: 1, rate: 1.00, effect_time: '2016-12-25 00:00:00', status: 1, source: 'sign'},
+          {id: 2, rate: 2.00, effect_time: '2016-12-25 00:00:00', status: 1, source: 'sign'},
+          {id: 3, rate: 3.50, effect_time: '2016-12-25 00:00:00', status: 2, source: 'sign'},
+          {id: 4, rate: 4.80, effect_time: '2016-12-25 00:00:00', status: 3, source: 'sign'},
+          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3, source: 'sign'},
+          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3, source: 'sign'}
         ]
       } else if (this.selected === 'virtual') {
         dataList = [

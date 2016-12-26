@@ -26,13 +26,13 @@
             <i class="iconfont icon-xiugaioryijian"></i>
             签到
           </div>
-          <router-link class="item" :to="{name: 'gift'}">
+          <router-link class="item" :to="{name: 'user-gift'}">
             <i class="iconfont icon-37"></i>福利
           </router-link>
-          <div class="item" v-touch-ripple>
+          <router-link class="item" :to="{name: 'user-project'}">
             <i class="iconfont icon-xiangmu"></i>
             我的项目
-          </div>
+          </router-link>
         </div>
         <div class="flex wrap">
           <div class="item" v-touch-ripple>

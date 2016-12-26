@@ -84,8 +84,8 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 about" v-touch-ripple>
-            <div class="feature-cont flex-middle ">
+          <div class="feature h50 about">
+            <router-link class="feature-cont flex-middle" :to="{name: 'about'}">
               <div class="full-container">
                 <span class="BBL-logo flex-middle">
                   <i></i>
@@ -93,7 +93,7 @@
                 <span class="title">关于倍倍利</span><br>
                 <span class="detail">了解我们及最新运营数据</span>
               </div>
-            </div>
+            </router-link>
           </div>
           <div class="feature h50 help" v-touch-ripple>
             <div class="feature-cont flex-middle ">

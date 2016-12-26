@@ -861,6 +861,10 @@ span.toNext {
   overflow: hidden;
 }
 
+.block {
+  display: block !important;
+}
+
 @font-face {
   font-family: "iconfont";
   src: url("../fonts/iconfont.eot?t=1480645243221");
@@ -1291,6 +1295,45 @@ span.toNext {
 
 .tabs .select span {
   border-bottom: 1px solid #e72418;
+}
+
+/* 帮助中心选项卡 */
+.tabs.help-center-tabs {
+  height: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.tabs.help-center-tabs span {
+  width: 6rem;
+  height: 6rem;
+  background-image: url(../images/help-center.png);
+  background-size: 24rem 6rem;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  border: none;
+  margin-bottom: 0;
+  display: block;
+}
+
+.tabs.help-center-tabs .select span {
+  opacity: 1;
+}
+
+.tabs.help-center-tabs .zcdl span {
+  background-position: 0 0;
+}
+
+.tabs.help-center-tabs .cztx span {
+  background-position: -6rem 0;
+}
+
+.tabs.help-center-tabs .tzlc span {
+  background-position: -12rem 0;
+}
+
+.tabs.help-center-tabs .bfj span {
+  background-position: -18rem 0;
 }
 
 .bblIntro .tab-option span {
@@ -2519,22 +2562,16 @@ span.toNext {
   padding: 0.5rem 0;
 }
 
-.user-projects .projects li .project-detail .invest-money i {
-  color: #e72418;
-  font-size: 1.1rem;
-}
-
-.user-projects .projects li .project-detail .invest-money i span {
+.user-projects .projects li .project-detail .invest-money, .user-projects .projects li .project-detail .project-expect {
   font-size: 1.3rem;
 }
 
-.user-projects .projects li .project-detail .project-expect i {
-  color: #e72418;
+.user-projects .projects li .project-detail .invest-money i, .user-projects .projects li .project-detail .project-expect i {
   font-size: 1.1rem;
 }
 
-.user-projects .projects li .project-detail .project-expect i span {
-  font-size: 1.3rem;
+.user-projects .projects li .project-detail .invest-money span, .user-projects .projects li .project-detail .project-expect span {
+  color: #e72418;
 }
 
 .user-projects .projects li .icon-bangzhu {
@@ -2570,6 +2607,13 @@ span.toNext {
 
 .myproject-detail .project-items .project-item .income-money, .myproject-detail .project-items .project-item .invest-moey {
   color: #e72418;
+}
+
+.myproject-detail .project-items .rates .fr span {
+  font-size: 1rem;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 1rem;
 }
 
 .myproject-detail .project-items .iconfont {
@@ -2897,7 +2941,7 @@ span.toNext {
   width: 84%;
   font-size: 1.2rem;
   border-bottom: 1px dashed #eee;
-  padding-right: 1rem;
+  padding: 0.5rem 1rem 0 0;
 }
 
 .welfare .welfare-item li .use .use-money {
@@ -2907,6 +2951,7 @@ span.toNext {
 .welfare .welfare-item li .use .use-purpose {
   text-align: center;
   line-height: 1.8rem;
+  height: 3rem;
 }
 
 .welfare .welfare-item li .use .use-purpose span {
@@ -2940,8 +2985,8 @@ span.toNext {
   background-position: -5rem 0;
 }
 
-.welfare .welfare-item li.valid {
-  box-shadow: 0 3px 3px #f2ce3e;
+.welfare .welfare-item li .alreay-pay {
+  background-position: -10rem 0;
 }
 
 .welfare .welfare-item li.valid .left-pic .icon-renminbi {
@@ -2954,7 +2999,11 @@ span.toNext {
 
 .welfare .rate-voucher li .use {
   width: 100%;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
+}
+
+.welfare .rate-voucher li .use .use-money span {
+  font-size: 1.2rem;
 }
 
 .welfare .rate-voucher li .voucher-from {
@@ -2962,7 +3011,78 @@ span.toNext {
   position: relative;
   right: 0;
   bottom: 0;
-  padding: 0 1rem;
+  padding: 1rem 1rem;
+}
+
+.welfare .rate-voucher li .state {
+  top: 39%;
+}
+
+.welfare .wealth-value li .left-pic {
+  width: 13%;
+}
+
+.welfare .wealth-value li .state {
+  right: 40%;
+  top: 23%;
+}
+
+.freshmen-experience {
+  margin-top: 40px;
+  margin-bottom: 45px;
+}
+
+.freshmen-experience ul li {
+  display: block;
+  background-color: #fff;
+  padding: 0 18px;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  line-height: 4.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.freshmen-experience ul li span:nth-child(1) {
+  font-size: 1.3rem;
+  color: #2d2d2d;
+  width: 30%;
+  display: inline-block;
+}
+
+.freshmen-experience ul li span:nth-child(2) {
+  font-size: 1.2rem;
+  color: #666666;
+}
+
+.freshmen-experience ul li .assets-value {
+  padding: 1rem 0;
+  line-height: 3rem;
+}
+
+.freshmen-experience ul li .assets-value span {
+  display: inline-block;
+  padding: 0;
+  border: 1px solid #666;
+  color: #666666;
+  text-align: center;
+  width: 20%;
+  border-radius: 5px;
+}
+
+.freshmen-experience ul li .assets-value .select {
+  background-color: #e72418;
+  border: none;
+  color: #fff;
+}
+
+.confirm-experience {
+  position: fixed;
+  bottom: 0;
+  border-radius: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
 }
 
 .turbolinks-progress-bar {
