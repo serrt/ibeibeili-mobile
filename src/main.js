@@ -38,7 +38,7 @@ axios.interceptors.response.use((response) => {
 Vue.prototype.$http = axios
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   routes
 })
 
