@@ -1,6 +1,7 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
+    <!-- 实名认证 -->
     <div class="container" v-show="page === 'name'">
       <div class="certification">
         <div class="current-steps">
@@ -29,6 +30,7 @@
         <button type="button" class="btn next-step" v-bind:class="{'inactive': name_verify_status}" v-on:click="nameVerify()">下一步</button>
       </div>
     </div>
+    <!-- 绑定银行卡 -->
     <div class="container" v-show="page === 'card'">
       <div class="container certification-step2">
         <div class='certification '>
@@ -42,8 +44,8 @@
       </div>
 
       <!-- 提示信息 -->
-      <div class="container error-box flex-middle">
-        <div class="error-content"></div>
+      <div class="container error-box flex-middle" v-show="card_error.error">
+        <div class="error-content">{{card_error.msg}}</div>
       </div>
 
       <div class="bind-bank full-container">
@@ -66,53 +68,61 @@
             </div>
           </li>
           <li class="container">
-            <div class="user-chose chose-province">
-              <span class="user-chose-result">请选择银行省份</span>
+            <div class="user-chose chose-province" v-on:click="toggleProvince()">
+              <span class="user-chose-result">{{card_info.province}}</span>
               <span class="more"><i class="iconfont icon-unie61f"></i></span>
             </div>
-            <div class="list province-list">
+            <div class="list province-list" v-show="this.open_province">
               <dl>
-                <dd v-for="item in city">{{item}}</dd>
+                <dd v-for="item in province" v-on:click="selectProvince(item)">{{item}}</dd>
               </dl>
             </div>
           </li>
           <li class="container">
-            <div class="user-chose chose-city">
-              <span class="user-chose-result">请选择银行城市</span>
+            <div class="user-chose chose-city" v-on:click="toggleCity()">
+              <span class="user-chose-result">{{card_info.city}}</span>
               <span class="more"><i class="iconfont icon-unie61f"></i></span>
             </div>
-            <div class='list city-list hide'>
+            <div class="list city-list" v-show="open_city">
               <dl>
-                <dd>北京</dd>
-                <dd>北京</dd>
-                <dd>北京</dd>
-                <dd>北京</dd>
+                <dd v-for="item in city" v-on:click="selectCity(item)">{{item}}</dd>
               </dl>
             </div>
           </li>
           <li class="container">
             <div class="user-chose banknum">
-              <input type="text" name="" placeholder="请输入开户行卡号">
+              <input type="number" name="card_number" v-model="card_info.card_number" placeholder="请输入开户行卡号"/>
             </div>
           </li>
           <li class="container">
             <div class="user-chose phone">
-              <input type="text" name="" placeholder="请输入预留手机号">
+              <input type="number" name="card_phone" v-model="card_info.card_phone" placeholder="请输入预留手机号">
             </div>
           </li>
           <li class="container">
             <div class="user-chose verify-code">
-              <input type="text" name="" placeholder="请输入验证码">
-              <span class="get-code">
-                获取验证码
-              </span>
+              <input type="text" name="card_code" v-model="card_info.card_code" placeholder="请输入验证码">
+              <a href="javascript:void(0)" class="get-code" v-on:click="getCode()">{{code_btn.click?code_btn.time+code_btn.msg2:code_btn.msg1}}</a>
             </div>
           </li>
         </ul>
       </div>
-
       <div class="container certification-next-step">
-        <a class="btn next-step">下一步</a>
+        <button type="button" class="btn next-step" v-bind:class="{'inactive': card_verify_status}" v-on:click="cardVerify()">下一步</button>
+      </div>
+    </div>
+    <!-- 设置支付密码 -->
+    <div class="container" v-show="page === 'pay'">
+      <div class='certification '>
+        <div class="current-steps">
+          <img src="../../static/images/certification-step3.png">
+        </div>
+        <p class="tips">
+          注意：为了您的账户安全，请设置支付密码！
+        </p>
+        <button type="button" class="btn set-code">设置支付密码</button>
+        <p class="guard">倍倍利联手新浪支付全力保障您的资金安全</p>
+        <div class='BBL-xinlang'></div>
       </div>
     </div>
   </div>
@@ -126,9 +136,8 @@ export default {
   components: {HeaderTop, City},
   data: function () {
     return {
-      title: '实名认证',
       user_info: {user_id: 1, name_verified: 0, bank_card_id: null, is_set_pay_password: 0},
-      page: 'card',
+      page: 'pay',
       name_verify: {name: '', idcard: ''},
       name_valid: {error: true, msg: ''},
       idcard_valid: {error: true, msg: ''},
@@ -139,17 +148,44 @@ export default {
       ],
       selected_bank: {code: '', name: '请选择银行'},
       open_bank: false,
-      city: City
+      province: [],
+      open_province: false,
+      open_city: false,
+      card_info: {card_number: '', card_phone: '', card_code: '', province: '请选择银行省份', city: '请选择银行城市'},
+      code_btn: {click: false, msg1: '获取验证码', msg2: '秒后点击重新发送', time: 0, timer: null},
+      card_error: {error: false, msg: ''}
     }
   },
   mounted () {
-    // for (let i in this.city) {
-    //   console.log(i)
-    // }
+    for (let i in City.china) {
+      this.province.push(i)
+    }
   },
   computed: {
+    title: function () {
+      if (this.page === 'card') {
+        return '绑定银行卡'
+      } else if (this.page === 'pay') {
+        return '设置支付密码'
+      } else {
+        return '实名认证'
+      }
+    },
     name_verify_status: function () {
       return (this.name_valid.error || this.idcard_valid.error)
+    },
+    city: function () {
+      return City.china[this.card_info.province]
+    },
+    card_verify_status: function () {
+      let error = false
+      for (let i in this.card_info) {
+        if (this.card_info[i] === '') {
+          error = true
+          break
+        }
+      }
+      return (this.selected_bank.code === '' || error)
     }
   },
   methods: {
@@ -160,24 +196,60 @@ export default {
         this.page = 'card'
       }
     },
+    cardVerify: function () {
+      let data = this.card_info
+      data.bank_code = this.selected_bank.code
+      if (!this.card_verify_status) {
+        console.log(data)
+      }
+    },
+    setPay: function () {
+      let data = {user_id: 1}
+      console.log(data)
+    },
     toggleBank: function () {
       this.open_bank = !this.open_bank
     },
     selectBank: function (item) {
       this.selected_bank = item
       this.open_bank = false
+    },
+    toggleProvince: function () {
+      this.open_province = !this.open_province
+    },
+    selectProvince: function (item) {
+      this.card_info.province = item
+      this.open_province = false
+    },
+    toggleCity: function () {
+      this.open_city = !this.open_city
+    },
+    selectCity: function (item) {
+      this.card_info.city = item
+      this.open_city = false
+    },
+    getCode: function () {
+      if (this.card_info.card_phone === '') {
+        window.alert('请输入预留手机号')
+        return false
+      }
+      if (!this.code_btn.click) {
+        this.code_btn.click = true
+        this.code_btn.time = 10
+        let self = this
+        if (this.code_btn.timer) {
+          clearInterval(this.code_btn.timer)
+        }
+        this.code_btn.timer = setInterval(function () {
+          self.code_btn.time --
+          if (self.code_btn.time === 0) {
+            self.code_btn.click = false
+          }
+        }, 1000)
+      }
     }
   },
   watch: {
-    page: function (value) {
-      if (value === 'card') {
-        this.title = '绑定银行卡'
-      } else if (value === 'pay') {
-        this.title = '设置支付密码'
-      } else {
-        this.title = '实名认证'
-      }
-    },
     'name_verify.name': function (value) {
       if (value === '') {
         this.name_valid = {error: true, msg: '请输入真实姓名'}
