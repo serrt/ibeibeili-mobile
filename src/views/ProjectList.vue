@@ -3,11 +3,11 @@
     <header-top :title="title"></header-top>
     <div class="invest-filter full-container">
       <div class="filter-condition flex">
-        <div class="filter" v-on:click="toggleTime()" v-touch-ripple>
+        <div class="filter" v-on:click="toggleTime()" >
           <span class="filter-duration">全部期限</span>
           <i class="iconfont" v-bind:class="{'icon-jiantoushang': this.filter_time, 'icon-xiajiantou': !this.filter_time}"></i>
         </div>
-        <div class="filter" v-on:click="toggleType()" v-touch-ripple>
+        <div class="filter" v-on:click="toggleType()" >
           <span class="filter-types">全部类型</span>
           <i class="iconfont" v-bind:class="{'icon-jiantoushang': this.filter_type, 'icon-xiajiantou': !this.filter_type}"></i>
         </div>

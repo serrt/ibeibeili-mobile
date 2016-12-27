@@ -59,14 +59,14 @@
               <div class="days-title flex-middle h50"><p class="Pcenter">期限</p></div>
             </div>
             <div class="buy flex-middle">
-              <span class="btn container invest-btn" v-touch-ripple>立即购买</span>
+              <span class="btn container invest-btn" >立即购买</span>
             </div>
           </div>
         </div>
 
         <!-- 四大功能 -->
         <div class='four-features full-container'>
-          <div class="feature h50 mission" v-touch-ripple>
+          <div class="feature h50 mission" >
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-renwu"></i><br>
@@ -75,7 +75,7 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 invite" v-touch-ripple>
+          <div class="feature h50 invite" >
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-yaoqing"></i><br>
@@ -95,7 +95,7 @@
               </div>
             </router-link>
           </div>
-          <div class="feature h50 help" v-touch-ripple>
+          <div class="feature h50 help" >
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-bangzhu"></i><br>
@@ -126,7 +126,7 @@ export default {
     return {
       swiper: null, // 滑动插件
       // 图片列表
-      img_list: [{url: '/static/images/banner.png'}, {url: '/static/images/bank.png'}, {url: '/static/images/message-pic.png'}],
+      img_list: [{url: './static/images/banner.png'}, {url: './static/images/bank.png'}, {url: './static/images/message-pic.png'}],
       trade_money: 102587896.00, // 累计交易额
       money_html: '<span>1</span>已'
     }
@@ -357,7 +357,7 @@ export default {
   #home .four-features .feature .BBL-logo i {
     height: 1.5rem;
     width: 2rem;
-    background-image: url(/static/images/bbl.png);
+    background-image: url(../../static/images/bbl.png);
     background-size: 100% 100%;
     display: block;
     margin: 0 auto;
@@ -390,7 +390,7 @@ export default {
     float: left;
     width: 3.7rem;
     height: 3.6rem;
-    background-image: url(/static/images/notice.png);
+    background-image: url(../../static/images/notice.png);
     background-size: 100% 100%;
     margin-right: 10px;
   }

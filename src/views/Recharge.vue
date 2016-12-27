@@ -22,7 +22,7 @@
         <a href="" class="recharge-explain">充值说明</a>
       </div>
       <div class="container">
-        <button type="button" class="btn" v-on:click="recharge" v-touch-ripple>充&nbsp;值</button>
+        <button type="button" class="btn" v-on:click="recharge" >充&nbsp;值</button>
       </div>
     </div>
     <footer-nav></footer-nav>

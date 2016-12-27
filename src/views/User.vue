@@ -22,7 +22,7 @@
       </div>
       <div class="functions">
         <div class="flex wrap">
-          <div class="item" v-touch-ripple>
+          <div class="item" >
             <i class="iconfont icon-xiugaioryijian"></i>
             签到
           </div>
@@ -35,15 +35,15 @@
           </router-link>
         </div>
         <div class="flex wrap">
-          <div class="item" v-touch-ripple>
+          <div class="item" >
             <i class="iconfont icon-jiaoyimingxichaxun"></i>
              交易明细
           </div>
-          <div class="item" v-touch-ripple>
+          <div class="item" >
             <i class="iconfont icon-youjian"></i>
             我的消息
           </div>
-          <div class="item" v-touch-ripple>
+          <div class="item" >
             <i class="iconfont icon-yijianfankui1"></i>
             意见反馈
           </div>

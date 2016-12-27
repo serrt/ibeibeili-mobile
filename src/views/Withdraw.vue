@@ -40,7 +40,7 @@
         <a href="" class="recharge-explain">提现说明</a>
       </div>
       <div class="container">
-        <button type="button" class="btn" v-on:click="recharge" v-touch-ripple>提&nbsp;现</button>
+        <button type="button" class="btn" v-on:click="recharge" >提&nbsp;现</button>
       </div>
     </div>
     <footer-nav></footer-nav>

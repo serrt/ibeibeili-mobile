@@ -23,23 +23,23 @@
       </div>
 
       <ul>
-        <li class="container" v-touch-ripple>
+        <li class="container" >
           截止时间
           <span class="toNext">{{project.end_time}}</span>
         </li>
-        <li class="container" v-touch-ripple>
+        <li class="container" >
           项目信息
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </li>
-        <li class="container" v-touch-ripple>
+        <li class="container" >
           承诺信息
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </li>
-        <li class="container" v-touch-ripple>
+        <li class="container" >
           相关证件
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </li>
-        <li class="container" v-touch-ripple>
+        <li class="container" >
           投资明细
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </li>

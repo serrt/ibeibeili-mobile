@@ -17,7 +17,7 @@
           </div>
           <!-- 收支 -->
           <ul v-show="selected === 'trade'">
-            <li v-for="item in tradeList" v-touch-ripple>
+            <li v-for="item in tradeList" >
               <div class="container">
                 <i class="iconfont fl" v-bind:class="{'icon-cuowu': item.status === -1, 'icon-zhengque': item.status !== -1}"></i>
                 <div class="detail">
@@ -35,7 +35,7 @@
           </ul>
           <!-- 充值 -->
           <ul v-show="selected === 'recharge'">
-            <li v-for="item in rechargeList" v-touch-ripple>
+            <li v-for="item in rechargeList" >
               <div class="container">
                 <i class="iconfont fl" v-bind:class="{'icon-cuowu': item.status === -1, 'icon-zhengque': item.status !== -1}"></i>
                 <div class="detail">
@@ -53,7 +53,7 @@
           </ul>
           <!-- 提现 -->
           <ul v-show="selected === 'withdraw'">
-            <li v-for="item in withdrawList" v-touch-ripple>
+            <li v-for="item in withdrawList" >
               <div class="container">
                 <i class="iconfont fl" v-bind:class="{'icon-cuowu': item.status === -1, 'icon-zhengque': item.status !== -1}"></i>
                 <div class="detail">

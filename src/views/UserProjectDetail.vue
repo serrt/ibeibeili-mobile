@@ -3,7 +3,7 @@
     <header-top :title="title"></header-top>
     <div class="myproject-detail">
       <!-- 项目信息 -->
-      <div class="project-items container" v-touch-ripple>
+      <div class="project-items container" >
         <div class="project-name surplus">{{project.name}}</div>
         <div class="project-item">
           融资总额 
@@ -47,7 +47,7 @@
       </div>
 
       <!-- 还款计划 -->
-      <div class="pay-plan container" v-touch-ripple>
+      <div class="pay-plan container" >
         还款计划
         <ul>
           <li>
