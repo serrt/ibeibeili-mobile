@@ -19,7 +19,7 @@
     "vue-router": "2.0.3",
     "swiper": "3.4.0",
     "vue-router": "2.0.3",
-    "vue-loadmore": "2.0.0"
+    "mint-ui": "^2.0.4"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

@@ -163,9 +163,6 @@ export default {
     }
   },
   watch: {
-    list: function (newVal) {
-      console.log(newVal.length)
-    }
   }
 }
 </script>

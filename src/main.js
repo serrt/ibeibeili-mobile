@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import routes from './routes'
 import appEnv from '../env'
-import Loadmore from 'vue-loadmore'
+import { Loadmore } from 'mint-ui'
 import filters from './filters'
 
 // 实例化Vue的filter
