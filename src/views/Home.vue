@@ -84,8 +84,8 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 about">
-            <router-link class="feature-cont flex-middle" :to="{name: 'about'}">
+          <router-link class="feature h50 about" :to="{name: 'about'}" tag="div">
+            <div class="feature-cont flex-middle" :to="{name: 'about'}">
               <div class="full-container">
                 <span class="BBL-logo flex-middle">
                   <i></i>
@@ -93,17 +93,17 @@
                 <span class="title">关于倍倍利</span><br>
                 <span class="detail">了解我们及最新运营数据</span>
               </div>
-            </router-link>
-          </div>
-          <div class="feature h50 help" >
-            <div class="feature-cont flex-middle ">
+            </div>
+          </router-link>
+          <router-link class="feature h50 help" :to="{name: 'help'}" tag="div">
+            <div class="feature-cont flex-middle">
               <div class="full-container">
                 <i class="iconfont icon-bangzhu"></i><br>
                 <span class="title">帮助中心</span><br>
                 <span class="detail">有问题找小倍</span>
               </div>
             </div>
-          </div>
+          </router-link>
         </div>
 
         <!-- 平台公告 -->

@@ -885,6 +885,10 @@ span.toNext {
   content: "\e601";
 }
 
+.icon-xiasanjiao:before {
+  content: "\e609";
+}
+
 .icon-shezhi:before {
   content: "\e61f";
 }
@@ -943,6 +947,10 @@ span.toNext {
 
 .icon-shangwuhezuo:before {
   content: "\e66c";
+}
+
+.icon-gonggao:before {
+  content: "\e620";
 }
 
 .icon-shouyeshouye:before {
@@ -1029,8 +1037,16 @@ span.toNext {
   content: "\e64e";
 }
 
+.icon-shangdian:before {
+  content: "\e67b";
+}
+
 .icon-gerenxinxi:before {
   content: "\e62c";
+}
+
+.icon-triangle-right-copy:before {
+  content: "\e641";
 }
 
 .icon-dizhi:before {
@@ -1087,6 +1103,10 @@ span.toNext {
 
 .icon-renwu:before {
   content: "\e61b";
+}
+
+.icon-yunying:before {
+  content: "\e657";
 }
 
 /* 底部导航 */
@@ -1302,6 +1322,7 @@ span.toNext {
   height: auto;
   padding-top: 1rem;
   padding-bottom: 1rem;
+  border-bottom: 2px solid #dbdbdb;
 }
 
 .tabs.help-center-tabs span {
@@ -1310,13 +1331,21 @@ span.toNext {
   background-image: url(../images/help-center.png);
   background-size: 24rem 6rem;
   background-repeat: no-repeat;
-  opacity: 0.5;
   border: none;
   margin-bottom: 0;
   display: block;
+  margin: 0 auto;
 }
 
-.tabs.help-center-tabs .select span {
+.tabs.help-center-tabs .tab-option {
+  opacity: 0.5;
+}
+
+.tabs.help-center-tabs .select {
+  color: #2d2d2d;
+}
+
+.tabs.help-center-tabs .select {
   opacity: 1;
 }
 
@@ -1624,6 +1653,7 @@ span.toNext {
 #investList .list li .list-item .detail .money {
   -webkit-box-flex: 1;
   flex: 1;
+  border: none;
 }
 
 #investList .list li .list-item .detail .money .total {
@@ -2919,7 +2949,7 @@ span.toNext {
 
 .welfare .welfare-item li .left-pic {
   position: relative;
-  width: 15%;
+  width: 4.5rem;
   display: inline-block;
 }
 
@@ -2941,7 +2971,7 @@ span.toNext {
   width: 84%;
   font-size: 1.2rem;
   border-bottom: 1px dashed #eee;
-  padding: 0.5rem 1rem 0 0;
+  padding: 0.5rem 1rem 0.5rem 0;
 }
 
 .welfare .welfare-item li .use .use-money {
@@ -2962,8 +2992,15 @@ span.toNext {
   position: absolute;
   width: 84%;
   right: 0;
-  bottom: 1rem;
+  bottom: 0.7rem;
   padding-right: 1rem;
+  font-size: 0.9rem;
+}
+
+.welfare .welfare-item li .voucher-from .voucher-name {
+  display: block;
+  float: left;
+  width: 60%;
 }
 
 .welfare .welfare-item li .state {
@@ -2999,7 +3036,7 @@ span.toNext {
 
 .welfare .rate-voucher li .use {
   width: 100%;
-  padding: 1rem 1rem;
+  padding: 0.5rem 1rem;
 }
 
 .welfare .rate-voucher li .use .use-money span {
@@ -3083,6 +3120,145 @@ span.toNext {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+
+.help-center .tabs {
+  position: relative;
+  border: none;
+}
+
+.help-center .help-list {
+  margin-top: 40px;
+  border-top: 1px solid #dbdbdb;
+}
+
+.help-center .help-list ul {
+  width: 100%;
+  height: auto;
+}
+
+.help-center .help-list ul li {
+  width: 100%;
+  border-bottom: 1px solid #dbdbdb;
+  background-color: #fff;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.help-center .help-list ul li .help-detail {
+  margin-left: 1.3rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.help-center .help-list ul li .help-detail .problem {
+  color: #2d2d2d;
+  font-size: 1.3rem;
+}
+
+.help-center .help-list ul li .help-detail .problem i {
+  color: #e72418;
+  margin-left: -1.8rem;
+}
+
+.help-center .help-list ul li .help-detail .answer {
+  font-size: 1.1rem;
+  color: #666666;
+  line-height: 1.3rem;
+  display: none;
+  margin-top: 1rem;
+}
+
+.help-center .help-list ul li .help-detail .answer span {
+  color: #e72418;
+}
+
+.help-center .help-list ul li .open .answer {
+  display: block;
+}
+
+.discovery-box {
+  margin-top: 40px;
+}
+
+.discovery-box .banner img {
+  width: 100%;
+}
+
+.discovery-box .options ul {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+}
+
+.discovery-box .options ul li {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  background-color: #fff;
+}
+
+.discovery-box .options ul li .option-item {
+  -webkit-box-flex: 1;
+  flex: 1;
+  border-right: 1px solid #e6e6e6;
+  padding: 1.5rem 1.1rem;
+}
+
+.discovery-box .options ul li .option-item:nth-child(2) {
+  -webkit-box-flex: 1;
+  flex: 1;
+  border-right: none;
+}
+
+.discovery-box .options ul li .logo {
+  display: block;
+  background-color: #ea4c4c;
+  width: 3rem;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+  margin-right: 1rem;
+  font-size: 1.8rem;
+  border-radius: 50%;
+  color: #fff;
+}
+
+.discovery-box .options ul li .intro .title {
+  font-size: 1.3rem;
+  color: #4d4d4d;
+  display: block;
+  line-height: 1.5rem;
+}
+
+.discovery-box .options ul li .intro .abstract {
+  font-size: 1rem;
+  color: #ababab;
+  display: block;
+  line-height: 1.5rem;
+}
+
+.discovery-box .latest-news {
+  margin-top: 1rem;
+  border-bottom: 1px solid #e6e6e6;
+  border-right: 1px solid #e6e6e6;
+  background-color: #fff;
+  margin-bottom: 40px;
+}
+
+.discovery-box .latest-news li {
+  font-size: 1.2rem;
+}
+
+.discovery-box .latest-news li .date {
+  font-size: 1rem;
+  bottom: 1rem;
+  color: #5a5a5a;
+}
+
+.discovery-box .latest-news li .abstract {
+  line-height: 1.8rem;
 }
 
 .turbolinks-progress-bar {

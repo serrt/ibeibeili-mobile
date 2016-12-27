@@ -8,7 +8,7 @@
     </div>
 
     <div class="transaction-details full-container">
-      <div class="list welfare-item page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+      <div class="list page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
         <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus === 'drop'">释放刷新</span>

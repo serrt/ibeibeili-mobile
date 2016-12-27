@@ -20,6 +20,8 @@ const routes = [
   { path: '/project/:id/invest-success', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) } },
   // 发现
   { path: '/find', name: 'find', component: (resolve) => { require(['./views/Find.vue'], (resolve)) } },
+  // 帮助中心
+  { path: '/help', name: 'help', component: (resolve) => { require(['./views/Help.vue'], (resolve)) } },
   // 我的账户
   { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) } },
   // 提现

@@ -1,9 +1,6 @@
 .page-loadmore-wrapper {
  overflow: scroll;
 }
-.mint-loadmore {
-  overflow: hidden;
-}
 .mint-loadmore-bottom {
   margin-bottom: -50px;
 }
