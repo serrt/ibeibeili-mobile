@@ -87,14 +87,16 @@
 <script>
 import FooterNav from '../components/Footer'
 import HeaderTop from '../components/Header'
+import List from '../components/List'
 
 export default {
-  components: {FooterNav, HeaderTop},
+  components: {FooterNav, HeaderTop, List},
   data: function () {
     return {
       title: '投资',
       filter_type: false,
       filter_time: false,
+      api: '/article/1',
       allLoaded: false,
       wrapperHeight: 0,
       bottomStatus: '',

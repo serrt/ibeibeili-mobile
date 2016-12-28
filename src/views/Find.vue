@@ -57,7 +57,8 @@
           </li>
         </ul>
       </div>
-      <div class="info full-container page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+
+      <!-- <div class="info full-container page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
         <loadmore class="latest-news" :top-method="refresh" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus === 'drop'">释放刷新</span>
@@ -81,7 +82,20 @@
             <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
           </div>
         </loadmore>
-      </div>
+      </div> -->
+      <list :api="example" :list="list" @handle-list-change="handleListChange">
+        <ul class="latest-news" solt="list">
+          <li v-for="item in list">
+            <div class="words fl">
+              <span class="abstract">{{item.title}}</span>
+            </div>
+            <span class="date">{{item.published_at}}</span>
+            <div class="news-pic flex-middle">
+              <img v-bind:src="item.image">
+            </div>
+          </li>
+        </ul>
+      </list>
     </div>
     <footer-nav></footer-nav>
   </div>
@@ -90,54 +104,31 @@
 <script>
 import HeaderTop from '../components/Header'
 import FooterNav from '../components/Footer'
+import List from '../components/List'
 
 export default {
-  components: {HeaderTop, FooterNav},
+  components: {HeaderTop, FooterNav, List},
   data: function () {
     return {
       title: '发现',
-      list: [],
-      allLoaded: true,
-      wrapperHeight: 0,
-      bottomStatus: '',
-      topStatus: ''
+      api: '/article/1',
+      example: [
+        {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: '../../static/images/news.png'},
+        {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: '../../static/images/news.png'},
+        {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
+        {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
+        {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: '../../static/images/news.png'}
+      ],
+      list: []
     }
   },
   mounted () {
-    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
   },
   computed: {
   },
   methods: {
-    handleBottomChange: function (status) {
-      this.bottomStatus = status
-    },
-    handleTopChange: function (status) {
-      this.topStatus = status
-    },
-    loadData: function (id, dir) {
-      console.log(1)
-      let dataList = [
-        {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: '../../static/images/news.png'}
-      ]
-      this.list = this.list.concat(dataList)
-      // this.allLoaded = true
-      if (dir === 'top') {
-        this.$refs.loadmore.onBottomLoaded(id)
-      } else if (dir === 'bottom') {
-        this.$refs.loadmore.onTopLoaded(id)
-      }
-      this.allLoaded = false
-    },
-    loadBottom: function (id) {
-      this.loadData(id, 'top')
-    },
-    refresh: function (id) {
-      this.list = []
-      this.loadData(id, 'bottom')
+    handleListChange: function (value) {
+      this.list = value
     }
   },
   watch: {
