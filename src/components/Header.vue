@@ -4,7 +4,7 @@
       <li class="back">
         <span v-on:click="back()"><i class="iconfont icon-01fanhui"></i></span>
       </li>
-      <li class="f-gray title">{{title}}</li>
+      <li class="f-gray title surplus">{{title}}</li>
       <li class="other">
         <span>
          

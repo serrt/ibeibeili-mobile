@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import routes from './routes'
 import appEnv from '../env'
+import 'mint-ui/lib/style.css'
 import { Loadmore } from 'mint-ui'
 import filters from './filters'
 

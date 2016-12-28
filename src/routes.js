@@ -20,6 +20,8 @@ const routes = [
   { path: '/project/:id/invest-success', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) } },
   // 发现
   { path: '/find', name: 'find', component: (resolve) => { require(['./views/Find.vue'], (resolve)) } },
+  // 公告
+  { path: '/notice', name: 'notice', component: (resolve) => { require(['./views/Notice.vue'], (resolve)) } },
   // 帮助中心
   { path: '/help', name: 'help', component: (resolve) => { require(['./views/Help.vue'], (resolve)) } },
   // 我的账户
@@ -36,10 +38,15 @@ const routes = [
   { path: '/user-project', name: 'user-project', component: (resolve) => { require(['./views/UserProject.vue'], (resolve)) } },
   // 用户投资项目详细
   { path: '/user-project/:id', name: 'user-project-detail', component: (resolve) => { require(['./views/UserProjectDetail.vue'], (resolve)) } },
+  // 用户消息
+  { path: '/user-message', name: 'user-message', component: (resolve) => { require(['./views/UserMessage.vue'], (resolve)) } },
   // 交易详细
   { path: '/user-trade', name: 'user-trade', component: (resolve) => { require(['./views/UserTrade.vue'], (resolve)) } },
   // 用户认证
   { path: '/user-verify', name: 'user-verify', component: (resolve) => { require(['./views/userVerify.vue'], (resolve)) } },
+  // 消息详细
+  { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) } },
+  { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }
 ]
 

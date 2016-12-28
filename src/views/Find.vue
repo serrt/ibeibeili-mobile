@@ -32,7 +32,7 @@
             </div>
           </li>
           <li class="flex">
-            <div class="option-item">
+            <router-link class="option-item" :to="{name: 'notice'}" tag="div">
               <div class="logo fl clear">
                 <span>
                   <i class="iconfont icon-gonggao"></i>
@@ -42,7 +42,7 @@
                 <span class="title">公告中心</span>
                 <span class="abstract">公司动态信息</span>
               </div>
-            </div>
+            </router-link>
             <div class="option-item">
               <div class="logo fl clear">
                 <span>
@@ -57,55 +57,30 @@
           </li>
         </ul>
       </div>
-      <div class="latest-news">
-        <div class="info full-container page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-          <loadmore :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-            <ul>
-              <li v-for="item in list">
-                <div class="words fl">
-                  <span class="abstract">{{item.title}}</span>
-                </div>
-                <span class="date">{{item.published_at}}</span>
-                <div class="news-pic flex-middle">
-                  <img v-bind:src="item.image">
-                </div>
-              </li>
-            </ul>
-            <div slot="bottom" class="mint-loadmore-bottom">
-              <span v-show="bottomStatus === 'drop'">加载更多</span>
-              <!-- <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span> -->
-              <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
-            </div>
-          </loadmore>
-        </div>
-      </div>
-    </div>
-    <div class="full-container">
-      <div class="footer full-container flex">
-        <div class="item home ">
-          <a href="">
-            <span class="item-icon"><i class="iconfont icon-home"></i></span>
-            <span class="item-text">首页</span>
-          </a>
-        </div>
-        <div class="item invest ">
-          <a href="invest.html">
-            <span class="item-icon"><i class="iconfont icon-touzi"></i></span>
-            <span class="item-text">投资</span>
-          </a>
-        </div>
-        <div class="item discovery active">
-          <a href="">
-            <span class="item-icon"><i class="iconfont icon-discoveryActive"></i></span>
-            <span class="item-text">发现</span>
-          </a>
-        </div>
-        <div class="item account">
-          <a href="">
-            <span class="item-icon"><i class="iconfont icon-caifu"></i></span>
-            <span class="item-text">我的账户</span>
-          </a>
-        </div>
+      <div class="info full-container page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+        <loadmore class="latest-news" :top-method="refresh" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
+          <div slot="top" class="mint-loadmore-top">
+            <span v-show="topStatus === 'drop'">释放刷新</span>
+            <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
+            <span v-show="topStatus === 'loading'">正在加载。。。</span>
+          </div>
+          <ul>
+            <li v-for="item in list">
+              <div class="words fl">
+                <span class="abstract">{{item.title}}</span>
+              </div>
+              <span class="date">{{item.published_at}}</span>
+              <div class="news-pic flex-middle">
+                <img v-bind:src="item.image">
+              </div>
+            </li>
+          </ul>
+          <div slot="bottom" class="mint-loadmore-bottom">
+            <span v-show="bottomStatus === 'drop'">加载更多</span>
+            <span v-show="bottomStatus == 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
+            <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
+          </div>
+        </loadmore>
       </div>
     </div>
     <footer-nav></footer-nav>
@@ -122,13 +97,14 @@ export default {
     return {
       title: '发现',
       list: [],
-      allLoaded: false,
+      allLoaded: true,
       wrapperHeight: 0,
-      bottomStatus: ''
+      bottomStatus: '',
+      topStatus: ''
     }
   },
   mounted () {
-    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top + 80
+    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
   },
   computed: {
   },
@@ -136,32 +112,32 @@ export default {
     handleBottomChange: function (status) {
       this.bottomStatus = status
     },
+    handleTopChange: function (status) {
+      this.topStatus = status
+    },
     loadData: function (id, dir) {
+      console.log(1)
       let dataList = [
         {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: '../../static/images/news.png'},
         {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: '../../static/images/news.png'},
         {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 3, title: '4倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 3, title: '5倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
         {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: '../../static/images/news.png'}
       ]
-      if (this.list.length > 0) {
-        dataList = []
-      }
-      if (dataList.length === 0) {
-        this.allLoaded = true
-      }
+      this.list = this.list.concat(dataList)
+      // this.allLoaded = true
       if (dir === 'top') {
         this.$refs.loadmore.onBottomLoaded(id)
       } else if (dir === 'bottom') {
-        this.list = []
         this.$refs.loadmore.onTopLoaded(id)
       }
-      this.list = this.list.concat(dataList)
+      this.allLoaded = false
     },
     loadBottom: function (id) {
-      console.log(1)
       this.loadData(id, 'top')
+    },
+    refresh: function (id) {
+      this.list = []
+      this.loadData(id, 'bottom')
     }
   },
   watch: {

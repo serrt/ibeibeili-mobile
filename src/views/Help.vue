@@ -3,195 +3,20 @@
     <header-top :title="title"></header-top>
     <div class="help-center full-container">
       <div class="tabs full-container flex help-center-tabs">
-        <div class="tab-option zcdl select ">
-          <span></span>
-          注册登录
-        </div>
-        <div class="tab-option cztx">
-          <span></span>
-          充值提现
-        </div>
-        <div class="tab-option tzlc">
-          <span></span>
-          投资理财
-        </div>
-        <div class="tab-option bfj">
-          <span></span>
-          备付金
+        <div class="tab-option" v-for="item in tabTitle" v-bind:class="[item.alias,item.id===selected?'select':'']" v-on:click="toggleTitle(item)">
+          <span></span>{{item.name}}
         </div>
       </div>
 
-      <!-- 注册登录 -->
-      <div class="help-list full-container hide">
-        <ul>
-          <li>
-            <div class="help-detail  open">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-xiasanjiao "></i>
-
-                </span>
-                实名登记时，如果身份证号里含有x，怎么填写？
-              </div>
-              <div class="answer">直接填写x，不区分大小写
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                一个手机号可以注册几个账户？
-              </div>
-              <div class="answer ">手机号、邮箱和客户的身份信息都具有唯一性，故<span>一个手机号只能注册绑定一个账户。</span>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册时收不到验证码怎么办？
-              </div>
-              <div class="answer ">
-                <p>1. 确认短信是否被手机软件拦截或过滤；</p>
-                <p>2. 确认手机是否能正常接收短信（信号问题、欠费、停机等）；</p>
-                <p>3. 短信收发过程中可能会有延时，请耐心等候；</p>
-                <p>4. 如经过反复尝试还不能收取验证码，可直接联系客服为您服务。</p>
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册后用户名是否可以修改？
-              </div>
-              <div class="answer ">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                为什么要进行实名认证？
-              </div>
-              <div class="answer ">为了提高账户安全等级，保障资金的安全性和合同的有效性，客户需在首次充值前完成实名登记，倍倍利承诺会对所有客户资料严格保密。
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- 充值提现 -->
-      <div class="help-list full-container hide">
-        <ul>
-          <li>
-            <div class="help-detail  open">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-xiasanjiao "></i>
-
-                </span>
-                注册后用户名是否可以修改？
-              </div>
-              <div class="answer">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册时手机收不到验证码怎么办？
-              </div>
-              <div class="answer ">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册时手机收不到验证码怎么办？
-              </div>
-              <div class="answer ">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-          <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册时手机收不到验证码怎么办？
-              </div>
-              <div class="answer ">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-
-      <!-- 投资理财 -->
-      <div class="help-list full-container hide">
-        <ul>
-          <li>
-            <div class="help-detail open">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-xiasanjiao "></i>
-
-                </span>
-                注册后用户名是否可以修改？
-              </div>
-              <div class="answer">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-           <li>
-            <div class="help-detail ">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-triangle-right-copy"></i>
-                </span>
-                注册时手机收不到验证码怎么办？
-              </div>
-              <div class="answer ">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- 备付金 -->
       <div class="help-list full-container">
         <ul>
-          <li>
-            <div class="help-detail open">
-              <div class="problem">
-                <span>
-                  <i class="iconfont icon-xiasanjiao"></i>
-                </span>
-                注册后用户名是否可以修改？
+          <li v-for="item in selectedList">
+            <div class="help-detail" v-bind:class="{'open': item.open}">
+              <div class="problem" v-on:click="openTab(item)">
+                <span><i class="iconfont" v-bind:class="{'icon-triangle-right-copy': !item.open, 'icon-xiasanjiao': item.open}"></i></span>
+                {{item.title}}
               </div>
-              <div class="answer">用户名注册成功后不可以修改，注册时请勿使用真实姓名作为用户名。
-              </div>
+              <div class="answer" v-html="item.content"></div>
             </div>
           </li>
         </ul>
@@ -209,15 +34,47 @@ export default {
     return {
       title: '帮助中心',
       tabTitle: [
-        {id: 1, name: '关于注册', image: ''}
-      ]
+        {id: 8, name: '注册登录', alias: 'zcdl'},
+        {id: 9, name: '充值提现', alias: 'cztx'},
+        {id: 10, name: '投资理财', alias: 'tzlc'},
+        {id: 11, name: '备付金', alias: 'bfj'},
+        {id: 12, name: '数据安全', alias: 'sjaq'}
+      ],
+      selected: 8,
+      tabList: []
+    }
+  },
+  created: function () {
+    for (let i in this.tabTitle) {
+      let cateId = this.tabTitle[i].id
+      this.tabList.push([
+        {id: 8, open: false, cate_id: cateId, title: '注册时收不到验证码怎么办' + cateId, content: '<p style="line-height: 2em;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">Q：注册时手机收不到验证码怎么办？</span></p><p style="line-height: 2em;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">1. 确认短信是否被手机软件拦截或过滤；<br/></span></p><p style="line-height: 2em;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">2. 确认手机是否能正常接收短信（信号问题、欠费、停机等）；</span></p><p style="line-height: 2em;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">3. 短信收发过程中可能会有延时，请耐心等候；</span></p><p style="line-height: 2em;"><span style="font-family: 微软雅黑, &#39;Microsoft YaHei&#39;; font-size: 14px;">4. 如经过反复尝试还不能收取验证码，可直接联系客服为您服务。</span></p><p><br/></p>'}
+      ])
     }
   },
   mounted () {
   },
   computed: {
+    selectedList: function () {
+      let current = []
+      for (let i in this.tabList) {
+        let parent = this.tabList[i]
+        for (let k in parent) {
+          if (parent[k].cate_id === this.selected) {
+            current.push(parent[k])
+          }
+        }
+      }
+      return current
+    }
   },
   methods: {
+    openTab: function (item) {
+      item.open = !item.open
+    },
+    toggleTitle: function (item) {
+      this.selected = item.id
+    }
   },
   watch: {
   }

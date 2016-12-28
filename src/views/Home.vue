@@ -59,7 +59,7 @@
               <div class="days-title flex-middle h50"><p class="Pcenter">期限</p></div>
             </div>
             <div class="buy flex-middle">
-              <span class="btn container invest-btn" >立即购买</span>
+              <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: 1}}" tag="span">立即购买</router-link>
             </div>
           </div>
         </div>
@@ -119,9 +119,10 @@
 <script>
 import FooterNav from '../components/Footer'
 import Swiper from 'swiper'
+import { MessageBox } from 'mint-ui'
 
 export default {
-  components: {FooterNav},
+  components: {FooterNav, MessageBox},
   data: function () {
     return {
       swiper: null, // 滑动插件
@@ -142,6 +143,7 @@ export default {
       autoplayDisableOnInteraction: false
     })
     this.swiper = sw
+    MessageBox.alert(2)
   },
   computed: {
     fult_money: function () {

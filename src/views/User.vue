@@ -22,28 +22,28 @@
       </div>
       <div class="functions">
         <div class="flex wrap">
-          <div class="item" >
+          <div class="item">
             <i class="iconfont icon-xiugaioryijian"></i>
             签到
           </div>
-          <router-link class="item" :to="{name: 'user-gift'}">
+          <router-link class="item" :to="{name: 'user-gift'}" tag="div">
             <i class="iconfont icon-37"></i>福利
           </router-link>
-          <router-link class="item" :to="{name: 'user-project'}">
+          <router-link class="item" :to="{name: 'user-project'}" tag="div">
             <i class="iconfont icon-xiangmu"></i>
             我的项目
           </router-link>
         </div>
         <div class="flex wrap">
-          <div class="item" >
+          <router-link class="item" :to="{name: 'user-trade'}" tag="div">
             <i class="iconfont icon-jiaoyimingxichaxun"></i>
              交易明细
-          </div>
-          <div class="item" >
+          </router-link>
+          <router-link class="item" :to="{name: 'user-message'}" tag="div">
             <i class="iconfont icon-youjian"></i>
             我的消息
-          </div>
-          <div class="item" >
+          </router-link>
+          <div class="item">
             <i class="iconfont icon-yijianfankui1"></i>
             意见反馈
           </div>
