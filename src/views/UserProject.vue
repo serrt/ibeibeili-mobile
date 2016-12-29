@@ -12,13 +12,12 @@
         <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus === 'drop'">释放刷新</span>
-            <!-- <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span> -->
+            <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
             <span v-show="topStatus === 'loading'">正在加载。。。</span>
           </div>
-          <!-- 正在投资 -->
           <ul>
-            <li v-for="item in list">
-              <router-link class="project-detail container" :to="{name: 'user-project-detail', params: {id: item.id}}">
+            <router-link v-for="item in list" tag="li" :to="{name: 'user-project-detail', params: {id: item.id}}">
+              <div class="project-detail container">
                 <span class="project-name surplus">{{item.projects_name}}</span>
                 <span class="project-item invest-money">
                   投资金额
@@ -40,12 +39,12 @@
                   起息时间
                   <span class="fr">{{item.interest_at}}</span>
                 </span>
-              </router-link>
-            </li>
+              </div>
+            </router-link>
           </ul>
           <div slot="bottom" class="mint-loadmore-bottom">
             <span v-show="bottomStatus === 'drop'">加载更多</span>
-            <!-- <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span> -->
+            <span v-show="bottomStatus === 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
             <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
           </div>
         </loadmore>

@@ -606,10 +606,6 @@ html * {
   font-family: "SimHei";
 }
 
-body {
-  background-color: #eee;
-}
-
 a {
   text-decoration: none;
   color: #6b6b6b;
@@ -953,6 +949,10 @@ span.toNext {
   content: "\e620";
 }
 
+.icon-yonghu2:before {
+  content: "\e60b";
+}
+
 .icon-shouyeshouye:before {
   content: "\e60a";
 }
@@ -1168,7 +1168,7 @@ span.toNext {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
-  z-index: 100;
+  z-index: 200;
   height: 40px;
   line-height: 40px;
   border-bottom: 1px solid #eee;
@@ -1292,6 +1292,7 @@ span.toNext {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+  overflow-x: auto;
 }
 
 .tabs .tab-option {
@@ -1365,8 +1366,16 @@ span.toNext {
   background-position: -18rem 0;
 }
 
+.bblIntro {
+  overflow-x: auto;
+}
+
+.bblIntro .tab-option {
+  min-width: 8rem;
+}
+
 .bblIntro .tab-option span {
-  padding: 0 0px;
+  display: inline-block;
 }
 
 .certification {
@@ -1817,6 +1826,10 @@ span.toNext {
   font-size: 2.5rem;
   color: #e72418;
   margin-bottom: 5px;
+}
+
+.user-account .functions .item a {
+  color: #494949;
 }
 
 .user-account .functions .wrap:nth-child(1) .item {
@@ -2709,7 +2722,7 @@ span.toNext {
 }
 
 .transaction-details {
-  margin-top: 82px;
+  margin-top: 80px;
 }
 
 .transaction-details .list ul li {
@@ -2921,7 +2934,6 @@ span.toNext {
 
 .latest-news li .words {
   width: 80%;
-  height: 100%;
   text-overflow: -o-ellipsis-lastline;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3244,6 +3256,11 @@ span.toNext {
   color: #fff;
 }
 
+.discovery-box .options ul li .logo .icon-bangzhu, .discovery-box .options ul li .logo .icon-gonggao {
+  display: inline-block;
+  margin-top: -0.5rem;
+}
+
 .discovery-box .options ul li .intro .title {
   font-size: 1.3rem;
   color: #4d4d4d;
@@ -3396,6 +3413,89 @@ span.toNext {
   font-size: 1.4rem;
   color: #e72418;
   margin: 1rem;
+}
+
+.setup {
+  margin-top: 40px;
+}
+
+.setup ul {
+  height: auto;
+  background-color: #fff;
+}
+
+.setup ul li {
+  font-size: 1.3rem;
+  color: #2d2d2d;
+  border-bottom: 1px solid #d6d6d6;
+  height: 4rem;
+  line-height: 4rem;
+}
+
+.setup ul li .iconfont {
+  font-size: 1.8rem;
+  margin-right: 1rem;
+  color: #e72418;
+}
+
+.setup ul li .toNext {
+  line-height: 4rem;
+}
+
+.setup ul li .toNext .iconfont {
+  font-size: 2rem;
+  margin-right: 0;
+  color: #d6d6d6;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.setup ul li .icon-shenfen {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 0.1rem;
+}
+
+.setup ul li .icon-353245214507 {
+  font-size: 2rem;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.setup ul li .icon-zhifu {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.setup ul .right-words {
+  color: #6d6d6d;
+  font-size: 1.1rem;
+}
+
+.error-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  color: #767777;
+  text-align: center;
+}
+
+.error-page img {
+  width: 40%;
+  margin-bottom: 3rem;
+}
+
+.error-page .back-home {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 8rem;
+}
+
+.error-page .back-home .btn {
+  font-size: 2rem;
 }
 
 .popup {
@@ -3817,8 +3917,8 @@ span.toNext {
 }
 
 #home .four-features .feature .BBL-logo i {
-  height: 1.5rem;
-  width: 2rem;
+  height: 1.8rem;
+  width: 2.4rem;
   background-image: url(../images/bbl.png);
   background-size: 100% 100%;
   display: block;

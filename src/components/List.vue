@@ -22,7 +22,7 @@ export default {
   data: function () {
     return {
       myList: [],
-      allLoaded: true,
+      allLoaded: false,
       wrapperHeight: 0,
       bottomStatus: '',
       topStatus: ''
@@ -42,7 +42,6 @@ export default {
       this.topStatus = status
     },
     loadData: function (id, dir) {
-      console.log(1)
       let dataList = this.api
       this.myList = this.myList.concat(dataList)
       if (dir === 'top') {
@@ -50,7 +49,7 @@ export default {
       } else if (dir === 'bottom') {
         this.$refs.loadmore.onTopLoaded(id)
       }
-      // this.allLoaded = false
+      // this.allLoaded = true
     },
     loadBottom: function (id) {
       this.loadData(id, 'top')
