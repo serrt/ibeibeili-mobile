@@ -1,30 +1,28 @@
 <template>
-  <div class="full-container">
-    <div class="footer full-container flex">
-      <div class="item home">
-        <router-link :to="{name: 'home'}">
-          <span class="item-icon"><i class="iconfont icon-home"></i></span>
-          <span class="item-text">首页</span>
-        </router-link>
-      </div>
-      <div class="item invest">
-        <router-link :to="{name: 'projects'}">
-          <span class="item-icon"><i class="iconfont icon-touzi"></i></span>
-          <span class="item-text">投资</span>
-        </router-link>
-      </div>
-      <div class="item discovery">
-        <router-link :to="{name: 'find'}">
-          <span class="item-icon"><i class="iconfont icon-discovery"></i></span>
-          <span class="item-text">发现</span>
-        </router-link>
-      </div>
-      <div class="item account">
-        <router-link :to="{name: 'user'}">
-          <span class="item-icon"><i class="iconfont icon-caifu"></i></span>
-          <span class="item-text">我的账户</span>
-        </router-link>
-      </div>
+  <div class="footer full-container flex">
+    <div class="item home">
+      <router-link :to="{name: 'home'}">
+        <span class="item-icon"><i class="iconfont icon-home"></i></span>
+        <span class="item-text">首页</span>
+      </router-link>
+    </div>
+    <div class="item invest">
+      <router-link :to="{name: 'projects'}">
+        <span class="item-icon"><i class="iconfont icon-touzi"></i></span>
+        <span class="item-text">投资</span>
+      </router-link>
+    </div>
+    <div class="item discovery">
+      <router-link :to="{name: 'find'}">
+        <span class="item-icon"><i class="iconfont icon-discovery"></i></span>
+        <span class="item-text">发现</span>
+      </router-link>
+    </div>
+    <div class="item account">
+      <router-link :to="{name: 'user'}">
+        <span class="item-icon"><i class="iconfont icon-caifu"></i></span>
+        <span class="item-text">我的账户</span>
+      </router-link>
     </div>
   </div>
 </template>

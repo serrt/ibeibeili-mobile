@@ -143,7 +143,6 @@ export default {
       autoplayDisableOnInteraction: false
     })
     this.swiper = sw
-    MessageBox.alert(2)
   },
   computed: {
     fult_money: function () {

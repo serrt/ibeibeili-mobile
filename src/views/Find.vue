@@ -57,33 +57,7 @@
           </li>
         </ul>
       </div>
-
-      <!-- <div class="info full-container page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-        <loadmore class="latest-news" :top-method="refresh" @top-status-change="handleTopChange" :bottom-method="loadBottom" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-          <div slot="top" class="mint-loadmore-top">
-            <span v-show="topStatus === 'drop'">释放刷新</span>
-            <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
-            <span v-show="topStatus === 'loading'">正在加载。。。</span>
-          </div>
-          <ul>
-            <li v-for="item in list">
-              <div class="words fl">
-                <span class="abstract">{{item.title}}</span>
-              </div>
-              <span class="date">{{item.published_at}}</span>
-              <div class="news-pic flex-middle">
-                <img v-bind:src="item.image">
-              </div>
-            </li>
-          </ul>
-          <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus === 'drop'">加载更多</span>
-            <span v-show="bottomStatus == 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-            <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
-          </div>
-        </loadmore>
-      </div> -->
-      <list :api="example" :list="list" @handle-list-change="handleListChange">
+      <list :api="api" :list="list" @handle-list-change="handleListChange">
         <ul class="latest-news" solt="list">
           <li v-for="item in list">
             <div class="words fl">
@@ -111,8 +85,7 @@ export default {
   data: function () {
     return {
       title: '发现',
-      api: '/article/1',
-      example: [
+      api: [
         {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: '../../static/images/news.png'},
         {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: '../../static/images/news.png'},
         {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},

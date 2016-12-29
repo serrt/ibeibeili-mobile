@@ -12,7 +12,7 @@
         <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
           <div slot="top" class="mint-loadmore-top">
             <span v-show="topStatus === 'drop'">释放刷新</span>
-            <!-- <span v-show="topStatus !== 'loading'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span> -->
+            <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
             <span v-show="topStatus === 'loading'">正在加载。。。</span>
           </div>
           <!-- 红包 -->
@@ -79,7 +79,7 @@
           </ul>
           <div slot="bottom" class="mint-loadmore-bottom">
             <span v-show="bottomStatus === 'drop'">加载更多</span>
-            <!-- <span v-show="bottomStatus !== 'loading'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span> -->
+            <span v-show="bottomStatus === 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
             <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
           </div>
         </loadmore>

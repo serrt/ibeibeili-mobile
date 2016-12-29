@@ -21,8 +21,8 @@ export default {
   name: 'list',
   data: function () {
     return {
-      myList: this.list,
-      allLoaded: false,
+      myList: [],
+      allLoaded: true,
       wrapperHeight: 0,
       bottomStatus: '',
       topStatus: ''
