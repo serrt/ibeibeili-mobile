@@ -10,11 +10,6 @@
     <div class="container welfare">
       <div class="welfare-item page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
         <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-          <div slot="top" class="mint-loadmore-top">
-            <span v-show="topStatus === 'drop'">释放刷新</span>
-            <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
-            <span v-show="topStatus === 'loading'">正在加载。。。</span>
-          </div>
           <!-- 红包 -->
           <ul class="red-bag" v-show="selected==='gift'">
             <li v-bind:class="{'valid': item.status===0}" v-for="item in giftList">
@@ -77,11 +72,6 @@
               <div class="state alreay-use" v-show="item.status===1"></div>
             </li>
           </ul>
-          <div slot="bottom" class="mint-loadmore-bottom">
-            <span v-show="bottomStatus === 'drop'">加载更多</span>
-            <span v-show="bottomStatus === 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>
-            <span v-show="bottomStatus === 'loading'">正在加载。。。</span>
-          </div>
         </loadmore>
       </div>
     </div>

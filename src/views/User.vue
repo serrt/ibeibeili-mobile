@@ -4,7 +4,7 @@
     <div class="user-account">
       <div class="myData full-container">
         <img src="../../static/images/u-account-bg.png">
-        <div class="account">
+        <router-link class="account" :to="{name: 'user-wallet'}" tag="div">
           <ul>
             <li class="accumulate">累计收益（元）</li>
             <li class="all-income">32123.21</li>
@@ -14,7 +14,7 @@
               <div class="all-money fr">账户余额(元):<span>10500000.00</span></div>
             </li>
           </ul>
-        </div>
+        </router-link>
       </div>
       <div class="money-operate">
         <router-link class="btn fl chongzhi" :to="{name: 'recharge'}">充值</router-link>

@@ -46,6 +46,9 @@ const routes = [
   { path: '/user-verify', name: 'user-verify', component: (resolve) => { require(['./views/userVerify.vue'], (resolve)) } },
   // 消息详细
   { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) } },
+  // 用户钱包
+  { path: '/user-wallet', name: 'user-wallet', component: (resolve) => { require(['./views/UserWallet.vue'], (resolve)) } },
+  // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }
 ]
