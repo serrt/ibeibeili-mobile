@@ -42,6 +42,7 @@ export default {
       this.topStatus = status
     },
     loadData: function (id, dir) {
+      console.log(1)
       let dataList = this.api
       this.myList = this.myList.concat(dataList)
       if (dir === 'top') {

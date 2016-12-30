@@ -29,8 +29,8 @@
     </div>
     <!-- 投资列表 -->
     <div class="full-container" id="investList">
-      <list :api="api" :list="list" @handle-list-change="handleListChange">
-        <ul class="list">
+      <list class="list" :api="api" :list="list" @handle-list-change="handleListChange">
+        <ul>
           <router-link v-for="item in list" :to="{ name: 'project-detail', params: { id: item.id }}" tag="li">
             <!-- 投资进度 -->
             <div class="progress" v-bind:style="{width: Math.floor(item.financed_money/item.finance_money*100)+'%'}"></div>
@@ -85,8 +85,8 @@ export default {
         {id: 1, name: '项目1', rate: 9, finance_time: '1个月', finance_money: 185000, financed_money: 0, status: 'prepare'},
         {id: 2, name: '项目2', rate: 10, finance_time: '3个月', finance_money: 110000, financed_money: 110000, status: 'full'},
         {id: 3, name: '项目3', rate: 11, finance_time: '66天', finance_money: 250000, financed_money: 250000, status: 'payment'},
-        {id: 4, name: '项目4', rate: 11, finance_time: '3个月', finance_money: 500000, financed_money: 14000, status: 'rush'},
-        {id: 5, name: '项目5', rate: 8, finance_time: '3个月', finance_money: 100000, financed_money: 20000, status: 'rush'},
+        // {id: 4, name: '项目4', rate: 11, finance_time: '3个月', finance_money: 500000, financed_money: 14000, status: 'rush'},
+        // {id: 5, name: '项目5', rate: 8, finance_time: '3个月', finance_money: 100000, financed_money: 20000, status: 'rush'},
         {id: 6, name: '项目6', rate: 9.5, finance_time: '1个月', finance_money: 200000, financed_money: 200000, status: 'finish'},
         {id: 7, name: '项目7', rate: 10, finance_time: '3自然月', finance_money: 200000, financed_money: 2500, status: 'rush'}
       ],
