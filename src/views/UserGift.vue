@@ -188,4 +188,7 @@ export default {
 }
 </script>
 <style scoped>
+.welfare .welfare-item li .use{
+  width: 80%;
+}
 </style>

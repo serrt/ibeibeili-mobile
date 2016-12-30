@@ -1,3 +1,9 @@
+.tabs{
+  height: auto
+}
+.tabs .tab-option span{
+  margin-bottom: 0;
+}
 .btn.prepare{
   background-color: #fcc800;
 }
