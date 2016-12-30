@@ -1,88 +1,45 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <div class="tabs full-container flex">
-      <div class="tab-option" v-bind:class="{'select': item.key===selected}" v-on:click="toggleTab(item)" v-for="item in tabTitle">
-        <span>{{item.name}}</span>
+    <div class="page-box top-box">
+      <div class="tabs full-container flex">
+        <div class="tab-option" v-bind:class="{'select': item.key===selected}" v-on:click="toggleTab(item)" v-for="item in tabTitle">
+          <span>{{item.name}}</span>
+        </div>
       </div>
-    </div>
-
-    <div class="container welfare">
-      <div class="welfare-item page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-        <loadmore :top-method="refresh" :bottom-method="loadBottom" @top-status-change="handleTopChange" @bottom-status-change="handleBottomChange" :bottom-all-loaded="allLoaded" ref="loadmore">
-          <!-- 红包 -->
-          <ul class="red-bag" v-show="selected==='gift'">
-            <li v-bind:class="{'valid': item.status===0}" v-for="item in giftList">
-              <span class="left-pic">
-                <img src="../../static/images/welfare.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>
-                <div class="use-purpose fr">
-                  <p>单笔满{{item.invest_money}}元可用</p>
-                  <p>仅限{{item.project_cate}}使用</p>
-                </div>
+      <list class="welfare" :api="api" :list="giftList" @handle-list-change="handleListChange">
+        <!-- 红包 -->
+        <ul slot="list" class="red-bag welfare-item" v-show="selected==='gift'">
+          <li v-bind:class="{'valid': item.status===0}" v-for="item in giftList">
+            <span class="left-pic">
+              <img src="../../static/images/welfare.png">
+              <i class="iconfont icon-renminbi"></i>
+            </span>
+            <div class="use fr">
+              <span class="use-money">{{item.money}}</span>
+              <div class="use-purpose fr">
+                <p>单笔满{{item.invest_money}}元可用</p>
+                <p>仅限{{item.project_cate}}使用</p>
               </div>
-              <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===2"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===1"></div>
-            </li>
-          </ul>
-          <!-- 加息券 -->
-          <ul class="rate-voucher" v-show="selected==='rate'">
-            <li v-bind:class="{'valid': item.status===1}" v-for="item in rateList">
-              <div class="use">
-                <span class="use-money">{{item.rate}}<span>%</span></span>
-                <!-- <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p>单笔满200元可用</p>
-                    <p>仅限6月标使用</p>
-                  </div>
-                </div> -->
-              </div>
-              <div class="voucher-from">签到奖励<span class="valid-date fr">有效期至{{item.effect_time}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===3"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===2"></div>
-            </li>
-          </ul>
-          <!-- 财富值 -->
-          <ul class="wealth-value" v-show="selected==='virtual'">
-            <li v-bind:class="{'valid': item.status===0}" v-for="item in virtualList">
-              <span class="left-pic">
-                <img src="../../static/images/welfare2.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p>仅限新手体验任务</p>
-                  </div>
-                </div>
-              </div>
-              <div class="voucher-from"><span class="valid-date fr">有效期至{{item.effect_time}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===2"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===1"></div>
-            </li>
-          </ul>
-        </loadmore>
-      </div>
+            </div>
+            <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
+            <!-- 过期 -->
+            <div class="state overdue" v-show="item.status===2"></div>
+            <!-- 已使用 -->
+            <div class="state alreay-use" v-show="item.status===1"></div>
+          </li>
+        </ul>
+      </list>
     </div>
   </div>
 </template>
 
 <script>
 import HeaderTop from '../components/Header'
+import List from '../components/List'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, List},
   data: function () {
     return {
       title: '福利',
@@ -92,17 +49,21 @@ export default {
         {name: '财富值', key: 'virtual'}
       ],
       selected: 'gift',
+      api: [
+        {id: 1, money: 5.00, invest_money: 500, project_cate: '6月标', name: '注册送5元投资红包', end_time: '2016-12-28 23:59:59', status: 0},
+        {id: 4, money: 6.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-28 23:59:59', status: 0},
+        {id: 5, money: 7.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-28 23:59:59', status: 0},
+        {id: 2, money: 8.00, invest_money: 800, project_cate: '3月标', name: '元宝游戏赠送', end_time: '2016-12-28 23:59:59', status: 1},
+        {id: 3, money: 9.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-21 23:59:59', status: 2},
+        {id: 3, money: 9.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-21 23:59:59', status: 2}
+      ],
       giftList: [],
       rateList: [],
-      virtualList: [],
-      allLoaded: false,
-      wrapperHeight: 0,
-      bottomStatus: '',
-      topStatus: ''
+      virtualList: []
     }
   },
   mounted () {
-    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
+    // this.giftList = this.api
   },
   computed: {
   },
@@ -110,77 +71,10 @@ export default {
     toggleTab (item) {
       if (item.key !== this.selected) {
         this.selected = item.key
-        if (this.selected === 'gift' && this.giftList.length === 0) {
-          this.refresh(1)
-        } else if (this.selected === 'rate' && this.rateList.length === 0) {
-          this.refresh(1)
-        } else if (this.selected === 'virtual' && this.virtualList.length === 0) {
-          this.refresh(1)
-        }
       }
     },
-    handleBottomChange: function (status) {
-      this.bottomStatus = status
-    },
-    handleTopChange: function (status) {
-      this.topStatus = status
-    },
-    loadData: function (id, dir) {
-      let dataList = []
-      if (this.selected === 'gift') {
-        dataList = [
-          {id: 1, money: 5.00, invest_money: 500, project_cate: '6月标', name: '注册送5元投资红包', end_time: '2016-12-28 23:59:59', status: 0},
-          {id: 4, money: 6.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-28 23:59:59', status: 0},
-          {id: 5, money: 7.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-28 23:59:59', status: 0},
-          {id: 2, money: 8.00, invest_money: 800, project_cate: '3月标', name: '元宝游戏赠送', end_time: '2016-12-28 23:59:59', status: 1},
-          {id: 3, money: 9.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-21 23:59:59', status: 2},
-          {id: 3, money: 9.00, invest_money: 1000, project_cate: '3月标', name: '签到赠送', end_time: '2016-12-21 23:59:59', status: 2}
-        ]
-      } else if (this.selected === 'rate') {
-        dataList = [
-          {id: 1, rate: 1.00, effect_time: '2016-12-25 00:00:00', status: 1, source: 'sign'},
-          {id: 2, rate: 2.00, effect_time: '2016-12-25 00:00:00', status: 1, source: 'sign'},
-          {id: 3, rate: 3.50, effect_time: '2016-12-25 00:00:00', status: 2, source: 'sign'},
-          {id: 4, rate: 4.80, effect_time: '2016-12-25 00:00:00', status: 3, source: 'sign'},
-          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3, source: 'sign'},
-          {id: 5, rate: 5.50, effect_time: '2016-12-24 00:00:00', status: 3, source: 'sign'}
-        ]
-      } else if (this.selected === 'virtual') {
-        dataList = [
-          {id: 1, money: 10000.00, effect_time: '2016-12-25 00:00:00', status: 0},
-          {id: 2, money: 20000.00, effect_time: '2016-12-25 00:00:00', status: 1},
-          {id: 3, money: 30000.00, effect_time: '2016-12-25 00:00:00', status: 2},
-          {id: 4, money: 40000.00, effect_time: '2016-12-25 00:00:00', status: 3},
-          {id: 4, money: 40000.00, effect_time: '2016-12-25 00:00:00', status: 3},
-          {id: 5, money: 50000.00, effect_time: '2016-12-25 00:00:00', status: 3}
-        ]
-      }
-      if (dir === 'top') {
-        this.$refs.loadmore.onBottomLoaded(id)
-      } else if (dir === 'bottom') {
-        if (this.selected === 'gift') {
-          this.giftList = []
-        } else if (this.selected === 'rate') {
-          this.rateList = []
-        } else if (this.selected === 'virtual') {
-          this.virtualList = []
-        }
-        this.$refs.loadmore.onTopLoaded(id)
-      }
-      if (this.selected === 'gift') {
-        this.giftList = this.giftList.concat(dataList)
-      } else if (this.selected === 'rate') {
-        this.rateList = this.rateList.concat(dataList)
-      } else if (this.selected === 'virtual') {
-        this.virtualList = this.virtualList.concat(dataList)
-      }
-    },
-    loadBottom: function (id) {
-      this.loadData(id, 'top')
-    },
-    refresh: function (id) {
-      this.allLoaded = false
-      this.loadData(id, 'bottom')
+    handleListChange: function (value) {
+      this.giftList = value
     }
   },
   watch: {
@@ -188,6 +82,11 @@ export default {
 }
 </script>
 <style scoped>
+.welfare{
+  margin-top: 40px;
+  overflow: scroll;
+  position: relative;
+}
 .welfare .welfare-item li .use{
   width: 80%;
 }

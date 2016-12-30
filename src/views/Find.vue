@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <div class="discovery-box full-container">
+    <div class="discovery-box full-container bottom-box page-box">
       <div class="banner">
         <img src="../../static/images/discovery-test.png">
       </div>
@@ -57,8 +57,8 @@
           </li>
         </ul>
       </div>
-      <list :api="api" :list="list" @handle-list-change="handleListChange">
-        <ul class="latest-news" slot="list">
+      <list class="latest-news" :api="api" :list="list" @handle-list-change="handleListChange">
+        <ul slot="list">
           <li v-for="item in list">
             <div class="words fl">
               <span class="abstract">{{item.title}}</span>
@@ -89,19 +89,24 @@ export default {
         {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: './static/images/news.png'},
         {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: './static/images/news.png'},
         {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
-        {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
+        {id: 3, title: '4倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
+        {id: 3, title: '5倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
         {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: './static/images/news.png'}
       ],
       list: []
     }
   },
   mounted () {
+    this.list = this.api
   },
   computed: {
   },
   methods: {
     handleListChange: function (value) {
       this.list = value
+    },
+    loadData: function () {
+      return this.api
     }
   },
   watch: {
@@ -109,4 +114,13 @@ export default {
 }
 </script>
 <style scoped>
+.discovery-box .latest-news{
+  margin-bottom: 0;
+}
+.latest-news{
+  overflow: scroll;
+}
+.latest-news li{
+  padding: 1rem
+}
 </style>

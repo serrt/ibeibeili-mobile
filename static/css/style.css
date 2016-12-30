@@ -4,6 +4,19 @@
 .tabs .tab-option span{
   margin-bottom: 0;
 }
+
+.page-box{
+  overflow: hidden;
+  max-height: 100%;
+  position: relative;
+}
+.top-box{
+  margin-top: 40px;
+}
+.bottom-box{
+  margin-bottom: 50px;
+}
+
 .btn.prepare{
   background-color: #fcc800;
 }

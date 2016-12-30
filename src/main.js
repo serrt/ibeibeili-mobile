@@ -11,6 +11,7 @@ import filters from './filters'
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
 Vue.use(VueRouter)
+Vue.use(VueRouter)
 Vue.component('loadmore', Loadmore)
 // Api 请求根地址
 axios.defaults.baseURL = appEnv.apiUrl
