@@ -7,8 +7,6 @@
 
 .page-box{
   overflow: hidden;
-  max-height: 100%;
-  position: relative;
 }
 .top-box{
   margin-top: 40px;
