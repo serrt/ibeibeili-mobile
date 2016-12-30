@@ -6,7 +6,7 @@
         <span v-show="topStatus === 'pull'" :class="{ 'is-rotate': topStatus === 'drop' }">↓</span>
         <span v-show="topStatus === 'loading'">正在加载。。。</span>
       </div>
-      <slot></slot>
+      <slot name="list"></slot>
       <div slot="bottom" class="mint-loadmore-bottom">
         <span v-show="bottomStatus === 'drop'">加载更多</span>
         <span v-show="bottomStatus == 'pull'" :class="{ 'is-rotate': bottomStatus === 'drop' }">↑</span>

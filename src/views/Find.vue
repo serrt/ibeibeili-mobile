@@ -58,7 +58,7 @@
         </ul>
       </div>
       <list :api="api" :list="list" @handle-list-change="handleListChange">
-        <ul class="latest-news" solt="list">
+        <ul class="latest-news" slot="list">
           <li v-for="item in list">
             <div class="words fl">
               <span class="abstract">{{item.title}}</span>

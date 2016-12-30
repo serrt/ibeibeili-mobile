@@ -12,7 +12,7 @@
       </ul>
     </div>
     <list class="infolist full-container" :api="api" :list="list" @handle-list-change="handleListChange">
-      <ul>
+      <ul slot="list">
         <router-link :to="{name: 'user-message-detail', params: {id: item.id}}" tag="li" v-for="item in list">
           <div class="info-content container" v-bind:class="{'isNew': item.readed === 0}">
             <div class="info-title surplus">{{item.title}}</div>

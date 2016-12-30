@@ -30,7 +30,7 @@
     <!-- 投资列表 -->
     <div class="full-container" id="investList">
       <list class="list" :api="api" :list="list" @handle-list-change="handleListChange">
-        <ul>
+        <ul slot="list">
           <router-link v-for="item in list" :to="{ name: 'project-detail', params: { id: item.id }}" tag="li">
             <!-- 投资进度 -->
             <div class="progress" v-bind:style="{width: Math.floor(item.financed_money/item.finance_money*100)+'%'}"></div>
