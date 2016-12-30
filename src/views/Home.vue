@@ -185,4 +185,13 @@ export default {
   #home .four-features {
     height: 30%;
   }
+  #home .notice .notice-icon {
+    display: block;
+    float: left;
+    width: 3.7rem;
+    height: 3.6rem;
+    background-image: url(../../static/images/notice.png);
+    background-size: 100% 100%;
+    margin-right: 10px;
+  }
 </style>
