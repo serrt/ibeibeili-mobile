@@ -57,19 +57,21 @@
           </li>
         </ul>
       </div>
-      <list class="latest-news" :api="api" :list="list" @handle-list-change="handleListChange">
-        <ul slot="list">
-          <li v-for="item in list">
-            <div class="words fl">
-              <span class="abstract">{{item.title}}</span>
-            </div>
-            <span class="date">{{item.published_at}}</span>
-            <div class="news-pic flex-middle">
-              <img v-bind:src="item.image">
-            </div>
-          </li>
-        </ul>
-      </list>
+      <div class="page-loadmore-wrapper latest-news" ref="wrapper" :style="{height: wrapperHeight + 'px' }">
+        <loadmore :autoFill="false" :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+          <ul>
+            <li v-for="item in list">
+              <div class="words fl">
+                <span class="abstract">{{item.title}}</span>
+              </div>
+              <span class="date">{{item.published_at}}</span>
+              <div class="news-pic flex-middle">
+                <img v-bind:src="item.image">
+              </div>
+            </li>
+          </ul>
+        </loadmore>
+      </div>
     </div>
     <footer-nav></footer-nav>
   </div>
@@ -78,10 +80,9 @@
 <script>
 import HeaderTop from '../components/Header'
 import FooterNav from '../components/Footer'
-import List from '../components/List'
 
 export default {
-  components: {HeaderTop, FooterNav, List},
+  components: {HeaderTop, FooterNav},
   data: function () {
     return {
       title: '发现',
@@ -93,11 +94,16 @@ export default {
         {id: 3, title: '5倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
         {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: './static/images/news.png'}
       ],
-      list: []
+      list: [],
+      allLoaded: true,
+      wrapperHeight: 0,
+      bottomStatus: '',
+      topStatus: ''
     }
   },
   mounted () {
-    this.list = this.api
+    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
+    this.refresh(1)
   },
   computed: {
   },
@@ -105,8 +111,31 @@ export default {
     handleListChange: function (value) {
       this.list = value
     },
-    loadData: function () {
-      return this.api
+    loadData: function (id, dir) {
+      let dataList = this.api
+      this.list = this.list.concat(dataList)
+      if (dir === 'top') {
+        this.$refs.loadmore.onBottomLoaded(id)
+      } else if (dir === 'bottom') {
+        this.$refs.loadmore.onTopLoaded(id)
+      }
+      // this.$http.get(this.api).then((response) => {
+      //   let dataList = response.data.data
+      //   this.list = this.list.concat(dataList)
+      //   if (dir === 'top') {
+      //     this.$refs.loadmore.onBottomLoaded(id)
+      //   } else if (dir === 'bottom') {
+      //     this.$refs.loadmore.onTopLoaded(id)
+      //   }
+      // })
+      // this.allLoaded = true
+    },
+    loadBottom: function (id) {
+      this.loadData(id, 'top')
+    },
+    refresh: function (id) {
+      this.list = []
+      this.loadData(id, 'bottom')
     }
   },
   watch: {

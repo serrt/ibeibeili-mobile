@@ -45,9 +45,11 @@
         </li>
       </ul>
       <div class="rights">
-        <i class="iconfont icon-renwu"></i>担保
-        <i class="iconfont icon-renwu"></i>风险备付金
-        <i class="iconfont icon-renwu"></i>到期还本付息
+        <i class="iconfont icon-renwu"></i>{{project.collateral_type}}
+        <span v-show="project.is_plan===1">
+          <i class="iconfont icon-renwu"></i>风险备付金
+        </span>
+        <i class="iconfont icon-renwu"></i>{{project.payment_name}}
       </div>
     </div>
 
@@ -84,9 +86,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import {Indicator} from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator},
   data: function () {
     return {
       title: '项目详细',
@@ -111,7 +114,12 @@ export default {
     }
   },
   mounted () {
-    console.log(this.$route.params)
+    Indicator.open()
+    this.$http.get('projects/' + this.$route.params.id).then((response) => {
+      Indicator.close()
+      // console.log(response.data.data)
+      this.project = response.data.data
+    })
   },
   computed: {
     projectPercent: function () {

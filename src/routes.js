@@ -25,29 +25,29 @@ const routes = [
   // 帮助中心
   { path: '/help', name: 'help', component: (resolve) => { require(['./views/Help.vue'], (resolve)) } },
   // 我的账户
-  { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) } },
+  { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 提现
-  { path: '/recharge', name: 'recharge', component: (resolve) => { require(['./views/Recharge.vue'], (resolve)) } },
+  { path: '/recharge', name: 'recharge', component: (resolve) => { require(['./views/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 充值
-  { path: '/withdraw', name: 'withdraw', component: (resolve) => { require(['./views/Withdraw.vue'], (resolve)) } },
+  { path: '/withdraw', name: 'withdraw', component: (resolve) => { require(['./views/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 签到
-  { path: '/sign', name: 'sign', component: (resolve) => { require(['./views/User.vue'], (resolve)) } },
+  { path: '/sign', name: 'sign', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户福利（红包、加息券、财富值）
-  { path: '/user-gift', name: 'user-gift', component: (resolve) => { require(['./views/UserGift.vue'], (resolve)) } },
+  { path: '/user-gift', name: 'user-gift', component: (resolve) => { require(['./views/UserGift.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户投资项目
-  { path: '/user-project', name: 'user-project', component: (resolve) => { require(['./views/UserProject.vue'], (resolve)) } },
+  { path: '/user-project', name: 'user-project', component: (resolve) => { require(['./views/UserProject.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户投资项目详细
-  { path: '/user-project/:id', name: 'user-project-detail', component: (resolve) => { require(['./views/UserProjectDetail.vue'], (resolve)) } },
+  { path: '/user-project/:id', name: 'user-project-detail', component: (resolve) => { require(['./views/UserProjectDetail.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户消息
-  { path: '/user-message', name: 'user-message', component: (resolve) => { require(['./views/UserMessage.vue'], (resolve)) } },
+  { path: '/user-message', name: 'user-message', component: (resolve) => { require(['./views/UserMessage.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 交易详细
-  { path: '/user-trade', name: 'user-trade', component: (resolve) => { require(['./views/UserTrade.vue'], (resolve)) } },
+  { path: '/user-trade', name: 'user-trade', component: (resolve) => { require(['./views/UserTrade.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户认证
-  { path: '/user-verify', name: 'user-verify', component: (resolve) => { require(['./views/userVerify.vue'], (resolve)) } },
+  { path: '/user-verify', name: 'user-verify', component: (resolve) => { require(['./views/userVerify.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 消息详细
-  { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) } },
+  { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户钱包
-  { path: '/user-wallet', name: 'user-wallet', component: (resolve) => { require(['./views/UserWallet.vue'], (resolve)) } },
+  { path: '/user-wallet', name: 'user-wallet', component: (resolve) => { require(['./views/UserWallet.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

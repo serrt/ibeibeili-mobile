@@ -5,24 +5,24 @@
       <div class="invest-filter full-container">
         <div class="filter-condition flex">
           <div class="filter" v-on:click="toggleTime()" >
-            <span class="filter-duration">全部期限</span>
+            <span class="filter-duration">{{query_time}}</span>
             <i class="iconfont" v-bind:class="{'icon-jiantoushang': this.filter_time, 'icon-xiajiantou': !this.filter_time}"></i>
           </div>
           <div class="filter" v-on:click="toggleType()" >
-            <span class="filter-types">全部类型</span>
+            <span class="filter-types">{{query_type}}</span>
             <i class="iconfont" v-bind:class="{'icon-jiantoushang': this.filter_type, 'icon-xiajiantou': !this.filter_type}"></i>
           </div>
         </div>
         <div class="all-duration filter-list" v-show="this.filter_time">
           <ul>
-            <li v-for="item in project_time" v-bind:class="{'selected': query.time === item.cate}" v-on:click="query.time=item.cate">
+            <li v-for="item in project_time" v-bind:class="{'selected': query.time === item.cate}" v-on:click="chooseTime(item)">
               {{item.name}}<span class="tick" v-show="query.time === item.cate">√</span>
             </li>
           </ul>
         </div>
         <div class="all-types filter-list" v-show="this.filter_type">
           <ul>
-            <li v-for="item in project_type" v-bind:class="{'selected': query.type === item.cate}" v-on:click="query.type=item.cate">
+            <li v-for="item in project_type" v-bind:class="{'selected': query.type === item.cate}" v-on:click="chooseType(item)">
               {{item.name}}<span class="tick" v-show="query.type === item.cate">√</span>
             </li>
           </ul>
@@ -30,9 +30,9 @@
       </div>
       <!-- 投资列表 -->
       <div id="investList" class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-        <loadmore class="list" :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
+        <loadmore class="list" :autoFill="false" :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
           <ul>
-            <router-link v-for="item in list" :to="{ name: 'project-detail', params: { id: item.id }}" tag="li">
+            <router-link v-show="list.length>0" v-for="item in list" :to="{ name: 'project-detail', params: { id: item.id }}" tag="li">
               <!-- 投资进度 -->
               <div class="progress" v-bind:style="{width: Math.floor(item.financed_money/item.finance_money*100)+'%'}"></div>
               <div class="list-item full-container">
@@ -58,8 +58,8 @@
                 </div>
                 <!-- 投资担保之类 -->
                 <div class="item-footer container">
-                  <span><i class="tubiao danbao"></i>担保</span>
-                  <span><i class="tubiao huabenfuxi"></i>到期还本利息</span>
+                  <span><i class="tubiao danbao"></i>{{item.collateral_type}}</span>
+                  <span><i class="tubiao huabenfuxi"></i>{{item.payment_name}}</span>
                 </div>
               </div>
             </router-link>
@@ -74,10 +74,10 @@
 <script>
 import FooterNav from '../components/Footer'
 import HeaderTop from '../components/Header'
-import List from '../components/List'
+import { Indicator } from 'mint-ui'
 
 export default {
-  components: {FooterNav, HeaderTop, List},
+  components: {FooterNav, HeaderTop, Indicator},
   data: function () {
     return {
       title: '投资',
@@ -88,13 +88,41 @@ export default {
       project_type: [{name: '全部类型', cate: ''}, {name: '企业贷', cate: 1}, {name: '债权贷', cate: 2}, {name: '房/车贷', cate: 3}, {name: '消费贷', cate: 4}],
       query: {time: '', type: ''},
       allLoaded: false,
-      wrapperHeight: 0
+      wrapperHeight: 0,
+      api: 'projects?',
+      nextApi: ''
     }
   },
   mounted () {
+    this.refresh(1)
     this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
   },
   computed: {
+    queryString: function () {
+      let str = ''
+      for (let i in this.query) {
+        str += '&' + i + '=' + this.query[i]
+      }
+      return str
+    },
+    query_time: function () {
+      let str = '全部期限'
+      for (let i in this.project_time) {
+        if (this.project_time[i].cate === this.query.time) {
+          str = this.project_time[i].name
+        }
+      }
+      return str
+    },
+    query_type: function () {
+      let str = '全部类型'
+      for (let i in this.project_type) {
+        if (this.project_type[i].cate === this.query.type) {
+          str = this.project_type[i].name
+        }
+      }
+      return str
+    }
   },
   methods: {
     toggleTime () {
@@ -105,8 +133,22 @@ export default {
       this.filter_time = false
       this.filter_type = !this.filter_type
     },
+    chooseTime: function (item) {
+      this.query.time = item.cate
+      this.refresh(1)
+      this.filter_time = false
+    },
+    chooseType: function (item) {
+      this.query.type = item.cate
+      this.refresh(1)
+      this.filter_type = false
+    },
     loadData: function (id, dir) {
-      this.$http.get('project-list.json').then((response) => {
+      let uri = this.api + this.queryString
+      if (this.nextApi !== '') {
+        uri = this.nextApi + this.queryString
+      }
+      this.$http.get(uri).then((response) => {
         let dataList = response.data.data
         this.list = this.list.concat(dataList)
         if (dir === 'top') {
@@ -114,14 +156,22 @@ export default {
         } else if (dir === 'bottom') {
           this.$refs.loadmore.onTopLoaded(id)
         }
+        Indicator.close()
+        if (response.data.meta.pagination.links.next) {
+          this.nextApi = response.data.meta.pagination.links.next
+        } else {
+          this.allLoaded = true
+        }
       })
-      // this.allLoaded = true
     },
     loadBottom: function (id) {
       this.loadData(id, 'top')
     },
     refresh: function (id) {
+      Indicator.open()
       this.list = []
+      this.nextApi = this.api
+      this.allLoaded = false
       this.loadData(id, 'bottom')
     }
   },

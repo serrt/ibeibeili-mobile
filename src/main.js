@@ -3,14 +3,14 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import routes from './routes'
 import appEnv from '../env'
+import store from './store'
 import 'mint-ui/lib/style.css'
-import { Loadmore } from 'mint-ui'
+import {Loadmore} from 'mint-ui'
 import filters from './filters'
 
 // 实例化Vue的filter
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
-Vue.use(VueRouter)
 Vue.use(VueRouter)
 Vue.component('loadmore', Loadmore)
 // Api 请求根地址
@@ -42,6 +42,19 @@ const router = new VueRouter({
   routes
 })
 
+// 登录中间验证，页面需要登录而没有登录的情况直接跳转登录
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.state.userInfo.userId) {
+      next()
+    } else {
+      next({path: '/login'})
+    }
+  } else {
+    next()
+  }
+})
+
 new Vue({
-  router
+  router, store
 }).$mount('#app')

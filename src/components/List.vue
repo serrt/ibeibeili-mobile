@@ -1,7 +1,8 @@
 <template>
-  <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+  <div class="page-loadmore-wrapper" ref="wrapper" :style="{height: wrapperHeight + 'px' }">
     <loadmore :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-      <slot name="list"></slot>
+      <div v-show="myList.length===0" :style="{ height: wrapperHeight + 'px' }">数据加载中。。。</div>
+      <slot v-show="myList.length>0" name="list"></slot>
     </loadmore>
   </div>
 </template>
@@ -20,6 +21,7 @@ export default {
   },
   mounted () {
     this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
+    this.refresh(1)
   },
   props: ['api', 'list'],
   computed: {
@@ -27,13 +29,15 @@ export default {
   methods: {
     loadData: function (id, dir) {
       console.log(1)
-      let dataList = this.api
-      this.myList = this.myList.concat(dataList)
-      if (dir === 'top') {
-        this.$refs.loadmore.onBottomLoaded(id)
-      } else if (dir === 'bottom') {
-        this.$refs.loadmore.onTopLoaded(id)
-      }
+      this.$http.get(this.api).then((response) => {
+        let dataList = response.data.data
+        this.myList = this.myList.concat(dataList)
+        if (dir === 'top') {
+          this.$refs.loadmore.onBottomLoaded(id)
+        } else if (dir === 'bottom') {
+          this.$refs.loadmore.onTopLoaded(id)
+        }
+      })
       // this.allLoaded = true
     },
     loadBottom: function (id) {

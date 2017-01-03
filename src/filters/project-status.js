@@ -1,4 +1,4 @@
-export default function (value) {
+export default function (value, project) {
   let str = ''
   switch (value) {
     case 'prepare':
