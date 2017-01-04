@@ -23,23 +23,16 @@
       </div>
 
       <ul>
-        <li class="container" >
+        <li class="container">
           截止时间
           <span class="toNext">{{project.end_time}}</span>
         </li>
-        <li class="container" >
-          项目信息
+        <li v-show="projectAttr.length===0" class="container">无信息</li>
+        <router-link :to="{name:'project-attr',params:{id:project.id,attr:item.attr_id}}" v-for="item in projectAttr" tag="li" class="container">
+          {{item.attr_name}}
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
-        </li>
-        <li class="container" >
-          承诺信息
-          <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
-        </li>
-        <li class="container" >
-          相关证件
-          <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
-        </li>
-        <li class="container" >
+        </router-link>
+        <li class="container">
           投资明细
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </li>
@@ -95,31 +88,40 @@ export default {
       title: '项目详细',
       project: {
         id: 1,
-        name: '项目1',
-        rate: 9,
-        finance_time: '1个月',
-        finance_time_num: 1,
-        finance_time_cate: 'm',
-        finance_money: 185000,
-        financed_money: 0,
-        status: 'rush',
-        gift_check: 1,
-        rate_check: 1,
-        finance_rule_money: 180.00,
-        end_time: '2016-12-28 00:00:00'
+        name: 'xxx',
+        rate: 'x',
+        finance_time: 'xxx',
+        finance_time_num: 'x',
+        finance_time_cate: 'x',
+        finance_money: 'xxx',
+        financed_money: 'x',
+        status: 'xxx',
+        finance_rule_money: 0,
+        end_time: 'xxx'
       },
+      projectAttr: [],
       isOpen: false,
       invest_money: '',
       profit: 0
     }
   },
   mounted () {
-    Indicator.open()
-    this.$http.get('projects/' + this.$route.params.id).then((response) => {
-      Indicator.close()
-      // console.log(response.data.data)
-      this.project = response.data.data
-    })
+    if (this.$store.getters.projectId === parseInt(this.$route.params.id)) {
+      this.project = this.$store.getters.projectInfo
+      this.projectAttr = this.$store.getters.projectAttr
+    } else {
+      Indicator.open()
+      this.$http.get('projects/' + this.$route.params.id).then((response) => {
+        this.project = response.data.data
+        this.$store.dispatch('project', this.project)
+        // 项目属性
+        this.$http.get('project_attr/' + this.$route.params.id).then((response) => {
+          Indicator.close()
+          this.projectAttr = response.data.data
+          this.$store.dispatch('attr', this.projectAttr)
+        })
+      })
+    }
   },
   computed: {
     projectPercent: function () {

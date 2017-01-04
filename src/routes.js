@@ -14,6 +14,7 @@ const routes = [
   { path: '/projects', name: 'projects', component: (resolve) => { require(['./views/ProjectList.vue'], (resolve)) } },
   // 项目详细
   { path: '/project/:id', name: 'project-detail', component: (resolve) => { require(['./views/ProjectDetail.vue'], (resolve)) } },
+  { path: '/project-attr/:id/:attr', name: 'project-attr', component: (resolve) => { require(['./views/ProjectAttr.vue'], (resolve)) } },
   // 投资项目
   { path: '/project/:id/invest-project', name: 'project-invest', component: (resolve) => { require(['./views/ProjectInvest.vue'], (resolve)) } },
   // 投资成功

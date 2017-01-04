@@ -6,26 +6,26 @@
         <i class="logo"></i>
       </div>
       <div class="login-input user-inputs">
-          <ul>
-            <li>
-              <div class="input-box">
-                <label for="username"><i class="iconfont icon-yonghu"></i></label>
-                <input type="text" name="username" v-model="username" placeholder="请输入手机号/用户名"/>
-              </div>
-              <div class="tip-box" v-show="name_input.error">{{name_input.msg}}</div>
-            </li>
-            <li>
-              <div class="input-box">
-                <label for="password"><i class="iconfont icon-suo"></i></label>
-                <input type="password" name="password" v-model="password" placeholder="请输入密码"/>
-              </div>
-              <div class="tip-box" v-show="pwd_input.error">{{pwd_input.msg}}</div>
-            </li>
-            <li class="other-option">
-              <router-link class="go-reg" :to="{name: 'register'}">立即注册</router-link>
-              <a href="javascript:void(0);" class="forget-password">忘记密码</a>
-            </li>
-          </ul>
+        <ul>
+          <li>
+            <div class="input-box">
+              <label for="username"><i class="iconfont icon-yonghu"></i></label>
+              <input type="text" name="username" v-model="username" placeholder="请输入手机号/用户名"/>
+            </div>
+            <div class="tip-box" v-show="name_input.error">{{name_input.msg}}</div>
+          </li>
+          <li>
+            <div class="input-box">
+              <label for="password"><i class="iconfont icon-suo"></i></label>
+              <input type="password" name="password" v-model="password" placeholder="请输入密码"/>
+            </div>
+            <div class="tip-box" v-show="pwd_input.error">{{pwd_input.msg}}</div>
+          </li>
+          <li class="other-option">
+            <router-link class="go-reg" :to="{name: 'register'}">立即注册</router-link>
+            <a href="javascript:void(0);" class="forget-password">忘记密码</a>
+          </li>
+        </ul>
       </div>
       <span class="btn login" v-bind:class="{'inactive': unsubmit}" v-on:click="login()">登&nbsp;&nbsp;录</span>
     </div>
