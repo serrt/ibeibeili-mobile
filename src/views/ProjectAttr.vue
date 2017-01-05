@@ -4,7 +4,7 @@
     <detail v-show="data.cate !== 1" :title="data.attr_name" :content="data.content"></detail>
     <div class="project-info container" v-show="list.length > 0">
       <div v-for="item in list">
-        <img v-bind:src="'http://www.bbl.com' + item.full_url" v-bind:alt="item.filename">
+        <img class="preview-img" v-bind:src="'http://www.bbl.com' + item.full_url" v-bind:alt="item.filename">
       </div>
     </div>
   </div>
@@ -30,6 +30,7 @@ export default {
           this.data = attrs[i]
         }
       }
+      this.list = JSON.parse(this.data.content)
     } else {
       this.$http.get('attr/' + this.$route.params.id + '/' + this.$route.params.attr).then((response) => {
         this.data = response.data.data

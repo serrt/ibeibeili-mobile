@@ -1,20 +1,32 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
+    <div class="header container">
+      <ul>
+        <li class="back" v-on:click="back()"><span><i class="iconfont icon-01fanhui"></i></span></li>
+        <li class="f-gray title">我的账户</li>
+        <router-link :to="{name: 'user-set'}" class="other" tag="li">
+          <span><i class="iconfont icon-shezhi"></i></span>
+        </router-link>
+      </ul>
+    </div>
     <div class="user-account">
       <div class="myData full-container">
         <img src="../../static/images/u-account-bg.png">
-        <router-link class="account" :to="{name: 'user-wallet'}" tag="div">
+        <div class="account">
           <ul>
             <li class="accumulate">累计收益（元）</li>
-            <li class="all-income">32123.21</li>
-            <li class="pig">存钱罐收益（元）：<span class="pig-money">0.00</span></li>
+            <li class="all-income">{{data.total_bonus}}</li>
+            <li class="pig">存钱罐收益（元）：<span class="pig-money">{{data.bonus}}</span></li>
             <li class="total">
-              <div class="all-assets fl"><a href="">总资产(元):</a><span >1115000000.12</span></div>
-              <div class="all-money fr">账户余额(元):<span>10500000.00</span></div>
+              <div class="all-assets fl">
+                <router-link :to="{name: 'user-wallet'}" tag="a">总资产(元):</router-link><span>{{data.total}}</span>
+              </div>
+              <div class="all-money fr">
+                账户余额(元):<span>{{data.balance}}</span>
+              </div>
             </li>
           </ul>
-        </router-link>
+        </div>
       </div>
       <div class="money-operate">
         <router-link class="btn fl chongzhi" :to="{name: 'recharge'}">充值</router-link>
@@ -55,21 +67,31 @@
 </template>
 
 <script>
-import HeaderTop from '../components/Header'
 import FooterNav from '../components/Footer'
+import { Indicator } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, FooterNav},
+  components: {FooterNav},
   data: function () {
     return {
-      title: '我的账户'
+      title: '我的账户',
+      user_id: this.$store.getters.userId,
+      data: {balance: 0.00, total: 0.00, bonus: 0.00, total_bonus: 0.00}
     }
   },
   mounted () {
+    Indicator.open()
+    this.$http.get('user/money').then((response) => {
+      this.data = response.data
+      Indicator.close()
+    })
   },
   computed: {
   },
   methods: {
+    back: function () {
+      this.$router.back()
+    }
   },
   watch: {
   }

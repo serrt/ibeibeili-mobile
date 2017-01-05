@@ -58,7 +58,7 @@
       <div class="ExpeBox">
         <p>计算预期收益</p>
         <div class="money">
-          <input type="number" v-model="invest_money" placeholder="请输入购买金额，最低200元" maxlength="8" />
+          <input type="number" v-model="invest_money" v-bind:placeholder="'请输入购买金额，最低'+project.finance_rule_money+'元'" maxlength="8" />
           <span>元</span>
         </div>
         <div class="profit">

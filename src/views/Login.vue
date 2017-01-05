@@ -34,16 +34,18 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import md5 from 'blueimp-md5'
+import { Indicator } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator},
   data: function () {
     return {
       title: '登录',
-      username: '',
-      password: '',
-      name_input: {error: true, msg: ''},
-      pwd_input: {error: true, msg: ''}
+      username: '18223350967',
+      password: '123456',
+      name_input: {error: false, msg: ''},
+      pwd_input: {error: false, msg: ''}
     }
   },
   mounted () {
@@ -55,9 +57,32 @@ export default {
   },
   methods: {
     login: function () {
-      let data = {username: this.username, password: this.password}
+      let data = {username: this.username, password: md5(this.password)}
       if (!this.unsubmit) {
-        console.log(data)
+        data.grant_type = 'password'
+        data.client_id = '2'
+        data.client_secret = '0rQMzyS6RtjVudAJGXA79ax1dAz5zKe2dgU76M9U'
+        data.scope = '*'
+        Indicator.open()
+        this.$http.post('login', data).then((response) => {
+          if (response.data.status === 1) {
+            this.name_input = {error: true, msg: response.data.msg}
+            Indicator.close()
+          } else {
+            console.log(response.data.access_token)
+            this.$store.dispatch('token', response.data.access_token)
+            console.log(this.$store.getters.token)
+            this.$http.post('user/user').then((response) => {
+              Indicator.close()
+              if (response.data.code === 200) {
+                this.$store.dispatch('login', response.data)
+                this.$router.push({name: 'user'})
+              } else {
+                window.alert(response.data.message)
+              }
+            })
+          }
+        })
       }
     }
   },

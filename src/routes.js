@@ -27,6 +27,8 @@ const routes = [
   { path: '/help', name: 'help', component: (resolve) => { require(['./views/Help.vue'], (resolve)) } },
   // 我的账户
   { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 账户设置
+  { path: '/user-set', name: 'user-set', component: (resolve) => { require(['./views/UserSet.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 提现
   { path: '/recharge', name: 'recharge', component: (resolve) => { require(['./views/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 充值
