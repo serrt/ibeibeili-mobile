@@ -732,6 +732,10 @@ span.toNext {
   background-color: #58a;
 }
 
+.btn[disabled] {
+  background-color: #e95f57;
+}
+
 .btn {
   display: block;
   border-radius: 5px;
@@ -861,6 +865,23 @@ span.toNext {
   display: block !important;
 }
 
+.animation-rotate {
+  display: inline-block;
+  -webkit-animation: rotate 2s infinite linear;
+  animation: rotate 2s infinite linear;
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}
+
 @font-face {
   font-family: "iconfont";
   src: url("../fonts/iconfont.eot?t=1480645243221");
@@ -941,6 +962,10 @@ span.toNext {
   content: "\e603";
 }
 
+.icon-wanyouxi:before {
+  content: "\e61c";
+}
+
 .icon-shangwuhezuo:before {
   content: "\e66c";
 }
@@ -953,6 +978,10 @@ span.toNext {
   content: "\e60b";
 }
 
+.icon-jinggao:before {
+  content: "\e693";
+}
+
 .icon-shouyeshouye:before {
   content: "\e60a";
 }
@@ -963,6 +992,10 @@ span.toNext {
 
 .icon-yonghu1:before {
   content: "\e610";
+}
+
+.icon-qiandao:before {
+  content: "\e60c";
 }
 
 .icon-yonghu3:before {
@@ -983,6 +1016,14 @@ span.toNext {
 
 .icon-home:before {
   content: "\e611";
+}
+
+.icon-touzi:before {
+  content: "\e66a";
+}
+
+.icon-icon07:before {
+  content: "\e615";
 }
 
 .icon-xiangmu:before {
@@ -1019,6 +1060,10 @@ span.toNext {
 
 .icon-cuowu:before {
   content: "\e6b4";
+}
+
+.icon-mima1:before {
+  content: "\e653";
 }
 
 .icon-yaoqing:before {
@@ -1077,12 +1122,12 @@ span.toNext {
   content: "\e618";
 }
 
-.icon-discovery:before {
-  content: "\e600";
+.icon-tixing:before {
+  content: "\e763";
 }
 
-.icon-touzi:before {
-  content: "\e649";
+.icon-discovery:before {
+  content: "\e600";
 }
 
 .icon-touziActive:before {
@@ -1095,6 +1140,10 @@ span.toNext {
 
 .icon-zhifumimakai:before {
   content: "\e689";
+}
+
+.icon-mo:before {
+  content: "\e61a";
 }
 
 .icon-yijianfankui:before {
@@ -1115,6 +1164,22 @@ span.toNext {
 
 .icon-mima:before {
   content: "\e631";
+}
+
+.icon-touzi1:before {
+  content: "\e61d";
+}
+
+.icon-yiyuebiao:before {
+  content: "\e61e";
+}
+
+.icon-sanyuebiao:before {
+  content: "\e622";
+}
+
+.icon-liuyuebiao:before {
+  content: "\e623";
 }
 
 /* 底部导航 */
@@ -1384,6 +1449,58 @@ span.toNext {
 
 .bblIntro .tab-option span {
   display: inline-block;
+}
+
+/* 提示框 */
+.prompt-information {
+  font-size: 1.2rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+  top: 0;
+  left: 0;
+  -webkit-transform: translate(0, -100%);
+  transform: translate(0, -100%);
+  position: fixed;
+  color: #fff;
+  z-index: 200;
+  background-color: rgba(231, 36, 24, 0.6);
+}
+
+.prompt-information .prompt-content {
+  width: 100%;
+}
+
+.prompt-information .prompt-content i.iconfont {
+  margin-right: 0.5rem;
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1.5rem;
+}
+
+/* 错误信息提示框 */
+.tipsBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 320px;
+  width: 60%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  color: #fff;
+  font-size: 1.2rem;
+  -webkit-transition: all 1s;
+  transition: all 1s;
+}
+
+.tipsBox .tipsBox-content {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 0.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  height: 8rem;
 }
 
 .certification {
@@ -3570,6 +3687,72 @@ span.toNext {
   margin-bottom: 3rem;
 }
 
+.mission-center {
+  margin-top: 40px;
+}
+
+.mission-center .mission-progress {
+  font-size: 1.2rem;
+  color: #666666;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.mission-center .mission-progress span {
+  color: #e72418;
+}
+
+.mission-center .missions .mission-title {
+  font-size: 1.4rem;
+  color: #666;
+  background-color: #f2f2f2;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.mission-center .missions .mission-list ul {
+  width: 100%;
+  height: auto;
+}
+
+.mission-center .missions .mission-list ul li {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #f2f2f2;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.mission-center .missions .mission-list ul li .mission-items {
+  height: 3.5rem;
+  line-height: 3.5rem;
+  font-size: 1.3rem;
+  color: #4c4c4c;
+}
+
+.mission-center .missions .mission-list ul li .mission-items .mission-icon {
+  border: 1px solid #f18101;
+  border-radius: 100%;
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  line-height: 3.5rem;
+  color: #f18101;
+  margin-right: 1rem;
+}
+
+.mission-center .missions .mission-list ul li .mission-items .mission-icon .iconfont {
+  font-size: 1.8rem;
+}
+
+.mission-center .missions .mission-list ul li .mission-items .mission-icon .icon-touzi1, .mission-center .missions .mission-list ul li .mission-items .mission-icon .icon-yiyuebiao, .mission-center .missions .mission-list ul li .mission-items .mission-icon .icon-sanyuebiao, .mission-center .missions .mission-list ul li .mission-items .mission-icon .icon-liuyuebiao {
+  font-size: 2.2rem;
+}
+
+.mission-center .missions .mission-list ul li .mission-items .mission-points {
+  color: #e72418;
+}
+
 .error-page {
   position: absolute;
   top: 50%;
@@ -3604,6 +3787,7 @@ span.toNext {
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.5);
+  z-index: 300;
 }
 
 .popup .popup-content {
@@ -3648,12 +3832,11 @@ span.toNext {
 }
 
 .popup .popup-content .detail {
-  padding-top: 1.8rem;
-  padding-bottom: 5.8rem;
+  padding-top: 4rem;
+  padding-bottom: 7rem;
   max-height: 400px;
-  min-height: 100px;
   overflow-y: auto;
-  font-size: 1.4rem;
+  font-size: 1.8rem;
   line-height: 2rem;
   color: #6b6b6b;
   text-align: center;
@@ -3716,10 +3899,6 @@ span.toNext {
 
 .reg-box p.login a {
   color: #f18101;
-}
-
-.reg-box .setpassword .password2 .iconfont {
-  font-size: 24px;
 }
 
 .reg-box .setpassword .referee .iconfont {

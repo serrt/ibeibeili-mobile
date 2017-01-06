@@ -35,7 +35,7 @@
         </li>
         <li class="login-pass">
           <i class="iconfont icon-suo"></i>登录密码
-          <router-link class="toNext right-words" :to="{name: 'user-edit-pwd'}" v-show="user.is_set_pay_password===1" tag="span">修改<i class="iconfont icon-unie61f"></i></router-link>
+          <router-link class="toNext right-words" :to="{name: 'user-edit-pwd'}" tag="span">修改<i class="iconfont icon-unie61f"></i></router-link>
         </li>
         <li class="pay-pass">
           <i class="iconfont icon-353245214507"></i>支付密码
@@ -44,7 +44,7 @@
           <!-- 未设置 -->
           <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.is_set_pay_password===0" tag="span">未设置<i class="iconfont icon-unie61f"></i></router-link>
         </li>
-        <li class="login-pass">
+        <li class="login-pass" v-show="user.name_verified===1">
           <i class="iconfont icon-yonghu"></i>新浪支付
           <router-link class="toNext right-words" :to="{name: 'user-sina'}" tag="span">个人中心<i class="iconfont icon-unie61f"></i></router-link>
         </li>

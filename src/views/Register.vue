@@ -61,7 +61,7 @@
         <div class="success"></div>
         <h5>恭喜{{phone}}注册成功！</h5>
         <p>您可以直接用手机号码登录</p>
-        <a href="u-certification-step1.html" class="btn authentication">去实名认证</a>
+        <router-link class="btn authentication" :to="{name: 'user-verify'}">去实名认证</router-link>
       </div>
     </div>
   </div>
@@ -77,7 +77,7 @@ export default {
   data: function () {
     return {
       title: '注册',
-      phone: '18223350967',
+      phone: '1822335084',
       phone_valid: {error: false, msg: ''},
       code: '',
       code_valid: {error: true, msg: ''},
@@ -130,7 +130,14 @@ export default {
     },
     nextPage: function () {
       if (!this.next) {
-        this.page = 2
+        let data = {phone_number: this.phone, code: this.code}
+        this.$http.post('checkCode', data).then((response) => {
+          if (response.data.status !== 0) {
+            this.code_valid = {error: true, msg: response.data.msg}
+          } else {
+            this.page = 2
+          }
+        })
       }
     },
     register: function () {
@@ -138,11 +145,25 @@ export default {
       if (!this.unsubmit) {
         Indicator.open()
         this.$http.post('register', data).then((response) => {
-          Indicator.close()
           if (response.data.status !== 0) {
+            Indicator.close()
             MessageBox('提示', response.data.msg)
           } else {
-            // this.page = 3
+            data.username = data.phone_number
+            data.grant_type = 'password'
+            data.client_id = '2'
+            data.client_secret = '0rQMzyS6RtjVudAJGXA79ax1dAz5zKe2dgU76M9U'
+            data.scope = '*'
+            this.$http.post('login', data).then((response) => {
+              Indicator.close()
+              if (response.data.status === 1) {
+                MessageBox('提示', response.data.msg)
+              } else {
+                this.$store.dispatch('token', response.data.access_token)
+                console.log(response.data.access_token)
+                this.page = 3
+              }
+            })
           }
         })
       }

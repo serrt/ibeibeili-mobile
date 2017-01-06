@@ -29,10 +29,10 @@
         </div>
       </div>
       <!-- 投资列表 -->
-      <div id="investList" class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
+      <div id="investList" class="page-loadmore-wrapper" ref="wrapper" :style="{height: wrapperHeight + 'px' }">
         <loadmore class="list" :autoFill="false" :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
           <ul>
-            <router-link v-show="list.length>0" v-for="item in list" :to="{ name: 'project-detail', params: { id: item.id }}" tag="li">
+            <li v-show="list.length>0" v-for="item in list">
               <!-- 投资进度 -->
               <div class="progress" v-bind:style="{width: Math.floor(item.financed_money/item.finance_money*100)+'%'}"></div>
               <div class="list-item full-container">
@@ -53,7 +53,7 @@
                     <div>金额</div>
                   </div>
                   <div class="state flex-middle">
-                    <button type="button" class="btn" v-bind:class="[item.status]">{{item.status | projectStatus}}</button>
+                    <router-link  :to="{ name: 'project-detail', params: { id: item.id }}" class="btn" v-bind:class="[item.status]">{{item.status | projectStatus}}</router-link>
                   </div>
                 </div>
                 <!-- 投资担保之类 -->
@@ -62,7 +62,7 @@
                   <span><i class="tubiao huabenfuxi"></i>{{item.payment_name}}</span>
                 </div>
               </div>
-            </router-link>
+            </li>
           </ul>
         </loadmore>
       </div>
