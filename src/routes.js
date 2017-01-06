@@ -29,6 +29,8 @@ const routes = [
   { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 账户设置
   { path: '/user-set', name: 'user-set', component: (resolve) => { require(['./views/UserSet.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 修改登录密码
+  { path: '/user-edit-pwd', name: 'user-edit-pwd', component: (resolve) => { require(['./views/UserEditPwd.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 提现
   { path: '/recharge', name: 'recharge', component: (resolve) => { require(['./views/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 充值
@@ -51,6 +53,10 @@ const routes = [
   { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户钱包
   { path: '/user-wallet', name: 'user-wallet', component: (resolve) => { require(['./views/UserWallet.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 新浪用户中心
+  { path: '/user-sina', name: 'user-sina', component: (resolve) => { require(['./views/iframe/UserSina.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 修改支付密码
+  { path: '/user-edit-paypwd', name: 'user-edit-paypwd', component: (resolve) => { require(['./views/iframe/UserEditPaypwd.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

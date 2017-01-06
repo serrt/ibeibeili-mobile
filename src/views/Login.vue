@@ -35,10 +35,10 @@
 <script>
 import HeaderTop from '../components/Header'
 import md5 from 'blueimp-md5'
-import { Indicator } from 'mint-ui'
+import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator},
+  components: {HeaderTop, Indicator, MessageBox},
   data: function () {
     return {
       title: '登录',
@@ -66,22 +66,13 @@ export default {
         Indicator.open()
         this.$http.post('login', data).then((response) => {
           if (response.data.status === 1) {
-            this.name_input = {error: true, msg: response.data.msg}
-            Indicator.close()
+            MessageBox('提示', response.data.msg)
           } else {
-            console.log(response.data.access_token)
             this.$store.dispatch('token', response.data.access_token)
-            console.log(this.$store.getters.token)
-            this.$http.post('user/user').then((response) => {
-              Indicator.close()
-              if (response.data.code === 200) {
-                this.$store.dispatch('login', response.data)
-                this.$router.push({name: 'user'})
-              } else {
-                window.alert(response.data.message)
-              }
-            })
+            console.log(response.data.access_token)
+            this.$router.push({name: 'user'})
           }
+          Indicator.close()
         })
       }
     }

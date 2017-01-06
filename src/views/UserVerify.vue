@@ -136,8 +136,8 @@ export default {
   components: {HeaderTop, City},
   data: function () {
     return {
-      user_info: {user_id: 1, name_verified: 0, bank_card_id: null, is_set_pay_password: 0},
-      page: 'pay',
+      user_info: this.$store.getters.user,
+      page: 'name',
       name_verify: {name: '', idcard: ''},
       name_valid: {error: true, msg: ''},
       idcard_valid: {error: true, msg: ''},
@@ -157,6 +157,13 @@ export default {
     }
   },
   mounted () {
+    if (this.user_info.name_verified === 0) {
+      this.page = 'name'
+    } else if (this.user_info.bank_card_id === null) {
+      this.page = 'card'
+    } else if (this.user_info.is_set_pay_password === 0) {
+      this.page = 'pay'
+    }
     for (let i in City.china) {
       this.province.push(i)
     }

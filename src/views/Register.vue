@@ -19,7 +19,7 @@
             <div class="tip-box" v-show="code_valid.error">{{code_valid.msg}}</div>
           </li>
           <li class="protocol">
-            <span class="tick"><input type="checkbox" class="i-agree" checked></span>
+            <span class="tick" v-bind:class="{'untick':!agreement}" v-on:click="agree()"><input type="checkbox" class="i-agree" v-model="agreement"/></span>
             我已阅读并同意
             <a href="u-reg-protocal.html" class="protocol-explain">《倍倍利注册协议》</a>
           </li>
@@ -69,9 +69,11 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import md5 from 'blueimp-md5'
+import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator, MessageBox},
   data: function () {
     return {
       title: '注册',
@@ -86,6 +88,7 @@ export default {
       repwd_valid: {error: true, msg: ''},
       invite_code: '',
       invite_valid: {error: true, msg: ''},
+      agreement: true,
       page: 1
     }
   },
@@ -93,7 +96,7 @@ export default {
   },
   computed: {
     next: function () {
-      return (this.phone_valid.error || this.code_valid.error)
+      return (this.phone_valid.error || this.code_valid.error || !this.agreement)
     },
     unsubmit: function () {
       return (this.repwd_valid.error || this.pwd_valid.error)
@@ -102,19 +105,28 @@ export default {
   methods: {
     getCode: function () {
       if (!this.phone_valid.error && !this.code_btn.click) {
-        this.code_btn.click = true
-        this.code_btn.time = 10
-        let self = this
-        if (this.code_btn.timer) {
-          clearInterval(this.code_btn.timer)
-        }
-        this.code_btn.timer = setInterval(function () {
-          self.code_btn.time --
-          if (self.code_btn.time === 0) {
-            self.code_btn.click = false
+        this.$http.post('registerCode', {phone_number: this.phone}).then((response) => {
+          if (response.data.status !== 0) {
+            this.phone_valid = {error: true, msg: response.data.msg}
+          } else {
+            this.code_btn.click = true
+            this.code_btn.time = 10
+            let self = this
+            if (this.code_btn.timer) {
+              clearInterval(this.code_btn.timer)
+            }
+            this.code_btn.timer = setInterval(function () {
+              self.code_btn.time --
+              if (self.code_btn.time === 0) {
+                self.code_btn.click = false
+              }
+            }, 1000)
           }
-        }, 1000)
+        })
       }
+    },
+    agree: function () {
+      this.agreement = !this.agreement
     },
     nextPage: function () {
       if (!this.next) {
@@ -122,10 +134,17 @@ export default {
       }
     },
     register: function () {
-      let data = {phone_number: this.phone, code: this.code, password: this.password, invite_code: this.invite_code}
+      let data = {phone_number: this.phone, code: this.code, password: md5(this.password), invite_code: this.invite_code}
       if (!this.unsubmit) {
-        console.log(data)
-        this.page = 3
+        Indicator.open()
+        this.$http.post('register', data).then((response) => {
+          Indicator.close()
+          if (response.data.status !== 0) {
+            MessageBox('提示', response.data.msg)
+          } else {
+            // this.page = 3
+          }
+        })
       }
     }
   },
@@ -176,4 +195,7 @@ export default {
 }
 </script>
 <style scoped>
+.protocol .untick {
+  background-position: 0 0;
+}
 </style>
