@@ -1,21 +1,14 @@
 .user-account .money-operate{
   margin-bottom: 0;
 }
+.top-box{
+  margin-top: 40px;
+}
 .tabs{
   height: auto
 }
 .tabs .tab-option span{
   margin-bottom: 0;
-}
-
-.page-box{
-  overflow: hidden;
-}
-.top-box{
-  margin-top: 40px;
-}
-.bottom-box{
-  margin-bottom: 50px;
 }
 
 .btn.prepare{

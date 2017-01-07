@@ -5,7 +5,7 @@ import routes from './routes'
 import appEnv from '../env'
 import store from './store'
 import 'mint-ui/lib/style.css'
-import {Loadmore} from 'mint-ui'
+import {Loadmore, InfiniteScroll} from 'mint-ui'
 import filters from './filters'
 // import VuePreview from 'vue-preview' // 图片预览
 
@@ -13,6 +13,7 @@ import filters from './filters'
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
 Vue.use(VueRouter)
+Vue.use(InfiniteScroll)
 // Vue.use(VuePreview)
 Vue.component('loadmore', Loadmore)
 
@@ -20,6 +21,9 @@ const router = new VueRouter({
   // mode: 'history',
   routes
 })
+if (window.sessionStorage.bbl_user) {
+  store.dispatch('user', JSON.parse(window.sessionStorage.bbl_user))
+}
 // 登录中间验证，页面需要登录而没有登录的情况直接跳转登录
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {

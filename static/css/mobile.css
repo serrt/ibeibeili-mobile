@@ -702,24 +702,23 @@ span.toNext {
 /* 小图标 */
 .tubiao {
   background-image: url(../images/icondanbao.png);
-  background-size: 72px 54px;
+  background-size: 7.2rem 5.4rem;
   display: inline-block;
-  width: 18px;
-  height: 18px;
+  width: 1.8rem;
+  height: 1.8rem;
   vertical-align: middle;
-  margin-top: -3px;
   -webkit-transform: scale(0.8);
   transform: scale(0.8);
 }
 
 /* 担保 */
 .danbao {
-  background-position: -18px 0;
+  background-position: -1.8rem 0;
 }
 
 /* 还本付息 */
 .huabenfuxi {
-  background-position: 0px -36px;
+  background-position: 0px -3.6rem;
 }
 
 .footer-nav {
@@ -906,6 +905,10 @@ span.toNext {
   content: "\e609";
 }
 
+.icon-jiazai:before {
+  content: "\e60e";
+}
+
 .icon-shezhi:before {
   content: "\e61f";
 }
@@ -1090,6 +1093,10 @@ span.toNext {
   content: "\e67b";
 }
 
+.icon-load:before {
+  content: "\e6f0";
+}
+
 .icon-gerenxinxi:before {
   content: "\e62c";
 }
@@ -1110,6 +1117,10 @@ span.toNext {
   content: "\e614";
 }
 
+.icon-loing:before {
+  content: "\e68f";
+}
+
 .icon-yijianfankui1:before {
   content: "\e60f";
 }
@@ -1124,6 +1135,10 @@ span.toNext {
 
 .icon-tixing:before {
   content: "\e763";
+}
+
+.icon-jiazai1:before {
+  content: "\e637";
 }
 
 .icon-discovery:before {
@@ -4037,8 +4052,10 @@ span.toNext {
 #home .trade-volume {
   height: 11%;
   background-color: #fff;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   border-bottom: 1px solid #efefef;
+  border-top: 1px solid #efefef;
 }
 
 #home .trade-volume .accumulate {
@@ -4086,11 +4103,14 @@ span.toNext {
 #home .recommend .invest-name {
   height: 30%;
   font-size: 1.2rem;
+  line-height: 1.8rem;
   color: #6d6d6d;
   border-bottom: 1px solid #efefef;
 }
 
 #home .recommend .invest-name span {
+  display: inline-block;
+  line-height: 1.8rem;
   font-size: 1rem;
 }
 
@@ -4148,10 +4168,11 @@ span.toNext {
 }
 
 #home .recommend .invest-intro .buy .invest-btn {
-  height: 36px;
-  line-height: 36px;
+  height: 3rem;
+  line-height: 3rem;
   background-color: #f18101;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
+  width: 80%;
 }
 
 #home .four-features {
@@ -4174,7 +4195,7 @@ span.toNext {
 
 #home .four-features .feature .feature-cont i {
   color: #e72418;
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 #home .four-features .feature .feature-cont .title {
@@ -4190,7 +4211,7 @@ span.toNext {
 
 #home .four-features .feature .BBL-logo {
   width: 3.5rem;
-  height: 2.5rem;
+  height: 2rem;
   margin: 0 auto;
 }
 
@@ -4210,7 +4231,7 @@ span.toNext {
   margin-bottom: -1px;
 }
 
-#home .four-features .help {
+#home .four-features .about {
   border-left: 1px solid #f3f3f3;
   border-top: 1px solid #f3f3f3;
   margin-left: -1px;

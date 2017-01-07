@@ -31,6 +31,7 @@ const actions = {
 
 const mutations = {
   user: function (state, info) {
+    window.sessionStorage.bbl_user = JSON.stringify(info)
     state.user = info
     state.id = info.id
   },

@@ -7,76 +7,82 @@
           <span>{{item.name}}</span>
         </div>
       </div>
-      <div class="page-loadmore-wrapper welfare" ref="wrapper" :style="{height: wrapperHeight + 'px' }">
-        <loadmore :autoFill="false" :top-method="refresh" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" ref="loadmore">
-          <!-- 红包 -->
-          <ul class="red-bag welfare-item" v-show="selected==='gift'">
-            <li v-bind:class="{'valid': item.status===0}" v-for="item in giftList">
-              <span class="left-pic">
-                <img src="../../static/images/welfare.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>
-                <div class="use-purpose fr">
-                  <p>单笔满{{item.rule_money}}元可用</p>
-                  <p v-show="item.project_cate===''">不限标</p>
-                  <p v-show="item.project_cate!==''">仅限{{item.project_cate}}使用</p>
-                </div>
-              </div>
-              <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time | timeFormat}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===2"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===1"></div>
-            </li>
-          </ul>
-          <!-- 加息券 -->
-          <ul class="rate-voucher welfare-item" v-show="selected==='rate'">
-            <li v-bind:class="{'valid': item.status===1}" v-for="item in rateList">
-              <div class="use">
-                <span class="use-money">{{item.rate}}<span>%</span></span>
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p>单笔满200元可用</p>
-                    <p>仅限6月标使用</p>
+      <div class="container">
+        <!-- 红包 -->
+        <div class="welfare2" v-show="selected==='gift'">
+          <div class="welfare-item red-bag">
+            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+              <li v-for="item in giftData.list" v-bind:class="{'valid':item.status===0}">
+                <img src="../../static/images/welfare-bg.png">
+                <div class="welfare-content">
+                  <div class="items flex">
+                    <div class="flex-middle items-money">
+                      <i class="iconfont icon-renminbi"></i><span>{{item.money}}</span>
+                    </div>
+                    <div class="flex-middle condition">
+                      <div>
+                        <span>单笔满{{item.rule_money}}元可用</span>
+                        <span>仅限{{item.project_cate}}使用</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="items flex">
+                    <div class="flex-middle item-from">{{item.name}}</div>
+                    <div class="flex-middle item-duration">
+                      <div v-show="item.end_time">有效期至{{item.end_time}}</div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="voucher-from">签到奖励<span class="valid-date fr">有效期至{{item.effect_time | timeFormat}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===3"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===2"></div>
-            </li>
-          </ul>
-          <ul class="wealth-value welfare-item" v-show="selected==='virtual'">
-            <li v-show="virtualList.length === 0">
-              <div class="use">
-                没有数据
-              </div>
-            </li>
-            <li v-bind:class="{'valid': item.status===0}" v-for="item in virtualList">
-              <span class="left-pic">
-                <img src="../../static/images/welfare2.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p>仅限新手体验任务</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 加息券 -->
+        <div class="welfare" v-show="selected==='rate'">
+          <div class="welfare-item rate-voucher">
+            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+              <li v-for="item in rateData.list" v-bind:class="{'valid':item.status===1}">
+                <div class="use">
+                  <span class="use-money">{{item.rate}}<span>%</span></span>
+                  <div class="use-purpose fr flex-middle">
+                    <div>
+                      <p>单笔满{{item.rule_money}}元可用</p>
+                      <p>仅限{{item.project_cate}}使用</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="voucher-from"><span class="valid-date fr">有效期至{{item.effect_time | timeFormat}}</span></div>
-              <!-- 过期 -->
-              <div class="state overdue" v-show="item.status===2"></div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===1"></div>
-            </li>
-          </ul>
-        </loadmore>
+                <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
+                <div class="state overdue" v-show="item.status===3"></div>
+                <div class="state alreay-use" v-show="item.status===2"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 财富值 -->
+        <div class="welfare" v-show="selected==='virtual'">
+          <div class="welfare-item wealth-value">
+            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+              <li v-for="item in virtualData.list" v-bind:class="{'valid': item.status===0}">
+                <span class="left-pic">
+                  <img src="../../static/images/welfare2.png">
+                </span>
+                <div class="use fr">
+                  <span class="use-money">{{item.money}}</span>点
+                  <div class="use-purpose fr flex-middle">
+                    <div>
+                      <p>仅限新手体验任务</p>
+                      <p>仅限新手体验任务</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="voucher-from"><span class="valid-date fr">{{item.end_time}}</span></div>
+                <div class="state alreay-use" v-show="item.status===1"></div>
+                <div class="state overdue" v-show="item.status===2"></div>
+                <div class="state alreay-pay" v-show="item.status===3"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -95,70 +101,51 @@ export default {
         {name: '加息券', key: 'rate'},
         {name: '财富值', key: 'virtual'}
       ],
-      selected: 'rate',
-      giftList: [],
-      rateList: [],
-      virtualList: [],
-      allLoaded: false,
-      wrapperHeight: 0,
-      bottomStatus: '',
-      topStatus: ''
+      selected: 'gift',
+      giftData: {api: 'user/gift', nextApi: '', list: []},
+      rateData: {api: 'user/rate', nextApi: '', list: []},
+      virtualData: {api: 'user/virtual', nextApi: '', list: []},
+      busy: false
     }
   },
   mounted () {
-    this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top
-    this.refresh(1)
+    this.loadData()
   },
   computed: {
-    api: function () {
-      if (this.selected === 'gift') {
-        return 'user-gift.json'
-      } else if (this.selected === 'rate') {
-        return 'user-rate.json'
-      } else if (this.selected === 'virtual') {
-        return 'user-virtual.json'
-      }
-    }
   },
   methods: {
     toggleTab (item) {
       if (item.key !== this.selected) {
         this.selected = item.key
-        if ((this.selected === 'gift' && this.giftList.length === 0) || (this.selected === 'rate' && this.rateList.length === 0) || (this.selected === 'virtual' && this.virtualList.length === 0)) {
-          this.refresh(1)
+        this.busy = false
+        if ((this.selected === 'gift' && this.giftData.list.length === 0) || (this.selected === 'rate' && this.rateData.list.length === 0) || (this.selected === 'virtual' && this.virtualData.list.length === 0)) {
+          this.loadData()
         }
       }
     },
-    loadData: function (id, dir) {
-      this.$http.get(this.api).then((response) => {
+    loadData: function (refresh) {
+      let data = this.giftData
+      if (this.selected === 'rate') {
+        data = this.rateData
+      } else if (this.selected === 'virtual') {
+        data = this.virtualData
+      }
+      let uri = data.api
+      if (data.nextApi !== '' && !refresh) {
+        uri = data.nextApi
+      }
+      if (refresh) {
+        data.list = []
+      }
+      this.$http.get(uri).then((response) => {
         let dataList = response.data.data
-        if (this.selected === 'gift') {
-          this.giftList = this.giftList.concat(dataList)
-        } else if (this.selected === 'rate') {
-          this.rateList = this.rateList.concat(dataList)
-        } else if (this.selected === 'virtual') {
-          this.virtualList = this.virtualList.concat(dataList)
-        }
-        if (dir === 'top') {
-          this.$refs.loadmore.onBottomLoaded(id)
-        } else if (dir === 'bottom') {
-          this.$refs.loadmore.onTopLoaded(id)
+        data.list = data.list.concat(dataList)
+        if (response.data.meta.pagination.links.next) {
+          data.nextApi = response.data.meta.pagination.links.next
+          this.busy = false
         }
       })
-      // this.allLoaded = true
-    },
-    loadBottom: function (id) {
-      this.loadData(id, 'top')
-    },
-    refresh: function (id) {
-      if (this.selected === 'gift') {
-        this.giftList = []
-      } else if (this.selected === 'rate') {
-        this.rateList = []
-      } else if (this.selected === 'virtual') {
-        this.virtualList = []
-      }
-      this.loadData(id, 'bottom')
+      this.busy = true
     }
   },
   watch: {
@@ -166,12 +153,4 @@ export default {
 }
 </script>
 <style scoped>
-.welfare{
-  margin-top: 40px;
-  overflow: scroll;
-  position: relative;
-}
-.welfare .welfare-item li .use.fr{
-  width: 80%;
-}
 </style>

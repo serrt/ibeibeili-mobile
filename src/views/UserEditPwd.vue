@@ -33,10 +33,10 @@
 <script>
 import HeaderTop from '../components/Header'
 import md5 from 'blueimp-md5'
-import { Indicator, MessageBox } from 'mint-ui'
+import { Indicator, MessageBox, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {HeaderTop, Indicator, MessageBox, Toast},
   data: function () {
     return {
       title: '修改密码',
@@ -82,9 +82,12 @@ export default {
         Indicator.open()
         this.$http.post('user/editPassword', data).then((response) => {
           Indicator.close()
-          MessageBox('提示', response.data.msg)
           if (response.data.status === 0) {
+            let instance = Toast({message: '操作成功', iconClass: 'icon icon-success'})
+            setTimeout(() => { instance.close() }, 500)
             this.$router.back()
+          } else {
+            MessageBox('提示', response.data.msg)
           }
         })
       }

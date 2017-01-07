@@ -12,10 +12,7 @@
         <div class="project-item">
           投资金额 <i class="iconfont icon-bangzhu"></i>
           <span class="fr invest-moey">
-            <i class="iconfont icon-renminbi"></i>{{invest.invest_money-invest.gift_money}}
-            <span v-if="invest.gift_money > 0">
-              +<i class="iconfont icon-renminbi"></i>{{invest.gift_money}}
-            </span>
+            <i class="iconfont icon-renminbi"></i>{{invest.invest_money}}
           </span>
         </div>
         <div class="project-item">
@@ -26,10 +23,7 @@
         <div class="project-item">
           收益 <i class="iconfont icon-bangzhu"></i>
           <span class="fr income-money">
-            <i class="iconfont icon-renminbi"></i>{{invest.invest_money | projectProfit(project)}}
-            <span v-if="invest.rate_number > 0">
-              +<i class="iconfont icon-renminbi"></i>{{invest.rate_number}}
-            </span>
+            <i class="iconfont icon-renminbi"></i>{{invest.invest_money | projectProfit(project)}}<span v-if="invest.rate_number>0">+<i class="iconfont icon-renminbi"></i>{{invest.rate_number}}</span>
           </span>
         </div>
         <div class="project-item">
@@ -42,7 +36,7 @@
         </div>
         <div class="project-item">
           还款时间
-          <span class="fr">{{project.trade_repayment_date}}</span>
+          <span class="fr">{{project.payment_time}}</span>
         </div>
       </div>
 
@@ -62,8 +56,7 @@
             <div class="full-container invest-detial flex">
               <div>{{item.money}}</div>
               <div>
-                {{item.profit}}
-                <span v-if="item.rate_number > 0">+{{item.rate_number}}</span>
+                {{item.profit}}<span v-if="item.rate_number>0">+{{item.rate_number}}</span>
               </div>
               <div class="payed" v-bind:class="{'payed': item.status===1, 'paying': item.status===0}">{{item.status===1?'已还':'未还'}}</div>
               <div class="surplus">{{item.pay_time?item.pay_time:item.input_time}}</div>
@@ -85,44 +78,26 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import { Indicator } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator},
   data: function () {
     return {
       title: '我的项目详细',
-      project: {
-        id: 1,
-        name: '项目1',
-        rate: 9,
-        finance_time: '3个月',
-        finance_time_num: 3,
-        finance_time_cate: 'm',
-        finance_money: 185000,
-        financed_money: 500,
-        status: 'rush',
-        gift_check: 1,
-        rate_check: 1,
-        finance_rule_money: 180.00,
-        end_time: '2016-12-28 00:00:00',
-        interest_at: '2016-12-24 12:25:25',
-        trade_repayment_date: '2017-02-25 12:12:12'
-      },
-      invest: {
-        invest_money: 505.00,
-        invest_time: '2016-12-23 14:58:12',
-        gift_money: 5.00,
-        rate: 0.2,
-        rate_number: 1.20
-      },
-      profit: [
-        {id: 1, money: 0, profit: 3.75, status: 1, pay_time: '2016-12-25 12:12:12', input_time: '2016-12-25 14:12:12', rate_number: 0},
-        {id: 2, money: 0, profit: 3.75, status: 0, pay_time: null, input_time: '2017-01-25 14:12:12', rate_number: 1.02},
-        {id: 3, money: 500, profit: 3.75, status: 0, pay_time: null, input_time: '2017-02-25 14:12:12', rate_number: 0}
-      ]
+      project: {},
+      invest: {},
+      profit: []
     }
   },
   mounted () {
+    Indicator.open()
+    this.$http.get('user/project-detail/' + this.$route.params.id).then((response) => {
+      this.invest = response.data.data
+      this.project = this.invest.project.data
+      this.profit = this.invest.profit.data
+      Indicator.close()
+    })
   },
   computed: {
   },
