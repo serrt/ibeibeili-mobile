@@ -118,6 +118,9 @@ export default {
       if (item.key !== this.selected) {
         this.selected = item.key
         this.busy = false
+        if ((this.selected === 'gift' && this.giftData.nextApi === undefined) || (this.selected === 'rate' && this.rateData.nextApi === undefined) || (this.selected === 'virtual' && this.virtualData.nextApi === undefined)) {
+          this.busy = true
+        }
         if ((this.selected === 'gift' && this.giftData.list.length === 0) || (this.selected === 'rate' && this.rateData.list.length === 0) || (this.selected === 'virtual' && this.virtualData.list.length === 0)) {
           this.loadData()
         }
@@ -141,9 +144,9 @@ export default {
         let dataList = response.data.data
         data.list = data.list.concat(dataList)
         if (response.data.meta.pagination.links.next) {
-          data.nextApi = response.data.meta.pagination.links.next
           this.busy = false
         }
+        data.nextApi = response.data.meta.pagination.links.next
       })
       this.busy = true
     }

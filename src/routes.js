@@ -16,9 +16,9 @@ const routes = [
   { path: '/project/:id', name: 'project-detail', component: (resolve) => { require(['./views/ProjectDetail.vue'], (resolve)) } },
   { path: '/project-attr/:id/:attr', name: 'project-attr', component: (resolve) => { require(['./views/ProjectAttr.vue'], (resolve)) } },
   // 投资项目
-  { path: '/project/:id/invest-project', name: 'project-invest', component: (resolve) => { require(['./views/ProjectInvest.vue'], (resolve)) } },
+  { path: '/project/:id/invest-project', name: 'project-invest', component: (resolve) => { require(['./views/ProjectInvest.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 投资成功
-  { path: '/project/:id/invest-success', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) } },
+  { path: '/project/:id/invest-success', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 发现
   { path: '/find', name: 'find', component: (resolve) => { require(['./views/Find.vue'], (resolve)) } },
   // 公告

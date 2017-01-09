@@ -3,8 +3,8 @@
     <header-top :title="data.attr_name"></header-top>
     <detail v-show="data.cate !== 1" :title="data.attr_name" :content="data.content"></detail>
     <div class="project-info container" v-show="list.length > 0">
-      <div v-for="item in list">
-        <img class="preview-img" v-bind:src="'http://www.bbl.com' + item.full_url" v-bind:alt="item.filename">
+      <div v-for="(item, index) in list">
+        <img class="preview-img" v-on:click="preview(index)" v-bind:src="baseUrl + item.full_url" v-bind:alt="item.filename">
       </div>
     </div>
   </div>
@@ -19,6 +19,7 @@ export default {
   data: function () {
     return {
       data: {},
+      baseUrl: 'http://www.bbl.com',
       list: []
     }
   },
@@ -43,6 +44,13 @@ export default {
   computed: {
   },
   methods: {
+    preview: function (index) {
+      let preImg = [{src: 'https://www.ibeibeili.com/resources/uploads/2016/12/22/fe36a11756cbb8668fb9ec4bf359eb0a.jpg', w: 1600, h: 333}]
+      // for (let i in this.list) {
+      //   preImg[i] = {src: this.baseUrl + this.list[i].full_url, w: 600, h: 400}
+      // }
+      this.$preview.open(index, preImg)
+    }
   },
   watch: {
   }

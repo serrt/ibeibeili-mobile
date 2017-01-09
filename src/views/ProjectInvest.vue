@@ -8,7 +8,7 @@
             账户余额 
             <div class="fr">
               <span><i class="iconfont icon-renminbi"></i>{{balance}}</span>
-                <router-link class="btn investNow" :to="{name: 'project-invest' ,params: {id: project.id}}">充值</router-link>
+              <router-link class="btn investNow" :to="{name: 'recharge'}">充值</router-link>
             </div>
           </div>
         </li>
@@ -32,7 +32,7 @@
         <li>
           <div class="container surplus">
             剩余可投金额
-            <div class="fr surplus-money"><span><i class="iconfont icon-renminbi"></i>{{project.finance_money-project.financed_money}}</span></div>
+            <div class="fr surplus-money"><span><i class="iconfont icon-renminbi"></i>{{project.finance_money?project.finance_money-project.financed_money:0}}</span></div>
           </div>
         </li>
         <li>
@@ -44,7 +44,7 @@
             </div>
           </div>
           <div class="container bags" v-show="gift_show && gift_check">
-            <span v-on:click="chooseGift(item)" v-for="item in gifts" v-bind:class="{'select': item.choosed}"><i class="iconfont icon-renminbi"></i>{{item.money}}</span>
+            <span v-on:click="chooseGift(item)" v-for="item in gifts" v-bind:class="{'select': item.choosed}" v-show="!item.disabled"><i class="iconfont icon-renminbi"></i>{{item.money}}</span>
           </div>
         </li>
         <li>
@@ -75,53 +75,65 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import {MessageBox, Indicator} from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, MessageBox, Indicator},
   data: function () {
     return {
-      title: '投资',
-      project: {
-        id: 1,
-        name: '项目1',
-        rate: 9,
-        finance_time: '1个月',
-        finance_time_num: 1,
-        finance_time_cate: 'm',
-        finance_money: 185000,
-        financed_money: 174500,
-        status: 'rush',
-        gift_check: '1',
-        gift_money_auto: '0', // 是否累计使用红包
-        finance_rule_money: 180.00,
-        end_time: '2016-12-28 00:00:00'
-      },
-      balance: 20000.00,
+      user: this.$store.getters.user,
+      project: this.$store.getters.projectInfo,
+      balance: 0,
       user_money: '', // 用户输入金额
       invest_money: 0, // 总的投资金额
       // 红包
-      gifts: [
-        {id: 1, money: 25.00, used_rule_money: 2500, choosed: false},
-        {id: 2, money: 10.00, used_rule_money: 1000, choosed: false},
-        {id: 3, money: 50.00, used_rule_money: 5000, choosed: false}
-      ],
+      gifts: [],
       gift_show: false,
       // 加息券
-      rates: [
-        {id: 1, rate: 0.2, choosed: false},
-        {id: 2, rate: 1.2, choosed: false}
-      ],
+      rates: [],
       rate_show: false
     }
   },
   mounted () {
+    // 是否实名认证和绑卡
+    if (this.user.name_verified !== 1) {
+      MessageBox.confirm('是否去实名认证?').then(action => {
+        this.$router.push({name: 'user-verify'})
+      }).catch(action => {})
+    } else if (this.user.bank_card_id === null) {
+      MessageBox.confirm('是否去绑定银行卡?').then(action => {
+        this.$router.push({name: 'user-verify'})
+      }).catch(action => {})
+    }
+    if (this.$store.getters.projectId !== parseInt(this.$route.params.id)) {
+      this.$http.get('projects/' + this.$route.params.id).then((response) => {
+        this.project = response.data.data
+      })
+    }
+    Indicator.open()
+    this.$http.get('user/balance').then((response) => {
+      this.balance = response.data.balance
+      this.$http.get('user/gift').then((response) => {
+        this.gifts = response.data.data
+        this.$http.get('user/rate').then((response) => {
+          this.rates = response.data.data
+          Indicator.close()
+        })
+      })
+    })
   },
   computed: {
+    title: function () {
+      return '投资' + (this.project.name ? '-' + this.project.name : '')
+    },
     gift_check: function () {
-      return this.project.gift_check === '1'
+      return this.project.gift_check === 1
     },
     gift_auto: function () {
-      return this.project.gift_money_auto === '1'
+      return this.project.gift_money_auto === 1
+    },
+    rate_check: function () {
+      return this.project.rate_check === 1
     },
     gift_total: function () {
       let money = 0
@@ -133,9 +145,6 @@ export default {
         }
       }
       return money
-    },
-    rate_check: function () {
-      return true
     }
   },
   methods: {
@@ -143,13 +152,17 @@ export default {
       this.gift_show = !this.gift_show
     },
     chooseGift (gift) {
-      if (!gift.choosed && !this.gift_auto) {
-        for (let i in this.gifts) {
-          this.gifts[i].choosed = false
+      // 不能超过项目剩余金额
+      let projectMoney = this.project.finance_money - this.project.financed_money
+      if (this.gift_total + this.user_money + gift.money <= projectMoney) {
+        if (!gift.choosed && !this.gift_auto) {
+          for (let i in this.gifts) {
+            this.gifts[i].choosed = false
+          }
         }
+        gift.choosed = !gift.choosed
+        this.invest_money = this.gift_total + this.user_money
       }
-      gift.choosed = !gift.choosed
-      this.invest_money = this.gift_total + this.user_money
     },
     toggleRate () {
       this.rate_show = !this.rate_show
@@ -176,9 +189,16 @@ export default {
             choosedRate = this.rates[i].id
           }
         }
-        let data = {user_money: this.user_money, invest_money: this.invest_money, gifts: choosedGifts, rate: choosedRate}
-        console.log(data)
-        this.$router.push({name: 'invest-success', params: {id: 1}})
+        let data = {project_id: this.project.id, user_money: this.user_money, invest_money: this.invest_money, gifts: choosedGifts, rate: choosedRate}
+        Indicator.open()
+        this.$http.post('user/invest', data).then((response) => {
+          Indicator.close()
+          if (response.data.status === 0) {
+            MessageBox('成功')
+          } else {
+            MessageBox(response.data.msg)
+          }
+        })
       }
     }
   },
@@ -188,10 +208,28 @@ export default {
       if (isNaN(money)) {
         money = 0
       }
+      if (money > 0) {
+        for (let i in this.gifts) {
+          if (this.gifts[i].rule_money > money) {
+            this.gifts[i].choosed = false
+            this.gifts[i].disabled = true
+          } else {
+            this.gifts[i].disabled = false
+          }
+        }
+      }
+      // 不能超过项目剩余金额
+      let projectMoney = this.project.finance_money - this.project.financed_money
+      if (money > projectMoney) {
+        this.user_money = money = projectMoney
+      }
       this.invest_money = money + this.gift_total
     }
   }
 }
 </script>
 <style scoped>
+.investing ul li .bags span{
+  margin: 2px;
+}
 </style>

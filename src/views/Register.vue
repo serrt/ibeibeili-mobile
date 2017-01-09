@@ -21,7 +21,7 @@
           <li class="protocol">
             <span class="tick" v-bind:class="{'untick':!agreement}" v-on:click="agree()"><input type="checkbox" class="i-agree" v-model="agreement"/></span>
             我已阅读并同意
-            <a href="u-reg-protocal.html" class="protocol-explain">《倍倍利注册协议》</a>
+            <router-link class="protocol-explain" :to="{name: 'article-detail', params: {id: 51}}">《倍倍利注册协议》</router-link>
           </li>
         </ul> 
       </div>
@@ -78,7 +78,7 @@ export default {
     return {
       title: '注册',
       phone: '1822335084',
-      phone_valid: {error: false, msg: ''},
+      phone_valid: {error: true, msg: ''},
       code: '',
       code_valid: {error: true, msg: ''},
       code_btn: {click: false, msg1: '获取验证码', msg2: '秒后点击重新发送', time: 0, timer: null},

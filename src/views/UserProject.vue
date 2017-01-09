@@ -56,7 +56,7 @@ export default {
         {name: '还款中', key: 'payment'},
         {name: '已还款', key: 'finish'}
       ],
-      selected: 'finish',
+      selected: 'rush',
       rushData: {api: 'user/project?status=rush', nextApi: '', list: []},
       paymentData: {api: 'user/project?status=payment', nextApi: '', list: []},
       finishData: {api: 'user/project?status=finish', nextApi: '', list: []},
@@ -82,6 +82,9 @@ export default {
       if (item.key !== this.selected) {
         this.selected = item.key
         this.busy = false
+        if ((this.selected === 'rush' && this.rushData.nextApi === undefined) || (this.selected === 'payment' && this.paymentData.nextApi === undefined) || (this.selected === 'finish' && this.finishData.nextApi === undefined)) {
+          this.busy = true
+        }
         if ((this.selected === 'rush' && this.rushData.list.length === 0) || (this.selected === 'payment' && this.paymentData.list.length === 0) || (this.selected === 'finish' && this.finishData.list.length === 0)) {
           this.loadData()
         }
@@ -105,8 +108,10 @@ export default {
         let dataList = response.data.data
         data.list = data.list.concat(dataList)
         if (response.data.meta.pagination.links.next) {
-          data.nextApi = response.data.meta.pagination.links.next
+          data.nextApi = response.data.meta.pagination.links.next + '&status=' + this.selected
           this.busy = false
+        } else {
+          data.nextApi = response.data.meta.pagination.links.next
         }
       })
       this.busy = true

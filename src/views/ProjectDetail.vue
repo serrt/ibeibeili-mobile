@@ -12,7 +12,7 @@
       <div class="start-base">
         借款{{project.finance_money | moneyFormat}} |
         期限 {{project.finance_time}} |
-        <i class="iconfont icon-renminbi"></i>{{project.finance_rule_money}}起投
+        <i class="iconfont icon-renminbi"></i>{{project.start_money}}起投
       </div>
       <div class="progress container">
         <span class="num fr">{{projectPercent}}%</span>
@@ -86,19 +86,7 @@ export default {
   data: function () {
     return {
       title: '项目详细',
-      project: {
-        id: 1,
-        name: 'xxx',
-        rate: 'x',
-        finance_time: 'xxx',
-        finance_time_num: 'x',
-        finance_time_cate: 'x',
-        finance_money: 'xxx',
-        financed_money: 'x',
-        status: 'xxx',
-        finance_rule_money: 0,
-        end_time: 'xxx'
-      },
+      project: {},
       projectAttr: [],
       isOpen: false,
       invest_money: '',

@@ -5,16 +5,16 @@ import routes from './routes'
 import appEnv from '../env'
 import store from './store'
 import 'mint-ui/lib/style.css'
-import {Loadmore, InfiniteScroll} from 'mint-ui'
+import {Loadmore, InfiniteScroll, MessageBox, Indicator} from 'mint-ui'
 import filters from './filters'
-// import VuePreview from 'vue-preview' // 图片预览
+import VuePreview from 'vue-preview' // 图片预览
 
 // 实例化Vue的filter
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
 Vue.use(VueRouter)
 Vue.use(InfiniteScroll)
-// Vue.use(VuePreview)
+Vue.use(VuePreview)
 Vue.component('loadmore', Loadmore)
 
 const router = new VueRouter({
@@ -40,6 +40,7 @@ router.beforeEach((to, from, next) => {
 // Api 请求根地址
 axios.defaults.baseURL = appEnv.apiUrl
 axios.interceptors.request.use((config) => {
+  // 请求头部添加token
   config.headers.common['Authorization'] = 'Bearer ' + store.getters.token
   return config
 }, (error) => {
@@ -49,6 +50,7 @@ axios.interceptors.response.use((response) => {
   if (response.data.code === 401) {
     router.replace({name: 'login'})
   } else if (response.data.code === 500) {
+    MessageBox('请稍后再试')
     console.error(response.data)
   }
   return response
@@ -64,6 +66,8 @@ axios.interceptors.response.use((response) => {
   } else {
     console.log('Error', error.message)
   }
+  MessageBox.alert('请稍后再试')
+  Indicator.close()
   return Promise.reject(error)
 })
 Vue.prototype.$http = axios
