@@ -18,7 +18,7 @@ const routes = [
   // 投资项目
   { path: '/project/:id/invest-project', name: 'project-invest', component: (resolve) => { require(['./views/ProjectInvest.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 投资成功
-  { path: '/project/:id/invest-success', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  { path: '/invest-success/:sn', name: 'invest-success', component: (resolve) => { require(['./views/InvestSuccess.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 发现
   { path: '/find', name: 'find', component: (resolve) => { require(['./views/Find.vue'], (resolve)) } },
   // 公告
@@ -57,6 +57,8 @@ const routes = [
   { path: '/user-sina', name: 'user-sina', component: (resolve) => { require(['./views/iframe/UserSina.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 修改支付密码
   { path: '/user-edit-paypwd', name: 'user-edit-paypwd', component: (resolve) => { require(['./views/iframe/UserEditPaypwd.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 支付跳转
+  { path: '/user-invest-pay/:sn', name: 'user-invest-pay', component: (resolve) => { require(['./views/iframe/Invest.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

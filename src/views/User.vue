@@ -71,7 +71,7 @@ import FooterNav from '../components/Footer'
 import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {FooterNav},
+  components: {FooterNav, MessageBox},
   data: function () {
     return {
       title: '我的账户',
@@ -84,13 +84,6 @@ export default {
     this.$http.get('user/money').then((response) => {
       this.data = response.data
       Indicator.close()
-    })
-    this.$http.post('user/user').then((response) => {
-      if (response.data.code === 200) {
-        this.$store.dispatch('user', response.data)
-      } else {
-        MessageBox('提示', response.data.message)
-      }
     })
   },
   computed: {

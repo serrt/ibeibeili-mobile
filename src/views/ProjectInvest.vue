@@ -96,14 +96,16 @@ export default {
   },
   mounted () {
     // 是否实名认证和绑卡
-    if (this.user.name_verified !== 1) {
-      MessageBox.confirm('是否去实名认证?').then(action => {
-        this.$router.push({name: 'user-verify'})
-      }).catch(action => {})
-    } else if (this.user.bank_card_id === null) {
-      MessageBox.confirm('是否去绑定银行卡?').then(action => {
-        this.$router.push({name: 'user-verify'})
-      }).catch(action => {})
+    if (this.$store.getters.userId) {
+      if (this.user.name_verified !== 1) {
+        MessageBox.confirm('是否去实名认证?').then(action => {
+          this.$router.push({name: 'user-verify'})
+        }).catch(action => {})
+      } else if (this.user.bank_card_id === null) {
+        MessageBox.confirm('是否去绑定银行卡?').then(action => {
+          this.$router.push({name: 'user-verify'})
+        }).catch(action => {})
+      }
     }
     if (this.$store.getters.projectId !== parseInt(this.$route.params.id)) {
       this.$http.get('projects/' + this.$route.params.id).then((response) => {
@@ -113,13 +115,13 @@ export default {
     Indicator.open()
     this.$http.get('user/balance').then((response) => {
       this.balance = response.data.balance
-      this.$http.get('user/gift').then((response) => {
-        this.gifts = response.data.data
-        this.$http.get('user/rate').then((response) => {
-          this.rates = response.data.data
-          Indicator.close()
-        })
-      })
+    })
+    this.$http.get('user/gift').then((response) => {
+      this.gifts = response.data.data
+      Indicator.close()
+    })
+    this.$http.get('user/rate').then((response) => {
+      this.rates = response.data.data
     })
   },
   computed: {
@@ -194,7 +196,7 @@ export default {
         this.$http.post('user/invest', data).then((response) => {
           Indicator.close()
           if (response.data.status === 0) {
-            MessageBox('成功')
+            this.$router.replace({name: 'user-invest-pay', params: {sn: response.data.sn}})
           } else {
             MessageBox(response.data.msg)
           }

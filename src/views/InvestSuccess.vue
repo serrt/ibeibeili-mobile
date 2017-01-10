@@ -19,10 +19,10 @@
 
       <div class="btns flex">
         <div class="container">
-          <router-link class="btn" :to="{name: 'user'}">查看项目</router-link>
+          <router-link class="btn" :to="{name: 'user-project'}" replace>查看项目</router-link>
         </div>
         <div class="container">
-          <router-link class="btn" :to="{name: 'projects'}">继续投资</router-link>
+          <router-link class="btn" :to="{name: 'projects'}" replace>继续投资</router-link>
         </div>
       </div>
     </div>
@@ -40,6 +40,9 @@ export default {
     }
   },
   mounted () {
+    if (window.top.location !== window.location) {
+      window.top.location.href = window.location.href
+    }
   },
   computed: {
   },
