@@ -23,7 +23,8 @@ export default {
   mounted () {
     this.height = window.innerHeight - 42 + 'px'
     Indicator.open()
-    this.$http.get('user/investPay/' + this.$route.params.sn).then((response) => {
+    let uri = window.location.href.split('#')[0]
+    this.$http.get('user/investPay/' + this.$route.params.sn + '?return_url=' + uri).then((response) => {
       Indicator.close()
       if (response.data.status === 0) {
         this.html = response.data.html
