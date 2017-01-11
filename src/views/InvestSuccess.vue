@@ -1,6 +1,5 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
     <div class="investSuccess container">
       <div class="ok-logo full-container">
         <div class="ok">
@@ -30,10 +29,8 @@
 </template>
 
 <script>
-import HeaderTop from '../components/Header'
-
 export default {
-  components: {HeaderTop},
+  components: {},
   data: function () {
     return {
       title: '投资成功'

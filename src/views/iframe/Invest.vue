@@ -2,7 +2,7 @@
   <div>
     <header-top :title="title"></header-top>
     <div class="full-container top-box">
-      <iframe frameborder="0" width="100%" v-bind:height="height" id="iframe"></iframe>
+      <!-- <iframe src="http://192.168.1.104/invest.html" frameborder="0" width="100%" v-bind:height="height" name="iframe" id="iframe"></iframe> -->
     </div>
   </div>
 </template>
@@ -23,14 +23,15 @@ export default {
   mounted () {
     this.height = window.innerHeight - 42 + 'px'
     Indicator.open()
-    let uri = window.location.href.split('#')[0]
+    let uri = 'https://test.ibeibeili.com'
     this.$http.get('user/investPay/' + this.$route.params.sn + '?return_url=' + uri).then((response) => {
       Indicator.close()
       if (response.data.status === 0) {
         this.html = response.data.html
-        let iframe = document.getElementById('iframe')
+        window.open('data:text/html;charset=utf-8,' + escape(this.html))
+        // let iframe = document.getElementById('iframe')
         // iframe.src = 'data:text/html;charset=utf-8,' + escape(this.html)
-        iframe.contentWindow.document.write(this.html)
+        // iframe.contentWindow.document.write(this.html)
       } else {
         window.alert(response.data.msg)
       }
