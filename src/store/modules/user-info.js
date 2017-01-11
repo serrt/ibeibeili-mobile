@@ -32,7 +32,7 @@ const actions = {
 const mutations = {
   user: function (state, info) {
     state.user = info
-    window.sessionStorage.bbl_user = info
+    window.sessionStorage.bbl_user = JSON.stringify(info)
     state.id = info.id
     state.isLogin = true
   },

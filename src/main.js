@@ -5,7 +5,7 @@ import routes from './routes'
 import appEnv from '../env'
 import store from './store'
 import 'mint-ui/lib/style.css'
-import {Loadmore, InfiniteScroll, MessageBox, Indicator} from 'mint-ui'
+import {Loadmore, InfiniteScroll, MessageBox, Indicator, Swipe, SwipeItem} from 'mint-ui'
 import filters from './filters'
 import VuePreview from 'vue-preview' // 图片预览
 
@@ -15,6 +15,8 @@ Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 Vue.use(VueRouter)
 Vue.use(InfiniteScroll)
 Vue.use(VuePreview)
+Vue.component(Swipe.name, Swipe)
+Vue.component(SwipeItem.name, SwipeItem)
 Vue.component('loadmore', Loadmore)
 
 const router = new VueRouter({
@@ -63,7 +65,7 @@ axios.interceptors.response.use((response) => {
 // 获取token,用户信息
 if (window.localStorage.bbl_token) {
   if (window.sessionStorage.bbl_user) {
-    store.dispatch('user', window.sessionStorage.bbl_user)
+    store.dispatch('user', JSON.parse(window.sessionStorage.bbl_user))
   } else {
     axios.post('user/user').then((response) => {
       if (response.data.code === 200) {

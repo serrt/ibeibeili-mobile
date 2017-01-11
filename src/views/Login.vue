@@ -69,10 +69,10 @@ export default {
             MessageBox('提示', response.data.msg)
           } else {
             this.$store.dispatch('token', response.data.access_token)
+            console.log(response.data.access_token)
             this.$http.post('user/user').then((response) => {
               if (response.data.code === 200) {
                 this.$store.dispatch('user', response.data)
-                console.log(response.data.access_token)
                 this.$router.push({name: 'user'})
               }
             })

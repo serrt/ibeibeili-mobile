@@ -18,7 +18,7 @@
             <div class="fr"><input type="number" v-model="user_money" class="purchase-money" placeholder="请输入购买金额"></div>
           </div>
         </li>
-        <li class="income">
+        <li class="income" v-show="user_money > 0">
           <div class="container expact">
             <div class="fr">
               预期收益
@@ -232,6 +232,7 @@ export default {
 </script>
 <style scoped>
 .investing ul li .bags span{
-  margin: 2px;
+  margin-top: 5px;
+  margin-right: 15px;
 }
 </style>

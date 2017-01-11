@@ -1,3 +1,7 @@
+#home .trade-volume .total-num span{
+  margin: 0 1px;
+}
+
 .user-account .money-operate{
   margin-bottom: 0;
 }

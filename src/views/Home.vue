@@ -3,12 +3,11 @@
     <div class="full-container" id="home">
       <div class="home-content">
         <div class="banner full-container swiper-container">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide" v-for="item in img_list">
-              <img class="swiper-lazy" v-bind:src="item.url"/>
-              <!-- <div class="swiper-lazy-preloader"></div> -->
-            </div>
-          </div>
+          <mt-swipe :auto="4000">
+            <mt-swipe-item class="swiper-slide" v-for="item in img_list">
+              <img v-bind:src="'http://www.bbl.com'+item.url"/>
+            </mt-swipe-item>
+          </mt-swipe>
           <!-- If we need pagination -->
           <div class="swiper-pagination"></div>
         </div>
@@ -24,17 +23,7 @@
             </div>
           </div>
           <div class="total-num flex-middle">
-            <div class="full-container" v-bind:money="this.fult_money">
-              <span>1</span>亿
-              <span>2</span>
-              <span>3</span>
-              <span>4</span>
-              <span>5</span>万
-              <span>6</span>
-              <span>7</span>
-              <span>8</span>
-              <span>9</span>元
-            </div>
+            <div class="full-container" v-html="this.fult_money"></div>
           </div>
         </div>
 
@@ -42,24 +31,24 @@
         <div class="full-container recommend">
           <div class="invest-name flex-middle">
             <div class='container surplus'>
-              商贸公司经营贷Y20160297
-              <span><i class="tubiao danbao"></i>担保</span>
-              <span><i class="tubiao huabenfuxi"></i>到期还本利息</span>
+              {{project.name}}
+              <span><i class="tubiao danbao"></i>{{project.collateral_type}}</span>
+              <span><i class="tubiao huabenfuxi"></i>{{project.payment_name}}</span>
             </div>
           </div>
           <div class="flex container invest-intro">
             <div class="rate">
               <div class="fl rate-detail">
-                <div class="rate-num flex-middle h50"><p class="Pcenter expect">11%<span>+1%</span></p></div>
+                <div class="rate-num flex-middle h50"><p class="Pcenter expect">{{project.rate}}%</p></div>
                 <div class="intro-title flex-middle h50">预期年化</div>
               </div>
             </div>
             <div class="days">
-              <div class="days-num flex-middle h50"><p class="Pcenter duration">66天</p></div>
+              <div class="days-num flex-middle h50"><p class="Pcenter duration">{{project.finance_time}}</p></div>
               <div class="days-title flex-middle h50"><p class="Pcenter">期限</p></div>
             </div>
             <div class="buy flex-middle">
-              <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: 1}}" tag="span">立即购买</router-link>
+              <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: project.id}}" tag="span">立即购买</router-link>
             </div>
           </div>
         </div>
@@ -118,35 +107,33 @@
 
 <script>
 import FooterNav from '../components/Footer'
-import Swiper from 'swiper'
-import { MessageBox } from 'mint-ui'
+import {MessageBox, Indicator} from 'mint-ui'
 
 export default {
-  components: {FooterNav, MessageBox},
+  components: {FooterNav, MessageBox, Indicator},
   data: function () {
     return {
-      swiper: null, // 滑动插件
-      // 图片列表
-      img_list: [{url: './static/images/banner.png'}, {url: './static/images/bank.png'}, {url: './static/images/message-pic.png'}],
-      trade_money: 102587896.00, // 累计交易额
-      money_html: '<span>1</span>已'
+      img_list: [],
+      project: {id: 0},
+      trade_money: 0 // 累计交易额
     }
   },
   mounted () {
-    let sw = new Swiper('.swiper-container', {
-      loop: true,
-      speed: 2000,
-      preloadImages: true,
-      autoplay: true,
-      pagination: '.swiper-pagination',
-      paginationClickable: true,
-      autoplayDisableOnInteraction: false
+    Indicator.open()
+    this.$http.get('projects/sumFinancedMoney').then((response) => {
+      this.trade_money = response.data.money
     })
-    this.swiper = sw
+    this.$http.get('banner').then((response) => {
+      this.img_list = response.data.data
+      Indicator.close()
+    })
+    this.$http.get('projects/recommoned').then((response) => {
+      this.project = response.data.data
+    })
   },
   computed: {
     fult_money: function () {
-      let number1 = Math.floor(this.trade_money / 100000000)
+      let number1 = Math.floor(this.trade_money / 100000000) | 0
       let number2 = Math.floor((this.trade_money - 100000000 * number1) / 10000)
       let number3 = Math.floor(this.trade_money - 100000000 * number1 - 10000 * number2)
       // 少于4位用0代替
@@ -162,8 +149,16 @@ export default {
           stringNumber3 = 0 + stringNumber3
         }
       }
-      let string = {number1: number1.toString(), number2: stringNumber2, number3: stringNumber3}
-      return string
+      let span = '<span>' + number1.toString() + '</span>亿'
+      for (let i = 0; i < stringNumber2.length; i++) {
+        span += '<span>' + (stringNumber2[i] | 0) + '</span>'
+      }
+      span += '万'
+      for (let i = 0; i < stringNumber3.length; i++) {
+        span += '<span>' + (stringNumber3[i] | 0) + '</span>'
+      }
+      span += '元'
+      return span
     }
   },
   methods: {

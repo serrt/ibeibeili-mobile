@@ -16,7 +16,6 @@
     "axios": "0.15.2",
     "blueimp-md5": "^2.6.0",
     "mint-ui": "^2.0.4",
-    "swiper": "3.4.0",
     "vue": "^2.1.0",
     "vue-preview": "^1.0.5",
     "vue-resource": "1.0.3",

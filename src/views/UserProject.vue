@@ -122,7 +122,14 @@ export default {
 }
 </script>
 <style scoped>
+.user-projects{
+  background-color: #efefef;
+}
 .project-item,.project-detail{
   display: block;
 }
+.user-projects .projects li{
+  border:none;
+}
+
 </style>
