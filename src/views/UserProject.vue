@@ -98,7 +98,7 @@ export default {
         data = this.finishData
       }
       let uri = data.api
-      if (data.nextApi !== '' && !refresh) {
+      if (data.nextApi && !refresh) {
         uri = data.nextApi
       }
       if (refresh) {

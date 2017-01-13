@@ -84,7 +84,7 @@ export default {
         data = this.withdrawData
       }
       let uri = data.api
-      if (data.nextApi !== '' && !refresh) {
+      if (data.nextApi && !refresh) {
         uri = data.nextApi
       }
       if (refresh) {

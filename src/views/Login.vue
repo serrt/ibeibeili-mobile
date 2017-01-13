@@ -23,7 +23,7 @@
           </li>
           <li class="other-option">
             <router-link class="go-reg" :to="{name: 'register'}">立即注册</router-link>
-            <a href="javascript:void(0);" class="forget-password">忘记密码</a>
+            <router-link class="forget-password" :to="{name: 'reset-password'}">忘记密码</router-link>
           </li>
         </ul>
       </div>
@@ -73,7 +73,7 @@ export default {
             this.$http.post('user/user').then((response) => {
               if (response.data.code === 200) {
                 this.$store.dispatch('user', response.data)
-                this.$router.push({name: 'user'})
+                this.$router.back()
               }
             })
           }

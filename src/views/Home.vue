@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="full-container" id="home">
-      <div class="home-content">
+      <div class="home-content" v-on:scroll="scrollT">
         <div class="banner full-container swiper-container">
           <mt-swipe :auto="4000">
             <mt-swipe-item class="swiper-slide" v-for="item in img_list">
@@ -64,40 +64,41 @@
               </div>
             </div>
           </div>
-          <div class="feature h50 invite" >
-            <div class="feature-cont flex-middle ">
+          <router-link class="feature h50 invite" :to="{name: 'virtual'}" tag="div">
+            <div class="feature-cont flex-middle">
+              <div class="full-container">
+                <i class="iconfont icon-yonghu2"></i><br>
+                <span class="title">新手体验</span><br>
+                <span class="detail">财富值专享</span>
+              </div>
+            </div>
+          </router-link>
+          <div class="feature h50 help" :to="{name: 'about'}" tag="div">
+            <div class="feature-cont flex-middle" :to="{name: 'about'}">
               <div class="full-container">
                 <i class="iconfont icon-yaoqing"></i><br>
                 <span class="title">邀请有奖</span><br>
-                <span class="detail">财富值专享</span>
+                <span class="detail">经纪人制度</span>
               </div>
             </div>
           </div>
           <router-link class="feature h50 about" :to="{name: 'about'}" tag="div">
-            <div class="feature-cont flex-middle" :to="{name: 'about'}">
-              <div class="full-container">
-                <span class="BBL-logo flex-middle">
-                  <i></i>
-                </span>
-                <span class="title">关于倍倍利</span><br>
-                <span class="detail">了解我们及最新运营数据</span>
-              </div>
-            </div>
-          </router-link>
-          <router-link class="feature h50 help" :to="{name: 'help'}" tag="div">
             <div class="feature-cont flex-middle">
               <div class="full-container">
-                <i class="iconfont icon-bangzhu"></i><br>
-                <span class="title">帮助中心</span><br>
-                <span class="detail">有问题找小倍</span>
+                <span class="BBL-logo flex-middle"><i></i></span>
+                <span class="title">关于倍倍利</span><br>
+                <span class="detail">了解我们及最新运营数据</span>
               </div>
             </div>
           </router-link>
         </div>
 
         <!-- 平台公告 -->
-        <div class="notice container flex-middle">
-          <i class="notice-icon"></i>招商、民生、广发、华夏、工商银行系统维护公告
+        <div class="notice-news container flex-middle">
+          <i class="notice-logo"></i>招商、民生、广发、华夏、工商银行系统维护公告
+        </div>
+        <div class="big-events" style="min-height:520px;">
+          <img src="../../static/images/big-events.gif" v-if="img_show"/>
         </div>
       </div>
     </div>
@@ -115,6 +116,7 @@ export default {
     return {
       img_list: [],
       project: {id: 0},
+      img_show: false,
       trade_money: 0 // 累计交易额
     }
   },
@@ -162,6 +164,11 @@ export default {
     }
   },
   methods: {
+    scrollT: function (event) {
+      if (event.srcElement.scrollTop >= window.outerHeight / 2 && !this.img_show) {
+        this.img_show = true
+      }
+    }
   }
 }
 </script>
@@ -179,14 +186,5 @@ export default {
 
   #home .four-features {
     height: 30%;
-  }
-  #home .notice .notice-icon {
-    display: block;
-    float: left;
-    width: 3.7rem;
-    height: 3.6rem;
-    background-image: url(../../static/images/notice.png);
-    background-size: 100% 100%;
-    margin-right: 10px;
   }
 </style>

@@ -8,7 +8,6 @@
           <img src="../../static/images/certification-step1.png">
         </div>
         <p class="tips">注意：请如实填写您的信息，实名认证一旦通过，此信息将不能修改!</p>
-
         <div class="reg-input user-inputs">
           <ul>
             <li>
@@ -21,7 +20,7 @@
             <li>
               <div class="input-box">
                 <label for="idcard"><i class="iconfont icon-shenfen"></i></label>
-                <input type="text" name="idcard" v-model="name_verify.idcard" placeholder="请输入身份证号码">
+                <input type="text" name="idcard" v-model="name_verify.id_card" placeholder="请输入身份证号码">
               </div>
               <div class="tip-box" v-show="idcard_valid.error">{{idcard_valid.msg}}</div>
             </li>
@@ -61,7 +60,7 @@
                   <div class="bank" v-bind:class="[item.code]">{{item.code}}</div>
                   <div class="bankDetails">
                     <p class="bankname">{{item.name}}</p>
-                    <p class="requirement">{{item.description}}</p>
+                    <p class="requirement">银行限额</p>
                   </div>    
                 </dd>
               </dl>
@@ -91,18 +90,18 @@
           </li>
           <li class="container">
             <div class="user-chose banknum">
-              <input type="number" name="card_number" v-model="card_info.card_number" placeholder="请输入开户行卡号"/>
+              <input type="number" name="bank_card" v-model="card_info.bank_card" placeholder="请输入开户行卡号"/>
             </div>
           </li>
           <li class="container">
             <div class="user-chose phone">
-              <input type="number" name="card_phone" v-model="card_info.card_phone" placeholder="请输入预留手机号">
+              <input type="number" name="phone" v-model="card_info.phone" placeholder="请输入预留手机号"/>
             </div>
           </li>
           <li class="container">
             <div class="user-chose verify-code">
-              <input type="text" name="card_code" v-model="card_info.card_code" placeholder="请输入验证码">
-              <a href="javascript:void(0)" class="get-code" v-on:click="getCode()">{{code_btn.click?code_btn.time+code_btn.msg2:code_btn.msg1}}</a>
+              <input type="text" name="bank_code" v-model="card_info.code" placeholder="请输入验证码">
+              <button type="button" class="get-code" v-on:click="getCode()">{{code_btn.click?code_btn.time+code_btn.msg2:code_btn.msg1}}</button>
             </div>
           </li>
         </ul>
@@ -120,7 +119,7 @@
         <p class="tips">
           注意：为了您的账户安全，请设置支付密码！
         </p>
-        <button type="button" class="btn set-code">设置支付密码</button>
+        <router-link class="btn set-code" :to="{name: 'user-edit-paypwd'}">设置支付密码</router-link>
         <p class="guard">倍倍利联手新浪支付全力保障您的资金安全</p>
         <div class='BBL-xinlang'></div>
       </div>
@@ -131,27 +130,24 @@
 <script>
 import HeaderTop from '../components/Header'
 import City from '../../static/city.js'
+import { Indicator, MessageBox, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, City},
+  components: {HeaderTop, City, Indicator, MessageBox, Toast},
   data: function () {
     return {
       user_info: this.$store.getters.user,
       page: 'name',
-      name_verify: {name: '', idcard: ''},
+      name_verify: {name: '', id_card: ''},
       name_valid: {error: true, msg: ''},
       idcard_valid: {error: true, msg: ''},
-      bank_list: [
-        {code: 'GDB', name: '广东发展银行', description: '最高单笔10万，单日50万，单月限额50万'},
-        {code: 'ICBC', name: '工商银行', description: '最高单笔10万，单日50万，单月限额50万'},
-        {code: 'SZPAB', name: '平安银行', description: '最高单笔10万，单日50万，单月限额50万'}
-      ],
+      bank_list: [],
       selected_bank: {code: '', name: '请选择银行'},
       open_bank: false,
       province: [],
       open_province: false,
       open_city: false,
-      card_info: {card_number: '', card_phone: '', card_code: '', province: '请选择银行省份', city: '请选择银行城市'},
+      card_info: {bank_card: '', bank_code: '', phone: '', code: '', province: '请选择银行省份', city: '请选择银行城市'},
       code_btn: {click: false, msg1: '获取验证码', msg2: '秒后点击重新发送', time: 0, timer: null},
       card_error: {error: false, msg: ''}
     }
@@ -167,6 +163,9 @@ export default {
     for (let i in City.china) {
       this.province.push(i)
     }
+    this.$http.get('codeList/bank_code').then((response) => {
+      this.bank_list = response.data.data
+    })
   },
   computed: {
     title: function () {
@@ -199,26 +198,39 @@ export default {
     nameVerify: function () {
       let data = this.name_verify
       if (!this.name_verify_status) {
-        console.log(data)
-        this.page = 'card'
+        Indicator.open()
+        this.$http.post('user/setRealname', data).then((response) => {
+          Indicator.close()
+          if (response.data.status === 0) {
+            this.$store.dispatch('user', response.data.user)
+            this.page = 'card'
+          } else {
+            this.idcard_valid = {error: true, msg: response.data.msg}
+          }
+        })
       }
     },
     cardVerify: function () {
       let data = this.card_info
-      data.bank_code = this.selected_bank.code
       if (!this.card_verify_status) {
-        console.log(data)
+        Indicator.open()
+        this.$http.post('user/bankCard', data).then((response) => {
+          Indicator.close()
+          if (response.data.status === 0) {
+            this.$store.dispatch('user', response.data.user)
+            this.page = 'pay'
+          } else {
+            MessageBox.alert(response.data.msg, '提示')
+          }
+        })
       }
-    },
-    setPay: function () {
-      let data = {user_id: 1}
-      console.log(data)
     },
     toggleBank: function () {
       this.open_bank = !this.open_bank
     },
     selectBank: function (item) {
       this.selected_bank = item
+      this.card_info.bank_code = item.code
       this.open_bank = false
     },
     toggleProvince: function () {
@@ -236,8 +248,8 @@ export default {
       this.open_city = false
     },
     getCode: function () {
-      if (this.card_info.card_phone === '') {
-        window.alert('请输入预留手机号')
+      if (this.card_info.phone === '') {
+        MessageBox.alert('请输入预留手机号')
         return false
       }
       if (!this.code_btn.click) {
@@ -247,6 +259,11 @@ export default {
         if (this.code_btn.timer) {
           clearInterval(this.code_btn.timer)
         }
+        this.$http.post('user/bankCardPhoneCode', this.card_info).then((response) => {
+          if (response.data.status !== 0) {
+            MessageBox.alert(response.data.msg, '提示')
+          }
+        })
         this.code_btn.timer = setInterval(function () {
           self.code_btn.time --
           if (self.code_btn.time === 0) {
@@ -264,15 +281,22 @@ export default {
         this.name_valid = {error: false, msg: ''}
       }
     },
-    'name_verify.idcard': function (value) {
+    'name_verify.id_card': function (value) {
       if (value === '') {
         this.idcard_valid = {error: true, msg: '请输入身份证号码'}
       } else {
         this.idcard_valid = {error: false, msg: ''}
       }
+    },
+    'card_info.province': function () {
+      this.card_info.city = '请选择银行城市'
     }
   }
 }
 </script>
 <style scoped>
+.bind-bank ul li .get-code{
+  border: none;
+  background-color: transparent;
+}
 </style>

@@ -1,5 +1,8 @@
 export default function (value, project) {
   value = parseFloat(value)
+  if (!project || !project.finance_time_num || !project.finance_time_cate || !project.rate) {
+    return 0
+  }
   let timeNum = project.finance_time_num
   let timeCate = project.finance_time_cate
   let rate = project.rate

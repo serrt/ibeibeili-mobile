@@ -48,25 +48,26 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import {Indicator, MessageBox, Toast} from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator, MessageBox},
   data: function () {
     return {
       title: '新手体验任务',
-      project: {projects_name: '新手体验任务', finance_time_num: 1, finance_time_cate: 'd', time_cate: '1天', rate: 8},
-      list: [
-        {id: 1, money: 10000.00, selected: false},
-        {id: 2, money: 20000.00, selected: false},
-        {id: 2, money: 20000.00, selected: false},
-        {id: 2, money: 20000.00, selected: false},
-        {id: 2, money: 20000.00, selected: false},
-        {id: 2, money: 20000.00, selected: false},
-        {id: 3, money: 30000.00, selected: false}
-      ]
+      project: {},
+      list: []
     }
   },
   mounted () {
+    Indicator.open()
+    this.$http.get('user/availableVirtual').then((response) => {
+      this.list = response.data.data
+      Indicator.close()
+    })
+    this.$http.get('virtual/project').then((response) => {
+      this.project = response.data.data
+    })
   },
   computed: {
     totalMoney: function () {
@@ -84,16 +85,27 @@ export default {
       item.selected = !item.selected
     },
     submit: function () {
-      let data = { id: [] }
+      let id = []
       for (let i in this.list) {
         if (this.list[i].selected) {
-          data.id.push(this.list[i].id)
+          id.push(this.list[i].id)
         }
       }
-      if (data.id.length === 0) {
-        window.alert('请选择财富值')
+      if (id.length === 0) {
+        MessageBox.alert('请选择财富值')
+      } else {
+        let data = {id: id}
+        Indicator.open()
+        this.$http.post('user/virtual/invest', data).then((response) => {
+          Indicator.close()
+          if (response.data.status !== 0) {
+            MessageBox.alert(response.data.msg, '提示')
+          } else {
+            Toast({message: '操作成功', iconClass: 'icon icon-success'})
+            this.$router.push({name: 'user-gift'})
+          }
+        })
       }
-      console.log(data)
     }
   },
   watch: {

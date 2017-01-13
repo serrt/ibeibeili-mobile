@@ -141,7 +141,7 @@ export default {
     },
     loadData: function (refresh) {
       let uri = this.api + this.queryString
-      if (this.nextApi !== '' && !refresh) {
+      if (this.nextApi && !refresh) {
         uri = this.nextApi + this.queryString
       }
       if (refresh) {

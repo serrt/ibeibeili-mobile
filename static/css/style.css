@@ -1,5 +1,9 @@
+body{
+  background-color: #f8f8f8;
+}
+
 #home .trade-volume .total-num span{
-  margin: 0 1px;
+  margin: 0 2px;
 }
 
 .user-account .money-operate{

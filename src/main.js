@@ -5,7 +5,7 @@ import routes from './routes'
 import appEnv from '../env'
 import store from './store'
 import 'mint-ui/lib/style.css'
-import {Loadmore, InfiniteScroll, MessageBox, Indicator, Swipe, SwipeItem} from 'mint-ui'
+import {InfiniteScroll, MessageBox, Indicator, Swipe, SwipeItem} from 'mint-ui'
 import filters from './filters'
 import VuePreview from 'vue-preview' // 图片预览
 
@@ -17,7 +17,6 @@ Vue.use(InfiniteScroll)
 Vue.use(VuePreview)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
-Vue.component('loadmore', Loadmore)
 
 const router = new VueRouter({
   // mode: 'history',
@@ -36,13 +35,33 @@ axios.interceptors.request.use((config) => {
   return Promise.reject(error)
 })
 
+// 获取token,用户信息
+if (window.localStorage.bbl_token) {
+  store.dispatch('token', JSON.parse(window.localStorage.bbl_token))
+  if (window.localStorage.bbl_user) {
+    store.dispatch('user', JSON.parse(window.localStorage.bbl_user))
+  } else {
+    axios.post('user/user').then((response) => {
+      if (response.data.code === 200) {
+        store.dispatch('user', response.data)
+      } else {
+        MessageBox('提示', response.data.message)
+      }
+    })
+  }
+} else {
+  MessageBox.confirm('登录失效?').then(action => {
+    router.push({name: 'login'})
+  }).catch(action => {})
+}
+
 // http 响应
 axios.interceptors.response.use((response) => {
   if (response.data.code === 401) {
     router.push({name: 'login'})
   } else if (response.data.code === 500) {
-    MessageBox('请稍后再试')
-    console.error(response.data)
+    MessageBox('网络错误,刷新重试')
+    window.location.reload()
   }
   return response
 }, (error) => {
@@ -61,25 +80,6 @@ axios.interceptors.response.use((response) => {
   Indicator.close()
   return Promise.reject(error)
 })
-
-// 获取token,用户信息
-if (window.localStorage.bbl_token) {
-  if (window.sessionStorage.bbl_user) {
-    store.dispatch('user', JSON.parse(window.sessionStorage.bbl_user))
-  } else {
-    axios.post('user/user').then((response) => {
-      if (response.data.code === 200) {
-        store.dispatch('user', response.data)
-      } else {
-        MessageBox('提示', response.data.message)
-      }
-    })
-  }
-} else {
-  MessageBox.confirm('登录失效?').then(action => {
-    router.push({name: 'login'})
-  }).catch(action => {})
-}
 
 Vue.prototype.$http = axios
 

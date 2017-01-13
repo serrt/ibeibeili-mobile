@@ -1,6 +1,15 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
+    <div class="header container">
+    <ul>
+      <li class="back">
+        <router-link :to="{name: 'home'}" tag="span" v-show="page===3" replace><i class="iconfont icon-01fanhui"></i></router-link>
+        <span v-on:click="back()" v-show="page!==3"><i class="iconfont icon-01fanhui"></i></span>
+      </li>
+      <li class="f-gray title surplus">{{title}}</li>
+      <li class="other"><span></span></li>
+    </ul>
+  </div>
     <div class="container reg-box" v-show="page === 1">
       <div class="reg-input user-inputs">
         <ul>
@@ -48,7 +57,7 @@
           <li>
             <div class="input-box referee">
               <label for="referee"><i class="iconfont icon-yonghu1"></i></label>
-              <input type="text" name="referee" id="referee" placeholder="请输入推荐编码（选填）">
+              <input type="text" name="referee" v-model="invite_code" placeholder="请输入推荐编码（选填）"/>
             </div>
             <div class="tip-box" v-show="invite_valid.error">{{invite_valid.msg}}</div>
           </li>
@@ -61,23 +70,22 @@
         <div class="success"></div>
         <h5>恭喜{{phone}}注册成功！</h5>
         <p>您可以直接用手机号码登录</p>
-        <router-link class="btn authentication" :to="{name: 'user-verify'}">去实名认证</router-link>
+        <router-link class="btn authentication" :to="{name: 'user-verify'}" replace>去实名认证</router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import HeaderTop from '../components/Header'
 import md5 from 'blueimp-md5'
 import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {Indicator, MessageBox},
   data: function () {
     return {
       title: '注册',
-      phone: '1822335084',
+      phone: '',
       phone_valid: {error: true, msg: ''},
       code: '',
       code_valid: {error: true, msg: ''},
@@ -103,6 +111,9 @@ export default {
     }
   },
   methods: {
+    back: function () {
+      this.$router.back()
+    },
     getCode: function () {
       if (!this.phone_valid.error && !this.code_btn.click) {
         this.$http.post('registerCode', {phone_number: this.phone}).then((response) => {
@@ -141,7 +152,7 @@ export default {
       }
     },
     register: function () {
-      let data = {phone_number: this.phone, code: this.code, password: md5(this.password), invite_code: this.invite_code}
+      let data = {phone_number: this.phone, code: this.code, password: md5(this.password), recommend_code: this.invite_code}
       if (!this.unsubmit) {
         Indicator.open()
         this.$http.post('register', data).then((response) => {
@@ -154,12 +165,14 @@ export default {
             data.client_id = '2'
             data.client_secret = '0rQMzyS6RtjVudAJGXA79ax1dAz5zKe2dgU76M9U'
             data.scope = '*'
+            let user = response.data.user
             this.$http.post('login', data).then((response) => {
               Indicator.close()
               if (response.data.status === 1) {
                 MessageBox('提示', response.data.msg)
               } else {
                 this.$store.dispatch('token', response.data.access_token)
+                this.$store.dispatch('user', user)
                 console.log(response.data.access_token)
                 this.page = 3
               }
@@ -180,8 +193,8 @@ export default {
       }
     },
     phone: function (value) {
-      let pat = /[1]\d{10}/
-      if (pat.test(value)) {
+      let pat = /[1]\d{10}/g
+      if (pat.test(value) && value.length === 11) {
         this.phone_valid = {error: false, msg: ''}
       } else {
         this.phone_valid = {error: true, msg: '手机号为11位数字'}

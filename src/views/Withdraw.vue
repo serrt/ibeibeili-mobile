@@ -8,7 +8,7 @@
           <li>
             <div class="container flex-middle withdraw-input">
               <label for="recharge-money"><i class="iconfont icon-renminbi"></i></label>
-              <input type="text" name="money" v-model="money" class="recharge-money" placeholder="请输入提现金额"/>
+              <input type="number" name="money" v-model="money" class="recharge-money" placeholder="请输入提现金额"/>
               <span class="get-all-money" v-on:click="money=balance">全部提现</span>
             </div>
           </li>
@@ -17,7 +17,7 @@
               <div class="recharge-bank">
                 提现银行
                 <span class="fr bank-name">
-                  <span class="bank CCB"></span>中国建设银行**3033
+                  <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank_name}}{{user.bank_card_number.substring(user.bank_card_number.length-6, user.bank_card_number.length) | strHide(0,4)}}
                 </span>
               </div>
               <div class="fee">
@@ -37,31 +37,42 @@
         </ul>
       </div>
       <div class="container">
-        <a href="" class="recharge-explain">提现说明</a>
+        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1222}}">充值说明</router-link>
       </div>
       <div class="container">
-        <button type="button" class="btn" v-on:click="recharge" >提&nbsp;现</button>
+        <button type="button" class="btn" v-on:click="recharge">提&nbsp;现</button>
       </div>
     </div>
-    <footer-nav></footer-nav>
   </div>
 </template>
 
 <script>
 import HeaderTop from '../components/Header'
-import FooterNav from '../components/Footer'
 
 export default {
-  components: {HeaderTop, FooterNav},
+  components: {HeaderTop},
+  beforeCreate: function () {
+    if (!this.$store.getters.user.bank_card_number) {
+      this.$router.back()
+    }
+  },
   data: function () {
     return {
       title: '提现',
+      user: this.$store.getters.user,
+      bank_name: 'xx',
       money: null,
-      balance: 200.15,
+      balance: 0,
       user_fee: 2.00
     }
   },
   mounted () {
+    this.$http.get('user/balance').then((response) => {
+      this.balance = response.data.balance
+    })
+    this.$http.get('code/' + this.user.bank_code).then((response) => {
+      this.bank_name = response.data.data.name
+    })
   },
   computed: {
   },

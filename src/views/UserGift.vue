@@ -134,7 +134,7 @@ export default {
         data = this.virtualData
       }
       let uri = data.api
-      if (data.nextApi !== '' && !refresh) {
+      if (data.nextApi && !refresh) {
         uri = data.nextApi
       }
       if (refresh) {

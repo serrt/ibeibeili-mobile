@@ -6,6 +6,8 @@ const routes = [
   { path: '/login', name: 'login', component (resolve) { require(['./views/Login.vue'], (resolve)) } },
   // 注册
   { path: '/register', name: 'register', component (resolve) { require(['./views/Register.vue'], (resolve)) } },
+  // 找回密码
+  { path: '/reset-password', name: 'reset-password', component (resolve) { require(['./views/ResetPassword.vue'], (resolve)) } },
   // 关于我们
   { path: '/about', name: 'about', component (resolve) { require(['./views/About.vue'], (resolve)) } },
   // 使用财富值
@@ -31,6 +33,12 @@ const routes = [
   { path: '/user-set', name: 'user-set', component: (resolve) => { require(['./views/UserSet.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 修改登录密码
   { path: '/user-edit-pwd', name: 'user-edit-pwd', component: (resolve) => { require(['./views/UserEditPwd.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 用户银行卡
+  { path: '/user-bank', name: 'user-bank', component: (resolve) => { require(['./views/UserBank.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 用户解绑银行卡
+  { path: '/user-bank-unbind', name: 'user-bank-unbind', component: (resolve) => { require(['./views/UserBankuUnbind.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 设置用户名
+  { path: '/user-set-username', name: 'user-set-username', component: (resolve) => { require(['./views/UserSetUsername.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 提现
   { path: '/recharge', name: 'recharge', component: (resolve) => { require(['./views/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 充值

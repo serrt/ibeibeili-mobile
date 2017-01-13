@@ -1,6 +1,14 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
+    <div class="header container">
+      <ul>
+        <li class="back">
+          <router-link :to="{name: 'user-project', params: {refresh: 1}}" tag="span" replace><i class="iconfont icon-01fanhui"></i></router-link>
+        </li>
+        <li class="f-gray title surplus">{{title}}</li>
+        <li class="other"><span></span></li>
+      </ul>
+    </div>
     <div class="full-container top-box">
       <iframe frameborder="0" width="100%" v-bind:height="height" name="iframe" id="iframe"></iframe>
     </div>
@@ -29,7 +37,7 @@ export default {
       if (response.data.status === 0) {
         this.html = response.data.html
         let iframe = document.getElementById('iframe')
-        iframe.src = 'data:text/html;charset=utf-8,' + escape(this.html)
+        // iframe.src = 'data:text/html;charset=utf-8,' + escape(this.html)
         iframe.contentWindow.document.write(this.html)
       } else {
         window.alert(response.data.msg)

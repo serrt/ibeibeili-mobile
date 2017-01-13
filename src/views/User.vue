@@ -2,7 +2,7 @@
   <div>
     <div class="header container">
       <ul>
-        <li class="back" v-on:click="back()"><span><i class="iconfont icon-01fanhui"></i></span></li>
+        <li class="back"></li>
         <li class="f-gray title">我的账户</li>
         <router-link :to="{name: 'user-set'}" class="other" tag="li">
           <span><i class="iconfont icon-shezhi"></i></span>
@@ -71,7 +71,7 @@ import FooterNav from '../components/Footer'
 import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {FooterNav, MessageBox},
+  components: {FooterNav, MessageBox, Indicator},
   data: function () {
     return {
       title: '我的账户',
@@ -80,6 +80,11 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.params.refresh) {
+      this.$http.post('user/user').then((response) => {
+        this.$store.dispatch('user', response.data)
+      })
+    }
     Indicator.open()
     this.$http.get('user/money').then((response) => {
       this.data = response.data
@@ -89,9 +94,6 @@ export default {
   computed: {
   },
   methods: {
-    back: function () {
-      this.$router.back()
-    }
   },
   watch: {
   }

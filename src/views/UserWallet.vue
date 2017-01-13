@@ -7,7 +7,7 @@
         <div class="chart-intro">
           <div class="intro">
             <div>持有总资产(元)</div>
-            <span class="all-money">{{sum.toFixed(2)}}</span>
+            <span class="all-money">{{account.sum}}</span>
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
           </li>
           <li>
             <div class="chart-item invest-money"> 
-               投资中金额
+               冻结金额
               <span class="fr">
                 <i class="iconfont icon-renminbi"></i>{{account.investMoney}}
               </span>
@@ -77,15 +77,15 @@ export default {
         profit: 0.00,
         investMoney: 0.00,
         totalInvest: 0.00,
-        totalProfit: 0.00
-      },
-      sum: 0
+        totalProfit: 0.00,
+        sum: 0
+      }
     }
   },
   mounted () {
     Indicator.open()
-    this.$http.get('user/wallet?user_id=' + this.user_id).then((response) => {
-      this.account = response.data
+    this.$http.get('user/wallet').then((response) => {
+      this.account = response.data.data
       for (let i in this.account) {
         this.sum += parseFloat(this.account[i])
       }
@@ -127,8 +127,13 @@ export default {
       }
 
       canvasObj.color = colors
-      for (let i = 0; i < colors.length; i++) {
-        canvasObj.angle[i] = (moneys[i] / sums) * canvasObj.per
+      if (sums === 0) {
+        canvasObj.color = ['#ccc']
+        canvasObj.angle = [100]
+      } else {
+        for (let i = 0; i < colors.length; i++) {
+          canvasObj.angle[i] = (moneys[i] / sums) * canvasObj.per
+        }
       }
       for (let i = 0; i < canvasObj.angle.length; i++) {
         ctx.beginPath()

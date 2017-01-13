@@ -20,12 +20,7 @@
         </li>
         <li class="income" v-show="user_money > 0">
           <div class="container expact">
-            <div class="fr">
-              预期收益
-              <span>
-                <i class="iconfont icon-renminbi"></i>
-                <span class="expact-money">{{invest_money | projectProfit(project)}}</span>
-              </span>
+            <div class="fr">预期收益<span><i class="iconfont icon-renminbi"></i><span class="expact-money">{{invest_money | projectProfit(project)}}</span><span class="expact-money" v-show="rate_project">+{{invest_money | projectProfit(rate_project)}}</span></span>
             </div>
           </div>
         </li>
@@ -116,17 +111,17 @@ export default {
     this.$http.get('user/balance').then((response) => {
       this.balance = response.data.balance
     })
-    this.$http.get('user/gift').then((response) => {
+    this.$http.get('user/availableGift').then((response) => {
       this.gifts = response.data.data
       Indicator.close()
     })
-    this.$http.get('user/rate').then((response) => {
+    this.$http.get('user/availableRate').then((response) => {
       this.rates = response.data.data
     })
   },
   computed: {
     title: function () {
-      return '投资' + (this.project.name ? '-' + this.project.name : '')
+      return (this.project.name ? this.project.name : '投资')
     },
     gift_check: function () {
       return this.project.gift_check === 1
@@ -136,6 +131,16 @@ export default {
     },
     rate_check: function () {
       return this.project.rate_check === 1
+    },
+    rate_project: function () {
+      let project = null
+      for (let i in this.rates) {
+        if (this.rates[i].choosed) {
+          project = JSON.parse(JSON.stringify(this.project))
+          project.rate = this.rates[i].rate
+        }
+      }
+      return project
     },
     gift_total: function () {
       let money = 0
@@ -154,17 +159,13 @@ export default {
       this.gift_show = !this.gift_show
     },
     chooseGift (gift) {
-      // 不能超过项目剩余金额
-      let projectMoney = this.project.finance_money - this.project.financed_money
-      if (this.gift_total + this.user_money + gift.money <= projectMoney) {
-        if (!gift.choosed && !this.gift_auto) {
-          for (let i in this.gifts) {
-            this.gifts[i].choosed = false
-          }
+      if (!gift.choosed && !this.gift_auto) {
+        for (let i in this.gifts) {
+          this.gifts[i].choosed = false
         }
-        gift.choosed = !gift.choosed
-        this.invest_money = this.gift_total + this.user_money
       }
+      gift.choosed = !gift.choosed
+      this.invest_money = this.gift_total + this.user_money
     },
     toggleRate () {
       this.rate_show = !this.rate_show
@@ -178,6 +179,11 @@ export default {
       rate.choosed = !rate.choosed
     },
     invest () {
+      let projectMoney = this.project.finance_money - this.project.financed_money
+      if (this.gift_total + this.user_money > projectMoney) {
+        MessageBox('超出项目可投金额')
+        return false
+      }
       if (this.user_money) {
         let choosedGifts = []
         for (let i in this.gifts) {
@@ -221,10 +227,10 @@ export default {
         }
       }
       // 不能超过项目剩余金额
-      let projectMoney = this.project.finance_money - this.project.financed_money
-      if (money > projectMoney) {
-        this.user_money = money = projectMoney
-      }
+      // let projectMoney = this.project.finance_money - this.project.financed_money
+      // if (money > projectMoney) {
+      //   this.user_money = money = projectMoney
+      // }
       this.invest_money = money + this.gift_total
     }
   }
