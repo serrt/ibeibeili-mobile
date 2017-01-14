@@ -1,6 +1,14 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
+    <div class="header container">
+      <ul>
+        <li class="back">
+          <router-link :to="{name: 'user', params: {refresh: 1}}" tag="span" replace><i class="iconfont icon-01fanhui"></i></router-link>
+        </li>
+        <li class="f-gray title surplus">{{title}}</li>
+        <li class="other"><span></span></li>
+      </ul>
+    </div>
     <div class="full-container top-box">
       <iframe v-bind:src="src" frameborder="0" width="100%" v-bind:height="height"></iframe>
     </div>

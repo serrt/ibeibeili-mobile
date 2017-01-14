@@ -27,7 +27,8 @@
           <!-- 已绑定 -->
           <router-link class="toNext right-words" :to="{name: 'user-bank'}" v-show="user.bank_card_id !== null" tag="span">已绑定<i class="iconfont icon-unie61f"></i></router-link>
           <!-- 未绑定 -->
-          <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.bank_card_id === null" tag="span">未绑定<i class="iconfont icon-unie61f"></i></router-link>
+          <span class="toNext right-words" v-show="user.bank_card_id === null" v-on:click="redirect('name')">未绑定<i class="iconfont icon-unie61f"></i></span>
+          <!-- <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.bank_card_id === null" tag="span">未绑定<i class="iconfont icon-unie61f"></i></router-link> -->
         </li>
         <li class="login-pass">
           <i class="iconfont icon-suo"></i>登录密码
@@ -38,7 +39,8 @@
           <!-- 已设置 -->
           <router-link class="toNext right-words" :to="{name: 'user-edit-paypwd'}" v-show="user.is_set_pay_password===1" tag="span">修改<i class="iconfont icon-unie61f"></i></router-link>
           <!-- 未设置 -->
-          <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.is_set_pay_password===0" tag="span">未设置<i class="iconfont icon-unie61f"></i></router-link>
+          <span class="toNext right-words" v-show="user.is_set_pay_password===0" v-on:click="redirect('name,card')">未设置<i class="iconfont icon-unie61f"></i></span>
+          <!-- <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.is_set_pay_password===0" tag="span">未设置<i class="iconfont icon-unie61f"></i></router-link> -->
         </li>
         <li class="login-pass" v-show="user.name_verified===1">
           <i class="iconfont icon-yonghu"></i>新浪支付
@@ -72,6 +74,24 @@ export default {
         this.$store.dispatch('logout')
         this.$router.replace({name: 'login'})
       }).catch(action => {})
+    },
+    redirect: function (verfiy) {
+      let uri = 'user-verify'
+      if (verfiy) {
+        if (verfiy.indexOf('name') !== -1 && this.user.name_verified === 0) {
+          MessageBox.confirm('请先实名认证?').then(action => {
+            this.$router.push({name: uri})
+          }).catch(action => {})
+        } else if (verfiy.indexOf('card') !== -1 && this.user.bank_card_id === null) {
+          MessageBox.confirm('请先绑定银行卡?').then(action => {
+            this.$router.push({name: uri})
+          }).catch(action => {})
+        } else {
+          this.$router.push({name: uri})
+        }
+      } else {
+        this.$router.push({name: uri})
+      }
     }
   },
   watch: {

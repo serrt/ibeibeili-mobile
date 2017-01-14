@@ -86,9 +86,6 @@ export default {
     }
   },
   watch: {
-    busy: function (value) {
-      console.log(value)
-    }
   }
 }
 </script>

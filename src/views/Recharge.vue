@@ -17,7 +17,7 @@
                   <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank_name}}{{user.bank_card_number.substring(user.bank_card_number.length-6, user.bank_card_number.length) | strHide(0,4)}}
                 </span>
               </div>
-              <div class="limit">充值限额<span class="fr">每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">50000</span></span></div>
+              <div class="limit">充值限额<span class="fr">每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{max_money}}</span></span></div>
             </div>
           </li>
         </ul>
@@ -34,9 +34,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator, MessageBox},
   beforeCreate: function () {
     if (!this.$store.getters.user.bank_card_number) {
       this.$router.back()
@@ -47,7 +48,8 @@ export default {
       title: '充值',
       money: null,
       user: this.$store.getters.user,
-      bank_name: 'xx'
+      bank_name: 'xx',
+      max_money: 50000
     }
   },
   mounted () {
@@ -59,6 +61,15 @@ export default {
   },
   methods: {
     recharge () {
+      if (this.money > 0) {
+        this.$http.post('user/recharge', {money: this.money}).then((response) => {
+          if (response.data.status === 0) {
+            this.$router.replace({name: 'user-recharge-pay', params: {sn: response.data.sn}})
+          } else {
+            MessageBox.alert(response.data.msg, '充值失败')
+          }
+        })
+      }
       console.log(this.money)
     }
   },

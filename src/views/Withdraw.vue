@@ -23,13 +23,14 @@
               <div class="fee">
                 手续费
                 <span class="fr">
-                  <i class="iconfont icon-renminbi"></i><span class="fee-num">{{user_fee}}</span>
+                  <mt-spinner type="snake" v-show="spinner"></mt-spinner>
+                  <i class="iconfont icon-renminbi" v-show="!spinner"></i><span class="fee-num">{{user_fee}}</span>
                 </span>
               </div>
               <div class="limit">
                 提现限额
                 <span class="fr">
-                  每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">50000</span>
+                  每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{max_money}}</span>
                 </span>
               </div>
             </div>
@@ -62,8 +63,11 @@ export default {
       user: this.$store.getters.user,
       bank_name: 'xx',
       money: null,
+      timer: null,
+      spinner: false,
       balance: 0,
-      user_fee: 2.00
+      user_fee: 0,
+      max_money: 50000
     }
   },
   mounted () {
@@ -82,6 +86,21 @@ export default {
     }
   },
   watch: {
+    money: function (value) {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      if (value > 0) {
+        this.spinner = true
+        let self = this
+        this.timer = setTimeout(function () {
+          self.$http.get('user/withdrawFee', {money: value}).then((response) => {
+            self.user_fee = response.data.fee.user_fee
+            self.spinner = false
+          })
+        }, 2000)
+      }
+    }
   }
 }
 </script>

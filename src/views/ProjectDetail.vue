@@ -94,7 +94,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.getters.projectId === parseInt(this.$route.params.id)) {
+    if (this.$store.getters.projectInfo.id === parseInt(this.$route.params.id)) {
       this.project = this.$store.getters.projectInfo
       this.projectAttr = this.$store.getters.projectAttr
     } else {

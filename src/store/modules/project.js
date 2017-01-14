@@ -4,9 +4,6 @@ const state = {
 }
 
 const getters = {
-  projectId: state => {
-    return state.info.id
-  },
   projectInfo: state => {
     return state.info
   },

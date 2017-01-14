@@ -65,8 +65,10 @@ const routes = [
   { path: '/user-sina', name: 'user-sina', component: (resolve) => { require(['./views/iframe/UserSina.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 修改支付密码
   { path: '/user-edit-paypwd', name: 'user-edit-paypwd', component: (resolve) => { require(['./views/iframe/UserEditPaypwd.vue'], (resolve)) }, meta: { requiresAuth: true } },
-  // 支付跳转
+  // 投资支付跳转
   { path: '/user-invest-pay/:sn', name: 'user-invest-pay', component: (resolve) => { require(['./views/iframe/Invest.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 充值支付跳转
+  { path: '/user-recharge-pay/:sn', name: 'user-recharge-pay', component: (resolve) => { require(['./views/iframe/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

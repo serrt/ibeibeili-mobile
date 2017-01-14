@@ -70,10 +70,11 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import md5 from 'blueimp-md5'
 import {MessageBox, Indicator} from 'mint-ui'
 
 export default {
-  components: {HeaderTop, MessageBox, Indicator},
+  components: {HeaderTop, MessageBox, Indicator, md5},
   data: function () {
     return {
       user: this.$store.getters.user,
@@ -81,6 +82,7 @@ export default {
       balance: 0,
       user_money: '', // 用户输入金额
       invest_money: 0, // 总的投资金额
+      user_password: '', // 用户输入的密码
       // 红包
       gifts: [],
       gift_show: false,
@@ -102,9 +104,10 @@ export default {
         }).catch(action => {})
       }
     }
-    if (this.$store.getters.projectId !== parseInt(this.$route.params.id)) {
+    if (this.$store.getters.projectInfo.id !== parseInt(this.$route.params.id)) {
       this.$http.get('projects/' + this.$route.params.id).then((response) => {
         this.project = response.data.data
+        this.$store.dispatch('project', this.project)
       })
     }
     Indicator.open()
@@ -181,33 +184,47 @@ export default {
     invest () {
       let projectMoney = this.project.finance_money - this.project.financed_money
       if (this.gift_total + this.user_money > projectMoney) {
-        MessageBox('超出项目可投金额')
+        MessageBox.alert('超出项目可投金额', '提示')
         return false
       }
       if (this.user_money) {
-        let choosedGifts = []
-        for (let i in this.gifts) {
-          if (this.gifts[i].choosed) {
-            choosedGifts.push(this.gifts[i].id)
-          }
+        // 项目密码
+        let self = this
+        if (this.project.password) {
+          MessageBox.prompt('请输入密码').then(({ value, action }) => {
+            self.user_password = md5(value)
+            this.investRequest()
+          }).catch(action => {
+            return false
+          })
+        } else {
+          this.investRequest()
         }
-        let choosedRate = null
-        for (let i in this.rates) {
-          if (this.rates[i].choosed) {
-            choosedRate = this.rates[i].id
-          }
-        }
-        let data = {project_id: this.project.id, user_money: this.user_money, invest_money: this.invest_money, gifts: choosedGifts, rate: choosedRate}
-        Indicator.open()
-        this.$http.post('user/invest', data).then((response) => {
-          Indicator.close()
-          if (response.data.status === 0) {
-            this.$router.replace({name: 'user-invest-pay', params: {sn: response.data.sn}})
-          } else {
-            MessageBox(response.data.msg)
-          }
-        })
       }
+    },
+    investRequest () {
+      let choosedGifts = []
+      for (let i in this.gifts) {
+        if (this.gifts[i].choosed) {
+          choosedGifts.push(this.gifts[i].id)
+        }
+      }
+      let choosedRate = null
+      for (let i in this.rates) {
+        if (this.rates[i].choosed) {
+          choosedRate = this.rates[i].id
+        }
+      }
+      let data = {project_id: this.project.id, user_money: this.user_money, gifts: choosedGifts, rate: choosedRate, password: this.user_password}
+      Indicator.open()
+      this.$http.post('user/invest', data).then((response) => {
+        Indicator.close()
+        if (response.data.status === 0) {
+          this.$router.replace({name: 'user-invest-pay', params: {sn: response.data.sn}})
+        } else {
+          MessageBox.alert(response.data.msg, '提示')
+        }
+      })
     }
   },
   watch: {
