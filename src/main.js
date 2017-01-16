@@ -46,7 +46,7 @@ if (window.localStorage.bbl_token) {
       if (response.data.code === 200) {
         store.dispatch('user', response.data)
       } else {
-        MessageBox('提示', response.data.message)
+        MessageBox.alert(response.data.message, '提示')
       }
     })
   }

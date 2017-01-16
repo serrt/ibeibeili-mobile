@@ -1,12 +1,12 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <div class="discovery-box full-container bottom-box page-box">
+    <div class="discovery-box full-container">
       <div class="banner">
         <img src="../../static/images/discovery-test.png">
       </div>
       <div class="options full-container">
-        <ul>
+        <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
           <li class="flex">
             <div class="option-item">
               <div class="logo fl clear">
@@ -59,7 +59,7 @@
       </div>
       <div class="latest-news">
         <ul>
-          <li v-for="item in list">
+          <router-link :to="{name: 'article-detail', params:{id:item.id}}" v-for="item in list" tag="li">
             <div class="words fl">
               <span class="abstract">{{item.title}}</span>
             </div>
@@ -67,7 +67,7 @@
             <div class="news-pic flex-middle">
               <img v-bind:src="item.image">
             </div>
-          </li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -78,40 +78,49 @@
 <script>
 import HeaderTop from '../components/Header'
 import FooterNav from '../components/Footer'
+import {Indicator} from 'mint-ui'
 
 export default {
-  components: {HeaderTop, FooterNav},
+  components: {HeaderTop, FooterNav, Indicator},
   data: function () {
     return {
       title: '发现',
-      list: [
-        {id: 1, title: '1倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: './static/images/news.png'},
-        {id: 2, title: '2倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: './static/images/news.png'},
-        {id: 3, title: '3倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
-        {id: 3, title: '4倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
-        {id: 3, title: '5倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: './static/images/news.png'},
-        {id: 4, title: '6倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: './static/images/news.png'}
-      ]
+      list: [],
+      busy: false,
+      api: 'article/activity',
+      nextApi: ''
     }
   },
   mounted () {
+    this.loadData()
   },
   computed: {
   },
   methods: {
+    loadData: function (refresh) {
+      let uri = this.api
+      if (this.nextApi && !refresh) {
+        uri = this.nextApi
+      }
+      if (refresh) {
+        this.list = []
+      }
+      Indicator.open()
+      this.$http.get(uri).then((response) => {
+        let dataList = response.data.data
+        this.list = this.list.concat(dataList)
+        Indicator.close()
+        if (response.data.meta.pagination.links.next) {
+          this.nextApi = response.data.meta.pagination.links.next
+          this.busy = false
+        }
+      })
+      this.busy = true
+    }
   },
   watch: {
   }
 }
 </script>
 <style scoped>
-.discovery-box .latest-news{
-  margin-bottom: 0;
-}
-.latest-news{
-  overflow: scroll;
-}
-.latest-news li{
-  padding: 1rem
-}
 </style>

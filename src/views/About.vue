@@ -318,16 +318,12 @@
     <div class="intro-item container latest-news" v-show="selected==='latest-news'">
       <!-- 公众号 -->
       <div class="info full-container">
-        <ul>
-          <li v-for="item in news">
-            <div class="words fl">
-              <span class="abstract">{{item.title}}</span>
-            </div>
+        <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+          <router-link :to="{name: 'article-detail', params:{id:item.id}}" tag="li" v-for="item in list">
+            <div class="words fl"><span class="abstract">{{item.title}}</span></div>
             <span class="date">{{item.published_at}}</span>
-            <div class="news-pic flex-middle">
-              <img v-bind:src="item.image">
-            </div>
-          </li>
+            <div class="news-pic flex-middle"><img v-bind:src="item.image"></div>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -350,15 +346,14 @@ export default {
       ],
       selected: 'company',
       selectedContent: '',
-      news: [
-        {id: 1, title: '倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-12-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 2, title: '倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-11-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 3, title: '倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-10-24 12:24:58', image: '../../static/images/news.png'},
-        {id: 4, title: '倍倍利最红11月讲真，大红包限时抢，精彩不容错过！倍倍利最红11月讲真，大红包限时抢，精彩不容错过！', published_at: '2016-09-24 12:24:58', image: '../../static/images/news.png'}
-      ]
+      list: [],
+      busy: false,
+      api: 'article/news',
+      nextApi: ''
     }
   },
   mounted () {
+    this.loadData()
   },
   computed: {
   },
@@ -372,6 +367,24 @@ export default {
       } else {
         this.selectedContent = key
       }
+    },
+    loadData: function (refresh) {
+      let uri = this.api
+      if (this.nextApi && !refresh) {
+        uri = this.nextApi
+      }
+      if (refresh) {
+        this.list = []
+      }
+      this.$http.get(uri).then((response) => {
+        let dataList = response.data.data
+        this.list = this.list.concat(dataList)
+        if (response.data.meta.pagination.links.next) {
+          this.nextApi = response.data.meta.pagination.links.next
+          this.busy = false
+        }
+      })
+      this.busy = true
     }
   },
   watch: {
