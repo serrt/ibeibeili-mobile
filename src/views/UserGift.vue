@@ -156,4 +156,10 @@ export default {
 }
 </script>
 <style scoped>
+.welfare2 .welfare-item ul li.valid .welfare-content .items .items-money{
+  color: #e72418;
+}
+.welfare2 .welfare-item ul li .welfare-content .items .items-money{
+  color: #717171;
+}
 </style>
