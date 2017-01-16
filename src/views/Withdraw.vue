@@ -38,10 +38,10 @@
         </ul>
       </div>
       <div class="container">
-        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1222}}">充值说明</router-link>
+        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1222}}">提现说明</router-link>
       </div>
       <div class="container">
-        <button type="button" class="btn" v-on:click="recharge">提&nbsp;现</button>
+        <button type="button" class="btn" v-on:click="withdraw">提&nbsp;现</button>
       </div>
     </div>
   </div>
@@ -49,9 +49,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator, MessageBox},
   beforeCreate: function () {
     if (!this.$store.getters.user.bank_card_number) {
       this.$router.back()
@@ -81,8 +82,16 @@ export default {
   computed: {
   },
   methods: {
-    recharge () {
-      console.log(this.money)
+    withdraw () {
+      if (this.money > 0) {
+        this.$http.post('user/withdraw', {money: this.money}).then((response) => {
+          if (response.data.status === 0) {
+            this.$router.replace({name: 'user-withdraw-pay', params: {sn: response.data.sn}})
+          } else {
+            MessageBox.alert(response.data.msg, '充值失败')
+          }
+        })
+      }
     }
   },
   watch: {

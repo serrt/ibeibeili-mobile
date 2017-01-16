@@ -29,6 +29,8 @@ const routes = [
   { path: '/help', name: 'help', component: (resolve) => { require(['./views/Help.vue'], (resolve)) } },
   // 我的账户
   { path: '/user', name: 'user', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 任务中心
+  { path: '/user-task', name: 'user-task', component: (resolve) => { require(['./views/UserTask.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 账户设置
   { path: '/user-set', name: 'user-set', component: (resolve) => { require(['./views/UserSet.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 修改登录密码
@@ -69,6 +71,8 @@ const routes = [
   { path: '/user-invest-pay/:sn', name: 'user-invest-pay', component: (resolve) => { require(['./views/iframe/Invest.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 充值支付跳转
   { path: '/user-recharge-pay/:sn', name: 'user-recharge-pay', component: (resolve) => { require(['./views/iframe/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 提现支付跳转
+  { path: '/user-withdraw-pay/:sn', name: 'user-withdraw-pay', component: (resolve) => { require(['./views/iframe/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

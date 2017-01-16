@@ -55,7 +55,7 @@
 
         <!-- 四大功能 -->
         <div class='four-features full-container'>
-          <div class="feature h50 mission" >
+          <router-link class="feature h50 mission" :to="{name: 'user-task'}" tag="div">
             <div class="feature-cont flex-middle ">
               <div class="full-container">
                 <i class="iconfont icon-renwu"></i><br>
@@ -63,7 +63,7 @@
                 <span class="detail">领取每日福利</span>
               </div>
             </div>
-          </div>
+          </router-link>
           <router-link class="feature h50 invite" :to="{name: 'virtual'}" tag="div">
             <div class="feature-cont flex-middle">
               <div class="full-container">

@@ -136,16 +136,18 @@ export default {
         }
       }
       for (let i = 0; i < canvasObj.angle.length; i++) {
-        ctx.beginPath()
-        ctx.moveTo(canvasObj.x, canvasObj.y)
-        ctx.arc(canvasObj.x, canvasObj.y, canvasObj.r, canvasObj.startAngle, canvasObj.startAngle + canvasObj.angle[i], false)
-        ctx.strokeStyle = canvasObj.color[i]
-        ctx.stroke()
-        ctx.moveTo(canvasObj.x, canvasObj.y)
-        ctx.fillStyle = canvasObj.color[i]
-        ctx.fill()
-        ctx.closePath()
-        canvasObj.startAngle = canvasObj.startAngle + canvasObj.angle[i]
+        if (canvasObj.angle[i] > 0) {
+          ctx.beginPath()
+          ctx.moveTo(canvasObj.x, canvasObj.y)
+          ctx.arc(canvasObj.x, canvasObj.y, canvasObj.r, canvasObj.startAngle, canvasObj.startAngle + canvasObj.angle[i], false)
+          ctx.strokeStyle = canvasObj.color[i]
+          ctx.stroke()
+          ctx.moveTo(canvasObj.x, canvasObj.y)
+          ctx.fillStyle = canvasObj.color[i]
+          ctx.fill()
+          ctx.closePath()
+          canvasObj.startAngle = canvasObj.startAngle + canvasObj.angle[i]
+        }
       }
     }
   },

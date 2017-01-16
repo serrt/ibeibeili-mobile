@@ -6,15 +6,13 @@
         <span>{{item.name}}</span>
       </div>
     </div>
-
-
     <!-- 公司简介 -->
     <div class="intro-item container company" v-show="selected==='company'">
       <!-- 公司介绍 -->
       <div class="info full-container company-info">
         <div class="title container">
           公司介绍
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('company-info')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='company-info', 'icon-jia': selectedContent!=='company-info'}" v-on:click="toggleContent('company-info')"></i>
         </div>
         <div class="detail full-container" v-show="selectedContent==='company-info'">
           <div class="pics full-container">
@@ -33,7 +31,7 @@
       <div class="info full-container big-events">
         <div class="title container">
           大事件
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('big-events')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='big-events', 'icon-jia': selectedContent!=='big-events'}" v-on:click="toggleContent('big-events')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='big-events'">
           <ul>
@@ -172,7 +170,7 @@
       <div class="info full-container qualifications">
         <div class="title container">
           资质证照
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('qualifications')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='qualifications', 'icon-jia': selectedContent!=='qualifications'}" v-on:click="toggleContent('qualifications')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='qualifications'">
           暂无
@@ -187,7 +185,7 @@
       <div class="info full-container money-manage">
         <div class="title container">
           资金托管
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('money-manage')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='money-manage', 'icon-jia': selectedContent!=='money-manage'}" v-on:click="toggleContent('money-manage')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='money-manage'">
           <div class="security-pics tuoguan"></div>
@@ -203,7 +201,7 @@
       <div class="info full-container risk">
         <div class="title container">
           严密风控
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('risk')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='risk', 'icon-jia': selectedContent!=='risk'}" v-on:click="toggleContent('risk')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='risk'">
           <div class="security-pics fengkong"></div>
@@ -220,7 +218,7 @@
       <div class="info full-container secret">
         <div class="title container">
           隐私保护
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('secret')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='secret', 'icon-jia': selectedContent!=='secret'}" v-on:click="toggleContent('secret')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='secret'">
           <div class="security-pics yinsi"></div>
@@ -236,7 +234,7 @@
       <div class="info full-container law">
         <div class="title container">
           法律保障
-          <i class="iconfont icon-jia fr" v-on:click="toggleContent('law')"></i>
+          <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='law', 'icon-jia': selectedContent!=='law'}" v-on:click="toggleContent('law')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='law'">
           <div class="security-pics law"></div>
