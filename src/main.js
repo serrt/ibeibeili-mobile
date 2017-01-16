@@ -60,11 +60,15 @@ if (window.localStorage.bbl_token) {
 axios.interceptors.response.use((response) => {
   if (response.data.code === 401) {
     router.push({name: 'login'})
+  } else if (response.data.code === 404) {
+    Indicator.close()
+    router.replace({name: 'not-found'})
   } else if (response.data.code === 500) {
     MessageBox('网络错误,刷新重试')
     window.location.reload()
+  } else {
+    return response
   }
-  return response
 }, (error) => {
   if (error.response) {
     if (error.response.status === 404) {

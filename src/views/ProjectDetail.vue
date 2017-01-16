@@ -32,10 +32,10 @@
           {{item.attr_name}}
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
         </router-link>
-        <li class="container">
+        <router-link :to="{name: 'project-invest-list', params: {id:this.$route.params.id}}" tag="li" class="container">
           投资明细
           <span class="toNext"><i class="iconfont icon-unie61f"></i></span>
-        </li>
+        </router-link>
       </ul>
       <div class="rights">
         <i class="iconfont icon-renwu"></i>{{project.collateral_type}}

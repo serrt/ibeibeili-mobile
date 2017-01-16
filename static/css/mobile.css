@@ -684,7 +684,7 @@ span.toNext {
 }
 
 span.toNext .iconfont {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
 }
 
 /* 多余文字处理 */
@@ -1310,7 +1310,7 @@ span.toNext .iconfont {
 }
 
 .header ul li span i {
-  font-size: 20px;
+  font-size: 1.4rem;
 }
 
 .header ul .back {
@@ -1318,11 +1318,14 @@ span.toNext .iconfont {
   text-align: left;
 }
 
+.header ul .back i {
+  color: #797979;
+}
+
 .header ul .title {
   width: 50%;
-  font-size: 20px;
+  font-size: 1.6rem;
   text-align: center;
-  font-size: 19px;
 }
 
 .header ul .other {
@@ -1340,7 +1343,7 @@ span.toNext .iconfont {
 
 .header ul .other span.all-read {
   color: #e72418;
-  font-size: 10px;
+  font-size: 1.2rem;
   width: 100%;
 }
 
@@ -1421,8 +1424,7 @@ span.toNext .iconfont {
 
 .tabs .tab-option span {
   display: inline-block;
-  height: 100%;
-  padding: 0 12px;
+  height: 39px;
   margin-bottom: 3px;
 }
 
@@ -1505,7 +1507,7 @@ span.toNext .iconfont {
   left: 0;
   position: fixed;
   color: #fff;
-  z-index: 300;
+  z-index: 9999;
   background-color: rgba(231, 36, 24, 0.6);
 }
 
@@ -1750,6 +1752,8 @@ span.toNext .iconfont {
   background-color: #f8f8f8;
   margin-top: 80px;
   position: relative;
+  padding-top: 10px;
+  background-color: #f8f8f8;
 }
 
 #investList .list {
@@ -1759,7 +1763,7 @@ span.toNext .iconfont {
 #investList .list li {
   background-color: #fff;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 }
 
 #investList .list li .progress {
@@ -1842,14 +1846,17 @@ span.toNext .iconfont {
 
 #investList .list li .list-item .detail .state .btn {
   width: 100%;
-  height: 2rem;
+  height: 2.5rem;
   font-size: 1.2rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
   border-radius: 2rem 0 0 2rem;
+  margin-right: -0.8rem;
+  text-align: left;
+  padding-left: 1rem;
 }
 
 #investList .list li .list-item .detail .state .state-getReady {
-  background-color: #fbf200;
+  background-color: #f08300;
 }
 
 #investList .list li .list-item .detail .state .state-paying {
@@ -2070,11 +2077,11 @@ span.toNext .iconfont {
   width: 55%;
   height: 100%;
   float: left;
-  background-color: #fbf200;
+  background-color: #f08300;
 }
 
 .invest-details .progress .overplus {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .invest-details ul {
@@ -2266,7 +2273,7 @@ span.toNext .iconfont {
 
 .investing ul li .balance .investNow {
   display: inline-block;
-  border: 1px solid #fbf200;
+  border: 1px solid #f08300;
   padding: 2px;
   border-radius: 2px;
   width: auto;
@@ -2274,7 +2281,7 @@ span.toNext .iconfont {
   font-size: 1.1rem;
   line-height: 1.1rem;
   background-color: #fff;
-  color: #fbf200;
+  color: #f08300;
   vertical-align: center;
   margin-left: 2px;
 }
@@ -2331,7 +2338,7 @@ span.toNext .iconfont {
 }
 
 .investing ul li .valid {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .investing ul li .invalid {
@@ -2418,7 +2425,7 @@ span.toNext .iconfont {
   margin: 0 auto;
   margin-bottom: 1.5rem;
   border-radius: 50%;
-  border: 1px solid #fbf200;
+  border: 1px solid #f08300;
   font-size: 0;
 }
 
@@ -2503,7 +2510,7 @@ span.toNext .iconfont {
 .recharge-withdraw .recharge-box ul li .get-all-money {
   position: absolute;
   right: 18px;
-  background-color: #fbf200;
+  background-color: #f08300;
   color: #fff;
   border-radius: 3px;
   padding: 2px;
@@ -2608,14 +2615,16 @@ span.toNext .iconfont {
   position: relative;
   line-height: 1.8rem;
   padding-right: 1rem;
+  padding-left: 0.5rem;
 }
 
 .infolist ul li .toNext {
   position: absolute;
-  right: 0.5rem;
+  right: 1.5rem;
   top: 0;
   line-height: 4rem;
   font-size: 2rem;
+  color: #b7b6b6;
 }
 
 .infolist ul li .info-content {
@@ -2634,14 +2643,14 @@ span.toNext .iconfont {
 
 .infolist ul li .isNew::before {
   position: absolute;
-  left: 0.4rem;
-  top: 0.7rem;
+  left: 0.2rem;
+  top: 0.4rem;
   content: "";
-  width: 0.5rem;
-  height: 0.5rem;
+  width: 6px;
+  height: 6px;
   display: block;
   background-color: #e72418;
-  border-radius: 50%;
+  border-radius: 100%;
 }
 
 .infolist .no-Data {
@@ -2652,12 +2661,18 @@ span.toNext .iconfont {
 }
 
 .notice {
-  margin-top: 41px;
+  margin-top: 40px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #eee;
 }
 
 .notice li {
   padding: 1.3rem 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   background-color: #fff;
 }
 
@@ -2670,7 +2685,7 @@ span.toNext .iconfont {
   background-repeat: no-repeat;
   background-position: 0 0;
   vertical-align: top;
-  margin-right: 5px;
+  margin-right: 1rem;
 }
 
 .notice li .project-remind {
@@ -2693,11 +2708,11 @@ span.toNext .iconfont {
 
 .notice li .hasNew::before {
   position: absolute;
-  width: 0.6rem;
-  height: 0.6rem;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
-  top: -0.1rem;
-  right: -0.1rem;
+  top: -0.2rem;
+  right: -0.2rem;
   content: "";
   background-color: #e72418;
 }
@@ -2705,7 +2720,6 @@ span.toNext .iconfont {
 .notice li .newMessage .message-title {
   font-size: 1.5rem;
   color: #393939;
-  margin-bottom: 0.2rem;
   line-height: 18px;
 }
 
@@ -2790,7 +2804,7 @@ span.toNext .iconfont {
 }
 
 .user-projects .projects li .icon-bangzhu {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .myproject-detail {
@@ -2817,7 +2831,7 @@ span.toNext .iconfont {
 }
 
 .myproject-detail .project-items .project-item .icon-bangzhu {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .myproject-detail .project-items .project-item .income-money, .myproject-detail .project-items .project-item .invest-moey {
@@ -2899,7 +2913,7 @@ span.toNext .iconfont {
 }
 
 .transaction-details .list ul li .icon-zhengque {
-  color: #fbf200;
+  color: #f08300;
   font-size: 1.4rem;
   margin-top: -0.2rem;
 }
@@ -2910,7 +2924,7 @@ span.toNext .iconfont {
 }
 
 .transaction-details .list ul li .icon-bangzhu {
-  color: #fbf200;
+  color: #f08300;
   font-size: 1.6rem;
   margin-top: -0.2rem;
   margin-left: -0.1rem;
@@ -2948,19 +2962,30 @@ span.toNext .iconfont {
 }
 
 .intro-item {
-  margin-top: 90px;
-  background-color: #fff;
+  padding-top: 10px;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0px;
+  background-color: #f8f8f8;
 }
 
 .intro-item .info {
+  background-color: #fff;
   border: 1px solid #eaeaea;
   padding: 1rem 0;
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.8rem;
+  box-shadow: 0 1px #eaeaea;
 }
 
 .intro-item .info .title, .intro-item .info .get-intouch-title {
   font-size: 1.5rem;
   color: #4b4b4b;
+}
+
+.intro-item .info .title i, .intro-item .info .get-intouch-title i {
+  margin-top: 2px;
 }
 
 .intro-item .info .get-intouch-title {
@@ -3046,11 +3071,11 @@ span.toNext .iconfont {
 }
 
 .intro-item .big-events ul .year {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .intro-item .big-events ul .year .node .circle {
-  background-color: #fbf200;
+  background-color: #f08300;
 }
 
 .security .security-pics {
@@ -3127,7 +3152,7 @@ span.toNext .iconfont {
 .latest-news li .date {
   font-size: 1.2rem;
   position: absolute;
-  bottom: 1.3rem;
+  bottom: 0.8rem;
   left: 1.3rem;
 }
 
@@ -3268,7 +3293,13 @@ span.toNext .iconfont {
 
 .freshmen-experience {
   margin-top: 40px;
-  margin-bottom: 45px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 45px;
+  background-color: #f8f8f8;
+  overflow-y: auto;
 }
 
 .freshmen-experience ul li {
@@ -3278,7 +3309,8 @@ span.toNext .iconfont {
   width: 100%;
   max-width: 640px;
   margin: 0 auto;
-  line-height: 4.5rem;
+  height: 4rem;
+  line-height: 4rem;
   border-bottom: 1px solid #f0f0f0;
 }
 
@@ -3302,8 +3334,8 @@ span.toNext .iconfont {
 .freshmen-experience ul li .assets-value span {
   display: inline-block;
   padding: 0;
-  border: 1px solid #666;
-  color: #666666;
+  background-color: #666;
+  color: #fff;
   text-align: center;
   width: 20%;
   border-radius: 5px;
@@ -3313,6 +3345,11 @@ span.toNext .iconfont {
   background-color: #e72418;
   border: none;
   color: #fff;
+}
+
+.freshmen-experience ul li.choose-value {
+  margin: 0.8rem 0;
+  height: auto;
 }
 
 .confirm-experience {
@@ -3377,6 +3414,8 @@ span.toNext .iconfont {
 
 .help-center .help-list ul li .open .answer {
   display: block;
+  color: #666;
+  font-size: 1.1rem;
 }
 
 .discovery-box {
@@ -3563,7 +3602,7 @@ span.toNext .iconfont {
 }
 
 .wallet .item-list ul li .interest::before {
-  background-color: #fbf200;
+  background-color: #f08300;
 }
 
 .wallet .item-list ul li .invest-money::before {
@@ -3672,6 +3711,7 @@ span.toNext .iconfont {
   height: auto;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  background-color: #e72418;
 }
 
 .my-bank .bankbox .banklogo {
@@ -3690,10 +3730,6 @@ span.toNext .iconfont {
   font-size: 1.2rem;
   color: #fff;
   line-height: 1.6rem;
-}
-
-.my-bank .boc, .my-bank .icbc, .my-bank .citic, .my-bank .gdb, .my-bank .hxb, .my-bank .szpab, .my-bank .cmb {
-  background-color: #e72418;
 }
 
 .my-bank .unbind {
@@ -3795,6 +3831,88 @@ span.toNext .iconfont {
 
 .set-name {
   margin-top: 60px;
+}
+
+.operation-success {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  color: #767777;
+  text-align: center;
+}
+
+.operation-success img {
+  width: 40%;
+  margin-bottom: 3rem;
+}
+
+.operation-success .back-home {
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 8rem;
+}
+
+.operation-success .back-home .btn {
+  font-size: 2rem;
+}
+
+.assets-planner-header {
+  background-color: transparent;
+  color: #fff;
+  background-color: #e72418;
+}
+
+.assets-planner-header .other .rules {
+  color: #fff;
+  text-decoration: underline;
+}
+
+.assets-planner-header .back span i {
+  color: #fff;
+}
+
+.ivest-logs {
+  margin-top: 40px;
+}
+
+.ivest-logs .detail-title {
+  height: 40px;
+  line-height: 40px;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #ececec;
+}
+
+.ivest-logs .detail-title div {
+  -webkit-box-flex: 1;
+  flex: 1;
+  text-align: center;
+}
+
+.ivest-logs .logs ul {
+  width: 100%;
+  height: auto;
+}
+
+.ivest-logs .logs ul li {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ececec;
+}
+
+.ivest-logs .logs ul li div {
+  -webkit-box-flex: 1;
+  flex: 1;
+  text-align: center;
+  font-size: 1.2rem;
+  line-height: 30px;
+}
+
+.ivest-logs .logs ul li div:nth-child(3) p {
+  line-height: 1.4rem;
+  display: block;
 }
 
 .error-page {
@@ -4100,7 +4218,7 @@ span.toNext .iconfont {
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .join .join-date, .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .join .total-days span {
   font-size: 2.4rem;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .join p:nth-child(2) {
@@ -4109,7 +4227,7 @@ span.toNext .iconfont {
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .lottery .change-date, .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .lottery .lottery-nums {
   font-size: 2.4rem;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .lottery p:nth-child(2) {
@@ -4121,14 +4239,14 @@ span.toNext .iconfont {
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .lottery a.go-lottery {
-  color: #fbf200;
-  border-bottom: 1px solid #fbf200;
+  color: #f08300;
+  border-bottom: 1px solid #f08300;
   line-height: 2rem;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .total-invest .invest-total-money, .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .total-invest .income-total-money, .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .total-invest .overcome {
   font-size: 2.4rem;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .total-invest img {
@@ -4138,12 +4256,12 @@ span.toNext .iconfont {
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .first span {
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .first span.all-days {
   font-size: 2.4rem;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .first img {
@@ -4167,7 +4285,7 @@ span.toNext .iconfont {
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .invest-history .item p span {
   font-size: 2rem;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .invest-history .first-invest {
@@ -4208,7 +4326,7 @@ span.toNext .iconfont {
 }
 
 .u-detail .swiper-container .swiper-wrapper .swiper-slide .detail-content .history .invest-type p span {
-  color: #fbf200;
+  color: #f08300;
   font-size: 24px;
 }
 
@@ -4492,6 +4610,212 @@ span.toNext .iconfont {
   width: 100%;
 }
 
+.homepage {
+  background-color: #f8f8f8;
+  margin-bottom: 50px;
+  /* 累计交易额 */
+  /* 推荐项目 */
+  /*  四大功能  */
+  /* 平台公告 */
+}
+
+.homepage .banner {
+  font-size: 0px;
+}
+
+.homepage .banner img {
+  width: 100%;
+}
+
+.homepage .trade-volume {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #fff;
+  border-bottom: 1px solid #efefef;
+  margin-bottom: 1rem;
+}
+
+.homepage .trade-volume .go-detail {
+  font-size: 1.1rem;
+  color: #e72418;
+  margin-bottom: 1rem;
+}
+
+.homepage .trade-volume .go-detail .toNext {
+  font-size: 1.1rem;
+  color: #666666;
+}
+
+.homepage .trade-volume .total-num {
+  font-size: 1.2rem;
+  color: #666666;
+}
+
+.homepage .trade-volume .total-num span {
+  font-size: 1.6rem;
+  padding: 0.1rem 0.2rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+  margin-right: 3px;
+}
+
+.homepage .recommend {
+  border-top: 1px solid #efefef;
+  border-bottom: 1px solid #efefef;
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+
+.homepage .recommend .invest-name {
+  font-size: 1.4rem;
+  color: #666;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #f5f5f5;
+  line-height: 1.6rem;
+}
+
+.homepage .recommend .invest-name span {
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.homepage .recommend .invest-intro {
+  width: 100%;
+}
+
+.homepage .recommend .invest-intro .rate {
+  -webkit-box-flex: 1;
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.homepage .recommend .invest-intro .rate .rate-num {
+  margin-bottom: 1.5rem;
+}
+
+.homepage .recommend .invest-intro .rate .rate-num p.expect {
+  height: 1.8rem;
+  line-height: 1.8rem;
+  font-size: 1.8rem;
+  color: #e72418;
+}
+
+.homepage .recommend .invest-intro .rate .rate-num p.expect span {
+  font-size: 1.2rem;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: -0.5rem;
+}
+
+.homepage .recommend .invest-intro .rate .intro-title {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.homepage .recommend .invest-intro .days {
+  -webkit-box-flex: 2;
+  flex: 2;
+  padding: 2rem 0;
+}
+
+.homepage .recommend .invest-intro .days p.duration {
+  height: 1.8rem;
+  line-height: 1.8rem;
+  font-size: 1.4rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.homepage .recommend .invest-intro .days .days-title {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.homepage .recommend .invest-intro .buy {
+  -webkit-box-flex: 2;
+  flex: 2;
+  padding: 2rem 0;
+}
+
+.homepage .recommend .invest-intro .buy .invest-btn {
+  background-color: #f18101;
+  width: 90%;
+  height: 40px;
+  line-height: 40px;
+}
+
+.homepage .four-features {
+  margin-bottom: 1rem;
+  background-color: #fff;
+}
+
+.homepage .four-features .feature {
+  background-color: transparent;
+  width: 50%;
+  text-align: center;
+  width: 100%;
+}
+
+.homepage .four-features .feature i {
+  display: inline-block;
+  font-size: 2.5rem;
+  color: #e72418;
+  margin-bottom: 0.5rem;
+}
+
+.homepage .four-features .feature .title {
+  font-size: 1.4rem;
+  color: #4d4d4d;
+}
+
+.homepage .four-features .feature .detail {
+  font-size: 1rem;
+  color: #ababab;
+}
+
+.homepage .four-features .feature .feature-cont {
+  padding: 1rem 0;
+  -webkit-box-flex: 1;
+  flex: 1;
+}
+
+.homepage .four-features .feature .feature-cont:nth-child(1) {
+  border-right: 1px solid #f3f3f3;
+  margin-left: -1px;
+}
+
+.homepage .four-features .feature:nth-child(1) {
+  border-bottom: 1px solid #f3f3f3;
+}
+
+.homepage .notice-news {
+  background-color: #fff;
+  font-size: 1.3rem;
+  color: #4d4d4d;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.homepage .notice-news .notice-logo {
+  display: block;
+  float: left;
+  width: 3.7rem;
+  height: 3.6rem;
+  background-image: url(../images/notice.png);
+  background-size: 100% 100%;
+  margin-right: 10px;
+}
+
+.homepage .big-events {
+  font-size: 0;
+}
+
+.homepage .big-events img {
+  width: 100%;
+}
+
 .login-box {
   text-align: center;
 }
@@ -4512,7 +4836,7 @@ span.toNext .iconfont {
 
 .login-box .login-input .other-option .go-reg {
   float: left;
-  color: #fbf200;
+  color: #f08300;
 }
 
 .login-box .login-input .other-option .forget-password {

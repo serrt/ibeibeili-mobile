@@ -68,9 +68,7 @@
       <!-- 投资合同 -->
       <div class="invest-contract container">
         投资合同
-        <span class="toNext">
-          查看详情<i class="iconfont icon-unie61f"></i>
-        </span>
+        <router-link class="toNext" :to="{name: 'user-project-contract', params: {id: this.$route.params.id}}" tag="span">查看详情<i class="iconfont icon-unie61f"></i></router-link>
       </div>
     </div>
   </div>

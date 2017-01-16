@@ -16,7 +16,10 @@ const routes = [
   { path: '/projects', name: 'projects', component: (resolve) => { require(['./views/ProjectList.vue'], (resolve)) } },
   // 项目详细
   { path: '/project/:id', name: 'project-detail', component: (resolve) => { require(['./views/ProjectDetail.vue'], (resolve)) } },
+  // 项目属性
   { path: '/project-attr/:id/:attr', name: 'project-attr', component: (resolve) => { require(['./views/ProjectAttr.vue'], (resolve)) } },
+  // 项目投资列表
+  { path: '/project-invest-list/:id', name: 'project-invest-list', component: (resolve) => { require(['./views/ProjectInvestList.vue'], (resolve)) } },
   // 投资项目
   { path: '/project/:id/invest-project', name: 'project-invest', component: (resolve) => { require(['./views/ProjectInvest.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 投资成功
@@ -53,6 +56,8 @@ const routes = [
   { path: '/user-project', name: 'user-project', component: (resolve) => { require(['./views/UserProject.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户投资项目详细
   { path: '/user-project/:id', name: 'user-project-detail', component: (resolve) => { require(['./views/UserProjectDetail.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 项目合同
+  { path: '/user-project-contract/:id', name: 'user-project-contract', component: (resolve) => { require(['./views/UserProjectContract.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户消息
   { path: '/user-message', name: 'user-message', component: (resolve) => { require(['./views/UserMessage.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 交易详细
@@ -75,7 +80,9 @@ const routes = [
   { path: '/user-withdraw-pay/:sn', name: 'user-withdraw-pay', component: (resolve) => { require(['./views/iframe/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
-  { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }
+  // 404
+  { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } },
+  { path: '/404', name: 'not-found', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }
 ]
 
 export default routes
