@@ -14,10 +14,10 @@
             <div class="recharge-attention container">
               <div class="recharge-bank">充值银行
                 <span class="fr bank-name">
-                  <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank_name}}{{user.bank_card_number.substring(user.bank_card_number.length-6, user.bank_card_number.length) | strHide(0,4)}}
+                  <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank.name}}{{bank_card_number | strHide(0,4)}}
                 </span>
               </div>
-              <div class="limit">充值限额<span class="fr">每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{max_money}}</span></span></div>
+              <div class="limit">充值限额<span class="fr">每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{bank.recharge_once}}</span></span></div>
             </div>
           </li>
         </ul>
@@ -26,7 +26,7 @@
         <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1222}}">充值说明</router-link>
       </div>
       <div class="container">
-        <button type="button" class="btn" v-on:click="recharge" >充&nbsp;值</button>
+        <button type="button" class="btn" v-on:click="recharge">充&nbsp;值</button>
       </div>
     </div>
   </div>
@@ -39,7 +39,15 @@ import { Indicator, MessageBox } from 'mint-ui'
 export default {
   components: {HeaderTop, Indicator, MessageBox},
   beforeCreate: function () {
-    if (!this.$store.getters.user.bank_card_number) {
+    let user = this.$store.getters.user
+    if (!user.bank_card_number) {
+      let str = '请先身份认证?'
+      if (user.name_verified) {
+        str = '请先绑定支付账户?'
+      }
+      MessageBox.confirm(str).then(({ value, action }) => {
+        this.$router.push({name: 'user-verify'})
+      }).catch(action => {})
       this.$router.back()
     }
   },
@@ -48,16 +56,25 @@ export default {
       title: '充值',
       money: null,
       user: this.$store.getters.user,
-      bank_name: 'xx',
-      max_money: 50000
+      bank: {}
     }
   },
   mounted () {
-    this.$http.get('code/' + this.user.bank_code).then((response) => {
-      this.bank_name = response.data.data.name
-    })
+    if (this.user.bank_code) {
+      this.$http.get('bank/' + this.user.bank_code).then((response) => {
+        this.bank = response.data.data
+      })
+    }
   },
   computed: {
+    bank_card_number: function () {
+      let user = this.user
+      if (user.bank_card_number) {
+        return user.bank_card_number.substring(user.bank_card_number.length - 6, user.bank_card_number.length)
+      } else {
+        return ''
+      }
+    }
   },
   methods: {
     recharge () {

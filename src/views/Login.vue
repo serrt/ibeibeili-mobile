@@ -39,6 +39,11 @@ import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
   components: {HeaderTop, Indicator, MessageBox},
+  beforeCreate: function () {
+    if (this.$store.getters.isLogin) {
+      this.$router.push({name: 'user'})
+    }
+  },
   data: function () {
     return {
       title: '登录',

@@ -7,7 +7,7 @@
           <div class="container">
             <!-- class: hasNew -->
             <span class="user-message fl"></span>
-            <router-link class="newMessage" :to="{name: 'article-detail', params: {id: sale_notice.id}}" tag="div">
+            <router-link class="newMessage" :to="{name: 'article-list', params: {cate: sale_notice.cate}}" tag="div">
               <div class="message-title surplus">预售公告<span class="date fr">{{sale_notice.published_at}}</span></div>
               <div class="abstract surplus">{{sale_notice.title}}</div>
             </router-link>
@@ -17,7 +17,7 @@
           <div class="container">
             <!-- class: hasNew -->
             <span class="project-remind fl"></span>
-            <router-link class="newMessage" :to="{name: 'article-detail', params: {id: payment_notice.id}}" tag="div">
+            <router-link class="newMessage" :to="{name: 'article-list', params: {cate: payment_notice.cate}}" tag="div">
               <div class="message-title surplus">还款公告<span class="date fr">{{payment_notice.published_at}}</span></div>
               <div class="abstract surplus">{{payment_notice.title}}</div>
             </router-link>
@@ -52,8 +52,8 @@ export default {
   data: function () {
     return {
       title: '公告中心',
-      sale_notice: {id: 1},
-      payment_notice: {id: 1},
+      sale_notice: {id: 1, cate: 1},
+      payment_notice: {id: 1, cate: 1},
       list: [],
       busy: false,
       api: 'article/system',

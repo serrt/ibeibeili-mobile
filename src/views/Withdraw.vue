@@ -17,20 +17,21 @@
               <div class="recharge-bank">
                 提现银行
                 <span class="fr bank-name">
-                  <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank_name}}{{user.bank_card_number.substring(user.bank_card_number.length-6, user.bank_card_number.length) | strHide(0,4)}}
+                  <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank.name}}{{bank_card_number | strHide(0,4)}}
                 </span>
               </div>
               <div class="fee">
                 手续费
                 <span class="fr">
-                  <mt-spinner type="snake" v-show="spinner"></mt-spinner>
-                  <i class="iconfont icon-renminbi" v-show="!spinner"></i><span class="fee-num">{{user_fee}}</span>
+                  <i class="iconfont icon-renminbi"></i>
+                  <mt-spinner type="snake" v-show="spinner" v-bind:style="{display: 'inline-block'}" :size="18"></mt-spinner>
+                  <span class="fee-num" v-show="!spinner">{{user_fee}}</span>
                 </span>
               </div>
               <div class="limit">
                 提现限额
                 <span class="fr">
-                  每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{max_money}}</span>
+                  每笔<i class="iconfont icon-renminbi"></i><span class="limit-num">{{bank.withdraw_once}}</span>
                 </span>
               </div>
             </div>
@@ -54,7 +55,15 @@ import { Indicator, MessageBox } from 'mint-ui'
 export default {
   components: {HeaderTop, Indicator, MessageBox},
   beforeCreate: function () {
-    if (!this.$store.getters.user.bank_card_number) {
+    let user = this.$store.getters.user
+    if (!user.bank_card_number) {
+      let str = '请先身份认证?'
+      if (user.name_verified) {
+        str = '请先绑定支付账户?'
+      }
+      MessageBox.confirm(str).then(({ value, action }) => {
+        this.$router.push({name: 'user-verify'})
+      }).catch(action => {})
       this.$router.back()
     }
   },
@@ -62,24 +71,32 @@ export default {
     return {
       title: '提现',
       user: this.$store.getters.user,
-      bank_name: 'xx',
+      bank: {},
       money: null,
-      timer: null,
       spinner: false,
       balance: 0,
-      user_fee: 0,
-      max_money: 50000
+      user_fee: 0
     }
   },
   mounted () {
     this.$http.get('user/balance').then((response) => {
       this.balance = response.data.balance
     })
-    this.$http.get('code/' + this.user.bank_code).then((response) => {
-      this.bank_name = response.data.data.name
-    })
+    if (this.user.bank_code) {
+      this.$http.get('bank/' + this.user.bank_code).then((response) => {
+        this.bank = response.data.data
+      })
+    }
   },
   computed: {
+    bank_card_number: function () {
+      let user = this.user
+      if (user.bank_card_number) {
+        return user.bank_card_number.substring(user.bank_card_number.length - 6, user.bank_card_number.length)
+      } else {
+        return ''
+      }
+    }
   },
   methods: {
     withdraw () {
@@ -88,7 +105,7 @@ export default {
           if (response.data.status === 0) {
             this.$router.replace({name: 'user-withdraw-pay', params: {sn: response.data.sn}})
           } else {
-            MessageBox.alert(response.data.msg, '充值失败')
+            MessageBox.alert(response.data.msg, '提现失败')
           }
         })
       }
@@ -103,7 +120,7 @@ export default {
         this.spinner = true
         let self = this
         this.timer = setTimeout(function () {
-          self.$http.get('user/withdrawFee', {money: value}).then((response) => {
+          self.$http.get('user/withdrawFee?money=' + value).then((response) => {
             self.user_fee = response.data.fee.user_fee
             self.spinner = false
           })

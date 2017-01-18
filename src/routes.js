@@ -49,7 +49,7 @@ const routes = [
   // 充值
   { path: '/withdraw', name: 'withdraw', component: (resolve) => { require(['./views/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 签到
-  { path: '/sign', name: 'sign', component: (resolve) => { require(['./views/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  { path: '/sign', name: 'sign', component: (resolve) => { require(['./views/Sign.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户福利（红包、加息券、财富值）
   { path: '/user-gift', name: 'user-gift', component: (resolve) => { require(['./views/UserGift.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户投资项目
@@ -80,6 +80,8 @@ const routes = [
   { path: '/user-withdraw-pay/:sn', name: 'user-withdraw-pay', component: (resolve) => { require(['./views/iframe/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
+  // 文章分类列表
+  { path: '/article-list/:cate', name: 'article-list', component: (resolve) => { require(['./views/ArticleList.vue'], (resolve)) } },
   // 404
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } },
   { path: '/404', name: 'not-found', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

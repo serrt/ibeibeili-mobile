@@ -1,6 +1,6 @@
 <template>
   <div class="full-container">
-    <div id="home" class="home-content" v-on:touchstart="touchstart" v-on:touchmove="touchmove" v-on:touchend="touchend">
+    <div id="home" class="home-content">
       <div class="banner full-container swiper-container">
         <mt-swipe :auto="4000">
           <mt-swipe-item class="swiper-slide" v-for="item in img_list">
@@ -70,7 +70,7 @@
             </div>
           </div>
         </router-link>
-        <div class="feature h50 help" :to="{name: 'about'}" tag="div">
+        <div class="feature h50 help">
           <div class="feature-cont flex-middle" :to="{name: 'about'}">
             <div class="full-container">
               <i class="iconfont icon-yaoqing"></i><br>
@@ -88,6 +88,7 @@
             </div>
           </div>
         </router-link>
+        <div class="clear"></div>
       </div>
 
       <!-- 平台公告 -->
@@ -113,8 +114,7 @@ export default {
       img_list: [],
       project: {id: 0},
       img_show: false,
-      touchStart: 0,
-      touchEnd: 0,
+      allLoaded: true,
       trade_money: 0 // 累计交易额
     }
   },
@@ -162,21 +162,12 @@ export default {
     }
   },
   methods: {
-    touchstart: function (event) {
-      this.touchStart = event.touches[0].clientY
-    },
-    touchmove: function (event) {
-      this.touchEnd = event.touches[0].clientY
-    },
-    touchend: function (event) {
-      // ele.scrollHeight >= window.outerHeight / 2
-    }
   }
 }
 </script>
 <style scoped>
   .banner{
-    height: 30%;
+    height: 30%
   }
   .banner img {
     width: 100%;

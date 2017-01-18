@@ -1,5 +1,5 @@
-body{
-  background-color: #f8f8f8;
+.notice{
+  position: relative;
 }
 
 #home .trade-volume .total-num span{
@@ -9,6 +9,7 @@ body{
 .user-account .money-operate{
   margin-bottom: 0;
 }
+
 .top-box{
   margin-top: 40px;
 }

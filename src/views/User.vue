@@ -34,10 +34,9 @@
       </div>
       <div class="functions">
         <div class="flex wrap">
-          <div class="item">
-            <i class="iconfont icon-xiugaioryijian"></i>
-            签到
-          </div>
+          <router-link class="item" :to="{name: 'sign'}" tag="div">
+            <i class="iconfont icon-xiugaioryijian"></i>签到
+          </router-link>
           <router-link class="item" :to="{name: 'user-gift'}" tag="div">
             <i class="iconfont icon-37"></i>福利
           </router-link>
