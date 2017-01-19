@@ -50,6 +50,8 @@ const routes = [
   { path: '/withdraw', name: 'withdraw', component: (resolve) => { require(['./views/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 签到
   { path: '/sign', name: 'sign', component: (resolve) => { require(['./views/Sign.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 补签卡
+  { path: '/sign-remark', name: 'sign-remark', component: (resolve) => { require(['./views/SignRemark.vue'], (resolve)) } },
   // 用户福利（红包、加息券、财富值）
   { path: '/user-gift', name: 'user-gift', component: (resolve) => { require(['./views/UserGift.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户投资项目

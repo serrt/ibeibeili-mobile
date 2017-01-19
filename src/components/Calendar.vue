@@ -43,14 +43,14 @@ export default {
   },
   props: ['list'],
   mounted () {
-    let self = this
-    let timer = setInterval(function () {
-      if (self.list) {
-        clearInterval(timer)
-        self.initData(self.formatDate(self.currentYear, self.currentMonth, self.currentDay))
-        Indicator.close()
-      }
-    }, 50)
+    // let self = this
+    // let timer = setInterval(function () {
+    //   if (self.list) {
+    //     clearInterval(timer)
+    //     self.initData(self.formatDate(self.currentYear, self.currentMonth, self.currentDay))
+    //     Indicator.close()
+    //   }
+    // }, 50)
   },
   computed: {
   },
@@ -63,7 +63,7 @@ export default {
         'sign': false,
         'bu': false
       }
-      if (day.getMonth() === now.getMonth()) {
+      if (day.getMonth() === now.getMonth() && now.getFullYear() === day.getFullYear()) {
         for (let i in this.list) {
           if (this.list[i] === day.getDate()) {
             classes.sign = true
@@ -129,6 +129,11 @@ export default {
     }
   },
   watch: {
+    list: function (value) {
+      let now = new Date()
+      this.initData(this.formatDate(now.getFullYear(), now.getMonth() + 1, 1))
+      Indicator.close()
+    }
   }
 }
 </script>
@@ -142,7 +147,6 @@ export default {
   }
   .month {
     width: 100%;
-    background: #00B8EC;
   }
 
   .month ul {
@@ -176,7 +180,7 @@ export default {
 
 
   .month ul li {
-    color: white;
+    color: #000;
     font-size: 20px;
     text-transform: uppercase;
     letter-spacing: 3px;
@@ -185,10 +189,9 @@ export default {
   .weekdays {
     margin: 0;
     padding: 10px 0;
-    background-color: #00B8EC;
     display: flex;
     flex-wrap: wrap;
-    color: #FFFFFF;
+    color: #000;
     justify-content: space-around;
   }
 
@@ -213,7 +216,7 @@ export default {
     width: 13%;
     text-align: center;
     padding: 10px 0;
-    margin: 0 1px;
+    margin: 1px;
     font-size: 1rem;
     color: #000;
   }

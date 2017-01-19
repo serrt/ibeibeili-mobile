@@ -4,7 +4,7 @@
     <div class="page-box top-box main-wrapper">
       <div class="mainHeader">
         <img src="../../static/images/sign/sign-header.gif" alt="签到" class="main-header-bg"/>
-        <div class="card-count">您有<span class="color-warning">{{user.tacked}}</span>张<span class="text-radius">补签卡</span></div>
+        <div class="card-count">您有<span class="color-warning">{{user.tacked}}</span>张<router-link class="text-radius" :to="{name:'sign-remark'}" tag="span">补签卡</router-link></div>
         <div class="signCount">
           <ul>
             <li>连签<span>{{signInfo.continue}}</span>天</li>
@@ -74,33 +74,24 @@
         </ul>
       </div>
       <!-- 抽取礼物-->
-      <div class="flop-out" ontouchstart="return false" onmousewheel="return false">
+      <div class="flop-out" onmousewheel="return false" v-show="flopShow">
         <div class="flop">
           <ul>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
-            </li>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
-            </li>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
-            </li>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
-            </li>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
-            </li>
-            <li class="face">
-              <img class="face-img" src="../../static/images/sign/flop-face.png" alt="签到翻牌"/>
+            <li v-for="item in flops" v-bind:class="{'rotate':item.rotate}" v-on:click="flop(item)">
+              <div class="face yourgift" v-show="item.sign">
+                <div class="win"></div>
+                <div class="redbag">
+                  <div class="text">{{item.giftName}}</div>
+                </div>
+              </div>
+              <div class="face face-img" v-show="!item.sign"></div>
             </li>
           </ul>
-          <div class="result">
-            <p>恭喜您，获得<span></span>元现金红包！</p>
-            <p>请在倍倍利财富“红包”中查看</p>
+          <div class="result" v-show="giftName!==''">
+            <p>恭喜您，获得<span>{{giftName}}</span>！</p>
+            <p>请在我的账户“福利”中查看</p>
           </div>
-          <a href="javascript:void(0);">知道了</a>
+          <a v-on:click="toggle()" href="javascript:void(0);">知道了</a>
         </div>
       </div>
     </div>
@@ -113,54 +104,98 @@ import Calendar from '../components/Calendar'
 import {Indicator, MessageBox, Toast} from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, Calendar, MessageBox},
+  components: {HeaderTop, Indicator, Calendar, MessageBox, Toast},
   data: function () {
     return {
       title: '签到',
-      calendarShow: true,
+      calendarShow: true, // 显示日历框
+      flopShow: false, // 显示抽奖框
+      // 抽奖元素
+      flops: [
+        {rotate: false, sign: false, giftName: ''},
+        {rotate: false, sign: false, giftName: ''},
+        {rotate: false, sign: false, giftName: ''},
+        {rotate: false, sign: false, giftName: ''},
+        {rotate: false, sign: false, giftName: ''},
+        {rotate: false, sign: false, giftName: ''}
+      ],
       user: this.$store.getters.user,
-      continueGift: [],
-      signInfo: {}
+      continueGift: [], // 连续签到的礼物
+      signInfo: {}, // 已签到的信息
+      pickDay: null, // 点击的日期Date
+      loading: false, // 动画执行中
+      giftName: ''
     }
   },
   mounted () {
-    Indicator.open()
-    this.$http.post('user/user').then((response) => {
-      this.$store.dispatch('user', response.data)
-    })
-    this.$http.get('user/signInfo').then((response) => {
-      this.signInfo = response.data
-    })
-    this.$http.get('user/signContinueGift').then((response) => {
-      this.continueGift = response.data.data
-    })
+    this.init()
   },
   computed: {
   },
   methods: {
+    init: function () {
+      Indicator.open()
+      this.$http.post('user/user').then((response) => {
+        this.$store.dispatch('user', response.data)
+        this.user = response.data
+      })
+      this.$http.get('user/signInfo').then((response) => {
+        this.signInfo = response.data
+      })
+      this.$http.get('user/signContinueGift').then((response) => {
+        this.continueGift = response.data.data
+      })
+      this.giftName = ''
+    },
     pick: function (day) {
       let now = new Date()
       if (now.getFullYear() !== day.getFullYear() || now.getMonth() !== day.getMonth()) {
-        Toast({message: '仅能签到当月', position: 'bottom', duration: 2000})
+        Toast({message: '仅能签到当月', position: 'center', duration: 2000})
         return
       }
       if (day.class && day.class.sign) {
-        Toast({message: '已经签到过了', position: 'bottom', duration: 2000})
+        Toast({message: '已经签到过了', position: 'center', duration: 2000})
         return
       }
       if (day.getDate() > now.getDate()) {
-        Toast({message: '时间还没到', position: 'bottom', duration: 2000})
+        Toast({message: '时间还没到', position: 'center', duration: 2000})
         return
       }
       if (day.getDate() < now.getDate() && this.user.tacked === 0) {
-        Toast({message: '补签卡不足', position: 'bottom', duration: 2000})
+        Toast({message: '补签卡不足', position: 'center', duration: 2000})
         return
       }
-      this.$http.post('user/sign', {date: day.toLocaleDateString()}).then((response) => {
-        if (response.data.status === 1) {
-          MessageBox.alert(response.data.msg, '提示')
+      this.flopShow = true
+      this.pickDay = day
+    },
+    flop: function (item) {
+      if (!this.loading) {
+        item.rotate = true
+        this.loading = true
+        this.$http.post('user/sign', {date: this.pickDay.toLocaleDateString()}).then((response) => {
+          this.loading = false
+          item.rotate = false
+          if (response.data.status === 1) {
+            MessageBox.alert(response.data.msg, '提示')
+          } else {
+            this.loading = false // 允许关闭窗体
+            item.rotate = false // 结束动画
+            item.sign = true
+            this.giftName = item.giftName = response.data.gift_name
+          }
+        })
+      }
+    },
+    toggle: function () {
+      if (!this.loading) {
+        this.flopShow = !this.flopShow
+        if (this.giftName !== '' && !this.flopShow) {
+          for (let i in this.flops) {
+            this.flops[i].sign = false
+          }
+          this.init()
         }
-      })
+      }
     }
   },
   watch: {
@@ -408,8 +443,7 @@ export default {
     position: fixed;
     overflow: scroll;
     top:0;
-    z-index:220;
-    display: none;
+    z-index:200;
   }
 
 
@@ -421,58 +455,108 @@ export default {
     background-size:100% 100%;
     background-repeat:no-repeat;
     margin: 0 auto;
-    box-sizing:border-box;
-    z-index:-1;
     position:relative;
-    top: 50%; /*偏移*/
     transform: translateY(-50%);
+    animation: slide-in 0.3s linear;
+    animation-fill-mode: forwards;
+  }
+  .slide-in{
+  }
+  .slide-out{
+    animation: slide-out 0.5s linear;
+  }
+  @-webkit-keyframes slide-in {
+    from { top: -50%; }
+    to { top: 50%; }
+  }
+  @keyframes slide-in {
+    from { top: -50%; }
+    to { top: 50%; }
+  }
+  @-ms-keyframes slide-in {
+    from { top: -50%; }
+    to { top: 50%; }
+  }
+  @-webkit-keyframes slide-out {
+    from { top: 50%; }
+    to { top: -50%; }
+  }
+  @keyframes slide-out {
+    from { top: 50%; }
+    to { top: -50%; }
+  }
+  @-ms-keyframes slide-out {
+    from { top: 50%; }
+    to { top: -50%; }
   }
   .flop ul{
     width:100%;
     margin:0 auto;
   }
+  .flop ul li.rotate{
+    -webkit-animation: spin 1s infinite linear;
+    -moz-animation: spin 1s infinite linear;
+    -ms-animation: spin 1s infinite linear;
+    animation: spin 1s infinite linear;
+  }
+  @-webkit-keyframes spin {
+    from { -webkit-transform: rotateY(0); }
+    to { -webkit-transform: rotateY(360deg); }
+  }
+  @-ms-keyframes spin {
+    from { ms-transform: rotateY(0); }
+    to { ms-transform: rotateY(360deg); }
+  }
+  @keyframes spin {
+    from { transform: rotateY(0); }
+    to { transform: rotateY(360deg); }
+  }
+
+  .flop ul li{
+    width: 31%;
+    display: inline-block;
+    position: relative;
+    margin: 1%;
+  }
+  
+  .flop .face{
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    min-height: 120px;
+  }
   .flop .face-img{
+    background-image: url('../../static/images/sign/flop-face.png');
+  }
+  .flop .yourgift{
+    background-image: url('../../static/images/sign/flop-back.png');
+  }
+  .flop .win{
+    background-image:url('../../static/images/sign/win.png');
+    background-size: 60%;
+    position:absolute;
     width: 100%;
     height: 100%;
-    min-width: 75px;
-    max-height: 190px;
-  }
-  .flop ul li{
-    width:30%;
-    display:inline-block;
-    margin:2px;
-  }
-
-
-  .flop ul li.yourgift div{
-    background-image:url('../../static/images/sign/flop-back.png');
-    width:90px;
-    height:120px;
-    background-size:90px 120px;
-    position:relative;
-    z-index:2;
-    padding-top:30px;
-  }
-
-  .flop  ul li.yourgift .win{
-    background-image:url('../../static/images/sign/win.png');
-    width:50px;
-    height:40px;
-    background-size:50px 40px;
-    position:absolute;
+    background-repeat: no-repeat;
     top:-10px;
     left:-10px;
-    z-index:5;
+    z-index: 1;
   }
-  .flop ul li.yourgift .redbag{
+  .flop .redbag{
     background-image:url('../../static/images/sign/redbag.png');
-    width:50px;
-    height:60px;
-    background-size:50px 60px;
-    font-size:14px;
-    line-height:20px;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    position:absolute;
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
     text-align:center;
     color:#fff;
+    z-index: 2;
+  }
+  .flop .redbag .text{
+    position: absolute;
+    bottom: 0;
   }
 
 

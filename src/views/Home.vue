@@ -138,13 +138,13 @@ export default {
       let number3 = Math.floor(this.trade_money - 100000000 * number1 - 10000 * number2)
       // 少于4位用0代替
       let stringNumber2 = number2.toString()
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 4; i++) {
         if (stringNumber2[i] === undefined) {
           stringNumber2 = 0 + stringNumber2
         }
       }
       let stringNumber3 = number3.toString()
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 4; i++) {
         if (stringNumber3[i] === undefined) {
           stringNumber3 = 0 + stringNumber3
         }
