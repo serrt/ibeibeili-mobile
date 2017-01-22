@@ -91,7 +91,7 @@
             <p>恭喜您，获得<span>{{giftName}}</span>！</p>
             <p>请在我的账户“福利”中查看</p>
           </div>
-          <a v-on:click="toggle()" href="javascript:void(0);">知道了</a>
+          <a v-on:click="toggle()" href="javascript:void(0);">关闭</a>
         </div>
       </div>
     </div>

@@ -69,8 +69,9 @@ export default {
   computed: {
     bank_card_number: function () {
       let user = this.user
-      if (user.bank_card_number) {
-        return user.bank_card_number.substring(user.bank_card_number.length - 6, user.bank_card_number.length)
+      let bankNumber = user.bank_card_number || ''
+      if (bankNumber.length > 6) {
+        return bankNumber.substring(bankNumber.length - 6, bankNumber.length)
       } else {
         return ''
       }

@@ -79,7 +79,7 @@ export default {
     }
   },
   mounted () {
-    if (this.$route.params.refresh) {
+    if (this.$route.params.refresh || this.$route.query.refresh) {
       this.$http.post('user/user').then((response) => {
         this.$store.dispatch('user', response.data)
       })

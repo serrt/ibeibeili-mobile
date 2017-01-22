@@ -68,9 +68,10 @@ export default {
           if (this.list[i] === day.getDate()) {
             classes.sign = true
             break
-          } else if (day.getDate() < this.list[i] && !classes.sign) {
-            classes.bu = true
           }
+        }
+        if (day.getDate() < now.getDate() && !classes.sign) {
+          classes.bu = true
         }
       }
       return classes

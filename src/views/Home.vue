@@ -71,13 +71,13 @@
           </div>
         </router-link>
         <div class="feature h50 help">
-          <div class="feature-cont flex-middle" :to="{name: 'about'}">
+          <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div">
             <div class="full-container">
               <i class="iconfont icon-yaoqing"></i><br>
               <span class="title">邀请有奖</span><br>
               <span class="detail">经纪人制度</span>
             </div>
-          </div>
+          </router-link>
         </div>
         <router-link class="feature h50 about" :to="{name: 'about'}" tag="div">
           <div class="feature-cont flex-middle">
