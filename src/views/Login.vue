@@ -41,7 +41,7 @@ export default {
   components: {HeaderTop, Indicator, MessageBox},
   beforeCreate: function () {
     if (this.$store.getters.isLogin) {
-      this.$router.push({name: 'user'})
+      this.$router.back()
     }
   },
   data: function () {

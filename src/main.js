@@ -66,9 +66,8 @@ axios.interceptors.response.use((response) => {
   } else if (response.data.code === 500) {
     MessageBox('网络错误,刷新重试')
     window.location.reload()
-  } else {
-    return response
   }
+  return response
 }, (error) => {
   if (error.response) {
     if (error.response.status === 404) {
@@ -77,6 +76,7 @@ axios.interceptors.response.use((response) => {
       console.log('方法不被允许')
     } else if (error.response.status === 401) {
       console.log('授权失败')
+      router.push({name: 'login'})
     }
   } else {
     console.log('Error', error.message)

@@ -78,7 +78,7 @@ export default {
       data: {balance: 0.00, total: 0.00, bonus: 0.00, total_bonus: 0.00}
     }
   },
-  mounted () {
+  created () {
     if (this.$route.params.refresh || this.$route.query.refresh) {
       this.$http.post('user/user').then((response) => {
         this.$store.dispatch('user', response.data)
@@ -86,8 +86,14 @@ export default {
     }
     Indicator.open()
     this.$http.get('user/money').then((response) => {
-      this.data = response.data
       Indicator.close()
+      if (response.code === 200) {
+        this.data = response.data
+      } else {
+        MessageBox.alert('请重新登陆', '提示')
+        this.$store.dispatch('logout')
+        this.$router.replace({name: 'login'})
+      }
     })
   },
   computed: {
