@@ -36,6 +36,7 @@
 import HeaderTop from '../components/Header'
 import md5 from 'blueimp-md5'
 import { Indicator, MessageBox } from 'mint-ui'
+import appEnv from '../env'
 
 export default {
   components: {HeaderTop, Indicator, MessageBox},
@@ -66,7 +67,7 @@ export default {
       if (!this.unsubmit) {
         data.grant_type = 'password'
         data.client_id = '2'
-        data.client_secret = '0rQMzyS6RtjVudAJGXA79ax1dAz5zKe2dgU76M9U'
+        data.client_secret = appEnv.clientSecret
         data.scope = '*'
         Indicator.open()
         this.$http.post('login', data).then((response) => {
