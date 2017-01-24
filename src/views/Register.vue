@@ -101,6 +101,12 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.query.invite_code) {
+      this.invite_code = this.$route.query.invite_code
+    }
+    if (this.$route.params.invite_code) {
+      this.invite_code = this.$route.params.invite_code
+    }
   },
   computed: {
     next: function () {

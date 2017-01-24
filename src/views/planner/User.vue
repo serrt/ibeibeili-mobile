@@ -19,7 +19,7 @@
             <div class="name">{{item.name}}</div>
             <div class="phonenum">{{item.phone_number}}</div>
             <div class="is-remind flex-middle">
-              <button type="button" class="btn reminds" v-on:click="sms" v-bind:class="{invalid:item.phone===0}">提醒TA投资</button>
+              <button type="button" class="btn reminds" v-on:click="sms" v-bind:class="{invalid:item.phone===0 || item.phone_number===null}">提醒TA投资</button>
             </div>
           </li>
         </ul>

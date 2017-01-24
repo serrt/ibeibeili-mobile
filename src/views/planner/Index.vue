@@ -66,10 +66,8 @@
           <span>{{planInfo.totalPlanMoney}}元</span>
         </router-link>
         <div class="total-invest">
-          <a href="">
-            <span>好友当月累计投资</span>
-            <span>{{planInfo.monthInvest}}元</span>
-          </a>
+          <span>好友当月累计投资</span>
+          <span>{{planInfo.monthInvest}}元</span>
         </div>
       </div>
       <div class="month-commission full-container">

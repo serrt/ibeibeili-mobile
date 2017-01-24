@@ -48,14 +48,16 @@ export default {
   components: {Popup, MessageBox},
   data: function () {
     return {
-      url: 'http://192.168.1.104:8080/#/register?invite_code=' + this.$store.getters.user.invite_code,
+      url: '',
+      // url: 'https://www.baidu.com/search?s=1',
       qrcodeSrc: '',
       qrcodeShow: false
     }
   },
   props: ['show'],
   mounted () {
-    this.qrcodeSrc = this.$http.defaults.baseURL + 'qrcode?text=' + this.url
+    this.url = 'http://192.168.1.104:8080/#/register?invite_code=' + this.$store.getters.user.invite_code
+    this.qrcodeSrc = this.$http.defaults.baseURL + 'qrcode?text=' + encodeURIComponent(this.url)
   },
   computed: {
   },
