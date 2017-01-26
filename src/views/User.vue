@@ -87,7 +87,7 @@ export default {
     Indicator.open()
     this.$http.get('user/money').then((response) => {
       Indicator.close()
-      if (response.code === 200) {
+      if (response.data.code === 200) {
         this.data = response.data
       } else {
         MessageBox.alert('请重新登陆', '提示')

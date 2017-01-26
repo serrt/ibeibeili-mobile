@@ -34,7 +34,7 @@
           <div class="container red-bag">
             红包
             <div class="fr bag-nums" v-on:click="toggleGift()" v-bind:class="{'invalid': gifts.length==0 || !gift_check, 'valid': gifts.length>0}">
-              <span v-if="gift_check">{{gifts.length}}个可用&gt;</span>
+              <span v-if="gift_check">{{gift_avaliable}}个可用&gt;</span>
               <span v-if="!gift_check">不允许使用红包</span>
             </div>
           </div>
@@ -86,6 +86,7 @@ export default {
       // 红包
       gifts: [],
       gift_show: false,
+      // gift_avaliable: 0,
       // 加息券
       rates: [],
       rate_show: false
@@ -116,6 +117,7 @@ export default {
     })
     this.$http.get('user/availableGift').then((response) => {
       this.gifts = response.data.data
+      // this.gift_avaliable = response.data.data.length
       Indicator.close()
     })
     this.$http.get('user/availableRate').then((response) => {
@@ -148,13 +150,22 @@ export default {
     gift_total: function () {
       let money = 0
       if (this.user_money) {
-        for (var i in this.gifts) {
+        for (let i in this.gifts) {
           if (this.gifts[i].choosed) {
             money += this.gifts[i].money
           }
         }
       }
       return money
+    },
+    gift_avaliable: function () {
+      let num = this.gifts.length
+      for (let i = 0; i < this.gifts.length; i++) {
+        if (this.gifts[i] && this.gifts[i].disabled) {
+          num--
+        }
+      }
+      return num
     }
   },
   methods: {

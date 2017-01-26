@@ -94,22 +94,17 @@ export default {
     }
   },
   mounted () {
-    if (this.$store.getters.projectInfo.id === parseInt(this.$route.params.id)) {
-      this.project = this.$store.getters.projectInfo
-      this.projectAttr = this.$store.getters.projectAttr
-    } else {
-      Indicator.open()
-      this.$http.get('projects/' + this.$route.params.id).then((response) => {
-        this.project = response.data.data
-        this.$store.dispatch('project', this.project)
-        // 项目属性
-        this.$http.get('project_attr/' + this.$route.params.id).then((response) => {
-          Indicator.close()
-          this.projectAttr = response.data.data
-          this.$store.dispatch('attr', this.projectAttr)
-        })
+    Indicator.open()
+    this.$http.get('projects/' + this.$route.params.id).then((response) => {
+      this.project = response.data.data
+      this.$store.dispatch('project', this.project)
+      // 项目属性
+      this.$http.get('project_attr/' + this.$route.params.id).then((response) => {
+        Indicator.close()
+        this.projectAttr = response.data.data
+        this.$store.dispatch('attr', this.projectAttr)
       })
-    }
+    })
   },
   computed: {
     projectPercent: function () {
