@@ -10,18 +10,21 @@
           <span class="fr"><i class="iconfont icon-renminbi"></i>{{project.finance_money}}</span>
         </div>
         <div class="project-item">
-          投资金额 <i class="iconfont icon-bangzhu"></i>
+          投资金额
+          <i class="iconfont icon-bangzhu text-warning" v-if="invest.gift !== ''" v-on:click="alert('输入金额+红包金额', '投资金额')"></i>
           <span class="fr invest-moey">
             <i class="iconfont icon-renminbi"></i>{{invest.invest_money}}
           </span>
         </div>
         <div class="project-item">
-          利率 <i class="iconfont icon-bangzhu"></i>
+          利率
+          <i class="iconfont icon-bangzhu text-warning"" v-if="invest.rate > 0" v-on:click="alert('本金利率+加息券利率', '利率')"></i>
           <span class="fr" v-if="invest.rate_number > 0">+{{invest.rate}}%</span>
           <span class="fr">{{project.rate}}%</span>
         </div>
         <div class="project-item">
-          收益 <i class="iconfont icon-bangzhu"></i>
+          收益
+          <i class="iconfont icon-bangzhu text-warning"" v-if="invest.rate > 0" v-on:click="alert('投资金额收益+加息券收益', '收益')"></i>
           <span class="fr income-money">
             <i class="iconfont icon-renminbi"></i>{{invest.invest_money | projectProfit(project)}}<span v-if="invest.rate_number>0">+<i class="iconfont icon-renminbi"></i>{{invest.rate_number}}</span>
           </span>
@@ -76,10 +79,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
-import { Indicator } from 'mint-ui'
+import { Indicator, MessageBox } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator},
+  components: {HeaderTop, Indicator, MessageBox},
   data: function () {
     return {
       title: '我的项目详细',
@@ -100,6 +103,11 @@ export default {
   computed: {
   },
   methods: {
+    alert: function (msg, title) {
+      if (msg) {
+        MessageBox.alert(msg, title)
+      }
+    }
   },
   watch: {
   }

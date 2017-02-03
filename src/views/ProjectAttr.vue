@@ -13,13 +13,14 @@
 <script>
 import HeaderTop from '../components/Header'
 import Detail from '../components/Detail'
+import env from '../../env'
 
 export default {
-  components: {HeaderTop, Detail},
+  components: {HeaderTop, Detail, env},
   data: function () {
     return {
       data: {},
-      baseUrl: 'http://www.bbl.com',
+      baseUrl: env.baseUrl,
       list: []
     }
   },
@@ -45,10 +46,11 @@ export default {
   },
   methods: {
     preview: function (index) {
-      let preImg = [{src: 'https://www.ibeibeili.com/resources/uploads/2016/12/22/fe36a11756cbb8668fb9ec4bf359eb0a.jpg', w: 1600, h: 333}]
-      // for (let i in this.list) {
-      //   preImg[i] = {src: this.baseUrl + this.list[i].full_url, w: 600, h: 400}
-      // }
+      let preImg = []
+      // preImg = [{src: 'https://www.ibeibeili.com/resources/uploads/2016/12/22/fe36a11756cbb8668fb9ec4bf359eb0a.jpg', w: 1600, h: 333}]
+      for (let i in this.list) {
+        preImg[i] = {src: this.baseUrl + this.list[i].full_url, w: 600, h: 400}
+      }
       this.$preview.open(index, preImg)
     }
   },

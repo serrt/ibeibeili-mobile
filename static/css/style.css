@@ -21,10 +21,10 @@
 }
 
 .text-warning{
-  color: #f18101;
+  color: #f18101 !important;
 }
 .text-danger{
-  color: #e72418;
+  color: #e72418 !important;
 }
 
 .btn.btn-warning{
