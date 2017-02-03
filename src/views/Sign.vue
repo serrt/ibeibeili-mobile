@@ -172,7 +172,8 @@ export default {
       if (!this.loading) {
         item.rotate = true
         this.loading = true
-        this.$http.post('user/sign', {date: this.pickDay.toLocaleDateString()}).then((response) => {
+        let date = this.pickDay.getFullYear() + '-' + (this.pickDay.getMonth() + 1) + '-' + this.pickDay.getDate()
+        this.$http.post('user/sign', {date: date}).then((response) => {
           this.loading = false
           item.rotate = false
           if (response.data.status === 1) {
