@@ -14,7 +14,7 @@
         </div>
         <div class="goSign" v-bind:class="{'top': signInfo.current !== ''}" v-if="signInfo.current !== false">
           <p>今日已签</p>
-          <p class="gift">{{signInfo.current}}</p>
+          <p class="gift" v-if="">{{signInfo.current}}</p>
         </div>
         <div class="goSign" v-else v-on:click="pick(new Date())">签到领钱</div>
         <div class="sign" v-on:click="calendarShow=!calendarShow"><span></span>签到记录<span class="arrow" v-bind:class="{'icon-up': calendarShow}"></span></div>
@@ -564,6 +564,9 @@ export default {
     color: gray;
     width: 60%;
     height: 60%;
+    top: 20%;
+    left: 20%;
+    color: white;
   }
   .flop .redbag .text{
     position: absolute;
