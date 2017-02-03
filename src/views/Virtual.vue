@@ -23,15 +23,15 @@
           <span>任务奖励</span>
           <span>{{totalMoney | projectProfit(project)}}</span>
         </li>
-        <li>
+        <li class="choose-value">
           <span>选择财富值</span>
           <span class="toNext">
             <i class="iconfont icon-unie61f"></i>
           </span>
           <div class="assets-value">
-            <span v-for="item in list" class="value1" v-on:click="select(item)" v-bind:class="{'select': item.selected}">{{item.money}}点</span>
+            <div v-for="item in list" class="value1" v-on:click="select(item)" v-bind:class="{'select': item.selected}">{{item.money}}点</div>
           </div>
-        </li> 
+        </li>
         <li>
           <span>实际消耗：</span>
           <span>{{totalMoney}}</span>
@@ -113,10 +113,4 @@ export default {
 }
 </script>
 <style scoped>
-.value1{
-  margin: 2px 5px;
-}
-.freshmen-experience ul li .assets-value .select{
-  border: 1px solid #e72418;
-}
 </style>
