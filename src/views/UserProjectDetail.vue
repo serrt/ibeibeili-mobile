@@ -30,11 +30,11 @@
           投资时间
           <span class="fr">{{invest.invest_time}}</span>
         </div>
-        <div class="project-item">
+        <div class="project-item" v-if="project.interest_at">
           起息时间
           <span class="fr">{{project.interest_at}}</span>
         </div>
-        <div class="project-item">
+        <div class="project-item" v-if="project.interest_at">
           还款时间
           <span class="fr">{{project.payment_time}}</span>
         </div>
@@ -58,8 +58,8 @@
               <div>
                 {{item.profit}}<span v-if="item.rate_number>0">+{{item.rate_number}}</span>
               </div>
-              <div class="payed" v-bind:class="{'payed': item.status===1, 'paying': item.status===0}">{{item.status===1?'已还':'未还'}}</div>
-              <div class="surplus">{{item.pay_time?item.pay_time:item.input_time}}</div>
+              <div class="payed" v-bind:class="{'payed': item.status===1, 'paying': item.status===0}">{{item.status===1?'已还款':'待还款'}}</div>
+              <div>{{item.pay_time?item.pay_time:item.input_time}}</div>
             </div>
           </li>
         </ul>
