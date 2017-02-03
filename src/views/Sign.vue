@@ -79,8 +79,8 @@
           <ul>
             <li v-for="item in flops" v-bind:class="{'rotate':item.rotate}" v-on:click="flop(item)">
               <div class="face yourgift" v-show="item.sign">
-                <div class="win"></div>
-                <div class="redbag">
+                <div class="win" v-show="item.giftName !== '谢谢参与'"></div>
+                <div class="redbag" v-bind:class="{bg: item.giftName !== '谢谢参与'}">
                   <div class="text">{{item.giftName}}</div>
                 </div>
               </div>
@@ -183,6 +183,10 @@ export default {
             item.rotate = false // 结束动画
             item.sign = true
             this.giftName = item.giftName = response.data.gift_name
+            // 没有抽到奖品
+            if (this.giftName === '') {
+              item.giftName = '谢谢参与'
+            }
           }
         }).catch((response) => {
           this.loading = false // 允许关闭窗体
@@ -546,21 +550,32 @@ export default {
     z-index: 1;
   }
   .flop .redbag{
+    position:absolute;
+    text-align: center;
+    color: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+  }
+  .flop .redbag.bg{
     background-image:url('../../static/images/sign/redbag.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    position:absolute;
+    color: gray;
     width: 60%;
     height: 60%;
-    top: 20%;
-    left: 20%;
-    text-align:center;
-    color:#fff;
-    z-index: 2;
   }
   .flop .redbag .text{
     position: absolute;
+    bottom: 40%;
+    left: 15%;
+    font-size: 1.4rem;
+  }
+  .flop .redbag.bg .text{
+    position: absolute;
     bottom: 0;
+    left: 0;
+    font-size: 1rem;
   }
 
 
