@@ -8,34 +8,21 @@
       <div class="options full-container">
         <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
           <li class="flex">
-            <div class="option-item">
+            <router-link :to="{name: 'planner'}" class="option-item" tag="div">
               <div class="logo fl clear">
                 <span>
-                  <i class="iconfont icon-shangdian"></i>
-                </span>
-              </div>
-              <div class="intro">
-                <span class="title">积分商城</span>
-                <span class="abstract">赚积分  积分兑换</span>
-              </div>
-            </div>
-            <div class="option-item">
-              <div class="logo fl clear">
-                <span>
-                  <i class="iconfont icon-yaoqing"></i>
+                  <i class="iconfont icon-invite"></i>
                 </span>
               </div>
               <div class="intro">
                 <span class="title">邀请有奖</span>
                 <span class="abstract">邀请就有惊喜</span>
               </div>
-            </div>
-          </li>
-          <li class="flex">
+            </router-link>
             <router-link class="option-item" :to="{name: 'notice'}" tag="div">
               <div class="logo fl clear">
                 <span>
-                  <i class="iconfont icon-gonggao"></i>
+                  <i class="iconfont icon-info"></i>
                 </span>
               </div>
               <div class="intro">
@@ -43,17 +30,30 @@
                 <span class="abstract">公司动态信息</span>
               </div>
             </router-link>
+          </li>
+          <li class="flex">
             <div class="option-item">
               <div class="logo fl clear">
                 <span>
-                  <i class="iconfont icon-yunying"></i>
+                  <i class="iconfont icon-report"></i>
                 </span>
               </div>
               <div class="intro">
                 <span class="title">运营报告</span>
-                <span class="abstract">了解最新运营数据</span>
+                <span class="abstract">季度运营报告</span>
               </div>
             </div>
+            <router-link class="option-item" :to="{name: 'help'}" tag="div">
+              <div class="logo fl clear">
+                <span>
+                  <i class="iconfont icon-bangzhu2"></i>
+                </span>
+              </div>
+              <div class="intro">
+                <span class="title">帮助中心</span>
+                <span class="abstract">有问题找小倍</span>
+              </div>
+            </router-link>
           </li>
         </ul>
       </div>

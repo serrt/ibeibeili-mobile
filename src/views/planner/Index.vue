@@ -86,10 +86,15 @@
 <script>
 import Share from '../../components/Share'
 import HeaderTop from '../../components/Header'
-import {Indicator} from 'mint-ui'
+import {Indicator, MessageBox} from 'mint-ui'
 
 export default {
-  components: {Share, HeaderTop, Indicator},
+  components: {Share, HeaderTop, Indicator, MessageBox},
+  beforeCreate: function () {
+    MessageBox.alert('敬请期待').then(action => {
+      this.$router.back()
+    })
+  },
   data: function () {
     return {
       title: '理财师',
@@ -99,13 +104,13 @@ export default {
     }
   },
   mounted () {
-    Indicator.open()
-    this.$http.post('user/plannerInfo').then((response) => {
-      this.$store.dispatch('user', response.data.data)
-      this.user = response.data.data
-      this.planInfo = response.data
-      Indicator.close()
-    })
+    // Indicator.open()
+    // this.$http.post('user/plannerInfo').then((response) => {
+    //   this.$store.dispatch('user', response.data.data)
+    //   this.user = response.data.data
+    //   this.planInfo = response.data
+    //   Indicator.close()
+    // })
   },
   computed: {
   },

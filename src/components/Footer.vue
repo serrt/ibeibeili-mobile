@@ -40,19 +40,19 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
   .footer .router-link-active {
-    color: #e72418;
+    color: #e72418 !important;
   }
   .footer .router-link-active .icon-home:before {
-    content: "\e603";
+    content: "\e62b";
   }
   .footer .router-link-active .icon-touzi:before {
-    content: "\e64b";
+    content: "\e62d";
   }
   .footer .router-link-active .icon-discovery:before {
-    content: "\e617";
+    content: "\e62c";
   }
   .footer .router-link-active .icon-caifu:before {
-    content: "\e669";
+    content: "\e62e";
   }
 
 </style>

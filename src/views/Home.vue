@@ -71,15 +71,13 @@
           </div>
         </router-link>
         <div class="feature h50 help">
-          <div class="feature-cont flex-middle" v-on:click="wait">
-          <!-- <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div"> -->
+          <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div">
             <div class="full-container">
               <i class="iconfont icon-yaoqing"></i><br>
               <span class="title">邀请有奖</span><br>
               <span class="detail">经纪人制度</span>
             </div>
-          <!-- </router-link> -->
-          </div>
+          </router-link>
         </div>
         <router-link class="feature h50 about" :to="{name: 'about'}" tag="div">
           <div class="feature-cont flex-middle">
@@ -107,10 +105,10 @@
 
 <script>
 import FooterNav from '../components/Footer'
-import {MessageBox, Indicator, Toast} from 'mint-ui'
+import {MessageBox, Indicator} from 'mint-ui'
 
 export default {
-  components: {FooterNav, MessageBox, Indicator, Toast},
+  components: {FooterNav, MessageBox, Indicator},
   data: function () {
     return {
       img_list: [],
@@ -164,9 +162,6 @@ export default {
     }
   },
   methods: {
-    wait: function () {
-      Toast({message: '敬请期待', position: 'bottom', duration: 5000})
-    }
   }
 }
 </script>

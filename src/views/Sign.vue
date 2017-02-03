@@ -12,7 +12,7 @@
             <li>漏签<span>{{signInfo.leak}}</span>天</li>
           </ul>
         </div>
-        <div class="goSign top" v-if="signInfo.current">
+        <div class="goSign" v-bind:class="{'top': signInfo.current !== ''}" v-if="signInfo.current !== false">
           <p>今日已签</p>
           <p class="gift">{{signInfo.current}}</p>
         </div>
@@ -183,6 +183,9 @@ export default {
             item.sign = true
             this.giftName = item.giftName = response.data.gift_name
           }
+        }).catch((response) => {
+          this.loading = false // 允许关闭窗体
+          item.rotate = false // 结束动画
         })
       }
     },
