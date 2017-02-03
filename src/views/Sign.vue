@@ -23,9 +23,9 @@
       <!-- 日历 -->
       <calendar v-show="calendarShow" :list="signInfo.list" @pick="pick"></calendar>
       <!-- 连续奖品 -->
-      <div class="gift">
-        <img src="../../static/images/sign/continuity-gift.gif" alt="">
-        <div class="mysterious-gift" v-show="continueGift.length>0">
+      <div class="gift" v-show="continueGift.length>0">
+        <img src="../../static/images/sign/continuity-gift.gif" alt="连续签到"/>
+        <div class="mysterious-gift">
           <ul>
             <li v-for="item in continueGift">
               <!-- alreadyGet -->

@@ -108,7 +108,9 @@ export default {
   },
   computed: {
     projectPercent: function () {
-      return Math.floor(this.project.financed_money / this.project.finance_money * 100)
+      if (this.project.finance_money) {
+        return Math.floor(this.project.financed_money / this.project.finance_money * 100)
+      }
     }
   },
   methods: {
