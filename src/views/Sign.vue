@@ -87,7 +87,7 @@
               <div class="face face-img" v-show="!item.sign"></div>
             </li>
           </ul>
-          <div class="result" v-show="giftName!==''">
+          <div class="result" v-show="giftName!=='' && giftName!=='谢谢参与'">
             <p>恭喜您，获得<span>{{giftName}}</span>！</p>
             <p>请在我的账户“福利”中查看</p>
           </div>
@@ -183,10 +183,6 @@ export default {
             item.rotate = false // 结束动画
             item.sign = true
             this.giftName = item.giftName = response.data.gift_name
-            // 没有抽到奖品
-            if (this.giftName === '') {
-              item.giftName = '谢谢参与'
-            }
           }
         }).catch((response) => {
           this.loading = false // 允许关闭窗体
