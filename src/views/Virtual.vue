@@ -56,6 +56,7 @@ export default {
     return {
       title: '新手体验任务',
       project: {},
+      totalMoney: 0,
       list: []
     }
   },
@@ -70,19 +71,17 @@ export default {
     })
   },
   computed: {
-    totalMoney: function () {
-      let money = 0
-      for (let i in this.list) {
-        if (this.list[i].selected) {
-          money += this.list[i].money
-        }
-      }
-      return money
-    }
   },
   methods: {
     select: function (item) {
       item.selected = !item.selected
+      let money = 0
+      for (let i = 0; i < this.list.length; i++) {
+        if (this.list[i].selected) {
+          money += this.list[i].money
+        }
+      }
+      this.totalMoney = money
     },
     submit: function () {
       let id = []

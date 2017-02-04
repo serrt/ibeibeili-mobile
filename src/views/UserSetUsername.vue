@@ -38,7 +38,7 @@ export default {
     submit: function () {
       if (this.username === '') {
         this.error_box = {error: true, msg: '请输入用户名'}
-      } else if (this.username.length < 3 || this.username.length > 20) {
+      } else if (this.username.length < 6 || this.username.length > 20) {
         this.error_box = {error: true, msg: '用户名长度3-20'}
       } else if (!/^[a-zA-Z0-9_]*[a-zA-Z]+[a-zA-Z0-9_]*$/.test(this.username)) {
         this.error_box = {error: true, msg: '用户名由英文字母、数字和下划线（ _ ）组成,且至少有一个英文字符'}
