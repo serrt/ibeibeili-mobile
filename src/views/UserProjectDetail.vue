@@ -61,7 +61,7 @@
               <div>
                 {{item.profit}}<span v-if="item.rate_number>0">+{{item.rate_number}}</span>
               </div>
-              <div class="payed" v-bind:class="{'payed': item.status===1, 'paying': item.status===0}">{{item.status===1?'已还款':'待还款'}}</div>
+              <div v-bind:class="{'payed': item.status===1, 'paying': item.status===0}">{{item.status===1?'已还款':'待还款'}}</div>
               <div>{{item.pay_time?item.pay_time:item.input_time}}</div>
             </div>
           </li>
@@ -69,7 +69,7 @@
       </div> 
 
       <!-- 投资合同 -->
-      <div class="invest-contract container">
+      <div class="invest-contract container" v-if="profit.length > 0">
         投资合同
         <router-link class="toNext" :to="{name: 'user-project-contract', params: {id: project.id}}" tag="span">查看详情<i class="iconfont icon-unie61f"></i></router-link>
       </div>

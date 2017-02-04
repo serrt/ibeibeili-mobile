@@ -7,76 +7,81 @@
           <span>{{item.name}}</span>
         </div>
       </div>
-      <div class="container welfare">
+      <div class="container welfare2">
         <!-- 红包 -->
         <div class="welfare-item red-bag" v-show="selected==='gift'">
           <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-            <li v-for="item in giftData.list" v-bind:class="{'valid':item.status===0}">
-              <span class="left-pic">
-                <img src="../../static/images/welfare.png">
-                <i class="iconfont icon-renminbi"></i>
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <span v-if="item.type==1">单笔满{{item.rule_money}}元可用</span>
-                    <span v-else>现金红包</span>
-                    <span v-show="item.project_cate">仅限{{item.project_cate}}使用</span>
+            <li class="state" v-for="item in giftData.list" v-bind:class="{'used':item.status===1, 'overdue':item.status===2}">
+              <img src="../../static/images/welfare-bg.png"/>
+              <div class="welfare-content container">
+                <div class="fl">
+                  <div class="welfare-nums flex-middle">
+                    <i class="iconfont icon-renminbi"></i>{{item.money}}
+                  </div>
+                  <div class="welfare-from flex-middle">{{item.name}}</div>
+                </div>
+                <div class="fr">
+                  <div class="welfare-use flex-middle">
+                    <div class="welfare-function" v-if="item.type==1">单笔满{{item.rule_money}}元可用</div>
+                    <div class="welfare-function" v-else>现金红包</div>
+                    <!-- <div class="welfare-function" v-show="item.project_cate">仅限{{item.project_cate}}使</div> -->
+                  </div>
+                  <div class="welfare-duration flex-middle">
+                    <span class="durationTo" v-if="item.type==1">有效期至{{item.end_time}}</span>
+                    <span class="durationTo" v-else>领取时间{{item.end_time}}</span>
                   </div>
                 </div>
               </div>
-              <div class="voucher-from">
-                <span class="voucher-name">{{item.name}}</span>
-                <span class="voucher-name fr" v-if="item.type==1">有效期至{{item.end_time}}</span>
-                <span class="voucher-name fr" v-else>领取时间{{item.end_time}}</span>
-              </div>
-              <!-- 已使用 -->
-              <div class="state alreay-use" v-show="item.status===1"></div>
-              <!-- 已过期 -->
-              <div class="state overdue" v-show="item.status===2"></div>
+              <div class="welfare-state" v-if="item.status!==0"></div>
             </li>
           </ul>
         </div>
         <!-- 加息券 -->
         <div class="welfare-item rate-voucher" v-show="selected==='rate'">
           <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-            <li v-for="item in rateData.list" v-bind:class="{'valid':item.status===1}">
-              <div class="use">
-                <span class="use-money">{{item.rate}}<span>%</span></span>
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p v-show="item.rule_money > 0">单笔满{{item.rule_money}}元可用</p>
-                    <p v-show="item.project_cate">仅限{{item.project_cate}}使用</p>
+            <li class="state" v-for="item in rateData.list" v-bind:class="{'used':item.status===2, 'overdue':item.status===3}">
+              <img src="../../static/images/welfare-bg.png">
+              <div class="welfare-content container">
+                <div class="fl">
+                  <div class="welfare-nums flex-middle">{{item.rate}}<span>%</span></div>
+                  <div class="welfare-from flex-middle">{{item.name}}</div>
+                </div>
+                <div class="fr">
+                  <div class="welfare-use flex-middle">
+                    <div class="welfare-function">
+                      <p>单笔满{{item.rule_money}}元可用</p>
+                      <p v-if="item.project_cate">仅限{{item.project_cate}}月标使用</p>
+                    </div>
+                  </div>
+                  <div class="welfare-duration flex-middle">
+                    <div class="durationTo">有效期至2016-11-25</div>
                   </div>
                 </div>
               </div>
-              <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
-              <div class="state overdue" v-show="item.status===3"></div>
-              <div class="state alreay-use" v-show="item.status===2"></div>
+              <div class="welfare-state" v-if="item.status>1"></div>
             </li>
           </ul>
         </div>
         <!-- 财富值 -->
         <div class="welfare-item wealth-value" v-show="selected==='virtual'">
           <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-            <li v-for="item in virtualData.list" v-bind:class="{'valid': item.status===0}">
-              <span class="left-pic">
-                <img src="../../static/images/welfare2.png">
-              </span>
-              <div class="use fr">
-                <span class="use-money">{{item.money}}</span>点
-                <div class="use-purpose fr flex-middle">
-                  <div>
-                    <p>仅限新手体验任务</p>
-                    <p>仅限新手体验任务</p>
+            <li class="state" v-for="item in virtualData.list" v-bind:class="{'used':item.status===1 || item.status===4, 'overdue':item.status===2, 'alreay-pay':item.status===3}">
+              <img src="../../static/images/welfare-bg.png">
+              <div class="welfare-content container">
+                <div class="fl">
+                  <div class="welfare-nums flex-middle">{{item.money}}<span>点</span></div>
+                  <div class="welfare-from flex-middle">财富值</div>
+                </div>
+                <div class="fr">
+                  <div class="welfare-use flex-middle">
+                    <!-- <div class="welfare-function">单笔满200元可用</div> -->
+                  </div>
+                  <div class="welfare-duration flex-middle">
+                    <div class="durationTo">有效期至{{item.end_time}}</div>
                   </div>
                 </div>
               </div>
-              <div class="voucher-from"><span class="valid-date fr">{{item.end_time}}</span></div>
-              <div class="state alreay-use" v-show="item.status===1"></div>
-              <div class="state overdue" v-show="item.status===2"></div>
-              <div class="state alreay-pay" v-show="item.status===3"></div>
+              <div class="welfare-state" v-if="item.status >0"></div>
             </li>
           </ul>
         </div>
@@ -153,10 +158,4 @@ export default {
 }
 </script>
 <style scoped>
-.welfare .welfare-item li .voucher-from .voucher-name{
-  width: auto;
-}
-.fr{
-  float: right !important;
-}
 </style>
