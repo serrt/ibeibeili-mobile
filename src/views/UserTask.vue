@@ -16,7 +16,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-icon07"></i>
+                  <i class="iconfont icon-shiming"></i>
                 </div>
                 完成实名认证
                 <span class="fr mission-points">
@@ -27,7 +27,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-zhifu"></i>
+                  <i class="iconfont icon-bangdingyinhangka"></i>
                 </div>
                 绑定银行卡
                 <span class="fr mission-points">
@@ -38,7 +38,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-mima1"></i>
+                  <i class="iconfont icon-mimashezhi"></i>
                 </div>
                 设置支付密码
                 <span class="fr mission-points">
@@ -49,7 +49,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-yiyuebiao"></i>
+                  <i class="iconfont icon-yiyue"></i>
                 </div>
                 完成1月标任意金额投资
                 <span class="fr mission-points">
@@ -60,7 +60,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-sanyuebiao"></i>
+                  <i class="iconfont icon-sanyue"></i>
                 </div>
                 完成3月标任意金额投资
                 <span class="fr mission-points">
@@ -71,7 +71,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-liuyuebiao"></i>
+                  <i class="iconfont icon-liuyue"></i>
                 </div>
                 完成6月标任意金额投资
                 <span class="fr mission-points">
@@ -82,7 +82,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-caifu"></i>
+                  <i class="iconfont icon-yaoqinghaoyou"></i>
                 </div>
                 邀请好友注册并投资
                 <span class="fr mission-points">
@@ -115,7 +115,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-wanyouxi"></i>
+                  <i class="iconfont icon-youxi"></i>
                 </div>
                 玩游戏接元宝
                 <span class="fr mission-points">
@@ -126,7 +126,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-caifu"></i>
+                  <i class="iconfont icon-yaoqinghaoyou"></i>
                 </div>
                 邀请好友注册
                 <span class="fr mission-points">
@@ -137,7 +137,7 @@
             <li>
               <div class="mission-items">
                 <div class="mission-icon fl">
-                  <i class="iconfont icon-touzi1"></i>
+                  <i class="iconfont icon-yibitouzi"></i>
                 </div>
                 完成任意1笔投资
                 <span class="fr mission-points">

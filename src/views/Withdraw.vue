@@ -16,7 +16,7 @@
             <div class="recharge-attention container">
               <div class="recharge-bank">
                 提现银行
-                <span class="fr bank-name">
+                <span class="fr bank-name flex-middle">
                   <span class="bank" v-bind:class="[user.bank_code]"></span>{{bank.name}}{{bank_card_number | strHide(0,4)}}
                 </span>
               </div>

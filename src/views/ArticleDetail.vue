@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-top :title="data.title"></header-top>
+    <header-top :title="title"></header-top>
     <detail :title="data.title" :content="data.content"></detail>
   </div>
 </template>
@@ -13,6 +13,7 @@ export default {
   components: {HeaderTop, Detail},
   data: function () {
     return {
+      title: '详细',
       data: {}
     }
   },

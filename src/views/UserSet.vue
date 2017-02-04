@@ -42,10 +42,11 @@
           <span class="toNext right-words" v-show="user.is_set_pay_password===0" v-on:click="redirect('name,card')">未设置<i class="iconfont icon-unie61f"></i></span>
           <!-- <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.is_set_pay_password===0" tag="span">未设置<i class="iconfont icon-unie61f"></i></router-link> -->
         </li>
-        <li class="login-pass" v-show="user.name_verified===1">
+        <router-link class="login-pass" v-show="user.name_verified===1" :to="{name: 'user-sina'}" tag="li">
           <i class="iconfont icon-yonghu"></i>新浪支付
-          <router-link class="toNext right-words" :to="{name: 'user-sina'}" tag="span">个人中心<i class="iconfont icon-unie61f"></i></router-link>
-        </li>
+          <!-- <router-link class="toNext right-words" :to="{name: 'user-sina'}" tag="span">个人中心<i class="iconfont icon-unie61f"></i></router-link> -->
+          <span class="toNext right-words">个人中心<i class="iconfont icon-unie61f"></i></span>
+        </router-link>
       </ul>
     </div>
     <button type="button" class="btn signout" v-on:click="login">安全退出</button>
@@ -65,6 +66,11 @@ export default {
     }
   },
   mounted () {
+    if (this.$route.params.refresh || this.$route.query.refresh) {
+      this.$http.post('user/user').then((response) => {
+        this.$store.dispatch('user', response.data)
+      })
+    }
   },
   computed: {
   },

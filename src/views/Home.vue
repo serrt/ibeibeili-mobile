@@ -1,7 +1,18 @@
 <template>
-  <div class="full-container">
-    <div id="home" class="home-content">
-      <div class="banner full-container swiper-container">
+  <div v-on:wheel="wheel">
+    <transition name="fade">
+      <div class="header container" v-show="header_show">
+        <ul>
+          <li class="back"></li>
+          <li class="f-gray title">首页</li>
+          <li class="other">
+            <router-link :to="{name: 'login'}" tag="span" v-if="!is_login">登录</router-link>
+          </li>
+        </ul>
+      </div>
+    </transition>
+    <div class="full-container homepage">
+      <div class="banner full-container" v-bind:style="{height: banner_height}">
         <mt-swipe :auto="4000">
           <mt-swipe-item class="swiper-slide" v-for="item in img_list">
             <img v-bind:src="item.url"/>
@@ -29,8 +40,8 @@
         <div class="invest-name flex-middle">
           <div class='container surplus'>
             {{project.name}}
-            <span><i class="tubiao danbao"></i>{{project.collateral_type}}</span>
-            <span><i class="tubiao huabenfuxi"></i>{{project.payment_name}}</span>
+            <span><i class="iconfont icon-danbao"></i>{{project.collateral_type}}</span>
+            <span><i class="iconfont icon-dqhbfx"></i>{{project.payment_name}}</span>
           </div>
         </div>
         <div class="flex container invest-intro">
@@ -41,8 +52,8 @@
             </div>
           </div>
           <div class="days">
-            <div class="days-num flex-middle h50"><p class="Pcenter duration">{{project.finance_time}}</p></div>
-            <div class="days-title flex-middle h50"><p class="Pcenter">期限</p></div>
+            <div class="days-num"><p class="Pcenter duration">{{project.finance_time}}</p></div>
+            <div class="days-title"><p class="Pcenter">期限</p></div>
           </div>
           <div class="buy flex-middle">
             <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: project.id}}" tag="span">立即购买</router-link>
@@ -52,51 +63,46 @@
 
       <!-- 四大功能 -->
       <div class='four-features full-container'>
-        <router-link class="feature h50 mission" :to="{name: 'user-task'}" tag="div">
-          <div class="feature-cont flex-middle ">
+        <div class="feature flex">
+          <router-link class="feature-cont flex-middle" :to="{name: 'user-task'}" tag="div">
             <div class="full-container">
-              <i class="iconfont icon-renwu"></i><br>
-              <span class="title">任务中心</span><br>
+              <i class="iconfont icon-renwu"></i>
+              <span class="title">任务中心</span>
               <span class="detail">领取每日福利</span>
             </div>
-          </div>
-        </router-link>
-        <router-link class="feature h50 invite" :to="{name: 'virtual'}" tag="div">
-          <div class="feature-cont flex-middle">
+          </router-link>
+          <router-link class="feature-cont flex-middle" :to="{name: 'virtual'}" tag="div">
             <div class="full-container">
-              <i class="iconfont icon-yonghu2"></i><br>
-              <span class="title">新手体验</span><br>
+              <i class="iconfont icon-yonghu2"></i>
+              <span class="title">新手体验</span>
               <span class="detail">财富值专享</span>
-            </div>
-          </div>
-        </router-link>
-        <div class="feature h50 help">
-          <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div">
-            <div class="full-container">
-              <i class="iconfont icon-yaoqing"></i><br>
-              <span class="title">邀请有奖</span><br>
-              <span class="detail">经纪人制度</span>
             </div>
           </router-link>
         </div>
-        <router-link class="feature h50 about" :to="{name: 'about'}" tag="div">
-          <div class="feature-cont flex-middle">
+        <div class="feature flex">
+          <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div">
+            <div class="full-container">
+              <i class="iconfont icon-yaoqing"></i>
+              <span class="title">邀请有奖</span>
+              <span class="detail">财富值专享</span>
+            </div>
+          </router-link>
+          <router-link class="feature-cont flex-middle" :to="{name: 'about'}" tag="div">
             <div class="full-container">
               <span class="BBL-logo flex-middle"><i></i></span>
-              <span class="title">关于倍倍利</span><br>
+              <span class="title">关于倍倍利</span>
               <span class="detail">了解我们及最新运营数据</span>
             </div>
-          </div>
-        </router-link>
-        <div class="clear"></div>
+          </router-link>
+        </div>
       </div>
 
       <!-- 平台公告 -->
-      <div class="notice-news container flex-middle">
-        <i class="notice-logo"></i>招商、民生、广发、华夏、工商银行系统维护公告
-      </div>
+      <router-link class="notice-news container flex-middle" v-if="notice.id" :to="{name: 'article-detail', params: {id: notice.id}}" tag="div">
+        <i class="notice-logo"></i>{{notice.title}}
+      </router-link>
       <div class="big-events">
-        <img src="../../static/images/big-events.gif" v-if="img_show"/>
+        <img src="../../static/images/big-events.gif"/>
       </div>
     </div>
     <footer-nav></footer-nav>
@@ -111,10 +117,13 @@ export default {
   components: {FooterNav, MessageBox, Indicator},
   data: function () {
     return {
+      title: '首页',
+      is_login: this.$store.getters.isLogin,
       img_list: [],
+      banner_height: window.innerHeight * 0.3 + 'px',
       project: {id: 0},
-      img_show: false,
-      allLoaded: true,
+      header_show: false,
+      notice: {},
       trade_money: 0 // 累计交易额
     }
   },
@@ -129,6 +138,11 @@ export default {
     })
     this.$http.get('projects/recommoned').then((response) => {
       this.project = response.data.data
+    })
+    this.$http.get('article/system').then((response) => {
+      if (response.data.data.length > 0) {
+        this.notice = response.data.data[0]
+      }
     })
   },
   computed: {
@@ -162,18 +176,25 @@ export default {
     }
   },
   methods: {
+    wheel: function () {
+      if (document.body.scrollTop > 50) {
+        this.header_show = true
+      } else {
+        this.header_show = false
+      }
+    }
   }
 }
 </script>
 <style scoped>
-  .banner{
-    height: 30%
-  }
   .banner img {
     width: 100%;
     height: 100%;
   }
-  #home{
-    margin-bottom: 50px;
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+  .fade-enter, .fade-leave-active {
+    opacity: 0
   }
 </style>

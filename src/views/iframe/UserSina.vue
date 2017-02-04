@@ -3,7 +3,7 @@
     <div class="header container">
       <ul>
         <li class="back">
-          <router-link :to="{name: 'user', params: {refresh: 1}}" tag="span" replace><i class="iconfont icon-01fanhui"></i></router-link>
+          <router-link :to="{name: 'user-set', params: {refresh: 1}}" tag="span" replace><i class="iconfont icon-01fanhui"></i></router-link>
         </li>
         <li class="f-gray title surplus">{{title}}</li>
         <li class="other"><span></span></li>

@@ -7,81 +7,78 @@
           <span>{{item.name}}</span>
         </div>
       </div>
-      <div class="container">
+      <div class="container welfare">
         <!-- 红包 -->
-        <div class="welfare2" v-show="selected==='gift'">
-          <div class="welfare-item red-bag">
-            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-              <li v-for="item in giftData.list" v-bind:class="{'valid':item.status===0}">
-                <img src="../../static/images/welfare-bg.png">
-                <div class="welfare-content">
-                  <div class="items flex">
-                    <div class="flex-middle items-money">
-                      <i class="iconfont icon-renminbi"></i><span>{{item.money}}</span>
-                    </div>
-                    <div class="flex-middle condition">
-                      <div>
-                        <span>单笔满{{item.rule_money}}元可用</span>
-                        <span>仅限{{item.project_cate}}使用</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="items flex">
-                    <div class="flex-middle item-from">{{item.name}}</div>
-                    <div class="flex-middle item-duration">
-                      <div v-show="item.end_time">有效期至{{item.end_time}}</div>
-                    </div>
+        <div class="welfare-item red-bag" v-show="selected==='gift'">
+          <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+            <li v-for="item in giftData.list" v-bind:class="{'valid':item.status===0}">
+              <span class="left-pic">
+                <img src="../../static/images/welfare.png">
+                <i class="iconfont icon-renminbi"></i>
+              </span>
+              <div class="use fr">
+                <span class="use-money">{{item.money}}</span>
+                <div class="use-purpose fr flex-middle">
+                  <div>
+                    <span v-if="item.type==1">单笔满{{item.rule_money}}元可用</span>
+                    <span v-else>现金红包</span>
+                    <span v-show="item.project_cate">仅限{{item.project_cate}}使用</span>
                   </div>
                 </div>
-              </li>
-            </ul>
-          </div>
+              </div>
+              <div class="voucher-from">
+                <span class="voucher-name">{{item.name}}</span>
+                <span class="voucher-name fr" v-if="item.type==1">有效期至{{item.end_time}}</span>
+                <span class="voucher-name fr" v-else>领取时间{{item.end_time}}</span>
+              </div>
+              <!-- 已使用 -->
+              <div class="state alreay-use" v-show="item.status===1"></div>
+              <!-- 已过期 -->
+              <div class="state overdue" v-show="item.status===2"></div>
+            </li>
+          </ul>
         </div>
         <!-- 加息券 -->
-        <div class="welfare" v-show="selected==='rate'">
-          <div class="welfare-item rate-voucher">
-            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-              <li v-for="item in rateData.list" v-bind:class="{'valid':item.status===1}">
-                <div class="use">
-                  <span class="use-money">{{item.rate}}<span>%</span></span>
-                  <div class="use-purpose fr flex-middle">
-                    <div>
-                      <p>单笔满{{item.rule_money}}元可用</p>
-                      <p>仅限{{item.project_cate}}使用</p>
-                    </div>
+        <div class="welfare-item rate-voucher" v-show="selected==='rate'">
+          <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+            <li v-for="item in rateData.list" v-bind:class="{'valid':item.status===1}">
+              <div class="use">
+                <span class="use-money">{{item.rate}}<span>%</span></span>
+                <div class="use-purpose fr flex-middle">
+                  <div>
+                    <p v-show="item.rule_money > 0">单笔满{{item.rule_money}}元可用</p>
+                    <p v-show="item.project_cate">仅限{{item.project_cate}}使用</p>
                   </div>
                 </div>
-                <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
-                <div class="state overdue" v-show="item.status===3"></div>
-                <div class="state alreay-use" v-show="item.status===2"></div>
-              </li>
-            </ul>
-          </div>
+              </div>
+              <div class="voucher-from">{{item.name}}<span class="valid-date fr">有效期至{{item.end_time}}</span></div>
+              <div class="state overdue" v-show="item.status===3"></div>
+              <div class="state alreay-use" v-show="item.status===2"></div>
+            </li>
+          </ul>
         </div>
         <!-- 财富值 -->
-        <div class="welfare" v-show="selected==='virtual'">
-          <div class="welfare-item wealth-value">
-            <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
-              <li v-for="item in virtualData.list" v-bind:class="{'valid': item.status===0}">
-                <span class="left-pic">
-                  <img src="../../static/images/welfare2.png">
-                </span>
-                <div class="use fr">
-                  <span class="use-money">{{item.money}}</span>点
-                  <div class="use-purpose fr flex-middle">
-                    <div>
-                      <p>仅限新手体验任务</p>
-                      <p>仅限新手体验任务</p>
-                    </div>
+        <div class="welfare-item wealth-value" v-show="selected==='virtual'">
+          <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+            <li v-for="item in virtualData.list" v-bind:class="{'valid': item.status===0}">
+              <span class="left-pic">
+                <img src="../../static/images/welfare2.png">
+              </span>
+              <div class="use fr">
+                <span class="use-money">{{item.money}}</span>点
+                <div class="use-purpose fr flex-middle">
+                  <div>
+                    <p>仅限新手体验任务</p>
+                    <p>仅限新手体验任务</p>
                   </div>
                 </div>
-                <div class="voucher-from"><span class="valid-date fr">{{item.end_time}}</span></div>
-                <div class="state alreay-use" v-show="item.status===1"></div>
-                <div class="state overdue" v-show="item.status===2"></div>
-                <div class="state alreay-pay" v-show="item.status===3"></div>
-              </li>
-            </ul>
-          </div>
+              </div>
+              <div class="voucher-from"><span class="valid-date fr">{{item.end_time}}</span></div>
+              <div class="state alreay-use" v-show="item.status===1"></div>
+              <div class="state overdue" v-show="item.status===2"></div>
+              <div class="state alreay-pay" v-show="item.status===3"></div>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -156,10 +153,10 @@ export default {
 }
 </script>
 <style scoped>
-.welfare2 .welfare-item ul li.valid .welfare-content .items .items-money{
-  color: #e72418;
+.welfare .welfare-item li .voucher-from .voucher-name{
+  width: auto;
 }
-.welfare2 .welfare-item ul li .welfare-content .items .items-money{
-  color: #717171;
+.fr{
+  float: right !important;
 }
 </style>

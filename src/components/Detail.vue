@@ -1,5 +1,6 @@
 <template>
   <div class="project-info container">
+    <h3>{{title}}</h3>
     <div v-html="content"></div>
   </div>
 </template>
@@ -10,7 +11,7 @@ export default {
     return {
     }
   },
-  props: ['content'],
+  props: ['content', 'title'],
   mounted () {
   },
   computed: {
@@ -24,5 +25,9 @@ export default {
 <style scoped>
 .container{
   background-color: white;
+}
+h3{
+  padding: 5px 0;
+  text-align: center;
 }
 </style>
