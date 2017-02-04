@@ -70,11 +70,12 @@
               <div class="welfare-content container">
                 <div class="fl">
                   <div class="welfare-nums flex-middle">{{item.money}}<span>点</span></div>
-                  <div class="welfare-from flex-middle">财富值</div>
+                  <div class="welfare-from flex-middle" v-if="item.profit > 0">奖励：{{item.profit}}</div>
+                  <div class="welfare-from flex-middle" v-else>财富值</div>
                 </div>
                 <div class="fr">
                   <div class="welfare-use flex-middle">
-                    <!-- <div class="welfare-function">单笔满200元可用</div> -->
+                    <div class="welfare-function">仅新手体验任务</div>
                   </div>
                   <div class="welfare-duration flex-middle">
                     <div class="durationTo">有效期至{{item.end_time}}</div>
