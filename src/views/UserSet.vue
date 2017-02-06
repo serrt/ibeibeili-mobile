@@ -37,12 +37,12 @@
         <li class="pay-pass">
           <i class="iconfont icon-353245214507"></i>支付密码
           <!-- 已设置 -->
-          <router-link class="toNext right-words" :to="{name: 'user-edit-paypwd'}" v-show="user.is_set_pay_password===1" tag="span">修改<i class="iconfont icon-unie61f"></i></router-link>
+          <router-link class="toNext right-words" :to="{name: 'user-edit-paypwd'}" v-show="user.is_set_pay_password===1" tag="span" replace>修改<i class="iconfont icon-unie61f"></i></router-link>
           <!-- 未设置 -->
           <span class="toNext right-words" v-show="user.is_set_pay_password===0" v-on:click="redirect('name,card')">未设置<i class="iconfont icon-unie61f"></i></span>
           <!-- <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.is_set_pay_password===0" tag="span">未设置<i class="iconfont icon-unie61f"></i></router-link> -->
         </li>
-        <router-link class="login-pass" v-show="user.name_verified===1" :to="{name: 'user-sina'}" tag="li">
+        <router-link class="login-pass" v-show="user.name_verified===1" :to="{name: 'user-sina'}" tag="li" replace>
           <i class="iconfont icon-yonghu"></i>新浪支付
           <!-- <router-link class="toNext right-words" :to="{name: 'user-sina'}" tag="span">个人中心<i class="iconfont icon-unie61f"></i></router-link> -->
           <span class="toNext right-words">个人中心<i class="iconfont icon-unie61f"></i></span>
