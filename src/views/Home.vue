@@ -128,13 +128,11 @@ export default {
     }
   },
   mounted () {
-    Indicator.open()
     this.$http.get('projects/sumFinancedMoney').then((response) => {
       this.trade_money = response.data.money
     })
     this.$http.get('banner').then((response) => {
       this.img_list = response.data.data
-      Indicator.close()
     })
     this.$http.get('projects/recommoned').then((response) => {
       this.project = response.data.data
