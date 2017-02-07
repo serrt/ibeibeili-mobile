@@ -31,7 +31,8 @@
           <!-- <router-link class="toNext right-words" :to="{name: 'user-verify'}" v-show="user.bank_card_id === null" tag="span">未绑定<i class="iconfont icon-unie61f"></i></router-link> -->
         </li>
         <li class="login-pass">
-          <i class="iconfont icon-suo"></i>登录密码
+          <i class="iconfont icon-suo"></i>
+          <span class="text">登录密码</span>
           <router-link class="toNext right-words" :to="{name: 'user-edit-pwd'}" tag="span">修改<i class="iconfont icon-unie61f"></i></router-link>
         </li>
         <li class="pay-pass">
@@ -55,10 +56,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
-import { Indicator, MessageBox } from 'mint-ui'
+import { Indicator, MessageBox, Cell } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {HeaderTop, Indicator, MessageBox, Cell},
   data: function () {
     return {
       title: '设置',
@@ -81,8 +82,10 @@ export default {
         this.$router.replace({name: 'login'})
       }).catch(action => {})
     },
-    redirect: function (verfiy) {
-      let uri = 'user-verify'
+    redirect: function (verfiy, uri) {
+      if (!uri) {
+        uri = 'user-verify'
+      }
       if (verfiy) {
         if (verfiy.indexOf('name') !== -1 && this.user.name_verified === 0) {
           MessageBox.confirm('请先实名认证?').then(action => {
@@ -105,4 +108,7 @@ export default {
 }
 </script>
 <style scoped>
+.setup ul li{
+  margin-bottom: 1px;
+}
 </style>

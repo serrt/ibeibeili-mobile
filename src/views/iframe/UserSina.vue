@@ -10,7 +10,7 @@
       </ul>
     </div>
     <div class="full-container top-box">
-      <iframe v-bind:src="src" frameborder="0" width="100%" v-bind:height="height"></iframe>
+      <iframe v-bind:src="src" frameborder="0" v-bind:height="height"></iframe>
     </div>
   </div>
 </template>
@@ -50,4 +50,7 @@ export default {
 }
 </script>
 <style scoped>
+iframe{
+  width: 100%;
+}
 </style>
