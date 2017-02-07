@@ -144,7 +144,7 @@ export default {
       if (pat.test(value) && value.length === 11) {
         this.phone_valid = {error: false, msg: ''}
       } else {
-        this.phone_valid = {error: true, msg: '手机号为11位数字'}
+        this.phone_valid = {error: true, msg: '无效的手机号码'}
       }
     },
     'info.code': function (value) {

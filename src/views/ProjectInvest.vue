@@ -15,7 +15,7 @@
         <li>
           <div class="container purchase">
             购买金额（元）
-            <div class="fr"><input type="number" v-model="user_money" class="purchase-money" placeholder="请输入购买金额"></div>
+            <div class="fr"><input type="number" v-model.number="user_money" class="purchase-money" placeholder="请输入购买金额"></div>
           </div>
         </li>
         <li class="income" v-show="user_money > 0">
@@ -240,10 +240,11 @@ export default {
   },
   watch: {
     user_money: function (value) {
-      let money = parseFloat(value)
+      let money = parseInt(value)
       if (isNaN(money)) {
         money = 0
       }
+      this.user_money = money
       if (money > 0) {
         for (let i in this.gifts) {
           if (this.gifts[i].rule_money > money) {

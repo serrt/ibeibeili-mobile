@@ -27,7 +27,10 @@
           </li>
         </ul>
       </div>
-      <span class="btn login" v-bind:class="{'inactive': unsubmit}" v-on:click="login()">登&nbsp;&nbsp;录</span>
+      <button type="button" class="btn login" v-bind:class="{'inactive': unsubmit}" v-on:click="login()">
+        <mt-spinner class="text" v-show="busy" type="fading-circle"></mt-spinner>
+        <span class="text">登&nbsp;&nbsp;录</span>
+      </button>
     </div>
   </div>
 </template>
@@ -35,10 +38,10 @@
 <script>
 import HeaderTop from '../components/Header'
 import md5 from 'blueimp-md5'
-import { Indicator, MessageBox } from 'mint-ui'
+import { Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {HeaderTop, Toast},
   beforeCreate: function () {
     if (this.$store.getters.isLogin) {
       this.$router.back()
@@ -49,6 +52,7 @@ export default {
       title: '登录',
       username: '18223350967',
       password: '123456',
+      busy: false,
       name_input: {error: false, msg: ''},
       pwd_input: {error: false, msg: ''}
     }
@@ -62,16 +66,21 @@ export default {
   },
   methods: {
     login: function () {
+      if (this.busy) {
+        return false
+      }
       let data = {username: this.username, password: md5(this.password)}
       if (!this.unsubmit) {
         data.grant_type = 'password'
         data.client_id = '2'
         data.client_secret = '0rQMzyS6RtjVudAJGXA79ax1dAz5zKe2dgU76M9U'
         data.scope = '*'
-        Indicator.open()
+        this.busy = true
         this.$http.post('login', data).then((response) => {
           if (response.data.status === 1) {
-            MessageBox('提示', response.data.msg)
+            this.busy = false
+            Toast(response.data.msg)
+            this.password = ''
           } else {
             this.$store.dispatch('token', response.data.access_token)
             console.log(response.data.access_token)
@@ -82,7 +91,6 @@ export default {
               }
             })
           }
-          Indicator.close()
         })
       }
     }
@@ -106,4 +114,14 @@ export default {
 }
 </script>
 <style scoped>
+.btn.login{
+  padding: 3px 0;
+}
+.btn.login .text{
+  display: inline-block;
+  height: 28px;
+}
+.btn.login .mint-spinner-fading-circle{
+  margin-top: 10px;
+}
 </style>

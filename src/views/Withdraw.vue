@@ -50,10 +50,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
-import { Indicator, MessageBox } from 'mint-ui'
+import { Indicator, MessageBox, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {HeaderTop, Indicator, MessageBox, Toast},
   beforeCreate: function () {
     let user = this.$store.getters.user
     if (!user.bank_card_number) {
@@ -106,7 +106,7 @@ export default {
           if (response.data.status === 0) {
             this.$router.replace({name: 'user-withdraw-pay', params: {sn: response.data.sn}})
           } else {
-            MessageBox.alert(response.data.msg, '提现失败')
+            Toast(response.data.msg)
           }
         })
       }

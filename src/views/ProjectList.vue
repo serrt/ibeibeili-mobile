@@ -40,7 +40,7 @@
               <!-- 投资内容 -->
               <div class="full-container detail flex">
                 <div class="rate">
-                  <div class="rate-num" v-text="item.rate+'%'"></div>
+                  <div class="rate-num" v-html="item.rate_show"></div>
                   <div>预期年化</div>
                 </div>
                 <div class="duration">
