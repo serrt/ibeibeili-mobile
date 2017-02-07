@@ -47,7 +47,7 @@
         <div class="flex container invest-intro">
           <div class="rate">
             <div class="fl rate-detail">
-              <div class="rate-num flex-middle h50"><p class="Pcenter expect">{{project.rate}}%</p></div>
+              <div class="rate-num flex-middle h50"><p class="Pcenter expect" v-html="project.rate_show"></p></div>
               <div class="intro-title flex-middle h50">预期年化</div>
             </div>
           </div>

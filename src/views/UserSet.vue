@@ -67,6 +67,9 @@ export default {
     }
   },
   mounted () {
+    if (window.top.location !== window.location) {
+      window.top.location.href = window.location.href
+    }
     if (this.$route.params.refresh || this.$route.query.refresh) {
       this.$http.post('user/user').then((response) => {
         this.$store.dispatch('user', response.data)

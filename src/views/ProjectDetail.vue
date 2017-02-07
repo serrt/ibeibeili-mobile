@@ -8,7 +8,7 @@
         <span v-show="project.rate_check"><i class="iconfont icon-renwu"></i>可使用加息券</span>
       </div>
       <div class="year-rate">预期年化</div>
-      <div class="year-rate-num">{{project.rate}}<span>%</span></div>
+      <div class="year-rate-num" v-html="project.rate_show"></div>
       <div class="start-base">
         借款{{project.finance_money | moneyFormat}} |
         期限 {{project.finance_time}} |

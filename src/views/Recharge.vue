@@ -34,10 +34,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
-import { Indicator, MessageBox } from 'mint-ui'
+import { Indicator, MessageBox, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox},
+  components: {HeaderTop, Indicator, MessageBox, Toast},
   beforeCreate: function () {
     let user = this.$store.getters.user
     if (!user.bank_card_number) {
@@ -87,6 +87,8 @@ export default {
             MessageBox.alert(response.data.msg, '充值失败')
           }
         })
+      } else {
+        Toast('请输入充值金额')
       }
     }
   },
