@@ -54,7 +54,7 @@
                     </div>
                   </div>
                   <div class="welfare-duration flex-middle">
-                    <div class="durationTo">有效期至2016-11-25</div>
+                    <div class="durationTo">有效期至{{item.end_time}}</div>
                   </div>
                 </div>
               </div>
