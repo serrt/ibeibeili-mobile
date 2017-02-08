@@ -49,7 +49,7 @@
                 <div class="fr">
                   <div class="welfare-use flex-middle">
                     <div class="welfare-function">
-                      <p>单笔满{{item.rule_money}}元可用</p>
+                      <p v-if="item.rule_money>0">单笔满{{item.rule_money}}元可用</p>
                       <p v-if="item.project_cate">仅限{{item.project_cate}}月标使用</p>
                     </div>
                   </div>

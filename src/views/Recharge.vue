@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     recharge () {
-      if (this.money > 0) {
+      if (this.money > 0 && this.money < 10000000000) {
         this.$http.post('user/recharge', {money: this.money}).then((response) => {
           if (response.data.status === 0) {
             this.$router.replace({name: 'user-recharge-pay', params: {sn: response.data.sn}})
@@ -92,7 +92,7 @@ export default {
           }
         })
       } else {
-        Toast('请输入充值金额')
+        Toast('请输入有效充值金额')
       }
     }
   },

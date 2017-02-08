@@ -40,12 +40,13 @@ export default {
         {id: 24, name: '备付金', alias: 'bfj'},
         {id: 25, name: '数据安全', alias: 'sjaq'}
       ],
-      selected: 0,
+      selected: 21,
       selectedList: [],
       tabList: this.$store.getters.articleList
     }
   },
   mounted () {
+    this.toggleTitle(this.tabTitle[0])
   },
   computed: {
   },

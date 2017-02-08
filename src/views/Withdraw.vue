@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     withdraw () {
-      if (this.money > 0) {
+      if (this.money > 0 && this.money < 10000000000) {
         this.$http.post('user/withdraw', {money: this.money}).then((response) => {
           if (response.data.status === 0) {
             this.$router.replace({name: 'user-withdraw-pay', params: {sn: response.data.sn}})
@@ -113,6 +113,8 @@ export default {
             Toast(response.data.msg)
           }
         })
+      } else {
+        Toast('请输入有效充值金额')
       }
     }
   },
