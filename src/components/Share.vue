@@ -6,10 +6,10 @@
             <div class="title container">分享到</div>
             <ul>
               <li class="container">
-                <div class="share-item">
+                <div class="share-item" v-on:click="shareToSession">
                   <span class="method weixin"></span>微信
                 </div>
-                <div class="share-item">
+                <div class="share-item" v-on:click="shareToTimeline">
                   <span class="method penyouquan"></span>朋友圈
                 </div>
                 <div class="share-item">
@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import appEnv from '../../env'
 import {Popup, MessageBox} from 'mint-ui'
 
 export default {
@@ -49,14 +50,14 @@ export default {
   data: function () {
     return {
       url: '',
-      // url: 'https://www.baidu.com/search?s=1',
       qrcodeSrc: '',
-      qrcodeShow: false
+      qrcodeShow: false,
+      shareData: {title: '理财师', description: '注册成为离理财师', thumb: false}
     }
   },
   props: ['show'],
   mounted () {
-    this.url = 'http://192.168.1.104:8080/#/register?invite_code=' + this.$store.getters.user.invite_code
+    this.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
     this.qrcodeSrc = this.$http.defaults.baseURL + 'qrcode?text=' + encodeURIComponent(this.url)
   },
   computed: {
@@ -70,6 +71,12 @@ export default {
     },
     copyLink: function () {
       window.prompt('邀请链接', this.url)
+    },
+    shareToTimeline: function () {
+      window.app.shareWechatLink(this.url, 1, this.shareData)
+    },
+    shareToSession: function () {
+      window.app.shareWechatLink(this.url, 0, this.shareData)
     }
   },
   watch: {
