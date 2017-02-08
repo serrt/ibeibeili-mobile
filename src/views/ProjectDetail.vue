@@ -38,11 +38,11 @@
         </router-link>
       </ul>
       <div class="rights">
-        <i class="iconfont icon-renwu"></i>{{project.collateral_type}}
+        <i class="iconfont icon-danbao"></i>{{project.collateral_type}}
         <span v-show="project.is_plan===1">
-          <i class="iconfont icon-renwu"></i>风险备付金
+          <i class="iconfont icon-beifujin"></i>风险备付金
         </span>
-        <i class="iconfont icon-renwu"></i>{{project.payment_name}}
+        <i class="iconfont icon-dqhbfx"></i>{{project.payment_name}}
       </div>
     </div>
 
@@ -50,8 +50,8 @@
       <span class="calc fl" v-on:click="toggleOpen()">
         <i class="iconfont icon-jisuanqi1"></i>
       </span>
-      <span class="btn invest-btn invalid" v-if="project.status !== 'rush'">{{project.status | projectStatus}}</span>
       <router-link class="btn invest-btn" v-if="project.status === 'rush'" v-bind:class="[project.status]" :to="{name: 'project-invest' ,params: {id: project.id}}">{{project.status | projectStatus}}</router-link>
+      <span class="btn invest-btn invalid" v-else>{{project.status | projectStatus}}</span>
     </div>
 
     <div class="Expectation" v-show="isOpen">

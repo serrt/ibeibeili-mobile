@@ -16,6 +16,9 @@ export default function (value, project) {
     case 'finish':
       str = '还款完成'
       break
+    case 'fail':
+      str = '流标'
+      break
     default:
       str = value
   }

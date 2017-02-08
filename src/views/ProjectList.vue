@@ -57,8 +57,9 @@
               </div>
               <!-- 投资担保之类 -->
               <div class="item-footer container">
-                <span><i class="tubiao danbao"></i>{{item.collateral_type}}</span>
-                <span><i class="tubiao huabenfuxi"></i>{{item.payment_name}}</span>
+                <span><i class="iconfont icon-danbao"></i>{{item.collateral_type}}</span>
+                <span><i class="iconfont icon-dqhbfx"></i>{{item.payment_name}}</span>
+                <span v-if="item.is_plan === 1"><i class="iconfont icon-beifujin"></i>备付金</span>
               </div>
             </div>
           </li>

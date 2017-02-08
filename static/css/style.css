@@ -42,3 +42,7 @@
 .btn.finish{
   background-color: #979797;
 }
+.btn.fail{
+  color: white;
+  background-color: gray;
+}
