@@ -23,7 +23,7 @@
         </ul>
       </div>
       <div class="container">
-        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1222}}">充值说明</router-link>
+        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1226}}">充值说明</router-link>
       </div>
       <div class="container">
         <button type="button" class="btn" v-on:click="recharge">充&nbsp;值</button>
@@ -40,6 +40,10 @@ export default {
   components: {HeaderTop, Indicator, MessageBox, Toast},
   beforeCreate: function () {
     let user = this.$store.getters.user
+    if (user.isOrganization) {
+      MessageBox('机构用户请到PC端进行充值提现')
+      this.$router.back()
+    }
     if (!user.bank_card_number) {
       let str = '请先身份认证?'
       if (user.name_verified) {
