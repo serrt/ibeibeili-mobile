@@ -28,8 +28,8 @@
             <div class="tip-box" v-show="code_valid.error">{{code_valid.msg}}</div>
           </li>
           <li class="protocol">
-            <span class="tick" v-bind:class="{'untick':!agreement}"><input type="checkbox" class="i-agree" v-model="agreement" v-on:click="agree()"/></span>
-            我已阅读并同意
+            <span class="tick" v-bind:class="{'untick':!agreement}"><input type="checkbox" class="i-agree" v-model="agreement"/></span>
+            <span v-on:click="agree">我已阅读并同意</span>
             <router-link class="protocol-explain" :to="{name: 'article-detail', params: {id: 51}}">《倍倍利注册协议》</router-link>
           </li>
         </ul> 
