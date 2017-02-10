@@ -194,8 +194,17 @@ export default {
     },
     invest () {
       let projectMoney = this.project.finance_money - this.project.financed_money
-      if (this.gift_total + this.user_money > projectMoney) {
+      let invsetMoney = this.gift_total + this.user_money
+      if (invsetMoney > projectMoney) {
         MessageBox.alert('超出项目可投金额', '提示')
+        return false
+      }
+      if (invsetMoney < this.project.start_money) {
+        MessageBox.alert('最低' + this.project.start_money + '元起', '提示')
+        return false
+      }
+      if (projectMoney <= this.project.finance_rule_money && invsetMoney !== projectMoney) {
+        MessageBox.alert('只允许投资' + projectMoney + '元', '提示')
         return false
       }
       if (this.user_money) {
@@ -226,7 +235,7 @@ export default {
           choosedRate = this.rates[i].id
         }
       }
-      let data = {project_id: this.project.id, user_money: this.user_money, gifts: choosedGifts, rate: choosedRate, password: this.user_password}
+      let data = {project_id: this.project.id, user_money: this.user_money, invest_money: this.user_money + this.gift_total, gifts: choosedGifts, rate: choosedRate, password: this.user_password}
       Indicator.open()
       this.$http.post('user/invest', data).then((response) => {
         Indicator.close()
@@ -244,7 +253,9 @@ export default {
       if (isNaN(money)) {
         money = 0
       }
-      this.user_money = money
+      if (value !== '') {
+        this.user_money = money
+      }
       if (money > 0) {
         for (let i in this.gifts) {
           if (this.gifts[i].rule_money > money) {

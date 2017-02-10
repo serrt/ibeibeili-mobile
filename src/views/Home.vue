@@ -1,5 +1,5 @@
 <template>
-  <div v-on:wheel="wheel">
+  <div v-on:wheel="wheel" v-on:touch="wheel">
     <transition name="fade">
       <div class="header container" v-show="header_show">
         <ul>

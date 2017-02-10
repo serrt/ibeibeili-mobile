@@ -9,9 +9,6 @@ export default function (value, project) {
   if (isNaN(value)) {
     value = 0
   }
-  if (value < project.finance_rule_money) {
-    return 0
-  }
   let dayProfit = value * rate / 100
   let money = 0
   // 天
