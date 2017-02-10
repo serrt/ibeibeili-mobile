@@ -19,10 +19,10 @@
 
 <script>
 import HeaderTop from '../components/Header'
-import { Indicator, MessageBox, Toast } from 'mint-ui'
+import { Indicator, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop, Indicator, MessageBox, Toast},
+  components: {HeaderTop, Indicator, Toast},
   data: function () {
     return {
       title: '设置用户名',

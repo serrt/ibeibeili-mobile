@@ -1,15 +1,15 @@
 <template>
   <div>
     <div class="header container">
-    <ul>
-      <li class="back">
-        <router-link :to="{name: 'home'}" tag="span" v-show="page===3" replace><i class="iconfont icon-01fanhui"></i></router-link>
-        <span v-on:click="back()" v-show="page!==3"><i class="iconfont icon-01fanhui"></i></span>
-      </li>
-      <li class="f-gray title surplus">{{title}}</li>
-      <li class="other"><span></span></li>
-    </ul>
-  </div>
+      <ul>
+        <li class="back">
+          <router-link :to="{name: 'home'}" tag="span" v-show="page===3" replace><i class="iconfont icon-01fanhui"></i></router-link>
+          <span v-on:click="back()" v-show="page!==3"><i class="iconfont icon-01fanhui"></i></span>
+        </li>
+        <li class="f-gray title surplus">{{title}}</li>
+        <li class="other"><span></span></li>
+      </ul>
+    </div>
     <div class="container reg-box" v-show="page === 1">
       <div class="reg-input user-inputs">
         <ul>

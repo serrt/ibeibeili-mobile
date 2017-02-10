@@ -64,6 +64,8 @@ const routes = [
   { path: '/user-message', name: 'user-message', component: (resolve) => { require(['./views/UserMessage.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 交易详细
   { path: '/user-trade', name: 'user-trade', component: (resolve) => { require(['./views/UserTrade.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 意见反馈
+  { path: '/user-feedback', name: 'user-feedback', component: (resolve) => { require(['./views/UserFeedback.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户认证
   { path: '/user-verify', name: 'user-verify', component: (resolve) => { require(['./views/userVerify.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 消息详细

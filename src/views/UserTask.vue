@@ -3,91 +3,20 @@
     <header-top :title="title"></header-top>
     <div class="mission-center full-container">
       <div class="mission-progress container">
-        今日完成<span class="finish">1</span>个任务，共获得<span class="points">5</span>个积分
+        今日完成<span class="finish">{{info.total}}</span>个任务，共获得<span class="points">{{info.score}}</span>个积分
       </div>
 
       <!-- 新手任务 -->
       <div class="freshmen-mission missions full-container">
-        <div class="mission-title container">
-          新手任务
-        </div>
+        <div class="mission-title container">新手任务</div>
         <div class="mission-list container">
           <ul>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-shiming"></i>
-                </div>
-                完成实名认证
-                <span class="fr mission-points">
-                  +5
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-bangdingyinhangka"></i>
-                </div>
-                绑定银行卡
-                <span class="fr mission-points">
-                  +5
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-mimashezhi"></i>
-                </div>
-                设置支付密码
-                <span class="fr mission-points">
-                  +5
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-yiyue"></i>
-                </div>
-                完成1月标任意金额投资
-                <span class="fr mission-points">
-                  +10
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-sanyue"></i>
-                </div>
-                完成3月标任意金额投资
-                <span class="fr mission-points">
-                  +10
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-liuyue"></i>
-                </div>
-                完成6月标任意金额投资
-                <span class="fr mission-points">
-                  +10
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-yaoqinghaoyou"></i>
-                </div>
-                邀请好友注册并投资
-                <span class="fr mission-points">
-                  +15
-                </span>
+            <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===1">
+              <!-- complete -->
+              <div class="mission-items" v-bind:class="{complete: item.finished}">
+                <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
+                {{item.name}}
+                <span class="fr mission-points">+{{item.score}}</span>
               </div>
             </li>
           </ul>
@@ -96,53 +25,15 @@
 
       <!-- 常规任务 -->
       <div class="normal-mission missions full-container">
-        <div class="mission-title container">
-          每日任务
-        </div>
+        <div class="mission-title container">每日任务</div>
         <div class="mission-list container">
           <ul>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-qiandao"></i>
-                </div>
-                签到
-                <span class="fr mission-points">
-                  +15
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-youxi"></i>
-                </div>
-                玩游戏接元宝
-                <span class="fr mission-points">
-                  +15
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-yaoqinghaoyou"></i>
-                </div>
-                邀请好友注册
-                <span class="fr mission-points">
-                  +15
-                </span>
-              </div>
-            </li>
-            <li>
-              <div class="mission-items">
-                <div class="mission-icon fl">
-                  <i class="iconfont icon-yibitouzi"></i>
-                </div>
-                完成任意1笔投资
-                <span class="fr mission-points">
-                  +15
-                </span>
+            <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===0">
+              <!-- complete -->
+              <div class="mission-items" v-bind:class="{complete: item.finished}">
+                <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
+                {{item.name}}
+                <span class="fr mission-points">+{{item.score}}</span>
               </div>
             </li>
           </ul>
@@ -155,23 +46,51 @@
 
 <script>
 import HeaderTop from '../components/Header'
+import { Indicator, Toast } from 'mint-ui'
 
 export default {
-  components: {HeaderTop},
+  components: {HeaderTop, Indicator, Toast},
   data: function () {
     return {
-      title: '任务中心'
+      title: '任务中心',
+      list: [],
+      info: {total: 0, score: 0}
     }
   },
   mounted () {
+    Indicator.open()
+    this.$http.get('user/task').then((response) => {
+      this.list = response.data.data
+      this.info.total = response.data.total
+      this.info.score = response.data.score
+      Indicator.close()
+    })
   },
   computed: {
   },
   methods: {
+    redirect: function (item) {
+      console.log(item.link)
+      if (item.link) {
+        this.$router.push({name: item.link})
+      }
+    }
   },
   watch: {
   }
 }
 </script>
 <style scoped>
+.mission-items.complete .mission-icon{
+  border-color: gray !important;
+  color: gray !important;
+}
+.mission-items.complete .mission-icon:after{
+  border: none !important;
+  background-color: transparent !important;
+  content: '' !important;
+}
+.mission-items.complete .mission-points{
+  color: gray !important;
+}
 </style>

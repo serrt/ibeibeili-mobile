@@ -54,10 +54,10 @@
             <i class="iconfont icon-youjian"></i>
             我的消息
           </router-link>
-          <div class="item">
+          <router-link class="item" :to="{name: 'user-feedback'}">
             <i class="iconfont icon-yijianfankui1"></i>
             意见反馈
-          </div>
+          </router-link>
         </div>
       </div>
     </div>

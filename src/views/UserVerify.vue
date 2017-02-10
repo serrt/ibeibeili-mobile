@@ -90,7 +90,7 @@
           </li>
           <li class="container">
             <div class="user-chose banknum">
-              <input type="number" name="bank_card" v-model="card_info.bank_card" placeholder="请输入开户行卡号"/>
+              <input type="text" name="bank_card" v-model="card_info.bank_card" placeholder="请输入开户行卡号"/>
             </div>
           </li>
           <li class="container">
@@ -159,6 +159,10 @@ export default {
       this.page = 'card'
     } else if (this.user_info.is_set_pay_password === 0) {
       this.page = 'pay'
+    }
+    if (this.user_info.name_verified === 1 && this.user_info.bank_card_id !== null && this.user_info.is_set_pay_password === 1) {
+      MessageBox('你已经完成认证')
+      this.$router.back()
     }
     for (let i in City.china) {
       this.province.push(i)

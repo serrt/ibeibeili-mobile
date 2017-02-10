@@ -590,7 +590,13 @@ button.swiper-pagination-bullet {
 /* investList */
 /* account */
 html {
-  font-size: 13px;
+  font-size: 11px;
+}
+
+@media (max-height: 666px) {
+  html {
+    font-size: 11px;
+  }
 }
 
 @media (max-height: 568px) {
@@ -1361,6 +1367,7 @@ span.toNext .iconfont {
   line-height: 30px;
   text-align: center;
   float: left;
+  margin-right: 0.5rem;
 }
 
 .user-inputs li div.input-box label .iconfont {
@@ -1374,7 +1381,7 @@ span.toNext .iconfont {
   outline: none;
   width: 85%;
   height: 29px;
-  font-size: 14px;
+  font-size: 1.4rem;
 }
 
 .user-inputs li .tip-box {
@@ -1545,6 +1552,21 @@ span.toNext .iconfont {
   left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
+}
+
+.share-box .qrCode {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.share-box .qrCode img {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 10%;
+  max-width: 100%;
 }
 
 .share-box .share-content {
@@ -3858,6 +3880,7 @@ span.toNext .iconfont {
   border-bottom: 1px solid #f1f1f1;
   height: 5rem;
   line-height: 5rem;
+  margin-bottom: 1px;
 }
 
 .setup ul li > .iconfont {
@@ -4032,6 +4055,26 @@ span.toNext .iconfont {
 
 .mission-center .missions .mission-list ul li .mission-items .mission-points {
   color: #e72418;
+}
+
+.mission-center .missions .mission-list ul li .complete .mission-icon {
+  position: relative;
+}
+
+.mission-center .missions .mission-list ul li .complete .mission-icon::after {
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #fff;
+  content: '\2714';
+  border: 1px solid #f18101;
+  line-height: 180%;
+  text-align: center;
+  display: block;
+  top: -0.3rem;
+  right: -0.8rem;
+  font-size: 1rem;
 }
 
 .set-name {
@@ -4473,7 +4516,7 @@ span.toNext .iconfont {
   display: block;
 }
 
-.lottery {
+.lottery-box {
   position: absolute;
   top: 0;
   left: 0;
@@ -4486,7 +4529,7 @@ span.toNext .iconfont {
   background-position: center center;
 }
 
-.lottery .bbl-logo {
+.lottery-box .bbl-logo {
   width: 70px;
   height: 21px;
   background-image: url(../images/BBL-logo2.png);
@@ -4496,7 +4539,7 @@ span.toNext .iconfont {
   margin-left: 15px;
 }
 
-.lottery .lottery-content {
+.lottery-box .lottery-content {
   position: absolute;
   top: 50%;
   left: 0;
@@ -4504,20 +4547,20 @@ span.toNext .iconfont {
   transform: translateY(-50%);
 }
 
-.lottery .lottery-content .summary {
+.lottery-box .lottery-content .summary {
   font-size: 1.3rem;
   color: #fff;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
-.lottery .lottery-content .summary.big {
+.lottery-box .lottery-content .summary.big {
   font-size: 2.5rem;
   color: #fbf200;
   margin-bottom: 2rem;
 }
 
-.lottery .lottery-content .lottery-card {
+.lottery-box .lottery-content .lottery-card {
   width: 270px;
   height: 120px;
   margin: 0 auto;
@@ -4526,7 +4569,7 @@ span.toNext .iconfont {
   padding: 10px;
 }
 
-.lottery .lottery-content .lottery-card .card {
+.lottery-box .lottery-content .lottery-card .card {
   width: 100%;
   height: 100%;
   position: relative;
@@ -4535,27 +4578,27 @@ span.toNext .iconfont {
   text-align: center;
 }
 
-.lottery .lottery-content .lottery-card .card p {
+.lottery-box .lottery-content .lottery-card .card p {
   font-size: 1.5rem;
   color: #693b04;
   line-height: 30px;
 }
 
-.lottery .lottery-content .lottery-card .card .logs {
+.lottery-box .lottery-content .lottery-card .card .logs {
   text-decoration: underline;
   color: #ff2124;
   font-size: 1.2rem;
   line-height: 30px;
 }
 
-.lottery .lottery-content .lottery-card .card .readed {
+.lottery-box .lottery-content .lottery-card .card .readed {
   color: #fff;
   width: 60%;
   height: 35px;
   line-height: 35px;
 }
 
-.lottery .lottery-content .lottery-card canvas {
+.lottery-box .lottery-content .lottery-card canvas {
   position: absolute;
   top: 0;
   left: 0;
@@ -4563,7 +4606,7 @@ span.toNext .iconfont {
   height: 100px;
 }
 
-.lottery .lottery-content .lottery-card .front {
+.lottery-box .lottery-content .lottery-card .front {
   width: 100%;
   height: 100%;
   background-color: #ffc603;
@@ -4573,13 +4616,35 @@ span.toNext .iconfont {
   text-align: center;
 }
 
-.lottery .lottery-content .lottery-card .front .btn {
+.lottery-box .lottery-content .lottery-card .front .btn {
   background-color: #ff2124;
   bottom: 0;
   width: 60%;
   font-size: 1.5rem;
   height: 35px;
   line-height: 35px;
+}
+
+.feedback {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f8f8f8;
+  padding-top: 1rem;
+}
+
+.feedback textarea {
+  width: 100%;
+  font-size: 1.2rem;
+  height: 150px;
+  resize: none;
+  border: 1px solid #e4e4e4;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 4.5rem;
+  outline: none;
 }
 
 .error-page {
@@ -5556,7 +5621,7 @@ span.toNext .iconfont {
   width: 5rem;
   height: 4rem;
   background-image: url(../images/welfare-state.png);
-  background-size: 15rem 4rem;
+  background-size: 20rem 4rem;
   background-repeat: no-repeat;
   position: absolute;
   left: 45%;
@@ -5625,7 +5690,6 @@ span.toNext .iconfont {
   height: 60%;
   width: 100%;
   font-size: 1.2rem;
-  padding-left: 2rem;
 }
 
 .welfare2 .welfare-item ul li.state .welfare-content .welfare-use .welfare-function {
@@ -5636,7 +5700,6 @@ span.toNext .iconfont {
 .welfare2 .welfare-item ul li.state .welfare-content .welfare-duration {
   height: 40%;
   width: 100%;
-  padding-left: 2rem;
   font-size: 1rem;
 }
 
@@ -5671,6 +5734,14 @@ span.toNext .iconfont {
 
 .welfare2 .welfare-item ul li.alreay-pay .welfare-state {
   background-position: -10rem 0;
+}
+
+.welfare2 .welfare-item ul li.not-generate .welfare-content .welfare-nums {
+  color: #aaa;
+}
+
+.welfare2 .welfare-item ul li.not-generate .welfare-state {
+  background-position: -15rem 0;
 }
 
 .welfare2 .rate-voucher .welfare-content .welfare-nums span, .welfare2 .wealth-value .welfare-content .welfare-nums span {
