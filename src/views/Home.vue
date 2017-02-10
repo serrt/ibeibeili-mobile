@@ -31,12 +31,12 @@
           </div>
         </div>
         <div class="total-num flex-middle">
-          <div class="full-container" v-html="this.fult_money"></div>
+          <div class="full-container" v-html="fult_money"></div>
         </div>
       </div>
 
       <!-- 推荐项目 -->
-      <div class="full-container recommend">
+      <div class="full-container recommend" v-if="project">
         <div class="invest-name flex-middle">
           <div class='container surplus'>
             {{project.name}}
@@ -121,7 +121,7 @@ export default {
       is_login: this.$store.getters.isLogin,
       img_list: [],
       banner_height: window.innerHeight * 0.3 + 'px',
-      project: {id: 0},
+      project: false,
       header_show: false,
       notice: {},
       trade_money: 0 // 累计交易额
