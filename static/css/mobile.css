@@ -4647,6 +4647,76 @@ span.toNext .iconfont {
   outline: none;
 }
 
+.index-datas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../images/personal-bg.gif);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.index-datas .datas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.index-datas li {
+  padding: 2rem 1rem 2rem 5rem;
+  position: relative;
+}
+
+.index-datas li .underline {
+  width: 100%;
+  height: 1px;
+  background-image: -webkit-linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0));
+  background-image: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0), white, rgba(255, 255, 255, 0));
+  position: absolute;
+  bottom: 1px;
+  left: 0px;
+}
+
+.index-datas li h5 {
+  color: #f08300;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.index-datas li p {
+  color: #fff;
+  font-size: 2.5rem;
+}
+
+.index-datas .close-datas {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  position: relative;
+  display: block;
+  margin: 7rem auto 0;
+}
+
+.index-datas .close-datas::after {
+  font-size: 2.5rem;
+  color: #fff;
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  content: '\2715';
+  font-weight: lighter;
+}
+
 .error-page {
   position: absolute;
   top: 50%;
@@ -5746,6 +5816,14 @@ span.toNext .iconfont {
 
 .welfare2 .rate-voucher .welfare-content .welfare-nums span, .welfare2 .wealth-value .welfare-content .welfare-nums span {
   font-size: 1.5rem;
+}
+
+.welfare2 .rate-voucher ul li.state .welfare-content .welfare-nums {
+  height: 100%;
+}
+
+.welfare2 .rate-voucher ul li.state .welfare-content .welfare-duration {
+  height: 100%;
 }
 
 /**

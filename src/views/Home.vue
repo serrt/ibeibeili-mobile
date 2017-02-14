@@ -21,7 +21,7 @@
         <div class="swiper-pagination"></div>
       </div>
       <!-- trade-volume -->
-      <div class="container trade-volume">
+      <router-link class="container trade-volume" :to="{name: 'platform-money'}" tag="div">
         <div class="accumulate flex-middle">
           <div class="go-detail full-container">
             累积交易额
@@ -33,7 +33,7 @@
         <div class="total-num flex-middle">
           <div class="full-container" v-html="fult_money"></div>
         </div>
-      </div>
+      </router-link>
 
       <!-- 推荐项目 -->
       <div class="full-container recommend" v-if="project">

@@ -2,6 +2,7 @@ const routes = [
   { path: '/', name: 'root', component: (resolve) => { require(['./views/Home.vue'], (resolve)) } },
   // 主页
   { path: '/home', name: 'home', component (resolve) { require(['./views/Home.vue'], (resolve)) } },
+  { path: '/platform-money', name: 'platform-money', component (resolve) { require(['./views/PlatformMoney.vue'], (resolve)) } },
   // 登录
   { path: '/login', name: 'login', component (resolve) { require(['./views/Login.vue'], (resolve)) } },
   // 注册
