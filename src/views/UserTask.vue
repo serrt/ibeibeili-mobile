@@ -40,6 +40,7 @@
         </div>
       </div>
 
+      <share :show="popupVisible" @cancel="shareBox"></share>
     </div>
   </div>
 </template>
@@ -47,14 +48,16 @@
 <script>
 import HeaderTop from '../components/Header'
 import { Indicator, Toast } from 'mint-ui'
+import Share from '../components/Share'
 
 export default {
-  components: {HeaderTop, Indicator, Toast},
+  components: {HeaderTop, Indicator, Toast, Share},
   data: function () {
     return {
       title: '任务中心',
       list: [],
-      info: {total: 0, score: 0}
+      info: {total: 0, score: 0},
+      popupVisible: false
     }
   },
   mounted () {
@@ -70,10 +73,14 @@ export default {
   },
   methods: {
     redirect: function (item) {
-      console.log(item.link)
       if (item.link) {
         this.$router.push({name: item.link})
+      } else if (item.key === 'invite') {
+        this.popupVisible = true
       }
+    },
+    shareBox: function () {
+      this.popupVisible = !this.popupVisible
     }
   },
   watch: {
