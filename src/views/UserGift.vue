@@ -44,15 +44,8 @@
               <div class="welfare-content container">
                 <div class="fl">
                   <div class="welfare-nums flex-middle">{{item.rate}}<span>%</span></div>
-                  <div class="welfare-from flex-middle">{{item.name}}</div>
                 </div>
                 <div class="fr">
-                  <div class="welfare-use flex-middle">
-                    <div class="welfare-function">
-                      <p v-if="item.rule_money>0">单笔满{{item.rule_money}}元可用</p>
-                      <p v-if="item.project_cate">仅限{{item.project_cate}}月标使用</p>
-                    </div>
-                  </div>
                   <div class="welfare-duration flex-middle">
                     <div class="durationTo">有效期至{{item.end_time}}</div>
                   </div>
