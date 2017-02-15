@@ -55,7 +55,7 @@ export default {
   components: {HeaderTop, MessageBox, Indicator, Toast},
   data: function () {
     return {
-      page: 1,
+      page: 2,
       info: {phone_number: '', code: '', pwd: '', repwd: ''},
       code_btn: {click: false, msg1: '获取验证码', msg2: '秒后点击重新发送', time: 0, timer: null},
       phone_valid: {error: true, msg: ''},
@@ -154,16 +154,18 @@ export default {
         this.code_valid = {error: false, msg: ''}
       }
     },
-    'info.pwd': function (value) {
+    'info.pwd': function (value, old) {
       if (value.length < 6) {
         this.pwd_valid = {error: true, msg: '密码最少6位'}
-      } else if (value.length > 10) {
-        this.pwd_valid = {error: true, msg: '密码最多10位'}
+      } else if (value.length > 20) {
+        // this.info.pwd = old
+        this.pwd_valid = {error: true, msg: '密码最多20位'}
       } else if (value === this.info.repwd) {
         this.repwd_valid = {error: false, msg: ''}
       } else {
         this.pwd_valid = {error: false, msg: ''}
       }
+      console.log(value.length)
     },
     'info.repwd': function (value) {
       if (value !== this.info.pwd) {

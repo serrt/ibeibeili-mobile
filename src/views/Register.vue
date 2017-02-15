@@ -215,11 +215,12 @@ export default {
         this.code_valid = {error: false, msg: ''}
       }
     },
-    password: function (value) {
+    password: function (value, old) {
       if (value.length < 6) {
         this.pwd_valid = {error: true, msg: '密码最少6位'}
-      } else if (value.length > 10) {
-        this.pwd_valid = {error: true, msg: '密码最多10位'}
+      } else if (value.length > 20) {
+        // this.password = old
+        this.pwd_valid = {error: true, msg: '密码最多20位'}
       } else {
         this.pwd_valid = {error: false, msg: ''}
       }
