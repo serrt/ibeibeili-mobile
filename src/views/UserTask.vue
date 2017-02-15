@@ -13,7 +13,7 @@
           <ul>
             <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===1">
               <!-- complete -->
-              <div class="mission-items" v-bind:class="{complete: item.finished}">
+              <div class="mission-items" v-bind:class="{complete: item.completed}">
                 <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
                 {{item.name}}
                 <span class="fr mission-points">+{{item.score}}</span>
@@ -30,7 +30,7 @@
           <ul>
             <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===0">
               <!-- complete -->
-              <div class="mission-items" v-bind:class="{complete: item.finished}">
+              <div class="mission-items" v-bind:class="{complete: item.completed}">
                 <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
                 {{item.name}}
                 <span class="fr mission-points">+{{item.score}}</span>
