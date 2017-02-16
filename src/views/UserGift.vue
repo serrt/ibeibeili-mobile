@@ -71,7 +71,8 @@
                     <div class="welfare-function">仅新手体验任务</div>
                   </div>
                   <div class="welfare-duration flex-middle">
-                    <div class="durationTo">有效期至{{item.end_time}}</div>
+                    <div class="durationTo" v-if="item.status===1 || item.status===3">奖励日期{{item.payment_time}}</div>
+                    <div class="durationTo" v-else>有效期至{{item.end_time}}</div>
                   </div>
                 </div>
               </div>
