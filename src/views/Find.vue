@@ -32,7 +32,7 @@
             </router-link>
           </li>
           <li class="flex">
-            <div class="option-item">
+            <router-link class="option-item" :to="{name: 'operation-report'}" tag="div">
               <div class="logo fl clear">
                 <span>
                   <i class="iconfont icon-report"></i>
@@ -42,7 +42,7 @@
                 <span class="title">运营报告</span>
                 <span class="abstract">季度运营报告</span>
               </div>
-            </div>
+            </router-link>
             <router-link class="option-item" :to="{name: 'help'}" tag="div">
               <div class="logo fl clear">
                 <span>

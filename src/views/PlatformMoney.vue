@@ -26,8 +26,9 @@
 </template>
 
 <script>
+import { Indicator } from 'mint-ui'
 export default {
-  components: {},
+  components: {Indicator},
   data: function () {
     return {
       title: '平台交易详细',
@@ -73,9 +74,11 @@ export default {
     if (this.$store.getters.financedMoney && this.$store.getters.profitMoney && this.$store.getters.planMoney) {
       this.money = this.$store.getters.platformMoney
     } else {
+      Indicator.open()
       this.$http.get('platformMoney').then((response) => {
         this.money = response.data
         this.$store.dispatch('platformMoney', response.data)
+        Indicator.close()
       })
     }
   },

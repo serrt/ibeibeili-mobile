@@ -83,6 +83,8 @@ const routes = [
   { path: '/user-recharge-pay/:sn', name: 'user-recharge-pay', component: (resolve) => { require(['./views/iframe/Recharge.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 提现支付跳转
   { path: '/user-withdraw-pay/:sn', name: 'user-withdraw-pay', component: (resolve) => { require(['./views/iframe/Withdraw.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 运营报告
+  { path: '/operation-report', name: 'operation-report', component: (resolve) => { require(['./views/iframe/OperationReport.vue'], (resolve)) } },
   // 文章详细
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   // 文章分类列表
