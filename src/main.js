@@ -93,15 +93,11 @@ router.beforeEach((to, from, next) => {
     if (store.state.userInfo.isLogin) {
       next()
     } else {
+      Indicator.close()
       next({path: '/login'})
     }
   } else {
     next()
   }
 })
-document.addEventListener('deviceready', function () {
-  if (window.app.getConnection() === 'none') {
-    router.push({name: 'not-found'})
-  }
-}, false)
 new Vue({router, store}).$mount('#app')

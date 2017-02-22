@@ -1,52 +1,52 @@
 <template>
-    <div v-show="show" class="share-box full-container">
-      <transition name="fade">
-        <div v-show="show" class="share-content">
-          <div class="share-methods full-container">
-            <div class="title container">分享到</div>
-            <ul>
-              <li class="container">
-                <div class="share-item" v-on:click="shareToSession">
-                  <span class="method weixin"></span>微信
-                </div>
-                <div class="share-item" v-on:click="shareToTimeline">
-                  <span class="method penyouquan"></span>朋友圈
-                </div>
-                <div class="share-item">
-                  <span class="method qq"></span>QQ
-                </div>
-                <div class="share-item">
-                  <span class="method kongjian"></span>QQ空间
-                </div>
-                <div class="share-item">
-                  <span class="method weibo"></span>微博
-                </div>
-              </li>
-              <li class="container">
-                <div class="share-item" v-on:click="copyLink">
-                  <span class="method links"></span>复制链接
-                </div>
-                <div class="share-item" v-on:click="showQrcode">
-                  <span class="method saomiao"></span>二维码
-                </div>
-              </li>
-            </ul>
-          </div>
-          <button type="button" v-on:click="cancelShare" class="btn cancel-share">取&nbsp;&nbsp;消</button>
+  <div v-show="show" class="share-box full-container">
+    <transition name="fade">
+      <div v-show="show" class="share-content">
+        <div class="share-methods full-container">
+          <div class="title container">分享到</div>
+          <ul>
+            <li class="container">
+              <div class="share-item" v-on:click="shareToSession">
+                <span class="method weixin"></span>微信
+              </div>
+              <div class="share-item" v-on:click="shareToTimeline">
+                <span class="method penyouquan"></span>朋友圈
+              </div>
+              <div class="share-item" v-on:click="shareToQQchat">
+                <span class="method qq"></span>QQ
+              </div>
+              <div class="share-item" v-on:click="shareQZone">
+                <span class="method kongjian"></span>QQ空间
+              </div>
+              <div class="share-item" v-on:click="shareWeibo">
+                <span class="method weibo"></span>微博
+              </div>
+            </li>
+            <li class="container">
+              <div class="share-item" v-on:click="copyLink">
+                <span class="method links"></span>复制链接
+              </div>
+              <div class="share-item" v-on:click="showQrcode">
+                <span class="method saomiao"></span>二维码
+              </div>
+            </li>
+          </ul>
         </div>
-      </transition>
-      <popup v-model="qrcodeShow">
-        <img v-bind:src="qrcodeSrc" alt="">
-      </popup>
-    </div>
+        <button type="button" v-on:click="cancelShare" class="btn cancel-share">取&nbsp;&nbsp;消</button>
+      </div>
+    </transition>
+    <popup v-model="qrcodeShow">
+      <img v-bind:src="qrcodeSrc" alt="">
+    </popup>
+  </div>
 </template>
 
 <script>
 import appEnv from '../../env'
-import {Popup, MessageBox} from 'mint-ui'
+import {Popup, Toast} from 'mint-ui'
 
 export default {
-  components: {Popup, MessageBox},
+  components: {Popup, Toast},
   data: function () {
     return {
       url: '',
@@ -57,8 +57,12 @@ export default {
   },
   props: ['show'],
   mounted () {
-    this.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
-    this.qrcodeSrc = this.$http.defaults.baseURL + 'qrcode?text=' + encodeURIComponent(this.url)
+    if (this.$store.getters.user.invite_code) {
+      this.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
+    } else {
+      this.url = appEnv.baseUrl
+    }
+    this.qrcodeSrc = appEnv.apiUrl + 'qrcode?text=' + encodeURIComponent(this.url)
   },
   computed: {
   },
@@ -77,6 +81,15 @@ export default {
     },
     shareToSession: function () {
       window.app.shareWechatLink(this.url, 0, this.shareData)
+    },
+    shareToQQchat: function () {
+      Toast({message: '正在开发中。。', position: 'bottom'})
+    },
+    shareQZone: function () {
+      Toast({message: '正在开发中。。', position: 'bottom'})
+    },
+    shareWeibo: function () {
+      Toast({message: '正在开发中。。', position: 'bottom'})
     }
   },
   watch: {

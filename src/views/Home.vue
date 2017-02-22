@@ -80,13 +80,15 @@
           </router-link>
         </div>
         <div class="feature flex">
-          <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div">
+          <!-- <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div"> -->
+          <div class="feature-cont flex-middle" v-on:click="shareBox">
             <div class="full-container">
               <i class="iconfont icon-yaoqing"></i>
               <span class="title">邀请有奖</span>
-              <span class="detail">财富值专享</span>
+              <span class="detail">邀请好友投资返佣</span>
             </div>
-          </router-link>
+          </div>
+          <!-- </router-link> -->
           <router-link class="feature-cont flex-middle" :to="{name: 'about'}" tag="div">
             <div class="full-container">
               <span class="BBL-logo flex-middle"><i></i></span>
@@ -106,15 +108,17 @@
       </div>
     </div>
     <footer-nav></footer-nav>
+    <share :show="popupVisible" @cancel="shareBox"></share>
   </div>
 </template>
 
 <script>
 import FooterNav from '../components/Footer'
 import {MessageBox, Indicator} from 'mint-ui'
+import Share from '../components/Share'
 
 export default {
-  components: {FooterNav, MessageBox, Indicator},
+  components: {FooterNav, MessageBox, Indicator, Share},
   data: function () {
     return {
       title: '首页',
@@ -124,6 +128,7 @@ export default {
       project: false,
       header_show: false,
       notice: {},
+      popupVisible: false,
       trade_money: 0 // 累计交易额
     }
   },
@@ -180,6 +185,9 @@ export default {
       } else {
         this.header_show = false
       }
+    },
+    shareBox: function () {
+      this.popupVisible = !this.popupVisible
     }
   }
 }
