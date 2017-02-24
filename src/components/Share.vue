@@ -52,7 +52,7 @@ export default {
       url: '',
       qrcodeSrc: '',
       qrcodeShow: false,
-      shareData: {title: '理财师', description: '注册成为离理财师', thumb: false}
+      shareData: {title: '理财师', description: '注册成为离理财师', thumb: appEnv.baseUrl + '/assets/images/h5/logo-bg.png'}
     }
   },
   props: ['show'],
@@ -83,10 +83,10 @@ export default {
       window.app.shareWechatLink(this.url, 0, this.shareData)
     },
     shareToQQchat: function () {
-      Toast({message: '正在开发中。。', position: 'bottom'})
+      window.app.shareQQChat(this.url, 0, this.shareData)
     },
     shareQZone: function () {
-      Toast({message: '正在开发中。。', position: 'bottom'})
+      window.app.shareQQChat(this.url, 1, this.shareData)
     },
     shareWeibo: function () {
       Toast({message: '正在开发中。。', position: 'bottom'})
