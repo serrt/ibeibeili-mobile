@@ -92,6 +92,10 @@ export default {
     }
   },
   mounted () {
+    this.$http.get('project_template').then((resp) => {
+      let data = [{name: '全部类型', cate: ''}]
+      this.project_type = data.concat(resp.data.data)
+    })
     this.loadData()
   },
   computed: {

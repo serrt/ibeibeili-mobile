@@ -57,8 +57,8 @@ export default {
         this.valid = {error: true, msg: '请输新密码'}
       } else if (this.info.new_pwd.length < 6) {
         this.valid = {error: true, msg: '密码最少6位'}
-      } else if (this.info.new_pwd.length > 10) {
-        this.valid = {error: true, msg: '密码最多10位'}
+      } else if (this.info.new_pwd.length > 20) {
+        this.valid = {error: true, msg: '密码最多20位'}
       } else if (this.info.old_pwd === '') {
         this.valid = {error: true, msg: '请输再次输入新密码'}
       } else if (this.info.new_pwd !== this.info.re_pwd) {

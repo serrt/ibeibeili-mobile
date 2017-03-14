@@ -39,7 +39,7 @@
         </ul>
       </div>
       <div class="container">
-        <router-link class="recharge-explain" :to="{name: 'article-detail', params: {id: 1226}}">提现说明</router-link>
+        <div class="recharge-explain">{{bank.withdraw_remarks}}</div>
       </div>
       <div class="container">
         <button type="button" class="btn" v-on:click="withdraw">提&nbsp;现</button>
@@ -138,4 +138,7 @@ export default {
 }
 </script>
 <style scoped>
+.recharge-withdraw .recharge-explain{
+  border-bottom: none;
+}
 </style>
