@@ -665,13 +665,18 @@ ul, ol {
 }
 
 .hide {
-  display: none !important;
+  display: none;
 }
 
 /* flex布局 */
 .flex {
+  /* 新版本语法: Chrome 21+ */
   display: -webkit-box;
+  /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
+  /* 老版本语法: Firefox (buggy) */
+  /* 混合版本语法: IE 10 */
   display: flex;
+  /* 新版本语法: Opera 12.1, Firefox 22+ */
 }
 
 .flex-middle {
@@ -1918,8 +1923,12 @@ span.toNext .iconfont {
 }
 
 #investList .list li .list-item .detail .rate {
-  -webkit-box-flex: 10;
-  flex: 10;
+  -webkit-box-flex: 1;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  /* IE 10 */
+  /* OLD - Firefox 19- */
+  flex: 1;
+  width: 25%;
 }
 
 #investList .list li .list-item .detail .rate .rate-num {
@@ -1936,8 +1945,12 @@ span.toNext .iconfont {
 }
 
 #investList .list li .list-item .detail .duration {
-  -webkit-box-flex: 10;
-  flex: 10;
+  -webkit-box-flex: 1;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  /* IE 10 */
+  /* OLD - Firefox 19- */
+  flex: 1;
+  width: 25%;
 }
 
 #investList .list li .list-item .detail .duration .days {
@@ -1948,8 +1961,12 @@ span.toNext .iconfont {
 }
 
 #investList .list li .list-item .detail .money {
-  -webkit-box-flex: 10;
-  flex: 10;
+  -webkit-box-flex: 1;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  /* IE 10 */
+  /* OLD - Firefox 19- */
+  flex: 1;
+  width: 25%;
   border: none;
 }
 
@@ -1960,8 +1977,12 @@ span.toNext .iconfont {
 }
 
 #investList .list li .list-item .detail .state {
-  -webkit-box-flex: 9;
-  flex: 9;
+  -webkit-box-flex: 1;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  /* IE 10 */
+  /* OLD - Firefox 19- */
+  flex: 1;
+  width: 25%;
 }
 
 #investList .list li .list-item .detail .state .btn {
@@ -2124,6 +2145,7 @@ span.toNext .iconfont {
 }
 
 .user-account .functions .item {
+  width: 33.33%;
   padding: 10px 0;
   -webkit-box-flex: 1;
   flex: 1;
@@ -2459,6 +2481,11 @@ span.toNext .iconfont {
   padding-bottom: 0.8rem;
   color: #292929;
   display: inline-block;
+  width: 100%;
+}
+
+.investing ul li .purchase .fr {
+  width: 50%;
 }
 
 .investing ul li .purchase .purchase-money {
@@ -2468,6 +2495,7 @@ span.toNext .iconfont {
   font-size: 1.2rem;
   line-height: 1.4rem;
   text-align: right;
+  width: 100%;
 }
 
 .investing ul li .expact {
@@ -4067,14 +4095,17 @@ span.toNext .iconfont {
   position: absolute;
   border-radius: 50%;
   background-color: #fff;
-  content: '\2714';
+  content: '√';
   border: 1px solid #f18101;
-  line-height: 180%;
-  text-align: center;
+  line-height: 170%;
   display: block;
   top: -0.3rem;
   right: -0.8rem;
   font-size: 1rem;
+  color: #f18101;
+  font-weight: bolder;
+  -webkit-transform: rotate(30deg);
+  transform: rotate(30deg);
 }
 
 .set-name {
@@ -4684,7 +4715,7 @@ span.toNext .iconfont {
 }
 
 .index-datas li h5 {
-  color: #f08300;
+  color: #fff600;
   font-size: 1.5rem;
   margin-bottom: 1rem;
 }
@@ -5560,7 +5591,6 @@ span.toNext .iconfont {
 }
 
 .homepage .four-features .feature {
-  width: 50%;
   text-align: center;
   width: 100%;
 }
@@ -5586,6 +5616,7 @@ span.toNext .iconfont {
 }
 
 .homepage .four-features .feature .feature-cont {
+  width: 50%;
   padding: 1.5rem 0;
   -webkit-box-flex: 1;
   flex: 1;
