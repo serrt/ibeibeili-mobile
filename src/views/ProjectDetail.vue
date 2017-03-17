@@ -4,7 +4,9 @@
     <div class="invest-details full-container">
       <div class="project-name">{{project.name}}</div>
       <div class="can-use">
-        <span v-show="project.gift_check"><i class="iconfont icon-renwu"></i>可使用红包</span>
+        <span v-show="project.gift_check">
+          <i class="iconfont icon-renwu"></i>{{project.gift_cate_name?project.gift_cate_name:'可以使用红包'}}
+        </span>
         <span v-show="project.rate_check"><i class="iconfont icon-renwu"></i>可使用加息券</span>
       </div>
       <div class="year-rate">预期年化</div>
@@ -101,8 +103,10 @@ export default {
       // 项目属性
       this.$http.get('project_attr/' + this.$route.params.id).then((response) => {
         Indicator.close()
-        this.projectAttr = response.data.data
-        this.$store.dispatch('attr', this.projectAttr)
+        if (response.data.data) {
+          this.projectAttr = response.data.data
+          this.$store.dispatch('attr', this.projectAttr)
+        }
       })
     })
   },

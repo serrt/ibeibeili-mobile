@@ -115,12 +115,12 @@ export default {
     this.$http.get('user/balance').then((response) => {
       this.balance = response.data.balance
     })
-    this.$http.get('user/availableGift').then((response) => {
+    this.$http.post('user/availableGift', {project: this.$route.params.id}).then((response) => {
       this.gifts = response.data.data
       // this.gift_avaliable = response.data.data.length
       Indicator.close()
     })
-    this.$http.get('user/availableRate').then((response) => {
+    this.$http.post('user/availableRate', {project: this.$route.params.id}).then((response) => {
       this.rates = response.data.data
     })
   },
