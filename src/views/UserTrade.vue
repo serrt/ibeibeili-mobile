@@ -13,7 +13,7 @@
         <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
           <li v-for="item in list">
             <div class="container">
-              <i class="iconfont fl" v-bind:class="{'icon-cuowu': item.status === -1, 'icon-zhengque': item.status === 1, 'icon-bangzhu': item.status === 0}"></i>
+              <i class="iconfont fl" v-bind:class="{'icon-cuowu': item.status === -1, 'icon-zhengque': item.status === 1 || item.status === 3, 'icon-bangzhu': item.status === 0}"></i>
               <div class="detail">
                 <div class="card">
                   <span class="detail-title surplus">{{item.remarks}}</span>

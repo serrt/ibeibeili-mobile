@@ -1,114 +1,125 @@
 <template>
   <div v-on:wheel="wheel" v-on:touch="wheel">
-    <transition name="fade">
-      <div class="header container" v-show="header_show">
-        <ul>
-          <li class="back"></li>
-          <li class="f-gray title">首页</li>
-          <li class="other">
-            <router-link :to="{name: 'login'}" tag="span" v-if="!is_login">登录</router-link>
-          </li>
-        </ul>
-      </div>
-    </transition>
-    <div class="full-container homepage">
-      <div class="banner full-container" v-bind:style="{height: banner_height}">
-        <mt-swipe :auto="4000">
-          <mt-swipe-item class="swiper-slide" v-for="item in img_list">
-            <img v-bind:src="item.url"/>
-          </mt-swipe-item>
-        </mt-swipe>
-        <div class="swiper-pagination"></div>
-      </div>
-      <!-- trade-volume -->
-      <router-link class="container trade-volume" :to="{name: 'platform-money'}" tag="div">
-        <div class="accumulate flex-middle">
-          <div class="go-detail full-container">
-            累积交易额
-            <span class="toNext">
-              <i class="iconfont icon-unie61f"></i>
-            </span>
+    <div class="content" v-show="!isFirstApp">
+      <transition name="fade">
+        <div class="header container" v-show="header_show">
+          <ul>
+            <li class="back"></li>
+            <li class="f-gray title">首页</li>
+            <li class="other">
+              <router-link :to="{name: 'login'}" tag="span" v-if="!is_login">登录</router-link>
+            </li>
+          </ul>
+        </div>
+      </transition>
+      <div class="full-container homepage">
+        <div class="banner full-container" v-bind:style="{height: banner_height}">
+          <mt-swipe :auto="4000">
+            <mt-swipe-item class="swiper-slide" v-for="item in img_list">
+              <router-link :to="{path: item.mobile_link || ''}">
+                <img v-bind:src="item.url"/>
+              </router-link>
+            </mt-swipe-item>
+          </mt-swipe>
+          <div class="swiper-pagination"></div>
+        </div>
+        <!-- trade-volume -->
+        <router-link class="container trade-volume" :to="{name: 'platform-money'}" tag="div">
+          <div class="accumulate flex-middle">
+            <div class="go-detail full-container">
+              累积交易额
+              <span class="toNext">
+                <i class="iconfont icon-unie61f"></i>
+              </span>
+            </div>
           </div>
-        </div>
-        <div class="total-num flex-middle">
-          <div class="full-container" v-html="fult_money"></div>
-        </div>
-      </router-link>
+          <div class="total-num flex-middle">
+            <div class="full-container" v-html="fult_money"></div>
+          </div>
+        </router-link>
 
-      <!-- 推荐项目 -->
-      <div class="full-container recommend" v-if="project">
-        <div class="invest-name flex-middle">
-          <div class='container surplus'>
-            {{project.name}}
-            <span><i class="iconfont icon-danbao"></i>{{project.collateral_type}}</span>
-            <span><i class="iconfont icon-dqhbfx"></i>{{project.payment_name}}</span>
-          </div>
-        </div>
-        <div class="flex container invest-intro">
-          <div class="rate">
-            <div class="fl rate-detail">
-              <div class="rate-num flex-middle h50"><p class="Pcenter expect" v-html="project.rate_show"></p></div>
-              <div class="intro-title flex-middle h50">预期年化</div>
+        <!-- 推荐项目 -->
+        <div class="full-container recommend" v-if="project">
+          <div class="invest-name flex-middle">
+            <div class='container surplus'>
+              {{project.name}}
+              <span><i class="iconfont icon-danbao"></i>{{project.collateral_type}}</span>
+              <span><i class="iconfont icon-dqhbfx"></i>{{project.payment_name}}</span>
             </div>
           </div>
-          <div class="days">
-            <div class="days-num"><p class="Pcenter duration">{{project.finance_time}}</p></div>
-            <div class="days-title"><p class="Pcenter">期限</p></div>
-          </div>
-          <div class="buy flex-middle">
-            <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: project.id}}" tag="span">立即购买</router-link>
+          <div class="flex container invest-intro">
+            <div class="rate">
+              <div class="fl rate-detail">
+                <div class="rate-num flex-middle h50"><p class="Pcenter expect" v-html="project.rate_show"></p></div>
+                <div class="intro-title flex-middle h50">预期年化</div>
+              </div>
+            </div>
+            <div class="days">
+              <div class="days-num"><p class="Pcenter duration">{{project.finance_time}}</p></div>
+              <div class="days-title"><p class="Pcenter">期限</p></div>
+            </div>
+            <div class="buy flex-middle">
+              <router-link class="btn container invest-btn" :to="{name: 'project-detail', params: {id: project.id}}" tag="span">立即购买</router-link>
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- 四大功能 -->
-      <div class='four-features full-container'>
-        <div class="feature flex">
-          <router-link class="feature-cont flex-middle" :to="{name: 'user-task'}" tag="div">
-            <div class="full-container">
-              <i class="iconfont icon-renwu"></i>
-              <span class="title">任务中心</span>
-              <span class="detail">领取每日福利</span>
-            </div>
-          </router-link>
-          <router-link class="feature-cont flex-middle" :to="{name: 'virtual'}" tag="div">
-            <div class="full-container">
-              <i class="iconfont icon-yonghu2"></i>
-              <span class="title">新手体验</span>
-              <span class="detail">财富值专享</span>
-            </div>
-          </router-link>
-        </div>
-        <div class="feature flex">
-          <!-- <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div"> -->
-          <div class="feature-cont flex-middle" v-on:click="shareBox">
-            <div class="full-container">
-              <i class="iconfont icon-yaoqing"></i>
-              <span class="title">邀请有奖</span>
-              <span class="detail">邀请好友投资返佣</span>
-            </div>
+        <!-- 四大功能 -->
+        <div class='four-features full-container'>
+          <div class="feature flex">
+            <router-link class="feature-cont flex-middle" :to="{name: 'user-task'}" tag="div">
+              <div class="full-container">
+                <i class="iconfont icon-renwu"></i>
+                <span class="title">任务中心</span>
+                <span class="detail">领取每日福利</span>
+              </div>
+            </router-link>
+            <router-link class="feature-cont flex-middle" :to="{name: 'virtual'}" tag="div">
+              <div class="full-container">
+                <i class="iconfont icon-yonghu2"></i>
+                <span class="title">新手体验</span>
+                <span class="detail">财富值专享</span>
+              </div>
+            </router-link>
           </div>
-          <!-- </router-link> -->
-          <router-link class="feature-cont flex-middle" :to="{name: 'about'}" tag="div">
-            <div class="full-container">
-              <span class="BBL-logo flex-middle"><i></i></span>
-              <span class="title">关于倍倍利</span>
-              <span class="detail">了解我们及最新运营数据</span>
+          <div class="feature flex">
+            <!-- <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div"> -->
+            <div class="feature-cont flex-middle" v-on:click="shareBox">
+              <div class="full-container">
+                <i class="iconfont icon-yaoqing"></i>
+                <span class="title">邀请有奖</span>
+                <span class="detail">邀请好友投资返佣</span>
+              </div>
             </div>
-          </router-link>
+            <!-- </router-link> -->
+            <router-link class="feature-cont flex-middle" :to="{name: 'about'}" tag="div">
+              <div class="full-container">
+                <span class="BBL-logo flex-middle"><i></i></span>
+                <span class="title">关于倍倍利</span>
+                <span class="detail">了解我们及最新运营数据</span>
+              </div>
+            </router-link>
+          </div>
+        </div>
+
+        <!-- 平台公告 -->
+        <router-link class="notice-news container flex-middle" v-if="notice.id" :to="{name: 'article-detail', params: {id: notice.id}}" tag="div">
+          <i class="notice-logo"></i>{{notice.title}}
+        </router-link>
+        <div class="big-events">
+          <img src="../../static/images/big-events.gif"/>
         </div>
       </div>
-
-      <!-- 平台公告 -->
-      <router-link class="notice-news container flex-middle" v-if="notice.id" :to="{name: 'article-detail', params: {id: notice.id}}" tag="div">
-        <i class="notice-logo"></i>{{notice.title}}
-      </router-link>
-      <div class="big-events">
-        <img src="../../static/images/big-events.gif"/>
-      </div>
+      <footer-nav></footer-nav>
+      <share :show="popupVisible" @cancel="shareBox"></share>
     </div>
-    <footer-nav></footer-nav>
-    <share :show="popupVisible" @cancel="shareBox"></share>
+    <div class="banner full-container" v-show="isFirstApp" v-bind:style="{height: innerHeight}">
+      <mt-swipe :auto="0" :continuous="false">
+        <mt-swipe-item class="swiper-slide" v-for="(item, index) in img_list">
+          <img v-bind:src="item.url" v-on:click="handleChange(index)"/>
+        </mt-swipe-item>
+      </mt-swipe>
+    </div>
   </div>
 </template>
 
@@ -125,6 +136,8 @@ export default {
       is_login: this.$store.getters.isLogin,
       img_list: [],
       banner_height: window.innerHeight * 0.3 + 'px',
+      innerHeight: window.innerHeight + 'px',
+      isFirstApp: false, // 是否第一次启动app应用
       project: false,
       header_show: false,
       notice: {},
@@ -133,6 +146,11 @@ export default {
     }
   },
   mounted () {
+    // 判断是否为首次启动
+    // if (!window.localStorage.bbl_first) {
+    //   this.isFirstApp = true
+    //   window.localStorage.bbl_first = 1
+    // }
     this.$http.get('projects/sumFinancedMoney').then((response) => {
       this.trade_money = response.data.money
     })
@@ -188,6 +206,11 @@ export default {
     },
     shareBox: function () {
       this.popupVisible = !this.popupVisible
+    },
+    handleChange: function (index) {
+      if (this.img_list.length - 1 === index) {
+        this.isFirstApp = false
+      }
     }
   }
 }

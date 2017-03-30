@@ -106,7 +106,6 @@ export default {
           str += '&' + i + '=' + this.query[i]
         }
       }
-      console.log(str)
       return str
     },
     query_time: function () {
