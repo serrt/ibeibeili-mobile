@@ -670,13 +670,8 @@ ul, ol {
 
 /* flex布局 */
 .flex {
-  /* 新版本语法: Chrome 21+ */
   display: -webkit-box;
-  /* 老版本语法: Safari, iOS, Android browser, older WebKit browsers. */
-  /* 老版本语法: Firefox (buggy) */
-  /* 混合版本语法: IE 10 */
   display: flex;
-  /* 新版本语法: Opera 12.1, Firefox 22+ */
 }
 
 .flex-middle {
@@ -1033,22 +1028,6 @@ span.toNext .iconfont {
   content: "\e626";
 }
 
-.icon-home:before {
-  content: "\e627";
-}
-
-.icon-discovery:before {
-  content: "\e628";
-}
-
-.icon-touzi:before {
-  content: "\e629";
-}
-
-.icon-caifu:before {
-  content: "\e62a";
-}
-
 .icon-homeActive:before {
   content: "\e62b";
 }
@@ -1221,6 +1200,22 @@ span.toNext .iconfont {
   content: "\e65c";
 }
 
+.icon-home:before {
+  content: "\e65d";
+}
+
+.icon-caifu:before {
+  content: "\e65e";
+}
+
+.icon-touzi:before {
+  content: "\e65f";
+}
+
+.icon-discovery:before {
+  content: "\e660";
+}
+
 /* 底部导航 */
 .footer {
   position: fixed;
@@ -1234,8 +1229,7 @@ span.toNext .iconfont {
 }
 
 .footer .item {
-  -webkit-box-flex: 1;
-  flex: 1;
+  width: 25%;
   text-align: center;
   color: #9d9d9d;
 }
@@ -1248,14 +1242,13 @@ span.toNext .iconfont {
 .footer .item .item-icon .iconfont {
   font-size: 24px;
   color: #9d9d9d;
-  font-weight: lighter;
+  font-weight: 100;
 }
 
 .footer .item .item-text {
   height: 16px;
   line-height: 12px;
   font-size: 1rem;
-  font-weight: 700;
 }
 
 .footer .item span {
@@ -1342,6 +1335,12 @@ span.toNext .iconfont {
 .header ul .other span.all-read {
   color: #e72418;
   font-size: 1.2rem;
+  width: 100%;
+}
+
+.header ul .other span.login {
+  color: #e72418;
+  font-size: 1.3rem;
   width: 100%;
 }
 
@@ -2191,7 +2190,7 @@ span.toNext .iconfont {
 }
 
 .invest-details .project-name {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: #666666;
   line-height: 1.5rem;
   margin-bottom: 5px;
@@ -2230,7 +2229,7 @@ span.toNext .iconfont {
 }
 
 .invest-details .start-base {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   color: #666;
   margin-bottom: 1rem;
 }
@@ -4722,7 +4721,12 @@ span.toNext .iconfont {
 
 .index-datas li p {
   color: #fff;
-  font-size: 2.5rem;
+  font-size: 1.2rem;
+}
+
+.index-datas li p span {
+  font-size: 2rem;
+  margin-right: 5px;
 }
 
 .index-datas .close-datas {

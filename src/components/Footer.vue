@@ -39,6 +39,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .footer .router-link-active .iconfont{
+    color: #e72418;
+  }
   .footer .router-link-active {
     color: #e72418 !important;
   }
