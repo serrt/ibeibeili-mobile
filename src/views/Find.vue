@@ -8,7 +8,7 @@
       <div class="options full-container">
         <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
           <li class="flex">
-            <router-link :to="{name: 'planner'}" class="option-item" tag="div">
+            <div :to="{name: 'planner'}" class="option-item" tag="div" v-on:click="shareBox">
               <div class="logo fl clear">
                 <span>
                   <i class="iconfont icon-invite"></i>
@@ -18,7 +18,7 @@
                 <span class="title">邀请有奖</span>
                 <span class="abstract">邀请就有惊喜</span>
               </div>
-            </router-link>
+            </div>
             <router-link class="option-item" :to="{name: 'notice'}" tag="div">
               <div class="logo fl clear">
                 <span>
@@ -71,23 +71,26 @@
         </ul>
       </div>
     </div>
+    <share :show="popupVisible" @cancel="shareBox"></share>
     <footer-nav></footer-nav>
   </div>
 </template>
 
 <script>
+import Share from '../components/Share'
 import HeaderTop from '../components/Header'
 import FooterNav from '../components/Footer'
 import {Indicator} from 'mint-ui'
 
 export default {
-  components: {HeaderTop, FooterNav, Indicator},
+  components: {HeaderTop, FooterNav, Indicator, Share},
   data: function () {
     return {
       title: '发现',
       list: [],
       busy: false,
       api: 'article/activity',
+      popupVisible: false,
       nextApi: ''
     }
   },
@@ -116,6 +119,9 @@ export default {
         }
       })
       this.busy = true
+    },
+    shareBox: function () {
+      this.popupVisible = !this.popupVisible
     }
   },
   watch: {

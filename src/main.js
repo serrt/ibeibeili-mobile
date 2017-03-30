@@ -50,10 +50,6 @@ if (window.localStorage.bbl_token) {
       }
     })
   }
-} else {
-  MessageBox.confirm('登录失效?').then(action => {
-    router.push({name: 'login'})
-  }).catch(action => {})
 }
 
 // http 响应
@@ -100,4 +96,31 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-new Vue({router, store}).$mount('#app')
+if (window.app.getConnection) {
+  document.addEventListener('deviceready', function () {
+    new Vue({router, store}).$mount('#app')
+    // 检查网络状态
+    if (window.app.getConnection() === 'none') {
+      router.push({name: 'not-found'})
+    }
+    // 检查更新
+    if (!/ios/i.test(window.device.platform)) {
+      window.cordova.getAppVersion.getVersionNumber(function (version) {
+        var versionCode = parseInt(version.toString().replace(/\./g, ''))
+        var data = {
+          versionCode: 101,
+          versionName: '1.0.1',
+          msg: '有新版本可供更新.\n 1.界面美化 \n 2.性能优化',
+          apk: 'https://www.ibeibeili.com/ibeibeili.apk'
+        }
+        if (versionCode < data.versionCode) {
+          MessageBox.confirm(data.msg, '倍倍利').then(action => {
+            window.open(data.apk, '_system', 'location=yes')
+          })
+        }
+      })
+    }
+  }, false)
+} else {
+  new Vue({router, store}).$mount('#app')
+}

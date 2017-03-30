@@ -102,8 +102,11 @@ export default {
     queryString: function () {
       let str = ''
       for (let i in this.query) {
-        str += '&' + i + '=' + this.query[i]
+        if (this.query[i]) {
+          str += '&' + i + '=' + this.query[i]
+        }
       }
+      console.log(str)
       return str
     },
     query_time: function () {

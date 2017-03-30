@@ -49,20 +49,27 @@ export default {
   components: {Popup, Toast},
   data: function () {
     return {
-      url: '',
       qrcodeSrc: '',
       qrcodeShow: false,
-      shareData: {title: '理财师', description: '注册成为离理财师', thumb: appEnv.baseUrl + '/assets/images/h5/logo-bg.png'}
+      shareData: {
+        title: '倍倍利',
+        description: '互联网投融资平台',
+        thumb: appEnv.baseUrl + '/assets/images/h5/logo-bg.png',
+        url: appEnv.baseUrl
+      }
     }
   },
-  props: ['show'],
+  props: ['show', 'data'],
   mounted () {
-    if (this.$store.getters.user.invite_code) {
-      this.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
-    } else {
-      this.url = appEnv.baseUrl
+    if (this.data) {
+      for (let i in this.shareData) {
+        if (this.data[i]) {
+          this.shareData[i] = this.data[i]
+        }
+      }
     }
-    this.qrcodeSrc = appEnv.apiUrl + 'qrcode?text=' + encodeURIComponent(this.url)
+    // this.shareData.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
+    this.qrcodeSrc = appEnv.apiUrl + 'qrcode?text=' + encodeURIComponent(this.shareData.url)
   },
   computed: {
   },
@@ -74,19 +81,19 @@ export default {
       this.qrcodeShow = true
     },
     copyLink: function () {
-      window.prompt('邀请链接', this.url)
+      window.prompt('邀请链接', this.shareData.url)
     },
     shareToTimeline: function () {
-      window.app.shareWechatLink(this.url, 1, this.shareData)
+      window.app.shareWechatLink(this.shareData, 1)
     },
     shareToSession: function () {
-      window.app.shareWechatLink(this.url, 0, this.shareData)
+      window.app.shareWechatLink(this.shareData, 0)
     },
     shareToQQchat: function () {
-      window.app.shareQQChat(this.url, 0, this.shareData)
+      window.app.shareQQChat(this.shareData, 0)
     },
     shareQZone: function () {
-      window.app.shareQQChat(this.url, 1, this.shareData)
+      window.app.shareQQChat(this.shareData, 1)
     },
     shareWeibo: function () {
       Toast({message: '正在开发中。。', position: 'bottom'})

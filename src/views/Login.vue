@@ -50,11 +50,11 @@ export default {
   data: function () {
     return {
       title: '登录',
-      username: '18223350967',
-      password: '123456',
+      username: '',
+      password: '',
       busy: false,
-      name_input: {error: false, msg: ''},
-      pwd_input: {error: false, msg: ''}
+      name_input: {error: true, msg: ''},
+      pwd_input: {error: true, msg: ''}
     }
   },
   mounted () {
