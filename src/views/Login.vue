@@ -1,6 +1,6 @@
 <template>
   <div>
-    <header-top :title="title"></header-top>
+    <header-top :title="title" backUrl="home"></header-top>
     <div class="container login-box">
       <div class="BBL-logo">
         <i class="logo"></i>
@@ -43,9 +43,9 @@ import { Toast } from 'mint-ui'
 export default {
   components: {HeaderTop, Toast},
   beforeCreate: function () {
-    if (this.$store.getters.isLogin) {
-      this.$router.back()
-    }
+    // if (this.$store.getters.isLogin) {
+    //   this.$router.back()
+    // }
   },
   data: function () {
     return {

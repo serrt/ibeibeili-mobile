@@ -2,7 +2,8 @@
   <div class="header container">
     <ul>
       <li class="back">
-        <span v-on:click="back()"><i class="iconfont icon-01fanhui"></i></span>
+        <span v-on:click="back()" v-if="backUrl === undefined"><i class="iconfont icon-01fanhui"></i></span>
+        <router-link :to="{path: 'home'}" v-else tag="span"><i class="iconfont icon-01fanhui"></i></router-link>
       </li>
       <li class="f-gray title surplus">{{title}}</li>
       <li class="other">
@@ -21,7 +22,9 @@ export default {
     return {
     }
   },
-  props: ['title'],
+  mounted: function () {
+  },
+  props: ['title', 'backUrl'],
   methods: {
     back: function () {
       this.$router.back()

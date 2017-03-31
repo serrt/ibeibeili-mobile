@@ -113,13 +113,6 @@
       <footer-nav></footer-nav>
       <share :show="popupVisible" @cancel="shareBox"></share>
     </div>
-    <div class="banner full-container" v-show="isFirstApp" v-bind:style="{height: innerHeight}">
-      <mt-swipe :auto="0" :continuous="false">
-        <mt-swipe-item class="swiper-slide" v-for="(item, index) in img_list">
-          <img v-bind:src="item.url" v-on:click="handleChange(index)"/>
-        </mt-swipe-item>
-      </mt-swipe>
-    </div>
   </div>
 </template>
 
