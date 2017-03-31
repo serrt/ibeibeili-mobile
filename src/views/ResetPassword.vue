@@ -55,7 +55,7 @@ export default {
   components: {HeaderTop, MessageBox, Indicator, Toast},
   data: function () {
     return {
-      page: 2,
+      page: 1,
       info: {phone_number: '', code: '', pwd: '', repwd: ''},
       code_btn: {click: false, msg1: '获取验证码', msg2: '秒后点击重新发送', time: 0, timer: null},
       phone_valid: {error: true, msg: ''},
