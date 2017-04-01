@@ -24,15 +24,15 @@
           </div>
         </li>
       </ul>
-      <div>
-        <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy" infinite-scroll-distance="250" infinite-scroll-immediate-check="false">
+      <div class="full-container">
+        <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy">
           <router-link v-for="item in list" :to="{name: 'article-detail', params: {id: item.id}}" tag="li">
             <div class="container">
               <div class="newMessage">
                 <div class="message-title surplus"><span class="title surplus">{{item.title}}</span><span class="date fr">{{item.published_at}}</span></div>
-                <!-- <div class="message-pic full-container">
-                  <img src="../../static/images/message-pic.png">
-                </div> -->
+                <div class="message-pic full-container" v-if="item.image">
+                  <img v-bind:src="item.image" width="100%" height="100%">
+                </div>
                 <!-- <div class="abstract surplus">{{item.content}}</div> -->
               </div>
             </div>
@@ -67,12 +67,12 @@ export default {
     this.$http.get('article/payment').then((response) => {
       this.payment_notice = response.data.data
     })
-    this.loadData()
   },
   computed: {
   },
   methods: {
     loadData: function (refresh) {
+      this.busy = true
       let uri = this.api
       if (this.nextApi && !refresh) {
         uri = this.nextApi
@@ -87,13 +87,15 @@ export default {
         Indicator.close()
         if (response.data.meta.pagination.links.next) {
           this.nextApi = response.data.meta.pagination.links.next
-          this.busy = false
+          // this.busy = false
         }
       })
-      this.busy = true
     }
   },
   watch: {
+    busy: function (v) {
+      console.log(v)
+    }
   }
 }
 </script>
