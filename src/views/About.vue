@@ -173,7 +173,18 @@
           <i class="iconfont fr" v-bind:class="{'icon-anonymous-iconfont': selectedContent==='qualifications', 'icon-jia': selectedContent!=='qualifications'}" v-on:click="toggleContent('qualifications')"></i>
         </div>
         <div class="detail container" v-show="selectedContent==='qualifications'">
-          暂无
+          <div class="pics full-container">
+            <img src="../../static/images/bbl/pic1.jpg">
+          </div>
+          <div class="pics full-container">
+            <img src="../../static/images/bbl/pic2.jpg">
+          </div>
+          <div class="pics full-container">
+            <img src="../../static/images/bbl/pic3.jpg">
+          </div>
+          <div class="pics full-container">
+            <img src="../../static/images/bbl/pic4.jpg">
+          </div>
         </div>
       </div>
     </div>
