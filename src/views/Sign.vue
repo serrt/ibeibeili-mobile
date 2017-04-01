@@ -354,13 +354,6 @@ export default {
     position:relative;
   }
 
-  .gift .mysterious-gift{
-    width:100%;
-    height:100px;
-    position:absolute;
-    bottom: 5px;
-    left:0px;
-  }
 
   .gift .mysterious-gift li{
     width:33.30%;
@@ -369,7 +362,6 @@ export default {
     font-size:12px;
     color:#8a8a8a;
     display:inline-block;
-    float:left;
   }
 
   .gift .mysterious-gift li>div{
