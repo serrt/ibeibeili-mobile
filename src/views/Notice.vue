@@ -1,7 +1,7 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <div class="notice full-container">
+    <div class="notice full-container" v-bind:style="{height: wrapperHeight+'px'}">
       <ul>
         <li class="myMessage">
           <div class="container">
@@ -24,21 +24,19 @@
           </div>
         </li>
       </ul>
-      <div class="full-container">
-        <ul v-infinite-scroll="loadData" infinite-scroll-disabled="busy">
-          <router-link v-for="item in list" :to="{name: 'article-detail', params: {id: item.id}}" tag="li">
-            <div class="container">
-              <div class="newMessage">
-                <div class="message-title surplus"><span class="title surplus">{{item.title}}</span><span class="date fr">{{item.published_at}}</span></div>
-                <div class="message-pic full-container" v-if="item.image">
-                  <img v-bind:src="item.image" width="100%" height="100%">
-                </div>
-                <!-- <div class="abstract surplus">{{item.content}}</div> -->
+      <ul v-infinite-scroll="loadData" infinite-scroll-distance="50" infinite-scroll-disabled="busy">
+        <router-link v-for="item in list" :to="{name: 'article-detail', params: {id: item.id}}" tag="li">
+          <div class="container">
+            <div class="newMessage">
+              <div class="message-title surplus"><span class="title surplus">{{item.title}}</span><span class="date fr">{{item.published_at}}</span></div>
+              <div class="message-pic full-container" v-if="item.image">
+                <img v-bind:src="item.image" width="100%" height="100%">
               </div>
+              <!-- <div class="abstract surplus">{{item.content}}</div> -->
             </div>
-          </router-link>
-        </ul>
-      </div>
+          </div>
+        </router-link>
+      </ul>
     </div>
   </div>
 </template>
@@ -54,6 +52,7 @@ export default {
       title: '公告中心',
       sale_notice: {id: 1, cate: 1},
       payment_notice: {id: 1, cate: 1},
+      wrapperHeight: 0,
       list: [],
       busy: false,
       api: 'article/system',
@@ -61,12 +60,14 @@ export default {
     }
   },
   mounted () {
+    this.wrapperHeight = document.documentElement.clientHeight
     this.$http.get('article/sale').then((response) => {
       this.sale_notice = response.data.data
     })
     this.$http.get('article/payment').then((response) => {
       this.payment_notice = response.data.data
     })
+    this.loadData()
   },
   computed: {
   },
@@ -87,15 +88,12 @@ export default {
         Indicator.close()
         if (response.data.meta.pagination.links.next) {
           this.nextApi = response.data.meta.pagination.links.next
-          // this.busy = false
+          this.busy = false
         }
       })
     }
   },
   watch: {
-    busy: function (v) {
-      console.log(v)
-    }
   }
 }
 </script>
