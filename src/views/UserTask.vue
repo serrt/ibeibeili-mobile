@@ -3,7 +3,7 @@
     <header-top :title="title"></header-top>
     <div class="mission-center full-container">
       <div class="mission-progress container">
-        今日完成<span class="finish">{{info.total}}</span>个任务，共获得<span class="points">{{info.score}}</span>个积分
+        今日完成<span class="finish">{{info.total}}</span>个任务
       </div>
 
       <!-- 新手任务 -->
