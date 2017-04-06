@@ -7,16 +7,16 @@
       </div>
 
       <!-- 新手任务 -->
-      <div class="freshmen-mission missions full-container">
+      <div class="freshmen-mission missions full-container" v-if="list1.length>0">
         <div class="mission-title container">新手任务</div>
         <div class="mission-list container">
           <ul>
-            <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===1">
+            <li v-for="item in list1" v-on:click="redirect(item)">
               <!-- complete -->
               <div class="mission-items" v-bind:class="{complete: item.completed}">
                 <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
                 {{item.name}}
-                <span class="fr mission-points">+{{item.score}}</span>
+                <span class="fr mission-points" v-if="item.score">+{{item.score}}</span>
               </div>
             </li>
           </ul>
@@ -24,22 +24,21 @@
       </div>
 
       <!-- 常规任务 -->
-      <div class="normal-mission missions full-container">
+      <div class="normal-mission missions full-container" v-if="list0.length>0">
         <div class="mission-title container">每日任务</div>
         <div class="mission-list container">
           <ul>
-            <li v-for="item in list" v-on:click="redirect(item)" v-if="item.type===0">
+            <li v-for="item in list0" v-on:click="redirect(item)">
               <!-- complete -->
               <div class="mission-items" v-bind:class="{complete: item.completed}">
                 <div class="mission-icon fl"><i class="iconfont" v-bind:class="item.icon"></i></div>
                 {{item.name}}
-                <span class="fr mission-points">+{{item.score}}</span>
+                <span class="fr mission-points" v-if="item.score">+{{item.score}}</span>
               </div>
             </li>
           </ul>
         </div>
       </div>
-
       <share :show="popupVisible" @cancel="shareBox"></share>
     </div>
   </div>
@@ -56,6 +55,8 @@ export default {
     return {
       title: '任务中心',
       list: [],
+      list0: [],
+      list1: [],
       info: {total: 0, score: 0},
       popupVisible: false
     }
@@ -64,6 +65,13 @@ export default {
     Indicator.open()
     this.$http.get('user/task').then((response) => {
       this.list = response.data.data
+      for (let i in this.list) {
+        if (this.list[i].type === 0) {
+          this.list0.push(this.list[i])
+        } else if (this.list[i].type === 1) {
+          this.list1.push(this.list[i])
+        }
+      }
       this.info.total = response.data.total
       this.info.score = response.data.score
       Indicator.close()

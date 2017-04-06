@@ -68,7 +68,7 @@ export default {
         }
       }
     }
-    if (this.$store.getters.user.invite_code) {
+    if (this.$store.getters.user.invite_code && this.shareData.url === appEnv.baseUrl) {
       this.shareData.url = appEnv.baseUrl + '/register/phone?invite_code=' + this.$store.getters.user.invite_code
     }
     this.qrcodeSrc = appEnv.apiUrl + 'qrcode?text=' + encodeURIComponent(this.shareData.url)

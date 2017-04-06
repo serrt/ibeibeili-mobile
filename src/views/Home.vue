@@ -83,19 +83,19 @@
             </router-link>
           </div>
           <div class="feature flex">
-            <!-- <router-link class="feature-cont flex-middle" :to="{name: 'planner'}" tag="div"> -->
-            <div class="feature-cont flex-middle" v-on:click="shareBox">
+            <router-link class="feature-cont flex-middle" :to="{name: 'activity'}" tag="div">
+            <!-- <div class="feature-cont flex-middle" v-on:click="shareBox"> -->
               <div class="full-container">
                 <i class="iconfont icon-yaoqing"></i>
                 <span class="title">邀请有奖</span>
                 <span class="detail">邀请好友投资返佣</span>
               </div>
-            </div>
-            <!-- </router-link> -->
+            <!-- </div> -->
+            </router-link>
             <router-link class="feature-cont flex-middle" :to="{name: 'about'}" tag="div">
               <div class="full-container">
                 <span class="BBL-logo flex-middle"><i></i></span>
-                <span class="title">关于倍倍利</span>
+                <span class="title">安全保障</span>
                 <span class="detail">了解我们及最新运营数据</span>
               </div>
             </router-link>

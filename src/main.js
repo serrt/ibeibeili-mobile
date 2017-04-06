@@ -124,3 +124,13 @@ if (window.app.getConnection) {
 } else {
   new Vue({router, store}).$mount('#app')
 }
+
+// baidu统计
+Vue.prototype.baidu = function (code) {
+  if (appEnv.appEnv === 'production') {
+    let hm = document.createElement('script')
+    hm.src = 'https://hm.baidu.com/hm.js?' + code
+    let s = document.getElementsByTagName('script')[0]
+    s.parentNode.insertBefore(hm, s)
+  }
+}

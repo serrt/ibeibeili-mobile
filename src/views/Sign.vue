@@ -12,11 +12,11 @@
             <li>漏签<span>{{signInfo.leak}}</span>天</li>
           </ul>
         </div>
-        <div class="goSign" v-bind:class="{'top': signInfo.current !== ''}" v-if="signInfo.current !== false">
+        <div class="goSign" v-if="signInfo.current === false" v-on:click="pick(new Date())">签到领钱</div>
+        <div class="goSign" v-bind:class="{'top': signInfo.current !== ''}" v-else>
           <p>今日已签</p>
           <p class="gift" v-if="">{{signInfo.current}}</p>
         </div>
-        <div class="goSign" v-else v-on:click="pick(new Date())">签到领钱</div>
         <div class="sign" v-on:click="calendarShow=!calendarShow"><span></span>签到记录<span class="arrow" v-bind:class="{'icon-up': calendarShow}"></span></div>
         <div class="moneySum">累计获得<span class="color-warning">{{signInfo.money}}</span>元</div>
       </div>

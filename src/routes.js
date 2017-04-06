@@ -95,6 +95,8 @@ const routes = [
   { path: '/planner-apply', name: 'planner-apply', component: (resolve) => { require(['./views/planner/Apply.vue'], (resolve)) }, meta: { requiresAuth: true } },
   { path: '/planner-money', name: 'planner-money', component: (resolve) => { require(['./views/planner/Money.vue'], (resolve)) }, meta: { requiresAuth: true } },
   { path: '/planner-user', name: 'planner-user', component: (resolve) => { require(['./views/planner/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 活动页
+  { path: '/activity', name: 'activity', component: (resolve) => { require(['./views/iframe/Activity.vue'], (resolve)) } },
   // 404
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } },
   { path: '/404', name: 'not-found', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

@@ -355,7 +355,7 @@ export default {
         {name: '联系我们', key: 'connection'},
         {name: '理财资讯', key: 'latest-news'}
       ],
-      selected: 'company',
+      selected: 'security',
       selectedContent: '',
       list: [],
       busy: false,
