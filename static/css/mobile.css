@@ -3148,7 +3148,7 @@ span.toNext .iconfont {
 .transaction-details .list ul li {
   background-color: #fff;
   border-bottom: 1px solid #d6d6d6;
-  padding: 1rem 0;
+  padding: 1.2rem 0;
   color: #717171;
 }
 
@@ -4750,6 +4750,428 @@ span.toNext .iconfont {
   transform: translate(-50%, -50%);
   content: '\2715';
   font-weight: lighter;
+}
+
+.invest-friends-content {
+  margin: 60px auto 20px;
+  padding: 0;
+  /* -----tab----- */
+  /* -----tab----- */
+  /* -----invest-friends-content----- */
+  /* -----invest-friends-content----- */
+  /* -----commission----- */
+  /* -----commission----- */
+}
+
+.invest-friends-content .tab {
+  width: 240px;
+  height: 30px;
+  margin: 10px auto;
+  line-height: 30px;
+  border: 1px solid #e72418;
+  font-size: 12px;
+  border-radius: 5px;
+  margin-bottom: 35px;
+}
+
+.invest-friends-content .tab a {
+  width: 50%;
+  height: 28px;
+  line-height: 28px;
+  display: block;
+  color: #e72418;
+  float: left;
+  text-align: center;
+}
+
+.invest-friends-content .tab .active {
+  background-color: #e72418;
+  color: #fff;
+}
+
+.invest-friends-content .first-reward {
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.invest-friends-content .first-reward span {
+  color: #f0893e;
+}
+
+.invest-friends-content .reward-item {
+  width: 80%;
+  height: 20px;
+  line-height: 20px;
+  margin: auto;
+}
+
+.invest-friends-content .reward-item:nth-child(2) {
+  margin-bottom: 35px;
+}
+
+.invest-friends-content .reward-item i, .invest-friends-content .reward-item span {
+  display: block;
+  width: 60%;
+  height: 100%;
+  float: left;
+  text-align: right;
+}
+
+.invest-friends-content .reward-item span {
+  width: 40%;
+  text-align: left;
+  font-size: 15px;
+}
+
+.invest-friends-content .reward-buttons {
+  width: 100%;
+  height: 30px;
+  display: -webkit-box;
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.invest-friends-content .reward-buttons > div {
+  -webkit-box-flex: 1;
+  flex: 1;
+}
+
+.invest-friends-content .reward-buttons a {
+  display: block;
+  width: 120px;
+  height: 30px;
+  line-height: 30px;
+  margin: 0 auto;
+  color: #fff;
+  background-color: #f0893e;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.invest-friends-content .reward-buttons p {
+  line-height: 16px;
+}
+
+.invest-friends-content .process {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
+
+.invest-friends-content .process .process-title {
+  position: relative;
+  font-size: 12px;
+  line-height: 18px;
+  margin-bottom: 20px;
+}
+
+.invest-friends-content .process .process-title a {
+  position: absolute;
+  right: 40px;
+  text-decoration: underline;
+  font-size: 10px;
+}
+
+.invest-friends-content .process table {
+  width: 320px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #e6e6e6;
+  border-bottom: none;
+}
+
+.invest-friends-content .process table tr {
+  width: 100%;
+  height: 27px;
+  line-height: 27px;
+  font-size: 10px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.invest-friends-content .process table tr td:nth-child(1) {
+  width: 190px;
+  border-right: 1px solid #e6e6e6;
+}
+
+.invest-friends-content .process table thead {
+  color: #333;
+}
+
+.invest-friends-content .commission span {
+  color: #f0893e;
+}
+
+.invest-friends-content .commission .reward {
+  text-align: center;
+  color: #666;
+}
+
+.invest-friends-content .commission .reward-item {
+  font-size: 12px;
+}
+
+.invest-friends-content .commission .reward-item span {
+  font-size: 15px;
+}
+
+.invest-friends-content .formula {
+  font-size: 10px;
+  line-height: 20px;
+}
+
+.invest-friends-content .rule-explain {
+  line-height: 20px;
+  text-align: right;
+  margin-right: 70px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  text-decoration: underline;
+}
+
+.invest-friends-content .my-income {
+  width: 270px;
+  margin: 0 auto;
+  margin-bottom: 25px;
+  border-top: 1px solid #e6e6e6;
+  color: #666;
+}
+
+.invest-friends-content .my-income li {
+  height: 25px;
+  line-height: 25px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.invest-friends-content .my-income i, .invest-friends-content .my-income span {
+  width: 50%;
+  float: left;
+}
+
+.invest-friends-content .my-income i {
+  text-align: right;
+}
+
+.invest-friends-content .my-income span {
+  text-align: center;
+}
+
+.invest-friends-content .commission-explain {
+  text-align: center;
+}
+
+.invest-friends-content .commission-explain p {
+  margin-bottom: 20px;
+  font-size: 11px;
+}
+
+.invest-friends-content .commission-explain table {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 240px;
+  border: 1px solid #e6e6e6;
+  box-sizing: border-box;
+  color: #666;
+}
+
+.invest-friends-content .commission-explain table tr {
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.invest-friends-content .commission-explain table td {
+  width: 60px;
+  border-right: 1px solid #e6e6e6;
+  padding: 5px 2px;
+  font-size: 10px;
+}
+
+.invest-friends-content .commission-explain table tr td:last-child {
+  border-right: none;
+}
+
+.friends-invest-detail {
+  position: fixed;
+  padding: 10px 0 0;
+  width: 300px;
+  left: 50%;
+  margin-left: -150px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.friends-invest-detail p {
+  margin-bottom: 20px;
+  color: #f0893e;
+  font-size: 14px;
+}
+
+.friends-invest-detail table {
+  width: 100%;
+  border: 1px solid #e6e6e6;
+  border-bottom: none;
+  border-collapse: collapse;
+}
+
+.friends-invest-detail table thead {
+  color: #333;
+}
+
+.friends-invest-detail table tr {
+  height: 30px;
+  line-height: 30px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.friends-invest-detail table tr td:nth-child(1) {
+  width: 33%;
+  border-right: 1px solid #e6e6e6;
+}
+
+.friends-invest-detail table tr td:nth-child(2) {
+  width: 33%;
+  border-right: 1px solid #e6e6e6;
+}
+
+.friends-invest-detail table tr td:nth-child(3) {
+  width: 34%;
+  position: relative;
+}
+
+.friends-invest-detail table span {
+  position: absolute;
+  right: 2px;
+  top: 7px;
+  display: block;
+  text-align: center;
+  width: 40px;
+  height: 15px;
+  line-height: 15px;
+  border-radius: 3px;
+  color: #fff;
+  background-color: #f0893e;
+}
+
+.friends-invest-detail table .complete span {
+  display: none;
+}
+
+/* --------------好友投资记录-------------- */
+/* --------------活动规则-------------- */
+.invite-rules {
+  width: 100%;
+  padding: 20px 10px 20px;
+  background-color: #db3d42;
+}
+
+.invite-rules-header {
+  background-color: transparent;
+}
+
+.anniversary2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.anniversary2 .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+
+.anniversary2 .swiper-slide {
+  width: 100%;
+  height: 100%;
+  background-image: url(../images/anniversary2/bg.png);
+  background-size: 100% auto;
+  background-position: center center;
+}
+
+.anniversary2 .swiper-slide .slide-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.anniversary2 .swiper-slide .next {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 20px;
+  background-image: url(../images/anniversary2/next.png);
+  background-size: 100% 100%;
+  -webkit-animation: nextSlide .8s infinite;
+  animation: nextSlide .8s infinite;
+}
+
+.anniversary2 .first .first-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -40%);
+  transform: translate(-50%, -40%);
+  display: block;
+  height: 70%;
+}
+
+.anniversary2 .first .flower {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60%;
+}
+
+.anniversary2 .second-page, .anniversary2 .third-page, .anniversary2 .forth-page, .anniversary2 .fifth-page, .anniversary2 .sixth-page {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  display: block;
+  height: 80%;
+}
+
+.anniversary2 .invest {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  margin-left: -86px;
+  width: 172px;
+  height: 68px;
+  background-image: url(../images/anniversary2/invest.png);
+  background-size: 100% 100%;
+}
+
+@-webkit-keyframes nextSlide {
+  0% {
+    bottom: 12px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 5px;
+    opacity: 0;
+  }
+}
+
+@keyframes nextSlide {
+  0% {
+    bottom: 12px;
+    opacity: 1;
+  }
+  100% {
+    bottom: 5px;
+    opacity: 0;
+  }
 }
 
 .error-page {

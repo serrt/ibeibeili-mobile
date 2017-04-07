@@ -6,6 +6,7 @@ import appEnv from '../env'
 import store from './store'
 import 'mint-ui/lib/style.css'
 import {InfiniteScroll, MessageBox, Indicator, Swipe, SwipeItem, Spinner} from 'mint-ui'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 import filters from './filters'
 import VuePreview from 'vue-preview' // 图片预览
 
@@ -18,6 +19,7 @@ Vue.use(VuePreview)
 Vue.component(Swipe.name, Swipe)
 Vue.component(SwipeItem.name, SwipeItem)
 Vue.component(Spinner.name, Spinner)
+Vue.use(VueAwesomeSwiper)
 
 const router = new VueRouter({
   // mode: 'history',

@@ -54,9 +54,9 @@
             <i class="iconfont icon-youjian"></i>
             我的消息
           </router-link>
-          <router-link class="item" :to="{name: 'user-feedback'}">
+          <router-link class="item" :to="{name: 'user-invite'}">
             <i class="iconfont icon-yijianfankui1"></i>
-            意见反馈
+            邀请有奖
           </router-link>
         </div>
       </div>

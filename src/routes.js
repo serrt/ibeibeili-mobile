@@ -73,6 +73,9 @@ const routes = [
   { path: '/user-message-detail/:id', name: 'user-message-detail', component: (resolve) => { require(['./views/UserMessageDetail.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 用户钱包
   { path: '/user-wallet', name: 'user-wallet', component: (resolve) => { require(['./views/UserWallet.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  // 邀请有奖
+  { path: '/user-invite', name: 'user-invite', component: (resolve) => { require(['./views/UserInvite.vue'], (resolve)) }, meta: { requiresAuth: true } },
+  { path: '/user-invite-friend', name: 'user-invite-friend', component: (resolve) => { require(['./views/UserInviteFriends.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 新浪用户中心
   { path: '/user-sina', name: 'user-sina', component: (resolve) => { require(['./views/iframe/UserSina.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 修改支付密码
@@ -89,14 +92,9 @@ const routes = [
   { path: '/article-detail/:id', name: 'article-detail', component: (resolve) => { require(['./views/ArticleDetail.vue'], (resolve)) } },
   // 文章分类列表
   { path: '/article-list/:cate', name: 'article-list', component: (resolve) => { require(['./views/ArticleList.vue'], (resolve)) } },
-  // 理财师
-  { path: '/planner', name: 'planner', component: (resolve) => { require(['./views/planner/Index.vue'], (resolve)) } },
-  { path: '/planner-rule', name: 'planner-rule', component: (resolve) => { require(['./views/planner/Rule.vue'], (resolve)) }, meta: { requiresAuth: true } },
-  { path: '/planner-apply', name: 'planner-apply', component: (resolve) => { require(['./views/planner/Apply.vue'], (resolve)) }, meta: { requiresAuth: true } },
-  { path: '/planner-money', name: 'planner-money', component: (resolve) => { require(['./views/planner/Money.vue'], (resolve)) }, meta: { requiresAuth: true } },
-  { path: '/planner-user', name: 'planner-user', component: (resolve) => { require(['./views/planner/User.vue'], (resolve)) }, meta: { requiresAuth: true } },
   // 活动页
   { path: '/activity', name: 'activity', component: (resolve) => { require(['./views/iframe/Activity.vue'], (resolve)) } },
+  { path: '/activity2', name: 'activity2', component: (resolve) => { require(['./views/activity2.vue'], (resolve)) } },
   // 404
   { path: '*', name: '404', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } },
   { path: '/404', name: 'not-found', component (resolve) { require(['./views/NotFound.vue'], (resolve)) } }

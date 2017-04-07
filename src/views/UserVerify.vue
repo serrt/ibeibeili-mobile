@@ -164,6 +164,7 @@ export default {
       MessageBox('你已经完成认证')
       this.$router.back()
     }
+    // 初始化省、城市信息
     for (let i in City.china) {
       this.province.push(i)
     }
