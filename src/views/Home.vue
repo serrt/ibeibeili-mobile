@@ -113,6 +113,7 @@
       <footer-nav></footer-nav>
       <share :show="popupVisible" @cancel="shareBox"></share>
     </div>
+    <guide :show="isFirstApp" @close="handleChange"></guide>
   </div>
 </template>
 
@@ -120,9 +121,10 @@
 import FooterNav from '../components/Footer'
 import {MessageBox, Indicator} from 'mint-ui'
 import Share from '../components/Share'
+import Guide from '../components/Guide'
 
 export default {
-  components: {FooterNav, MessageBox, Indicator, Share},
+  components: {FooterNav, MessageBox, Indicator, Share, Guide},
   data: function () {
     return {
       title: '首页',
@@ -141,9 +143,9 @@ export default {
   mounted () {
     // 判断是否为首次启动
     // if (!window.localStorage.bbl_first) {
-    //   this.isFirstApp = true
     //   window.localStorage.bbl_first = 1
     // }
+    this.isFirstApp = true
     this.$http.get('projects/sumFinancedMoney').then((response) => {
       this.trade_money = response.data.money
     })
@@ -201,9 +203,7 @@ export default {
       this.popupVisible = !this.popupVisible
     },
     handleChange: function (index) {
-      if (this.img_list.length - 1 === index) {
-        this.isFirstApp = false
-      }
+      this.isFirstApp = false
     }
   }
 }
