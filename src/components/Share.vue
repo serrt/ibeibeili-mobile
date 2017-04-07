@@ -98,7 +98,7 @@ export default {
       window.app.shareQQChat(this.shareData, 1)
     },
     shareWeibo: function () {
-      Toast({message: '正在开发中。。', position: 'bottom'})
+      window.app.shareWeibo(this.shareData)
     }
   },
   watch: {

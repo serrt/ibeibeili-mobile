@@ -142,10 +142,11 @@ export default {
   },
   mounted () {
     // 判断是否为首次启动
-    // if (!window.localStorage.bbl_first) {
-    //   window.localStorage.bbl_first = 1
-    // }
-    this.isFirstApp = true
+    if (!window.localStorage.bbl_first) {
+      window.localStorage.bbl_first = 1
+      this.isFirstApp = true
+    }
+    // this.isFirstApp = true
     this.$http.get('projects/sumFinancedMoney').then((response) => {
       this.trade_money = response.data.money
     })

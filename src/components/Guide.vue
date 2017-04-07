@@ -1,14 +1,24 @@
 <template>
   <div class="banner full-container guide" v-show="show" v-bind:style="{height: innerHeight}">
     <mt-swipe :auto="0" :continuous="false" :show-indicators="false">
-      <mt-swipe-item class="swiper-slide" v-for="(item, index) in guideList">
+      <mt-swipe-item class="swiper-slide">
         <div class="guide-bg">
-          <img class="guide-img" v-bind:src="item.url"/>
+          <div class="guide-img guide-img1"></div>
         </div>
       </mt-swipe-item>
       <mt-swipe-item class="swiper-slide">
         <div class="guide-bg">
-          <img class="guide-img" src="/static/images/guide/4.png" alt=""/>
+          <div class="guide-img guide-img2"></div>
+        </div>
+      </mt-swipe-item>
+      <mt-swipe-item class="swiper-slide">
+        <div class="guide-bg">
+          <div class="guide-img guide-img3"></div>
+        </div>
+      </mt-swipe-item>
+      <mt-swipe-item class="swiper-slide">
+        <div class="guide-bg">
+          <div class="guide-img guide-img4"></div>
           <button type="button" class="guide-btn" v-on:click="closeGuide">立即前往</button>
         </div>
       </mt-swipe-item>
@@ -20,13 +30,7 @@
 export default {
   data: function () {
     return {
-      innerHeight: window.innerHeight + 'px',
-      // 引导页图片地址
-      guideList: [
-        {url: '/static/images/guide/1.png'},
-        {url: '/static/images/guide/2.png'},
-        {url: '/static/images/guide/3.png'}
-      ]
+      innerHeight: window.innerHeight + 'px'
     }
   },
   props: ['show'],
@@ -52,14 +56,24 @@ export default {
 .guide-img{
   display: block;
   width: 100%;
-  position: absolute;
-  top:50%;
-  -webkit-transform: translate(0,-50%);
-  -moz-transform: translate(0,-50%);
-  -ms-transform: translate(0,-50%);
-  -o-transform: translate(0,-50%);
-  transform: translate(0,-50%);
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: center center;
 }
+.guide-img1{
+  background-image: url(../../static/images/guide/1.png);
+}
+.guide-img2{
+  background-image: url(../../static/images/guide/2.png);
+}
+.guide-img3{
+  background-image: url(../../static/images/guide/3.png);
+}
+.guide-img4{
+  background-image: url(../../static/images/guide/4.png);
+}
+
 .guide-btn{
   position: absolute;
   bottom: 15%;
