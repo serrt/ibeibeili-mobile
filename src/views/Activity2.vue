@@ -2,7 +2,7 @@
   <div>
     <div class="anniversary2 full-container">
       <div class="swiper-container anniversary-content">
-        <swiper class="swiper-wrapper" :option="swiperOption" :direction="'vertical'">
+        <swiper class="swiper-wrapper" :options="swiperOption">
           <!-- 初始页面 -->
           <swiper-slide class="swiper-slide first">
             <div class="slide-content">
@@ -54,16 +54,11 @@
 </template>
 
 <script>
-import {swiper, swiperSlide} from 'vue-awesome-swiper'
-
 export default {
-  components: {swiper, swiperSlide},
   data: function () {
     return {
       title: '邀请有奖',
       swiperOption: {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
         direction: 'vertical'
       }
     }
