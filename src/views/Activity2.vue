@@ -43,7 +43,7 @@
           <swiper-slide class="swiper-slide">
             <div class="slide-content">
               <img src="../../static/images/activity-anniversary2/6.png" class="sixth-page">
-              <a href="" class="invest"></a>
+              <router-link class="invest" :to="{path: 'projects'}"></router-link>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -59,7 +59,8 @@ export default {
     return {
       title: '邀请有奖',
       swiperOption: {
-        direction: 'vertical'
+        direction: 'vertical',
+        nextButton: '.next'
       }
     }
   },
