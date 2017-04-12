@@ -1,6 +1,7 @@
 <template>
   <div>
-    <div class="anniversary2 full-container">
+    <header-top :title="title"></header-top>
+    <div class="page-box top-box anniversary2 full-container">
       <div class="swiper-container anniversary-content">
         <swiper class="swiper-wrapper" :options="swiperOption">
           <!-- 初始页面 -->
@@ -54,10 +55,13 @@
 </template>
 
 <script>
+import HeaderTop from '../components/Header'
+
 export default {
+  components: {HeaderTop},
   data: function () {
     return {
-      title: '邀请有奖',
+      title: '2周年庆',
       swiperOption: {
         direction: 'vertical',
         nextButton: '.next'

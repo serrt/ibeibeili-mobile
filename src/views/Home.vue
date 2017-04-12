@@ -16,7 +16,7 @@
         <div class="banner full-container" v-bind:style="{height: banner_height}">
           <mt-swipe :auto="4000">
             <mt-swipe-item class="swiper-slide" v-for="item in img_list">
-              <router-link :to="{path: item.mobile_link || ''}">
+              <router-link :to="{path: item.link || ''}">
                 <img v-bind:src="item.url"/>
               </router-link>
             </mt-swipe-item>

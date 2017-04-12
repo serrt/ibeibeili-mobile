@@ -66,7 +66,7 @@
             </div>
             <span class="date">{{item.published_at}}</span>
             <div class="news-pic flex-middle">
-              <img v-bind:src="item.image">
+              <img v-bind:src="item.image || '/static/images/message-pic.png'">
             </div>
           </router-link>
         </ul>

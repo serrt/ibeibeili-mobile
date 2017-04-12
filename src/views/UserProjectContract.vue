@@ -1,27 +1,29 @@
 <template>
   <div>
     <header-top :title="title"></header-top>
-    <detail :title="data.title" :content="data.content"></detail>
+    <div class="full-container top-box">
+      <iframe frameborder="0" width="100%" v-bind:height="height" v-bind:src="src" name="iframe" id="iframe"></iframe>
+    </div>
   </div>
 </template>
 
 <script>
 import HeaderTop from '../components/Header'
-import Detail from '../components/Detail'
-import { Indicator } from 'mint-ui'
+import { Indicator, MessageBox } from 'mint-ui'
+import env from '../../env'
 
 export default {
-  components: {HeaderTop, Indicator, Detail},
+  components: {HeaderTop, Indicator, MessageBox, env},
   data: function () {
     return {
       title: '投资合同',
-      data: {title: '', content: ''}
+      data: {title: '', content: ''},
+      height: window.innerHeight - 42 + 'px',
+      src: ''
     }
   },
   mounted () {
-    this.$http.get('user/project/' + this.$route.params.id + '/contract').then((response) => {
-      this.data.content = response.data.html
-    })
+    this.src = env.apiUrl + 'project-contract?project_id=' + this.$route.params.id + '&user_id=' + this.$store.getters.userId
   },
   computed: {
   },
